@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { map } from 'rxjs';
  
 @Injectable({
@@ -7,7 +8,7 @@ import { map } from 'rxjs';
 })
 export class ApiService {
 
-  baseUrl = 'http://localhost:4000';
+  baseUrl = environment.URL;
 
   constructor( private _http: HttpClient ) { }
 
