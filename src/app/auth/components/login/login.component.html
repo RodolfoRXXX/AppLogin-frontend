@@ -1,21 +1,72 @@
-<div class = 'row m-0 w-100'>
-    <div class = 'col-md-4 offset-4 mt-5' *ngIf = '!isLogin'>
-        <h4>Login</h4>
-        <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)" >
-            <div class = 'form-group'>
-                <input class = 'form-control' type = "text" name = "username" placeholder = "Username" ngModel>
-            </div>
-          
-            <div class = 'form-group'>
-                <input class = 'form-control' type = "password" name = "password" placeholder = "Password" ngModel>
-            </div>
-            <input class= 'btn btn-outline-info' type = "submit" value = "Login">
-        </form>
+
+<div class="card col-4 mt-5" 
+     style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; margin: auto; "     
+>
+    <div class="card-header text-center">
+        Inicio de sesión
     </div>
-    <div class = 'col-md-4 offset-4 mt-5' *ngIf = 'isLogin'>
+    <div class="card-body" *ngIf='!isLogin'>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-1">
+              <label for="InputUser" class="form-label">Nombre de usuario</label>
+              <input type="text" 
+                     class="form-control"
+                     id="InputUser" 
+                     aria-describedby="userHelp"
+                     formControlName="username"
+                     (focus)="actualizarSmt()"
+                     [ngClass]="form.get('username')?.valid?'is-valid':(((form.get('username')?.invalid)&&(form.get('username')?.dirty||form.get('username')?.touched))?'is-invalid':'')"
+              />
+              <div style="height: 15px; font-size: 0.9rem;">
+                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('username')?.invalid)&&(form.get('username')?.dirty||form.get('username')?.touched)">
+                  <span *ngIf="form.get('username')?.errors?.['required']">Este campo es requerido.</span>
+                  <span *ngIf="form.get('username')?.errors?.['minlength']">El nombre de usuario debe tener al menos 4 caracteres.</span>
+                  <span *ngIf="form.get('username')?.errors?.['maxlength']">El nombre de usuario no debe superar los 20 caracteres.</span>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="InputPassword" class="form-label">Contraseña</label>
+              <input type="password" 
+                     class="form-control mb-1" 
+                     id="InputPassword"
+                     formControlName="password"
+                     (focus)="actualizarSmt()"
+                     [ngClass]="form.get('password')?.valid?'is-valid':(((form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched))?'is-invalid':'')"   
+              />
+              <div style="height: 15px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched)">
+                  <span *ngIf="form.get('password')?.errors?.['required']">Este campo es requerido.</span>
+                  <span *ngIf="form.get('password')?.errors?.['minlength']">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="form.get('password')?.errors?.['maxlength']">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+              </div>
+            </div>
+            <!--<div class="mb-2 form-check">
+              <input type="checkbox" 
+                     class="form-check-input" 
+                     id="Check"
+                     formControlName="recuerdame"       
+              />
+              <label class="form-check-label" for="Check">Recuérdame</label>
+            </div>-->
+            <button type="submit" 
+                    class="btn btn-primary form-control" 
+                    [disabled]="form.invalid || estadoSmt != 'ingreso'"
+                    [ngClass]="(estadoSmt == 'ok')?'bg-success':((estadoSmt == 'error')?'bg-danger':'bg-primary')"        
+            >
+              <span *ngIf="estadoSmt == 'ingreso'">Ingresar</span>
+              <span *ngIf="estadoSmt == 'load'">Loading...</span>
+              <span *ngIf="estadoSmt == 'ok'">Ok!</span>
+              <span *ngIf="estadoSmt == 'error'">Error!</span>
+            </button>
+        </form>
+        <a type="button" class="d-block mt-3 text-end" style="font-size: 0.8rem;" (click)="irRegistro()">No tenés una cuenta? Registrate!</a>
+    </div>
+    <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
        
         <h1>You are logged in</h1>
-        <button class = 'btn btn-outline-info' (click) = 'logout()'>Log-out</button>
+        <button class = 'btn btn-outline-info' (click)='logout()'>Log-out</button>
           
     </div>
 </div>
