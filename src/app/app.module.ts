@@ -8,16 +8,18 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth/auth.module';
 
 import { NavbarComponent } from './nav/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { HomeComponent } from './nonsecure-componentes/home/home.component';
+import { ProfileComponent } from './secure-componentes/profile/profile.component';
 import { InterceptorServiceService } from './services/interceptor-service.service';
+import { LogoutComponent } from './secure-componentes/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
