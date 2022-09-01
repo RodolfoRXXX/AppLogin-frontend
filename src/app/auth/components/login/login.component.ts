@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { emailValidator } from '../../function/functions';
 
 @Component({
   selector: 'app-login',
@@ -29,11 +30,10 @@ export class LoginComponent implements OnInit {
 
   creaFormulario(){
     this.form = new FormGroup({
-      username: new FormControl('',
+      email: new FormControl('',
       [
         Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(20)
+        emailValidator()
       ]),
       password: new FormControl('',
       [

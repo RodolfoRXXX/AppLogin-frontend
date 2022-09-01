@@ -1,21 +1,98 @@
-<div class = 'row m-0 w-100'>
-    <div class = 'col-md-4 offset-4 mt-5' *ngIf = '!isLogin'>
-        <h4>Register</h4>
-        <form #myform = "ngForm" (ngSubmit) = "onSubmit(myform)" >
-            <div class = 'form-group'>
-                <input class = 'form-control' type = "text" name = "username" placeholder = "Username" ngModel>
-            </div>
-            <div class = 'form-group'>
-                <input class = 'form-control' type = "email" name = "email" placeholder = "Email" ngModel>
-            </div>
-          
-            <div class = 'form-group'>
-                <input class = 'form-control' type = "password" name = "password" placeholder = "Password" ngModel>
-            </div>
-            <input class= 'btn btn-outline-info' type = "submit" value = "Register">
-        </form>
+
+<div class="card col-md-4 mt-3" 
+     style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; margin: auto; "     
+>
+    <div class="card-header text-center">
+        Registrarse
     </div>
-    <div class = 'col-md-4 offset-4 mt-5' *ngIf = 'isLogin'>
-        <h5>You are logged in</h5>
+    <div class="card-body" *ngIf="!isLogin">
+        <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
+          <div class="mb-1">
+            <label for="InputEmail" class="form-label">Correo electrónico</label>
+            <input type="email" 
+                   class="form-control"
+                   id="InputEmail" 
+                   aria-describedby="emailHelp"
+                   formControlName="email"
+                   (focus)="actualizarSmt()"
+                   [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
+            />
+            <div id="emailHelp" class="form-text">No compartiremos esta información con nadie.</div>
+            <div style="height: 15px; font-size: 0.9rem;">
+              <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
+                <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
+                <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
+              </div>
+            </div>
+          </div>
+          <div class="mb-1">
+            <label for="InputPassword" class="form-label">Contraseña</label>
+            <input type="password" 
+                   class="form-control mb-1" 
+                   id="InputPassword"
+                   formControlName="password"
+                   (focus)="actualizarSmt()"
+                   [ngClass]="form.get('password')?.valid?'is-valid':(((form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched))?'is-invalid':'')"   
+            />
+            <div style="height: 15px; font-size: 0.9rem; ">
+              <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched)">
+                <span *ngIf="form.get('password')?.errors?.['required']">Este campo es requerido.</span>
+                <span *ngIf="form.get('password')?.errors?.['minlength']">La contraseña debe tener más de 4 caracteres.</span>
+                <span *ngIf="form.get('password')?.errors?.['maxlength']">La contraseña debe tener menos de 20 caracteres.</span>
+              </div>
+            </div>
+          </div>
+          <div class="mb-1">
+            <label for="InputPasswordRep" class="form-label">Repetir contraseña</label>
+            <input type="password" 
+                   class="form-control mb-1" 
+                   id="InputPasswordRep"
+                   formControlName="passwordRep"
+                   (focus)="actualizarSmt()"
+                   [ngClass]="(form.get('passwordRep')?.valid)&&(!form.errors?.['noIguales'])?'is-valid':( (form.get('passwordRep')?.invalid || form.errors?.['noIguales']) && (form.get('passwordRep')?.dirty||form.get('passwordRep')?.touched)?'is-invalid':'')"   
+            />
+            <div style="height: 15px; font-size: 0.9rem; ">
+              <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('passwordRep')?.invalid || form.errors?.['noIguales'])&&(form.get('passwordRep')?.dirty||form.get('passwordRep')?.touched)">
+                <span *ngIf="form.get('passwordRep')?.errors?.['required']">Este campo es requerido.</span>
+                <span *ngIf="form.errors?.['noIguales']">La constraseña no es la misma.</span>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="InputRol" class="form-label">Elegí tu rol</label>
+            <select class="form-control mb-1" id="InputRol" formControlName="rol">
+              <option value="" selected disabled>Elegí...</option>
+              <option value="admin">Profesional</option>
+              <option value="user">Usuario</option>
+            </select>
+            <div style="height: 15px; font-size: 0.9rem; ">
+              <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('rol')?.invalid)&&(form.get('rol')?.dirty||form.get('nivel')?.touched)">
+                <span *ngIf="form.get('rol')?.errors?.['required']">Tenés que ingresar un rol.</span>
+              </div>
+            </div>
+          </div>
+          <!--<div class="mb-2 form-check">
+            <input type="checkbox" 
+                   class="form-check-input" 
+                   id="Check"
+                   formControlName="recuerdame"       
+            />
+            <label class="form-check-label" for="Check">Recuérdame</label>
+          </div>-->
+            <button type="submit" 
+                    class="btn btn-primary form-control"
+                    [disabled]="form.invalid || estadoSmt != 'registro'"
+                    [ngClass]="(estadoSmt == 'ok')?'bg-success':((estadoSmt == 'error')?'bg-danger':'bg-primary')"         
+            >
+              <span *ngIf="estadoSmt == 'registro'">Registrarse</span>
+              <span *ngIf="estadoSmt == 'load'">Loading...</span>
+              <span *ngIf="estadoSmt == 'ok'">Ok!</span>
+              <span *ngIf="estadoSmt == 'error'">Error!</span>
+            </button>
+        </form>
+        <a type="button" class="d-block mt-3 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Ya tenés una cuenta? Ingresá!</a>
+    </div>
+    <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
+        <h5>Estás logueado!</h5>
     </div>
 </div>

@@ -1,27 +1,26 @@
 
-<div class="card col-4 mt-5" 
+<div class="card col-md-4 mt-3" 
      style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; margin: auto; "     
 >
     <div class="card-header text-center">
         Inicio de sesión
     </div>
     <div class="card-body" *ngIf='!isLogin'>
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
             <div class="mb-1">
-              <label for="InputUser" class="form-label">Nombre de usuario</label>
-              <input type="text" 
+              <label for="InputEmail" class="form-label">Correo electrónico</label>
+              <input type="email" 
                      class="form-control"
-                     id="InputUser" 
-                     aria-describedby="userHelp"
-                     formControlName="username"
+                     id="InputEmail" 
+                     aria-describedby="emailHelp"
+                     formControlName="email"
                      (focus)="actualizarSmt()"
-                     [ngClass]="form.get('username')?.valid?'is-valid':(((form.get('username')?.invalid)&&(form.get('username')?.dirty||form.get('username')?.touched))?'is-invalid':'')"
+                     [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
               />
               <div style="height: 15px; font-size: 0.9rem;">
-                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('username')?.invalid)&&(form.get('username')?.dirty||form.get('username')?.touched)">
-                  <span *ngIf="form.get('username')?.errors?.['required']">Este campo es requerido.</span>
-                  <span *ngIf="form.get('username')?.errors?.['minlength']">El nombre de usuario debe tener al menos 4 caracteres.</span>
-                  <span *ngIf="form.get('username')?.errors?.['maxlength']">El nombre de usuario no debe superar los 20 caracteres.</span>
+                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
+                  <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
+                  <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
                 </div>
               </div>
             </div>
@@ -65,7 +64,7 @@
     </div>
     <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
        
-        <h1>You are logged in</h1>
+        <h1>Estás logueado</h1>
         <button class = 'btn btn-outline-info' (click)='logout()'>Log-out</button>
           
     </div>
