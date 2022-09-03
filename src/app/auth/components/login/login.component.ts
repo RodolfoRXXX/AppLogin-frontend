@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { emailValidator } from '../../function/functions';
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   errorMessage: any;
   form: FormGroup;
   estadoSmt: string = 'ingreso';
+  subjectLogin: Subject<object> = new Subject(); 
 
   constructor(
     private _api: ApiService,
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.isUserLogin();
     this.creaFormulario();
+    this.subjectLogin.asObservable().subscribe( value => console.log(value) );
   }
 
   creaFormulario(){
@@ -55,9 +58,11 @@ export class LoginComponent implements OnInit {
         this.estadoSmt = 'ok';
         this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
         this._auth.setDataInLocalStorage('token', res.token);
+          this.subjectLogin.next({state: true, data: this._auth.getUserDetails()});
         this._router.navigate(['home']);
       } else{
         this.estadoSmt = 'error';
+          this.subjectLogin.next({state: false, data: null});
       }
     } )
   }
