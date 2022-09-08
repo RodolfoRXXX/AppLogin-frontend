@@ -4,18 +4,27 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CommunicationService {
+export class ComunicationService {
 
-subjectLogin: Subject<string> = new Subject();
-login: boolean = false;
+  dataIdObservable: Subject<string|null> = new Subject();
+  notifierObservable: Subject<any> = new Subject();
 
+  constructor() { }
 
-  constructor() {
-    
+  //Observable para cambios en el id del usuario
+  setDataId( id:string|null ){
+    this.dataIdObservable.next(id);
+  }
+  getDataId(){
+    return this.dataIdObservable.asObservable();
   }
 
-  comunicarLogin(){
-
+  //Observable para llamar a una notificación
+  setNotifier( value: any ){
+    this.notifierObservable.next(value);
+  }
+  getNotifier(){
+    return this.notifierObservable.asObservable();
   }
 
 

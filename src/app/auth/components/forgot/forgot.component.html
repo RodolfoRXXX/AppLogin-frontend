@@ -1,0 +1,47 @@
+<div class="card col-md-4 mt-3" 
+     style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; margin: auto; "     
+>
+    <div class="card-header text-center">
+        Reenvío de datos
+    </div>
+    <div class="card-body" *ngIf='!isLogin'>
+        <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
+            <div class="mb-2">
+              <label for="InputEmail" class="form-label">Correo electrónico</label>
+              <input type="email" 
+                     class="form-control"
+                     id="InputEmail" 
+                     aria-describedby="emailHelp"
+                     formControlName="email"
+                     (focus)="actualizarSmt()"
+                     [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
+              />
+              <div style="height: 15px; font-size: 0.9rem;">
+                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
+                  <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
+                  <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" 
+                    class="btn btn-primary form-control" 
+                    [disabled]="form.invalid || estadoSmt != 'envio'"
+            >
+              <span *ngIf="estadoSmt == 'envio'">Enviar</span>
+              <span *ngIf="estadoSmt == 'load'">Loading...</span>
+              <span *ngIf="estadoSmt == 'ok'">Ok!</span>
+              <span *ngIf="estadoSmt == 'error'">Error!</span>
+            </button>
+            <div class="alert mt-3 mb-1" [ngClass]="classLogin" [hidden]="!displayLogin">
+              <p class="mb-0 d-block text-center">{{ messageLogin }}</p>
+            </div>
+        </form>
+        <a type="button" class="d-block mt-2 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Tenés una cuenta? Ingresá!</a>
+    </div>
+    <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
+       
+        <h1>Estás logueado</h1>
+          
+    </div>
+</div>

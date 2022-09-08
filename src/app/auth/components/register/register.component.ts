@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ComunicationService } from 'src/app/services/comunication.service';
 import { emailValidator, validarPass} from '../../function/functions';
 
 @Component({
@@ -14,13 +15,16 @@ export class RegisterComponent implements OnInit {
 
   estadoSmt: string = 'registro';
   isLogin: boolean = false;
-  errorMessage: any;
+  displayLogin: boolean = false;
+  messageLogin: string;
+  classLogin: string;
   form: FormGroup;
 
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
-    private _router: Router
+    private _router: Router,
+    private _com: ComunicationService
   ) { }
 
   ngOnInit(): void {
@@ -53,22 +57,41 @@ export class RegisterComponent implements OnInit {
   }
 
   actualizarSmt(){
-    (this.estadoSmt == 'error')?(this.estadoSmt = 'registro'):'';
+    if(this.estadoSmt == 'error'){
+      this.estadoSmt = 'registro';
+      this.estadoLogin(false, '', '');
+    }
+  }
+
+  estadoLogin( display:boolean, clase:string, message:string ){
+    this.displayLogin = display;
+    this.classLogin = clase;
+    this.messageLogin = message;
   }
 
   onSubmit(){
     this.estadoSmt = 'load';
     this._api.postTypeRequest('user/register', this.form.value).subscribe( (res:any) => {
-      if (res.status) {
-        console.log(res);
-        this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
-        this._auth.setDataInLocalStorage('token', res.token);
-        this._router.navigate(['home']);
-        this.estadoSmt = 'ok';
+      if ((res.status)&&(res.status != 0)){
+        if(res.data != 'existente'){
+          this.estadoSmt = 'ok';
+          this.estadoLogin(true, 'alert-success', 'Usuario creado exitósamente!');
+          this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
+          this._auth.setDataInLocalStorage('token', res.token);
+          this._com.setDataId(res.data[0].id);
+          this._router.navigate(['home']);
+        } else{
+          this.estadoSmt = 'error';
+          this.estadoLogin(true, 'alert-danger', 'Usuario existente');
+          this._com.setDataId(null);
+          setTimeout(() => {
+            this._router.navigate(['login']);
+          }, 2500);
+        }
       } else{
-        console.log(res)
-        alert(res.msg)
         this.estadoSmt = 'error';
+        this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intente nuevamente.');
+        this._com.setDataId(null);
       }
     });
   }

@@ -1,5 +1,24 @@
-<h2 style="margin-top: 30px;">This is the protected page</h2>
+<div class="d-flex" style="height: 90vh;">
+    <!-- Barra lateral de navegación -->
+    <section class="w-25" style="border-right: 1px solid rgba(223, 223, 223, 0.882);">
+        <nav class="navbar">
+              <ul class="navbar-nav d-flex flex-column p-3">
+                <li class="nav-item active mb-1">
+                  <a class="nav-link" routerLink = "dashboard" routerLinkActive = "active">Dashboard</a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a class="nav-link" routerLink = "configuration" routerLinkActive = "active" >Configuración</a>
+                </li>
+              </ul>
+          </nav>
+    </section>
+    <!-- Contenido del profile -->
+    <section class="w-75 p-3" style="overflow-y: auto;">
+        <router-outlet></router-outlet>
+    </section>
+</div>
 
-<h2 *ngIf="this.protectedData?.data">{{ this.protectedData.data.username }}</h2>
 
-<h2 *ngIf="this.protectedData?.data">{{ this.protectedData.data.userWebsite }}</h2>
+
+
+

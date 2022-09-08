@@ -1,0 +1,90 @@
+<h5>Actualizar contraseña</h5>
+
+<form [formGroup]="form" class="p-3 col-md-6" (ngSubmit)="onSubmit()">
+
+    <!-- Constraseña actual -->
+    <div class="mb-2">
+      <label for="InputOldPassword" class="form-label ps-2">Contraseña actual</label>
+      <div class="form-group d-flex">
+        <input type="password" 
+             class="form-control"
+             id="InputOldPassword"
+             #oldPasswordInput
+             aria-describedby="oldPasswordHelp"
+             formControlName="oldpassword"
+             placeholder="Ingresá tu contraseña actual para verificar tu identidad"
+             (focus)="actualizarSmt()"
+        />
+        <button type="button" class="btn ms-2" 
+                [ngClass]="( (estadoValidacion == 'verificar')||(estadoValidacion == 'loading') )?'btn-primary':( (estadoValidacion == 'ok')?('btn-success'):((estadoValidacion == 'error')?'btn-danger':'') )" [disabled]="form.get('oldpassword')?.invalid || (estadoValidacion != 'verificar')" 
+                (click)="verificarPasswordActual(form.get('oldpassword')?.value)"
+        >
+          <span *ngIf="estadoValidacion == 'verificar'">Verificar</span>
+          <span *ngIf="estadoValidacion == 'loading'">loading...</span>
+          <span *ngIf="estadoValidacion == 'ok'">Ok!</span>
+          <span *ngIf="estadoValidacion == 'error'">Error!</span>
+        </button>
+      </div>
+      
+      <div style="height: 15px; font-size: 0.9rem;">
+        <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('oldpassword')?.invalid)&&(form.get('oldpassword')?.dirty||form.get('oldpassword')?.touched)">
+          <span *ngIf="form.get('oldpassword')?.errors?.['required']">La contraseña es requerida.</span>
+          <span *ngIf="form.get('oldpassword')?.errors?.['minlength']">La contraseña debe tener más de 4 caracteres.</span>
+          <span *ngIf="form.get('oldpassword')?.errors?.['maxlength']">La contraseña no debe superar los 20 caracteres.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Constraseña nueva -->
+    <div class="mb-2">
+        <label for="Password" class="form-label ps-2">Contraseña Nueva</label>
+        <input type="password" 
+               class="form-control"
+               id="Password" 
+               aria-describedby="passwordHelp"
+               formControlName="password"
+               placeholder="Ingresá la nueva contraseña"
+               [ngClass]="form.get('password')?.valid?'is-valid':(((form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched))?'is-invalid':'')"
+        />
+        <div style="height: 15px; font-size: 0.9rem;">
+          <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched)">
+            <span *ngIf="form.get('password')?.errors?.['required']">La contraseña es requerida.</span>
+            <span *ngIf="form.get('password')?.errors?.['minlength']">La contraseña debe tener más de 4 caracteres.</span>
+            <span *ngIf="form.get('password')?.errors?.['maxlength']">La contraseña no debe superar los 20 caracteres.</span>
+          </div>
+        </div>
+    </div>
+
+    <!-- Repetir contraseña -->
+    <div class="mb-2">
+        <label for="InputPasswordRep" class="form-label ps-2">Repetir Contraseña</label>
+        <input type="password" 
+               class="form-control"
+               id="InputPasswordRep" 
+               aria-describedby="passwordRepHelp"
+               formControlName="passwordRep"
+               placeholder="Repetí la contraseña nueva"
+               [ngClass]="(form.get('passwordRep')?.valid)&&(!form.errors?.['noIguales'])?'is-valid':( (form.get('passwordRep')?.invalid || form.errors?.['noIguales']) && (form.get('passwordRep')?.dirty||form.get('passwordRep')?.touched)?'is-invalid':'')"
+        />
+        <div style="height: 15px; font-size: 0.9rem;">
+          <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('passwordRep')?.invalid || form.errors?.['noIguales'])&&(form.get('passwordRep')?.dirty||form.get('passwordRep')?.touched)">
+            <span *ngIf="form.get('passwordRep')?.errors?.['required']">Este campo es requerido.</span>
+                <span *ngIf="form.errors?.['noIguales']">La contraseña no es la misma.</span>
+          </div>
+        </div>
+    </div>
+
+    <!-- Campo ID hidden -->
+    <input type="hidden" formControlName="id">
+
+    <button type="submit" 
+            class="btn btn-primary form-control mt-1" 
+            [disabled]="form.invalid || estadoSmt != 'actualizar' || estadoValidacion != 'ok'"
+            [ngClass]="(estadoSmt == 'ok')?'bg-success':((estadoSmt == 'error')?'bg-danger':'bg-primary')"        
+    >
+      <span *ngIf="estadoSmt == 'actualizar'">Actualizar</span>
+      <span *ngIf="estadoSmt == 'load'">Loading...</span>
+      <span *ngIf="estadoSmt == 'ok'">Ok!</span>
+      <span *ngIf="estadoSmt == 'error'">Error!</span>
+    </button>
+</form>

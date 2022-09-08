@@ -54,7 +54,7 @@
             <div style="height: 15px; font-size: 0.9rem; ">
               <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('passwordRep')?.invalid || form.errors?.['noIguales'])&&(form.get('passwordRep')?.dirty||form.get('passwordRep')?.touched)">
                 <span *ngIf="form.get('passwordRep')?.errors?.['required']">Este campo es requerido.</span>
-                <span *ngIf="form.errors?.['noIguales']">La constraseña no es la misma.</span>
+                <span *ngIf="form.errors?.['noIguales']">La contraseña no es la misma.</span>
               </div>
             </div>
           </div>
@@ -81,16 +81,18 @@
           </div>-->
             <button type="submit" 
                     class="btn btn-primary form-control"
-                    [disabled]="form.invalid || estadoSmt != 'registro'"
-                    [ngClass]="(estadoSmt == 'ok')?'bg-success':((estadoSmt == 'error')?'bg-danger':'bg-primary')"         
+                    [disabled]="form.invalid || estadoSmt != 'registro'"        
             >
               <span *ngIf="estadoSmt == 'registro'">Registrarse</span>
               <span *ngIf="estadoSmt == 'load'">Loading...</span>
               <span *ngIf="estadoSmt == 'ok'">Ok!</span>
               <span *ngIf="estadoSmt == 'error'">Error!</span>
             </button>
+            <div class="alert mt-3 mb-1" [ngClass]="classLogin" [hidden]="!displayLogin">
+              <p class="mb-0 d-block text-center">{{ messageLogin }}</p>
+            </div>
         </form>
-        <a type="button" class="d-block mt-3 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Ya tenés una cuenta? Ingresá!</a>
+        <a type="button" class="d-block mt-2 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Ya tenés una cuenta? Ingresá!</a>
     </div>
     <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
         <h5>Estás logueado!</h5>
