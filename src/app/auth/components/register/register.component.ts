@@ -85,7 +85,9 @@ export class RegisterComponent implements OnInit {
           this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
           this._auth.setDataInLocalStorage('token', res.token);
           this._com.setDataId(res.data[0].id);
-          this._router.navigate(['verificate']);
+          setTimeout(() => {
+            this._router.navigate(['verificate']);
+          }, 2500);
           //AQUI DEBE ENVIAR EL CORREO ELECTRONICO CON EL "codeEmail" para verificar
         } else{
           this.estadoSmt = 'error';

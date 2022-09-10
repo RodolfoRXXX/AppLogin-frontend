@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
 
@@ -20,6 +21,7 @@ export class EmailCheckerComponent implements OnInit {
 
   constructor(
     private _auth: AuthService,
+    private _api: ApiService,
     private _com: ComunicationService,
     private _router: Router
   ) { }
@@ -70,6 +72,19 @@ export class EmailCheckerComponent implements OnInit {
     })
   }
 
+  actualizarSmt(){
+    if(this.estadoSmt == 'error'){
+      this.estadoSmt = 'verificar';
+      this.estadoLogin(false, '', '');
+    }
+  }
+
+  estadoLogin( display:boolean, clase:string, message:string ){
+    this.displayLogin = display;
+    this.classLogin = clase;
+    this.messageLogin = message;
+  }
+
   onSubmit(){
     this.estadoSmt = 'load';
     this.form.controls['codeEmail'].setValue(
@@ -80,7 +95,26 @@ export class EmailCheckerComponent implements OnInit {
       this.form.get('5')?.value+
       this.form.get('6')?.value
     );
-    console.log(this.form.value);
+    this._api.putTypeRequest('user/verificate-user', this.form.value).subscribe( (res:any) => {
+      if ((res.status)&&(res.status != 0)){
+        if(res.data != 'error'){
+          this.estadoSmt = 'ok';
+          this.estadoLogin(true, 'alert-success', 'Código correcto!');
+          this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
+          this._auth.setDataInLocalStorage('token', res.token);
+          setTimeout(() => {
+            this._router.navigate(['profile']);
+          }, 1500);
+        } else{
+          this.estadoSmt = 'error';
+          this.estadoLogin(true, 'alert-danger', 'Código incorrecto. Intentá nuevamente.');
+        }
+          
+      } else{
+        this.estadoSmt = 'error';
+        this.estadoLogin(true, 'alert-warning', 'No se ha podido verificar el código. Intentá nuevamente.');
+      }
+    });
   }
 
   irModificar(){

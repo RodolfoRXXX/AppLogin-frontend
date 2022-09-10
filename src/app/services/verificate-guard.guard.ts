@@ -19,7 +19,6 @@ export class VerificateGuardGuard implements CanActivate {
       var data = this._auth.getUserDetails();
       if(data){
         data = JSON.parse(data)[0].active;
-        console.log(data);
         if(data == '1'){
           return true;
         }
