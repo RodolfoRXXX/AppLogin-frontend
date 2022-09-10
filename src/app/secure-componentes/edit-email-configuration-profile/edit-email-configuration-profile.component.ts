@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
 import { emailValidator, validarEmail } from '../function/functions';
+import { md5 } from 'src/app/secure-componentes/function/md5';
 
 @Component({
   selector: 'app-edit-email-configuration-profile',
@@ -35,19 +36,20 @@ export class EditEmailConfigurationProfileComponent implements OnInit {
   crearFormulario( id:string ){
     this.form = new FormGroup({
       email: new FormControl('',
-      [
-        Validators.required,
-        emailValidator()
-      ]),
+        [
+          Validators.required,
+          emailValidator()
+        ]),
       reemail: new FormControl('',
-      [
-        Validators.required
-      ]),
+        [
+          Validators.required
+        ]),
       id: new FormControl((id)?id:'',
-      [
-        Validators.required
-      ]
-    )
+        [
+          Validators.required
+        ]),
+      codeEmail: new FormControl(''),
+      active: new FormControl(0)
     }, { validators: validarEmail })
   }
 
@@ -58,8 +60,9 @@ export class EditEmailConfigurationProfileComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.form.value);
     this.estadoSmt = 'load';
+    let e = md5(this.form.get('email')?.value).slice(0,6);
+    this.form.controls['codeEmail'].setValue(e);
     this._api.putTypeRequest('user/updateemail', this.form.value).subscribe( (res:any) => {
       if((res.status != 0)&&(res.data.affectedRows != 0)){
         this.estadoSmt = 'ok';

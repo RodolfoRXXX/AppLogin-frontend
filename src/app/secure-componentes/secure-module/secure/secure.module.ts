@@ -10,7 +10,9 @@ import { DashboardProfileComponent } from '../../dashboard-profile/dashboard-pro
 import { ConfigurationProfileComponent } from '../../configuration-profile/configuration-profile.component';
 import { EditEmailConfigurationProfileComponent } from '../../edit-email-configuration-profile/edit-email-configuration-profile.component';
 import { EditPassConfigurationProfileComponent } from '../../edit-pass-configuration-profile/edit-pass-configuration-profile.component';
+import { EmailCheckerComponent } from '../../email-checker/email-checker.component';
 import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { RouterModule } from '@angular/router';
     DashboardProfileComponent,
     ConfigurationProfileComponent,
     EditEmailConfigurationProfileComponent,
-    EditPassConfigurationProfileComponent
+    EditPassConfigurationProfileComponent,
+    EmailCheckerComponent
   ],
   imports: [
     CommonModule,

@@ -9,13 +9,13 @@ import { AuthService } from './auth.service';
 export class AuthGuardService {
 
   constructor(
-    private _authService: AuthService,
+    private _auth: AuthService,
     private _router: Router
   ) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this._authService.getToken()) {
-      return true;
+    if (this._auth.getToken()) {
+        return true;
     }
 
     //navegar hasta la página de login

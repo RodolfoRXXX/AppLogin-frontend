@@ -1,1 +1,78 @@
-<p>email-checker works!</p>
+<div class="card col-md-4 mt-3" 
+     style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; margin: auto; "
+>
+    <!-- Input de números para comprobar cuenta -->
+    <div *ngIf="checkerDisplay">
+        <div class="card-header text-center">
+            Verificá tu correo electrónico
+        </div>
+        <div class="card-body">
+            <h6 class="text-muted text-center" style="font-size: 0.8rem;">Ingresá el código de 6 dígitos que recibiste en tu correo electrónico</h6>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="d-flex justify-content-around w-100 mt-3 mb-3">
+                    <input type="text" 
+                           formControlName="1" 
+                           maxlength="1" 
+                           class="input-code" 
+                           [ngClass]="form.get('1')?.valid?'valid':(((form.get('1')?.invalid)&&(form.get('1')?.dirty||form.get('1')?.touched))?'invalid':'')"
+                    />
+                    <input type="text" 
+                           formControlName="2" 
+                           maxlength="1" 
+                           class="input-code" 
+                           [ngClass]="form.get('2')?.valid?'valid':(((form.get('2')?.invalid)&&(form.get('2')?.dirty||form.get('2')?.touched))?'invalid':'')"
+                    />
+                    <input type="text" 
+                           formControlName="3" 
+                           maxlength="1" 
+                           class="input-code" 
+                           [ngClass]="form.get('3')?.valid?'valid':(((form.get('3')?.invalid)&&(form.get('3')?.dirty||form.get('3')?.touched))?'invalid':'')"
+                    />
+                    <input type="text" 
+                           formControlName="4" 
+                           maxlength="1" 
+                           class="input-code" 
+                           [ngClass]="form.get('4')?.valid?'valid':(((form.get('4')?.invalid)&&(form.get('4')?.dirty||form.get('4')?.touched))?'invalid':'')"
+                    />
+                    <input type="text" 
+                           formControlName="5" 
+                           maxlength="1" 
+                           class="input-code" 
+                           [ngClass]="form.get('5')?.valid?'valid':(((form.get('5')?.invalid)&&(form.get('5')?.dirty||form.get('5')?.touched))?'invalid':'')"
+                    />
+                    <input type="text" 
+                           formControlName="6" 
+                           maxlength="1" 
+                           class="input-code" 
+                           [ngClass]="form.get('6')?.valid?'valid':(((form.get('6')?.invalid)&&(form.get('6')?.dirty||form.get('6')?.touched))?'invalid':'')"
+                    />
+                </div>
+                <a type="button" class="d-block mt-0 mb-2 text-start" style="font-size: 0.8rem;" (click)="irModificar()">Modificar el correo electrónico de acceso</a>
+                <button type="submit" 
+                    class="btn btn-primary form-control" 
+                    [disabled]="form.invalid || estadoSmt != 'verificar'"
+            >
+              <span *ngIf="estadoSmt == 'verificar'">Verificar</span>
+              <span *ngIf="estadoSmt == 'load'">Loading...</span>
+              <span *ngIf="estadoSmt == 'ok'">Ok!</span>
+              <span *ngIf="estadoSmt == 'error'">Error!</span>
+            </button>
+            <div class="alert mt-3 mb-1" [ngClass]="classLogin" [hidden]="!displayLogin">
+              <p class="mb-0 d-block text-center">{{ messageLogin }}</p>
+            </div>
+            <a type="button" class="d-block mt-2 mb-0 text-end" style="font-size: 0.8rem;" (click)="reenviarCodigo()">Reenviarme el código</a>
+            </form>
+        </div>
+    </div> 
+
+    <!-- Componente para cambiar la cuenta de correo electrónico -->
+    <div *ngIf="!checkerDisplay">
+        <div class="card-header text-center">
+            Actualizá tu correo electrónico
+        </div>
+        <div class="card-body">
+            <app-edit-email-configuration-profile></app-edit-email-configuration-profile>
+        </div>
+    </div>
+</div>
+
