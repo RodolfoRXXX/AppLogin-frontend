@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { ProfileComponent } from '../../profile/profile.component';
 import { LogoutComponent } from '../../logout/logout.component';
@@ -12,6 +13,7 @@ import { EditEmailConfigurationProfileComponent } from '../../edit-email-configu
 import { EditPassConfigurationProfileComponent } from '../../edit-pass-configuration-profile/edit-pass-configuration-profile.component';
 import { EmailCheckerComponent } from '../../email-checker/email-checker.component';
 import { RouterModule } from '@angular/router';
+import { MenuLateralComponent } from '../../menu-lateral/menu-lateral-fijo/menu-lateral.component';
 
 
 @NgModule({
@@ -22,14 +24,16 @@ import { RouterModule } from '@angular/router';
     ConfigurationProfileComponent,
     EditEmailConfigurationProfileComponent,
     EditPassConfigurationProfileComponent,
-    EmailCheckerComponent
+    EmailCheckerComponent,
+    MenuLateralComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ]
 })
 export class SecureModule { }

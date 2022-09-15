@@ -1,0 +1,24 @@
+<ng-template #content let-offcanvas>
+    <div class="offcanvas-header">
+      <h4 class="offcanvas-title" id="offcanvas-basic-title">Menú</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss()"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="p-3 border-bottom ms-1 me-3">
+        <h6 class="mb-0"><span class="text-muted fs-09r">Usuario:</span> {{ user }}</h6>
+      </div>  
+        <nav class="navbar">
+            <ul class="navbar-nav d-flex flex-column p-1 pe-3 w-100">
+              <li class="nav-item mb-1" >
+                <a class="nav-link ps-3" routerLink = "profile/dashboard" routerLinkActive = "active" (click)="offcanvas.dismiss()">Tablero</a>
+              </li>
+              <li class="nav-item mb-1" >
+                <a class="nav-link ps-3" routerLink = "profile/mistags" routerLinkActive = "active" (click)="offcanvas.dismiss()">Mis tags</a>
+              </li>
+              <li class="nav-item mb-1">
+                  <a class="nav-link ps-3" routerLink = "profile/configuration" routerLinkActive = "active" (click)="offcanvas.dismiss()">Configuración</a>
+              </li>
+            </ul>
+        </nav>
+    </div>
+</ng-template>

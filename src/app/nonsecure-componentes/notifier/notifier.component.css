@@ -1,0 +1,46 @@
+/* Extra small devices (phones, 600px and down) */
+
+.notifier-width {
+    width: 25%;
+}
+
+.notifier-style {
+    position: absolute;
+    top: 10vh;
+    right: 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 100;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .notifier-width {
+        width: 60%;
+    }
+
+    .notifier-style {
+        top: 12vh;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+
+
+}

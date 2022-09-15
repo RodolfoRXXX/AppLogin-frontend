@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
 
   constructor( 
     private _auth: AuthService,
-    private _com: ComunicationService  
+    private _com: ComunicationService
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +27,10 @@ export class NavbarComponent implements OnInit {
       if (this._auth.getUserDetails() != null) {
         this.isLogin = true;
       }
+  }
+
+  open(){
+    this._com.setMenuOffCanvas();
   }
 
 
