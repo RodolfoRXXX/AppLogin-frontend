@@ -1,0 +1,91 @@
+<div class="">
+    <form>
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+            <a ngbNavLink>Tipo</a>
+            <ng-template ngbNavContent>
+                <div class="form-group mb-2">
+                    <label for="input" class="control-label mb-2">Selecciona un tipo de Tag</label>
+                    <div>
+                        <select name="" id="input" class="form-control">
+                            <option disabled selected>Elige uno</option>
+                            <option value="">Persona</option>
+                            <option value="">Mascota</option>
+                            <option value="">Vehículo</option>
+                        </select>
+                    </div>
+                </div>
+            </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+                <a ngbNavLink>Datos</a>
+                    <ng-template ngbNavContent>
+                        <div class="row">
+                            <div class="d-flex flex-column col-md-6">
+                                <img src="#" class="img-responsive border" alt="Image" style="width: 100%; height: 300px;">
+                                
+                                <div class="form-group mt-3">
+                                    <label for="input" class="control-label mb-2">Cargar una imagen nueva</label>
+                                    <div>
+                                        <input type="file" id="input" class="form-control" value="" required="required" title="">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <app-persona-form formControlName="persona"></app-persona-form>
+                                <app-mascota-form *ngIf="false"></app-mascota-form>
+                                <app-vehiculo-form *ngIf="false"></app-vehiculo-form>
+                            </div>
+                        </div>
+                    </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+                <a ngbNavLink>Contacto</a>
+                    <ng-template ngbNavContent>
+                        <div class="input-group row">
+                            <div class="col">
+                                <label class="form-label" for="nombrecontacto">Nombre completo:</label>
+                                <input class="form-control" type="text" id="nombrecontacto">
+                            </div>
+                        </div>
+                        <div class="input-group row">
+                            <div class="col-6">
+                                <label class="form-label" for="codarea">Código de área:</label>
+                                <input class="form-control" type="number" id="codarea">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label" for="telefono">Teléfono:</label>
+                                <input class="form-control" type="number" id="telefono">
+                            </div>
+                        </div>
+                        <div class="input-group row">
+                            <div class="col">
+                                <label class="form-label" for="wspcontacto">Whatsapp contacto:</label>
+                                <input class="form-control" type="text" id="wspcontacto">
+                            </div>
+                        </div>
+                    </ng-template>
+            </li>
+            <li [ngbNavItem]="4">
+                <a ngbNavLink>Información importante</a>
+                    <ng-template ngbNavContent>
+                        <div class="form-group">
+                            <label for="textarea" class="control-label mb-2">Ingresá aquí información importante sobre la persona, mascota o vehículo del Tag.</label>
+                            <div>
+                                <textarea name="" id="textarea" class="form-control" rows="3" required="required" placeholder="Escribe aquí..."></textarea>
+                            </div>
+                        </div>
+                    </ng-template>
+            </li>
+        </ul>
+        <div class="border-end border-start border-bottom p-4 pb-2">
+            <div [ngbNavOutlet]="nav" >
+            </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary mt-2">Crear</button>
+            </div>
+        </div>
+    </form>
+</div>
+

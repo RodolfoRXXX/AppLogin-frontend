@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
-import { emailValidator, validarEmail } from '../function/functions';
+import { emailValidator, validarEmail } from '../../function/functions';
 import { md5 } from 'src/app/secure-componentes/function/md5';
 
 @Component({

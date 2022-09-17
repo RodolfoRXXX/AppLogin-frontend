@@ -5,8 +5,8 @@ import { timeout } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
-import { validarPass } from '../function/functions';
-import { md5 } from '../function/md5';
+import { validarPass } from '../../function/functions';
+import { md5 } from '../../function/md5';
 
 @Component({
   selector: 'app-edit-pass-configuration-profile',

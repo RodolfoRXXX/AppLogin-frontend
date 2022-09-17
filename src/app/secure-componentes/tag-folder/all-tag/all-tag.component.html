@@ -1,0 +1,67 @@
+<h4 class="mt-1 text-start">Tag-ID personal:</h4>
+
+<div class="rounded accordion-box-principal">
+    <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
+                <span class="text-start">Nombre: <span class="d-block"><b>Diego Fernando Molinari</b></span></span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-success" (click)="irEditTag()">Crear/Editar</button>
+                    <button class="btn btn-outline-warning">Ver Tag</button>
+                    <button class="btn btn-outline-danger">Editar Vinculación</button>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>
+
+
+
+  <h5 class="mt-5 text-start">Tag-ID secundarios:</h5>
+<div class="rounded accordion-box-secondary" *ngIf="true">
+    <ngb-accordion #acc="ngbAccordion">
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
+                <span class="text-start">Nombre: <span class="d-block"><b>Gato</b> - <b>Pelusa</b></span></span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-success">Editar</button>
+                    <button class="btn btn-outline-warning">Ver Tag</button>
+                    <button class="btn btn-outline-danger">Editar Vinculación</button>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
+                <span class="text-start">Nombre: <span class="d-block"><b>Hijo</b> - <b>Sebastián Dario Molinari</b></span></span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-success">Editar</button>
+                    <button class="btn btn-outline-warning">Ver Tag</button>
+                    <button class="btn btn-outline-danger">Editar Vinculación</button>
+                </div>
+            </ng-template>
+        </ngb-panel>
+        <ngb-panel>
+            <ng-template ngbPanelTitle>
+                <span class="me-5">Tipo: <span class="d-block"><b>Vehículo</b></span></span>
+                <span class="text-start">Tipo: <span class="d-block"><b>Bicicleta</b> - <b>Venzo</b></span></span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-success">Editar</button>
+                    <button class="btn btn-outline-warning">Ver Tag</button>
+                    <button class="btn btn-outline-danger">Editar Vinculación</button>
+                </div>
+            </ng-template>
+        </ngb-panel>
+    </ngb-accordion>
+</div>
+<button class="btn btn-primary mt-2 ms-3">Crear nuevo Tag</button>
