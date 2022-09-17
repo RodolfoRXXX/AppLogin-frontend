@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-mascota-form',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mascota-form.component.css']
 })
 export class MascotaFormComponent implements OnInit {
+
+  @Input() form: FormGroup; 
 
   constructor() { }
 

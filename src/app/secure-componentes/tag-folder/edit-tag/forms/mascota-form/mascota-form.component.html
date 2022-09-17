@@ -1,37 +1,39 @@
+<div [formGroup]="form">
+    <div class="input-group row">
+        <div class="col-6">
+            <label class="form-label" for="nombre">Nombre:</label>
+            <input class="form-control" type="text" id="nombre" formControlName="nombre">
+        </div>
+        <div class="col-6">
+            <label class="form-label" for="especie">Especie:</label>
+            <input class="form-control" type="text" id="especie" formControlName="especie">
+        </div>
+    </div>
+    <div class="input-group row">
+        <div class="col">
+            <label class="form-label" for="ciudad">Ciudad:</label>
+            <input class="form-control" type="text" id="ciudad" formControlName="ciudad">
+        </div>
+    </div>
+    <div class="input-group row">
+        <div class="col">
+            <label class="form-label" for="direccion">Dirección:</label>
+            <input class="form-control" type="text" id="direccion" formControlName="direccion">
+        </div>
+    </div>
+    
+    <h6>Opcionales:</h6>
+    <div class="input-group row">
+        <div class="col">
+            <label class="form-label" for="detalle">Detalle característico:</label>
+            <input class="form-control" type="text" id="detalle" formControlName="detalle">
+        </div>
+    </div>
+    <div class="input-group row">
+        <div class="col">
+            <label class="form-label" for="fechanac">Fecha de nacimiento:</label>
+            <input class="form-control" type="date" id="fechanac" formControlName="fechanac">
+        </div>
+    </div>
+</div>
 
-<div class="input-group row">
-    <div class="col-6">
-        <label class="form-label" for="nombre">Nombre:</label>
-        <input class="form-control" type="text" id="nombre">
-    </div>
-    <div class="col-6">
-        <label class="form-label" for="apellido">Especie:</label>
-        <input class="form-control" type="text" id="apellido">
-    </div>
-</div>
-<div class="input-group row">
-    <div class="col">
-        <label class="form-label" for="ciudad">Ciudad:</label>
-        <input class="form-control" type="text" id="codarea">
-    </div>
-</div>
-<div class="input-group row">
-    <div class="col">
-        <label class="form-label" for="direccion">Dirección:</label>
-        <input class="form-control" type="text" id="direccion">
-    </div>
-</div>
-
-<h6>Opcionales:</h6>
-<div class="input-group row">
-    <div class="col">
-        <label class="form-label" for="detalle">Detalle característico:</label>
-        <input class="form-control" type="text" id="detalle">
-    </div>
-</div>
-<div class="input-group row">
-    <div class="col">
-        <label class="form-label" for="fechanac">Fecha de nacimiento:</label>
-        <input class="form-control" type="date" id="fechanac">
-    </div>
-</div>

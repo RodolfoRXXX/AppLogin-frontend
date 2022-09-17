@@ -1,41 +1,43 @@
+<div [formGroup]="form">
+    <div class="input-group row">
+        <div class="col-6">
+            <label class="form-label" for="nombre">Nombre:</label>
+            <input class="form-control" type="text" id="nombre" formControlName="nombre">
+        </div>
+        <div class="col-6">
+            <label class="form-label" for="apellido">Apellido:</label>
+            <input class="form-control" type="text" id="apellido" formControlName="apellido">
+        </div>
+    </div>
+    <div class="input-group row">
+        <div class="col">
+            <label class="form-label" for="ciudad">Ciudad:</label>
+            <input class="form-control" type="text" id="ciudad" formControlName="ciudad">
+        </div>
+    </div>
+    
+    <h6>Opcionales:</h6>
+    <div class="input-group row">
+        <div class="col-6">
+            <label class="form-label" for="direccion">Dirección:</label>
+            <input class="form-control" type="text" id="direccion" formControlName="direccion">
+        </div>
+        <div class="col-6">
+            <label class="form-label" for="fechanac">Fecha de nacimiento:</label>
+            <input class="form-control" type="date" id="fechanac" formControlName="fechanac">
+        </div>
+    </div>
+    <div class="input-group row">
+        <div class="col">
+            <label class="form-label" for="email">Correo electrónico:</label>
+            <input class="form-control" type="text" id="email" formControlName="email">
+        </div>
+    </div>
+    <div class="input-group row">
+        <div class="col">
+            <label class="form-label" for="nacionalidad">Nacionalidad:</label>
+            <input class="form-control" type="text" id="cnacionalidad" formControlName="nacionalidad">
+        </div>
+    </div>
+</div>
 
-<div class="input-group row">
-    <div class="col-6">
-        <label class="form-label" for="nombre">Nombre:</label>
-        <input class="form-control" type="text" id="nombre" formControlName="nombre">
-    </div>
-    <div class="col-6">
-        <label class="form-label" for="apellido">Apellido:</label>
-        <input class="form-control" type="text" id="apellido" formControlName="apellido">
-    </div>
-</div>
-<div class="input-group row">
-    <div class="col">
-        <label class="form-label" for="ciudad">Ciudad:</label>
-        <input class="form-control" type="text" id="ciudad" formControlName="ciudad">
-    </div>
-</div>
-
-<h6>Opcionales:</h6>
-<div class="input-group row">
-    <div class="col-6">
-        <label class="form-label" for="direccion">Dirección:</label>
-        <input class="form-control" type="text" id="direccion">
-    </div>
-    <div class="col-6">
-        <label class="form-label" for="fechanac">Fecha de nacimiento:</label>
-        <input class="form-control" type="date" id="fechanac">
-    </div>
-</div>
-<div class="input-group row">
-    <div class="col">
-        <label class="form-label" for="email">Correo electrónico:</label>
-        <input class="form-control" type="text" id="email">
-    </div>
-</div>
-<div class="input-group row">
-    <div class="col">
-        <label class="form-label" for="nacionalidad">Nacionalidad:</label>
-        <input class="form-control" type="text" id="cnacionalidad">
-    </div>
-</div>

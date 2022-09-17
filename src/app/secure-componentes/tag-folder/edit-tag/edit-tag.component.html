@@ -1,5 +1,5 @@
 <div class="">
-    <form>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
             <li [ngbNavItem]="1">
             <a ngbNavLink>Tipo</a>
@@ -7,17 +7,17 @@
                 <div class="form-group mb-2">
                     <label for="input" class="control-label mb-2">Selecciona un tipo de Tag</label>
                     <div>
-                        <select name="" id="input" class="form-control">
+                        <select id="input" class="form-control" (change)="onChange($event.target)">
                             <option disabled selected>Elige uno</option>
-                            <option value="">Persona</option>
-                            <option value="">Mascota</option>
-                            <option value="">Vehículo</option>
+                            <option value="persona">Persona</option>
+                            <option value="mascota">Mascota</option>
+                            <option value="vehiculo">Vehículo</option>
                         </select>
                     </div>
                 </div>
             </ng-template>
             </li>
-            <li [ngbNavItem]="2">
+            <li [ngbNavItem]="2" [disabled]="inactiveIndex">
                 <a ngbNavLink>Datos</a>
                     <ng-template ngbNavContent>
                         <div class="row">
@@ -33,14 +33,14 @@
                                 
                             </div>
                             <div class="col-md-6">
-                                <app-persona-form formControlName="persona"></app-persona-form>
-                                <app-mascota-form *ngIf="false"></app-mascota-form>
-                                <app-vehiculo-form *ngIf="false"></app-vehiculo-form>
+                                <app-persona-form [form]="form" *ngIf="tagChoosen == 'persona'"></app-persona-form>
+                                <app-mascota-form [form]="form" *ngIf="tagChoosen == 'mascota'"></app-mascota-form>
+                                <app-vehiculo-form [form]="form" *ngIf="tagChoosen == 'vehiculo'"></app-vehiculo-form>
                             </div>
                         </div>
                     </ng-template>
             </li>
-            <li [ngbNavItem]="3">
+            <li [ngbNavItem]="3" [disabled]="inactiveIndex">
                 <a ngbNavLink>Contacto</a>
                     <ng-template ngbNavContent>
                         <div class="input-group row">
@@ -67,7 +67,7 @@
                         </div>
                     </ng-template>
             </li>
-            <li [ngbNavItem]="4">
+            <li [ngbNavItem]="4" [disabled]="inactiveIndex">
                 <a ngbNavLink>Información importante</a>
                     <ng-template ngbNavContent>
                         <div class="form-group">

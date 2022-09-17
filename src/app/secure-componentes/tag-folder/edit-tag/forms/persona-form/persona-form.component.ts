@@ -1,41 +1,19 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-persona-form',
   templateUrl: './persona-form.component.html',
-  styleUrls: ['./persona-form.component.css'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef( () => PersonaFormComponent ),
-      multi: true
-    }
-  ]
+  styleUrls: ['./persona-form.component.css']
 })
-export class PersonaFormComponent implements OnInit, ControlValueAccessor {
+export class PersonaFormComponent implements OnInit {
 
-  isDisabled: boolean;
+  @Input() form: FormGroup; 
 
   constructor() { }
-
-  onChange = () => {}; //métodos que agrego y ejecuto en alguna función que genere cambios
-  onTouched = () => {};
 
   ngOnInit(): void {
   }
 
-  writeValue(obj: any): void {
-    //escribe alguna variable interna con valores que vengan desde el formulario
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-  setDisabledState(state: boolean): void {
-    this.isDisabled = state;
-  }
 
 }
