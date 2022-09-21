@@ -1,20 +1,21 @@
+<!-- Personal -->
 <div>
     <ul class="nav nav-tabs padding-nav-tab color-nav-tab">
         <li class="nav-item"><a class="nav-link active">Tag-ID personal</a></li>
     </ul>
-    <button class="btn btn-primary btn-crearTag" *ngIf="!tagPersonalExist" (click)="irEditTag('personal', '0')">Crear Tag-ID Personal</button>
+    <button class="btn btn-primary btn-crearTag" *ngIf="!tagPersonalExist" (click)="editTag('personal', -1)">Crear Tag-ID Personal</button>
     <div class="rounded accordion-box-principal" *ngIf="tagPersonalExist">
-        <ngb-accordion #acc="ngbAccordion">
-            <ngb-panel>
+        <ngb-accordion #acc="ngbAccordion" *ngFor="let persona of personas; let i = index">
+            <ngb-panel *ngIf="persona.nivel == 'personal'">
                 <ng-template ngbPanelTitle>
                     <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
-                    <span class="text-start">Nombre: <span class="d-block"><b>Diego Fernando Molinari</b></span></span>
+                    <span class="text-start">Nombre: <span class="d-block"><b>{{ persona.nombre + ' ' + persona.apellido }}</b></span></span>
                 </ng-template>
                 <ng-template ngbPanelContent>
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-outline-success" (click)="irEditTag('personal', '1')">Crear/Editar</button>
-                        <button class="btn btn-outline-warning">Ver Tag</button>
-                        <button class="btn btn-outline-danger">Editar Vinculación</button>
+                        <button class="btn btn-outline-success" (click)="editTag('personal', i )">Editar</button>
+                        <button class="btn btn-outline-warning" (click)="verTag('personal', i)">Ver Tag</button>
+                        <button class="btn btn-outline-danger"  (click)="vincularTag('personal', i)">Editar Vinculación</button>
                     </div>
                 </ng-template>
             </ngb-panel>
@@ -22,52 +23,77 @@
     </div>
 </div>
 
+<!-- Adicional - Personas -->
 <div>
     <ul class="nav nav-tabs padding-nav-tab color-nav-tab-adic">
-        <li class="nav-item"><a class="nav-link active">Tag-ID adicionales</a></li>
+        <li class="nav-item"><a class="nav-link active">Tag-ID adicional - Personas</a></li>
     </ul>
-    <button class="btn btn-primary btn-crearTag" (click)="irEditTag('adicional', '0')">Crear Tag-ID Adicional</button>
+    <button class="btn btn-primary btn-crearTag" (click)="editTag('adicional', -1)">Crear Tag-ID Adicional</button>
     <div class="rounded accordion-box-secondary" *ngIf="tagAdicionalExist">
         <ngb-accordion #acc="ngbAccordion">
-            <ngb-panel>
-                <ng-template ngbPanelTitle>
-                    <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
-                    <span class="text-start">Nombre: <span class="d-block"><b>Gato</b> - <b>Pelusa</b></span></span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-outline-success" (click)="irEditTag('adicional', '3')">Editar</button>
-                        <button class="btn btn-outline-warning">Ver Tag</button>
-                        <button class="btn btn-outline-danger">Editar Vinculación</button>
-                    </div>
-                </ng-template>
-            </ngb-panel>
-            <ngb-panel>
-                <ng-template ngbPanelTitle>
-                    <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
-                    <span class="text-start">Nombre: <span class="d-block"><b>Hijo</b> - <b>Sebastián Dario Molinari</b></span></span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-outline-success">Editar</button>
-                        <button class="btn btn-outline-warning">Ver Tag</button>
-                        <button class="btn btn-outline-danger">Editar Vinculación</button>
-                    </div>
-                </ng-template>
-            </ngb-panel>
-            <ngb-panel>
-                <ng-template ngbPanelTitle>
-                    <span class="me-5">Tipo: <span class="d-block"><b>Vehículo</b></span></span>
-                    <span class="text-start">Tipo: <span class="d-block"><b>Bicicleta</b> - <b>Venzo</b></span></span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-outline-success">Editar</button>
-                        <button class="btn btn-outline-warning">Ver Tag</button>
-                        <button class="btn btn-outline-danger">Editar Vinculación</button>
-                    </div>
-                </ng-template>
-            </ngb-panel>
+                <ngb-panel *ngFor="let persona of personas">
+                    <ng-template ngbPanelTitle>
+                        <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
+                        <span class="text-start">Nombre: <span class="d-block"><b>Gato</b> - <b>Pelusa</b></span></span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-success" (click)="editTag('adicional', 3)">Editar</button>
+                            <button class="btn btn-outline-warning">Ver Tag</button>
+                            <button class="btn btn-outline-danger">Editar Vinculación</button>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+        </ngb-accordion>
+    </div>
+</div>
+
+<!-- Adicional - Mascotas -->
+<div>
+    <ul class="nav nav-tabs padding-nav-tab color-nav-tab-adic">
+        <li class="nav-item"><a class="nav-link active">Tag-ID adicional - Mascotas</a></li>
+    </ul>
+    <button class="btn btn-primary btn-crearTag" (click)="editTag('adicional', -1)">Crear Tag-ID Adicional</button>
+    <div class="rounded accordion-box-secondary" *ngIf="tagAdicionalExist">
+        <ngb-accordion #acc="ngbAccordion">
+                <ngb-panel *ngFor="let persona of personas">
+                    <ng-template ngbPanelTitle>
+                        <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
+                        <span class="text-start">Nombre: <span class="d-block"><b>Gato</b> - <b>Pelusa</b></span></span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-success" (click)="editTag('adicional', 3)">Editar</button>
+                            <button class="btn btn-outline-warning">Ver Tag</button>
+                            <button class="btn btn-outline-danger">Editar Vinculación</button>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+        </ngb-accordion>
+    </div>
+</div>
+
+<!-- Adicional - Vehículos -->
+<div>
+    <ul class="nav nav-tabs padding-nav-tab color-nav-tab-adic">
+        <li class="nav-item"><a class="nav-link active">Tag-ID adicional - Vehículos</a></li>
+    </ul>
+    <button class="btn btn-primary btn-crearTag" (click)="editTag('adicional', -1)">Crear Tag-ID Adicional</button>
+    <div class="rounded accordion-box-secondary" *ngIf="tagAdicionalExist">
+        <ngb-accordion #acc="ngbAccordion">
+                <ngb-panel *ngFor="let persona of personas">
+                    <ng-template ngbPanelTitle>
+                        <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
+                        <span class="text-start">Nombre: <span class="d-block"><b>Gato</b> - <b>Pelusa</b></span></span>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-success" (click)="editTag('adicional', 3)">Editar</button>
+                            <button class="btn btn-outline-warning">Ver Tag</button>
+                            <button class="btn btn-outline-danger">Editar Vinculación</button>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
         </ngb-accordion>
     </div>
 </div>
