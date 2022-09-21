@@ -10,6 +10,7 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 export class NavbarComponent implements OnInit {
 
   isLogin: boolean = false;
+  userId: string|null;
 
   constructor( 
     private _auth: AuthService,
@@ -19,7 +20,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.isUserLogin();
     this._com.getDataId().subscribe( value => {
-      value?this.isLogin = true:this.isLogin = false;
+      if(value){
+        this.isLogin = true;
+        this.userId = value
+      } else{
+        this.isLogin = false;
+        this.userId = null;
+      }
     })
   };
 

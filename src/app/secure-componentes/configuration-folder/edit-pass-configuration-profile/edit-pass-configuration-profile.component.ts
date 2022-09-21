@@ -89,7 +89,7 @@ export class EditPassConfigurationProfileComponent implements OnInit {
 
   onSubmit(){
     this.estadoSmt = 'load';
-    this._api.putTypeRequest('user/updatepassword', this.form.value).subscribe( (res:any) => {
+    this._api.putTypeRequest('profile/updatepassword', this.form.value).subscribe( (res:any) => {
       if((res.status != 0)&&(res.data.affectedRows != 0)){
         this.estadoSmt = 'ok';
         this._com.setNotifier({display: true, state:'alert-success', text:'La contraseña se ha actualizado con éxito!'})

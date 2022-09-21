@@ -84,6 +84,7 @@ export class RegisterComponent implements OnInit {
           this.estadoLogin(true, 'alert-success', 'Usuario creado exitósamente!');
           this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
           this._auth.setDataInLocalStorage('token', res.token);
+          this._auth.setDataInLocalStorage('userId', res.data[0].id);
           this._com.setDataId(res.data[0].id);
           setTimeout(() => {
             this._router.navigate(['verificate']);

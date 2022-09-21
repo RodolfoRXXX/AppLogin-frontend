@@ -16,6 +16,10 @@
     text-align: left;
 }
 
+.navbar-color {
+    background: linear-gradient(to bottom, rgb(13, 110, 253), rgb(102, 161, 250));
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {
 

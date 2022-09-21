@@ -63,7 +63,7 @@ export class EditEmailConfigurationProfileComponent implements OnInit {
     this.estadoSmt = 'load';
     let e = md5(this.form.get('email')?.value).slice(0,6);
     this.form.controls['codeEmail'].setValue(e);
-    this._api.putTypeRequest('user/updateemail', this.form.value).subscribe( (res:any) => {
+    this._api.putTypeRequest('profile/updateemail', this.form.value).subscribe( (res:any) => {
       if((res.status != 0)&&(res.data.affectedRows != 0)){
         this.estadoSmt = 'ok';
         this._com.setNotifier({display: true, state:'alert-success', text:'Se ha enviado un código a tu nuevo correo electrónico. Verificalo!'})

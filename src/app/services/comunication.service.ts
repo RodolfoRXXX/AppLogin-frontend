@@ -9,6 +9,7 @@ export class ComunicationService {
   dataIdObservable: Subject<string|null> = new Subject();
   notifierObservable: Subject<any> = new Subject();
   menuOffcanvasObservable: Subject<any> = new Subject();
+  tabEditorStateObservable: Subject<any> = new Subject();
 
   constructor() { }
 
@@ -34,6 +35,14 @@ export class ComunicationService {
   }
   getMenuOffCanvas(){
     return this.menuOffcanvasObservable.asObservable();
+  }
+
+  //Observable que llama al menú lateral en pantalla de teléfono móvil
+  setTabEditor( value:any ){
+    this.tabEditorStateObservable.next(value);
+  }
+  getTabEditor(){
+    return this.tabEditorStateObservable.asObservable();
   }
 
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
  
 @Injectable({
   providedIn: 'root'
@@ -28,15 +28,15 @@ export class ApiService {
   }
 
   postTypeRequest(url:any, payload:any){
-    return this._http.post(`${this.baseUrl}${url}`, payload).pipe(map( res => {
-      return res;
-    }))
+    return this._http.post(`${this.baseUrl}${url}`, payload).pipe(
+      catchError(this.handleError)
+    )
   }
 
   putTypeRequest(url:any, payload:any){
-    return this._http.put(`${this.baseUrl}${url}`, payload).pipe(map( res => {
-      return res;
-    }))
+    return this._http.put(`${this.baseUrl}${url}`, payload).pipe(
+      catchError(this.handleError)
+    )
   }
 
   //Manejo de errores

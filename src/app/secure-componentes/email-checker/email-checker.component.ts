@@ -95,7 +95,7 @@ export class EmailCheckerComponent implements OnInit {
       this.form.get('5')?.value+
       this.form.get('6')?.value
     );
-    this._api.putTypeRequest('user/verificate-user', this.form.value).subscribe( (res:any) => {
+    this._api.putTypeRequest('profile/verificate-user', this.form.value).subscribe( (res:any) => {
       if ((res.status)&&(res.status != 0)){
         if(res.data != 'error'){
           this.estadoSmt = 'ok';

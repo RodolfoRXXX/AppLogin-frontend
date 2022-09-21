@@ -1,13 +1,17 @@
 /* Extra small devices (phones, 600px and down) */
 
 .tag-profile-content {
-    padding: 1rem 1.5rem 1.5rem 1.5rem;
+    padding: 0 0 1.5rem;
+}
+
+.color-nav-tab {
+    background-color: rgb(247, 247, 247);
 }
 
 @media only screen and (max-width: 768px) {
 
     .tag-profile-content {
-        padding: 1rem 0;
+        padding: 0;
     }
 
 }

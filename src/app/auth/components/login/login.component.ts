@@ -71,8 +71,9 @@ export class LoginComponent implements OnInit {
           this.estadoLogin(true, 'alert-success', 'Acceso autorizado!');
           this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
           this._auth.setDataInLocalStorage('token', res.token);
+          this._auth.setDataInLocalStorage('userId', res.data[0].id);
           this._com.setDataId(res.data[0].id);
-          this._router.navigate(['home']);
+          this._router.navigate(['profile']);
         } else{
           this.estadoSmt = 'error';
           this.estadoLogin(true, 'alert-danger', 'Usuario o contraseña incorrectos.');

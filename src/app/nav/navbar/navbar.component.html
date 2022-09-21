@@ -1,24 +1,24 @@
-<nav class="navbar navbar-light bg-light ps-4 pe-4 nav-shadow">
-    <a class="navbar-brand me-0 col-md-6 col-12 nav-brand" routerLink="">AppTag.io</a>
+<nav class="navbar navbar-light navbar-color ps-4 pe-4 nav-shadow">
+    <a class="navbar-brand me-0 col-md-6 col-12 nav-brand text-white" routerLink="">identiLink.com.ar</a>
     <div class="col-md-6 col-12">
       <ul class="navbar-nav nav-items">
         <li class="nav-item ms-0 display-menu" *ngIf="isLogin">
-          <button class="btn" (click)="open()" style="border-color: white!important;"><span class="navbar-toggler-icon"></span></button>
+          <button class="btn" (click)="open()"><span class="navbar-toggler-icon"></span></button>
         </li>
         <li class="nav-item">
-          <a class="nav-link me-3" routerLink = "home" routerLinkActive = "active">Home</a>
+          <a class="nav-link me-3 text-white" routerLink = "home" routerLinkActive = "active">Home</a>
         </li>
         <li class="nav-item d-flex" *ngIf="isLogin">
-            <a class="nav-link me-3" routerLink = "profile" routerLinkActive = "active">Mi cuenta</a>
+            <a class="nav-link me-3 text-white" routerLink = "profile" routerLinkActive = "active">Mi cuenta</a>
         </li>
         <li class="nav-item d-flex" *ngIf="isLogin">
-          <a class="nav-link" routerLink = "logout" routerLinkActive = "active" >Cerrar sesión</a>
+          <a class="nav-link text-white" routerLink = "logout" routerLinkActive = "active" >Cerrar sesión</a>
         </li>
         <li class="nav-item d-flex" *ngIf="!isLogin">
-          <a class="nav-link me-3" routerLink = "login" routerLinkActive = "active">Ingresar</a>
+          <a class="nav-link me-3 text-white" routerLink = "login" routerLinkActive = "active">Ingresar</a>
         </li>
         <li class="nav-item d-flex" *ngIf="!isLogin">
-          <a class="nav-link" routerLink = "register" routerLinkActive = "active" >Registrarse</a>
+          <a class="nav-link text-white" routerLink = "register" routerLinkActive = "active" >Registrarse</a>
         </li>
       </ul>
     </div>

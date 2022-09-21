@@ -20,9 +20,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this._api.getTypeRequest('profile/profile').subscribe((res:any) => {
+    /*this._api.getTypeRequest('profile/profile').subscribe((res:any) => {
       this.protectedData = res
-    });
+    });*/
     this.getUser();
 
   }

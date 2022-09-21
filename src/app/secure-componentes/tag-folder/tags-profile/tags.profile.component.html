@@ -1,12 +1,8 @@
-<nav class="d-flex justify-content-between" aria-label="breadcrumb">
-    <h3>Mis Tags</h3>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a class="text-primary" (click)="irTablero()" style="cursor:pointer;">Tablero</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Mis tags</li>
-    </ol>
+<nav class="d-flex justify-content-end pt-3 color-nav-tab">
+    <h2 class="me-4 mb-0">{{ vistaTag }}</h2>
 </nav>
 <!-- Contenido del tag -->
-<section class="tag-profile-content border-top">
+<section class="tag-profile-content">
     <router-outlet></router-outlet>
 </section>
 

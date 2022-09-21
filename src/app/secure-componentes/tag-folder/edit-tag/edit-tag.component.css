@@ -1,0 +1,15 @@
+.color-nav-tab {
+    background-color: rgb(247, 247, 247);
+}
+
+.padding-nav-tab {
+    padding: 0.75rem 1rem 0;
+}
+
+.padding-content-form {
+    padding: 1rem;
+}
+
+.nav-a {
+    cursor: pointer;
+}

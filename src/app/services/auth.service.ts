@@ -15,6 +15,14 @@ export class AuthService {
     }
   }
 
+  getUserId(){
+    if (localStorage.getItem('userId')) {
+      return localStorage.getItem('userId')
+    } else {
+      return null;
+    }
+  }
+
   setDataInLocalStorage(variableName:any, data:any){
     localStorage.setItem(variableName, data);
   }

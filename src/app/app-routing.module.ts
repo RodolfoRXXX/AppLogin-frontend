@@ -30,9 +30,9 @@ const routes: Routes = [
         children: [
           {path: '', redirectTo: 'all-tag', pathMatch: 'full'},
           {path: 'all-tag', component: AllTagComponent},
-          {path: 'edit-tag', component: EditTagComponent}
+          {path: 'edit-tag/:tipo/:id', component: EditTagComponent}
         ]
-    },
+      },
       {path: 'configuration', component: ConfigurationProfileComponent}
     ],
     canActivate: [AuthGuardService, VerificateGuardGuard],
