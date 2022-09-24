@@ -1,89 +1,113 @@
+
 <div>
     <ul class="nav nav-tabs padding-nav-tab color-nav-tab">
         <li class="nav-item"><a class="nav-link nav-a" 
-                                [ngClass]="!activeTipo?'disabled':(navActive == 1?'active':'')"
-                                name="1" 
-                                (click)="onTabClick($event)">Tipo</a></li>
+                                [ngClass]="!activeTabs?'disabled':(navActive == 1?'active':'')"
+                                name="1" (click)="onTabClick($event)">Datos</a></li>
         <li class="nav-item"><a class="nav-link nav-a" 
-                                [ngClass]="!activeOthers?'disabled':(navActive == 2?'active':'')"
-                                name="2" (click)="onTabClick($event)">Datos</a></li>
+                                [ngClass]="!activeTabs?'disabled':(navActive == 2?'active':'')"
+                                name="2" (click)="onTabClick($event)">Contacto</a></li>
         <li class="nav-item"><a class="nav-link nav-a" 
-                                [ngClass]="!activeOthers?'disabled':(navActive == 3?'active':'')"
-                                name="3" (click)="onTabClick($event)">Contacto</a></li>
-        <li class="nav-item"><a class="nav-link nav-a" 
-                                [ngClass]="!activeOthers?'disabled':(navActive == 4?'active':'')"
-                                name="4" (click)="onTabClick($event)">Información importante</a></li>
+                                [ngClass]="!activeTabs?'disabled':(navActive == 3?'active':'')"
+                                name="3" (click)="onTabClick($event)">Información importante</a></li>
     </ul>
-        <div class="padding-content-form" *ngIf="navActive == 1">
-            <div class="form-group mb-2">
-                <label for="input" class="control-label mb-2">Selecciona un tipo de Tag-ID</label>
-                <div>
-                    <select id="input" class="form-control" (change)="onChange($event.target)" #selectTipo>
-                        <option disabled selected>Elige uno</option>
-                        <option value="persona">Persona</option>
-                        <option value="mascota">Mascota</option>
-                        <option value="vehiculo">Vehículo</option>
-                    </select>
-                </div>
-            </div>
+    <div class="d-flex justify-content-center p-4" *ngIf="load_form">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">...loading</span>
         </div>
-    <form>
-        <div class="padding-content-form" *ngIf="navActive == 2">
-            <div class="row">
-                <div class="d-flex flex-column col-md-6">
-                    <img src="#" class="img-responsive border" alt="Image" style="width: 100%; height: 300px;">
-                    
-                    <div class="form-group mt-3">
-                        <label for="input" class="control-label mb-2">Cargar una imagen nueva</label>
-                        <div>
-                            <input type="file" id="input" class="form-control" value="" required="required" title="">
+    </div>
+    <div *ngIf="show_form">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="padding-content-form" *ngIf="navActive == 1">
+                <div class="row">
+                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                        <label for="inputimg" class="control-label img-align" title="Cargar una nueva imagen">
+                            <img [src]="foto_formulario"
+                                  class="img-rounded" 
+                                  alt="Image" 
+                                  style="width: 50%;" >  
+                        </label>
+                        <input type="file" id="inputimg" class="form-control" required="required" formControlName="foto" style="display: none;">
+                        <div style="height: 18px; font-size: 0.9rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                              <span *ngIf="true">Este campo es requerido.</span>
+                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                            </div>
                         </div>
                     </div>
-                    
-                </div>
-                <div class="col-md-6">
-                    <app-persona-form [form]="form" *ngIf="tagChoosen == 'persona'"></app-persona-form>
-                    <app-mascota-form [form]="form" *ngIf="tagChoosen == 'mascota'"></app-mascota-form>
-                    <app-vehiculo-form [form]="form" *ngIf="tagChoosen == 'vehiculo'"></app-vehiculo-form>
-                </div>
-            </div>
-        </div>
-        <div class="padding-content-form" *ngIf="navActive == 3">
-            <div class="input-group row">
-                <div class="col">
-                    <label class="form-label" for="nombrecontacto">Nombre completo:</label>
-                    <input class="form-control" type="text" id="nombrecontacto">
+                    <div class="col-md-6">
+                        <app-persona-form [form]="form" *ngIf="tipo_form == 'persona'"></app-persona-form>
+                        <app-mascota-form [form]="form" *ngIf="tipo_form == 'mascota'"></app-mascota-form>
+                        <app-vehiculo-form [form]="form" *ngIf="tipo_form == 'vehiculo'"></app-vehiculo-form>
+                    </div>
                 </div>
             </div>
-            <div class="input-group row">
-                <div class="col-6">
-                    <label class="form-label" for="codarea">Código de área:</label>
-                    <input class="form-control" type="number" id="codarea">
+            <div class="padding-content-form" *ngIf="navActive == 2">
+                <div class="input-group row m-0">
+                    <div class="col p-0">
+                        <label class="form-label" for="nombreresp">Nombre del contacto:</label>
+                        <input class="form-control" type="text" id="nombreresp" formControlName="nombreresp">
+                        <div style="height: 18px; font-size: 0.9rem; ">
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                              <span *ngIf="true">Este campo es requerido.</span>
+                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-6">
-                    <label class="form-label" for="telefono">Teléfono:</label>
-                    <input class="form-control" type="number" id="telefono">
+                <div class="input-group row m-0">
+                    <div class="col-6 ps-0">
+                        <label class="form-label" for="telefono">Teléfono:</label>
+                        <input class="form-control" type="number" id="telefono" formControlName="telresp">
+                        <div style="height: 18px; font-size: 0.9rem; ">
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                              <span *ngIf="true">Este campo es requerido.</span>
+                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 pe-0">
+                        <label class="form-label" for="wspresp">Whatsapp:</label>
+                        <input class="form-control" type="number" id="wspresp" formControlName="wspresp">
+                        <div style="height: 18px; font-size: 0.9rem; ">
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                              <span *ngIf="true">Este campo es requerido.</span>
+                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="input-group row">
-                <div class="col">
-                    <label class="form-label" for="wspcontacto">Whatsapp contacto:</label>
-                    <input class="form-control" type="text" id="wspcontacto">
-                </div>
+            <div class="padding-content-form" *ngIf="navActive == 3">
+                <div class="form-group">
+                    <label for="textarea" class="control-label mb-2">Ingresá aquí información importante sobre la persona, mascota o vehículo del Tag.</label>
+                    <div>
+                        <textarea name="" id="textarea" class="form-control" rows="3" required="required" placeholder="Escribe aquí..." formControlName="observaciones"></textarea>
+                        <div style="height: 18px; font-size: 0.9rem; ">
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                              <span *ngIf="true">Este campo es requerido.</span>
+                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
             </div>
+            <div class="d-flex justify-content-end padding-content-form pt-0">
+                <button class="btn btn-danger me-3">Cancelar</button>
+                <button class="btn btn-primary">Crear</button>
+            </div>
+        </form>
+    </div>
+        
+    <div class="p-3" *ngIf="error_form">
+        <div class="alert alert-danger">
+            <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualice la página.</p>
         </div>
-        <div class="padding-content-form" *ngIf="navActive == 4">
-            <div class="form-group">
-                <label for="textarea" class="control-label mb-2">Ingresá aquí información importante sobre la persona, mascota o vehículo del Tag.</label>
-                <div>
-                    <textarea name="" id="textarea" class="form-control" rows="3" required="required" placeholder="Escribe aquí..."></textarea>
-                </div>
-            </div>  
-        </div>
-        <div class="d-flex justify-content-end padding-content-form pt-0">
-            <button class="btn btn-danger me-3">Cancelar</button>
-            <button class="btn btn-primary">Crear</button>
-        </div>
-    </form>
+    </div>
 </div>
 

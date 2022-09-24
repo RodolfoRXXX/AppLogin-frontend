@@ -1,99 +1,207 @@
 <!-- Personal -->
 <div>
+    <!-- Solapa base Personal -->
     <ul class="nav nav-tabs padding-nav-tab color-nav-tab">
         <li class="nav-item"><a class="nav-link active">Tag-ID personal</a></li>
     </ul>
-    <button class="btn btn-primary btn-crearTag" *ngIf="!tagPersonalExist" (click)="editTag('personal', -1)">Crear Tag-ID Personal</button>
-    <div class="rounded accordion-box-principal" *ngIf="tagPersonalExist">
-        <ngb-accordion #acc="ngbAccordion" *ngFor="let persona of personas; let i = index">
-            <ngb-panel *ngIf="persona.nivel == 'personal'">
-                <ng-template ngbPanelTitle>
-                    <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
-                    <span class="text-start">Nombre: <span class="d-block"><b>{{ persona.nombre + ' ' + persona.apellido }}</b></span></span>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-outline-success" (click)="editTag('personal', i )">Editar</button>
-                        <button class="btn btn-outline-warning" (click)="verTag('personal', i)">Ver Tag</button>
-                        <button class="btn btn-outline-danger"  (click)="vincularTag('personal', i)">Editar Vinculación</button>
-                    </div>
-                </ng-template>
-            </ngb-panel>
-        </ngb-accordion>
+    <div class="col-md-6 ms-auto me-auto">
+        <!-- Tag personal -->
+        <div class="rounded accordion-box-principal" *ngIf="tag_personal_exist">
+            <ngb-accordion #acc="ngbAccordion">
+                <ng-container *ngFor="let persona of personas">
+                    <ngb-panel *ngIf="persona.nivel == 'personal'">
+                        <ng-template ngbPanelTitle>
+                            <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
+                            <span class="text-start">Nombre: <span class="d-block"><b>{{ persona.nombre + ' ' + persona.apellido }}</b></span></span>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-success" (click)="editTag('persona', persona.id )">Editar</button>
+                                <button class="btn btn-outline-warning" (click)="verTag('persona', persona.id)">Ver Tag</button>
+                                <button class="btn btn-outline-danger"  (click)="vincularTag('persona', persona.id)">Editar Vinculación</button>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                </ng-container>  
+            </ngb-accordion>
+        </div>
+        <!-- Alerta en caso de error de carga -->
+        <div class="p-3" *ngIf="error_carga_persona && !load_tag_personal">
+            <div class="alert alert-danger">
+                <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualice la página.</p>
+            </div>
+        </div>
+        <!-- Spinner load personal -->
+        <div class="d-flex justify-content-center p-4" *ngIf="load_tag_personal">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">...loading</span>
+            </div>
+        </div>
+        <!-- Alerta que aparece si no hay tag -->
+        <div class="p-3 pb-2" *ngIf="!tag_personal_exist && !load_tag_personal && !error_carga_persona">
+            <div class="alert alert-info mb-0">
+                <p class="d-block text-center mb-0">Aún no creaste tu Tag personal. Empezá ahora!</p>
+            </div>
+        </div>
+        <!-- Botón que aparece si no hay tag -->
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary btn-crearTag" *ngIf="!tag_personal_exist && !load_tag_personal" (click)="editTag('personal', 0)" [disabled]="tag_personal_exist || load_tag_personal">Crear mi Tag-ID Personal</button>
+        </div>
     </div>
 </div>
 
 <!-- Adicional - Personas -->
 <div>
+    <!-- Solapa base Persona -->
     <ul class="nav nav-tabs padding-nav-tab color-nav-tab-adic">
         <li class="nav-item"><a class="nav-link active">Tag-ID adicional - Personas</a></li>
     </ul>
-    <button class="btn btn-primary btn-crearTag" (click)="editTag('adicional', -1)">Crear Tag-ID Adicional</button>
-    <div class="rounded accordion-box-secondary" *ngIf="tagAdicionalExist">
-        <ngb-accordion #acc="ngbAccordion">
-                <ngb-panel *ngFor="let persona of personas">
-                    <ng-template ngbPanelTitle>
-                        <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
-                        <span class="text-start">Nombre: <span class="d-block"><b>Gato</b> - <b>Pelusa</b></span></span>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-success" (click)="editTag('adicional', 3)">Editar</button>
-                            <button class="btn btn-outline-warning">Ver Tag</button>
-                            <button class="btn btn-outline-danger">Editar Vinculación</button>
-                        </div>
-                    </ng-template>
-                </ngb-panel>
-        </ngb-accordion>
+    <div class="col-md-6 ms-auto me-auto">
+        <!-- Tag adicional persona --> 
+        <div class="rounded accordion-box-secondary" *ngIf="tag_adic_persona_existe">
+            <ngb-accordion #acc="ngbAccordion">
+                <ng-container *ngFor="let persona of personas">
+                    <ngb-panel *ngIf="persona.nivel == 'adicional'">
+                        <ng-template ngbPanelTitle>
+                            <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
+                            <span class="text-start">Nombre: <span class="d-block"><b>{{ persona.nombre + ' ' + persona.apellido }}</b></span></span>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-success" (click)="editTag('persona', persona.id)">Editar</button>
+                                <button class="btn btn-outline-warning" (click)="verTag('persona', persona.id)">Ver Tag</button>
+                                <button class="btn btn-outline-danger" (click)="vincularTag('persona', persona.id)">Editar Vinculación</button>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                </ng-container>
+            </ngb-accordion>
+        </div>
+        <!-- Alerta en caso de error de carga -->
+        <div class="p-3" *ngIf="error_carga_persona && !load_tag_persona">
+            <div class="alert alert-danger">
+                <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualice la página.</p>
+            </div>
+        </div>
+        <!-- Spinner load persona -->
+        <div class="d-flex justify-content-center p-4" *ngIf="load_tag_persona">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">...loading</span>
+            </div>
+        </div>
+        <!-- Alerta que aparece si no hay tag -->
+        <div class="p-3 pb-2" *ngIf="!tag_adic_persona_existe && !load_tag_persona && !error_carga_persona">
+            <div class="alert alert-info mb-0">
+                <p class="d-block text-center mb-0">No hay Tags para personas adicionales. Creá uno nuevo!</p>
+            </div>
+        </div>
+        <!-- Botón que aparece si no hay tag -->
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary btn-crearTag" (click)="editTag('persona', 0)">Crear Tag-ID Persona</button>
+        </div>
     </div>
 </div>
 
 <!-- Adicional - Mascotas -->
 <div>
+    <!-- Solapa base Mascota -->
     <ul class="nav nav-tabs padding-nav-tab color-nav-tab-adic">
         <li class="nav-item"><a class="nav-link active">Tag-ID adicional - Mascotas</a></li>
     </ul>
-    <button class="btn btn-primary btn-crearTag" (click)="editTag('adicional', -1)">Crear Tag-ID Adicional</button>
-    <div class="rounded accordion-box-secondary" *ngIf="tagAdicionalExist">
-        <ngb-accordion #acc="ngbAccordion">
-                <ngb-panel *ngFor="let persona of personas">
-                    <ng-template ngbPanelTitle>
-                        <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
-                        <span class="text-start">Nombre: <span class="d-block"><b>Gato</b> - <b>Pelusa</b></span></span>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-success" (click)="editTag('adicional', 3)">Editar</button>
-                            <button class="btn btn-outline-warning">Ver Tag</button>
-                            <button class="btn btn-outline-danger">Editar Vinculación</button>
-                        </div>
-                    </ng-template>
-                </ngb-panel>
-        </ngb-accordion>
+    <div class="col-md-6 ms-auto me-auto">
+        <!-- Tag adicional mascota --> 
+        <div class="rounded accordion-box-secondary" *ngIf="tag_adic_mascota_existe">
+            <ngb-accordion #acc="ngbAccordion">
+                <ng-container *ngFor="let mascota of mascotas">
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
+                            <span class="text-start">Nombre: <span class="d-block"><b>{{ mascota.especie }}</b> - <b>{{ mascota.nombre }}</b></span></span>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-success" (click)="editTag('mascota', mascota.id)">Editar</button>
+                                <button class="btn btn-outline-warning" (click)="verTag('mascota', mascota.id)">Ver Tag</button>
+                                <button class="btn btn-outline-danger" (click)="vincularTag('mascota', mascota.id)">Editar Vinculación</button>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                </ng-container>
+            </ngb-accordion>
+        </div>
+        <!-- Alerta en caso de error de carga -->
+        <div class="p-3 pb-2" *ngIf="error_carga_mascota && !load_tag_mascota">
+            <div class="alert alert-danger mb-0">
+                <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualice la página.</p>
+            </div>
+        </div>
+        <!-- Spinner load mascota -->
+        <div class="d-flex justify-content-center p-4" *ngIf="load_tag_mascota">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">...loading</span>
+            </div>
+        </div>
+        <!-- Alerta que aparece si no hay tag -->
+        <div class="p-3 pb-2" *ngIf="!tag_adic_mascota_existe && !load_tag_mascota && !error_carga_mascota">
+            <div class="alert alert-info mb-0">
+                <p class="d-block text-center mb-0">No hay Tags para mascotas. Creá uno nuevo!</p>
+            </div>
+        </div>
+        <!-- Botón que aparece si no hay tag -->
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary btn-crearTag" (click)="editTag('mascota', 0)">Crear Tag-ID Mascota</button>
+        </div>
     </div>
 </div>
 
 <!-- Adicional - Vehículos -->
 <div>
+    <!-- Solapa base Vehículo -->
     <ul class="nav nav-tabs padding-nav-tab color-nav-tab-adic">
         <li class="nav-item"><a class="nav-link active">Tag-ID adicional - Vehículos</a></li>
     </ul>
-    <button class="btn btn-primary btn-crearTag" (click)="editTag('adicional', -1)">Crear Tag-ID Adicional</button>
-    <div class="rounded accordion-box-secondary" *ngIf="tagAdicionalExist">
-        <ngb-accordion #acc="ngbAccordion">
-                <ngb-panel *ngFor="let persona of personas">
-                    <ng-template ngbPanelTitle>
-                        <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
-                        <span class="text-start">Nombre: <span class="d-block"><b>Gato</b> - <b>Pelusa</b></span></span>
-                    </ng-template>
-                    <ng-template ngbPanelContent>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-outline-success" (click)="editTag('adicional', 3)">Editar</button>
-                            <button class="btn btn-outline-warning">Ver Tag</button>
-                            <button class="btn btn-outline-danger">Editar Vinculación</button>
-                        </div>
-                    </ng-template>
-                </ngb-panel>
-        </ngb-accordion>
+    <div class="col-md-6 ms-auto me-auto">
+        <!-- Tag adicional vehículo --> 
+        <div class="rounded accordion-box-secondary" *ngIf="tag_adic_vehiculo_existe">
+            <ngb-accordion #acc="ngbAccordion">
+                <ng-container *ngFor="let vehiculo of vehiculos">
+                    <ngb-panel>
+                        <ng-template ngbPanelTitle>
+                            <span class="me-5">Tipo: <span class="d-block"><b>Vehículo</b></span></span>
+                            <span class="text-start">Nombre: <span class="d-block"><b>{{ vehiculo.marca }}</b> - <b>{{ vehiculo.modelo }}</b> - <b>{{ vehiculo.color }}</b></span></span>
+                        </ng-template>
+                        <ng-template ngbPanelContent>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-success" (click)="editTag('vehiculo', vehiculo.id)">Editar</button>
+                                <button class="btn btn-outline-warning" (click)="verTag('vehiculo', vehiculo.id)">Ver Tag</button>
+                                <button class="btn btn-outline-danger" (click)="vincularTag('vehiculo', vehiculo.id)">Editar Vinculación</button>
+                            </div>
+                        </ng-template>
+                    </ngb-panel>
+                </ng-container>
+            </ngb-accordion>
+        </div>
+        <!-- Alerta en caso de error de carga -->
+        <div class="p-3 pb-2" *ngIf="error_carga_vehiculo && !load_tag_vehiculo">
+            <div class="alert alert-danger mb-0">
+                <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualice la página.</p>
+            </div>
+        </div>
+        <!-- Spinner load vehiculo -->
+        <div class="d-flex justify-content-center p-4" *ngIf="load_tag_vehiculo">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">...loading</span>
+            </div>
+        </div>
+        <!-- Alerta que aparece si no hay tag -->
+        <div class="p-3 pb-2" *ngIf="!tag_adic_vehiculo_existe && !load_tag_vehiculo && !error_carga_vehiculo">
+            <div class="alert alert-info mb-0">
+                <p class="d-block text-center mb-0">No hay Tags para vehículos. Creá uno nuevo!</p>
+            </div>
+        </div>
+        <!-- Botón que aparece si no hay tag -->
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary btn-crearTag" (click)="editTag('vehiculo', 0)">Crear Tag-ID Vehículo</button>
+        </div>
     </div>
 </div>

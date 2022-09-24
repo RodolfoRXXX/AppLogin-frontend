@@ -1,42 +1,91 @@
 <div [formGroup]="form">
-    <div class="input-group row">
-        <div class="col-6">
-            <label class="form-label" for="nombre">Nombre:</label>
+    <div class="input-group row m-0">
+        <div class="col-6 ps-0">
+            <label class="form-label mb-1" for="nombre">Nombre:</label>
             <input class="form-control" type="text" id="nombre" formControlName="nombre">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-            <label class="form-label" for="apellido">Apellido:</label>
+        <div class="col-6 pe-0">
+            <label class="form-label mb-1" for="apellido">Apellido:</label>
             <input class="form-control" type="text" id="apellido" formControlName="apellido">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="input-group row">
-        <div class="col">
-            <label class="form-label" for="ciudad">Ciudad:</label>
+    <div class="input-group row m-0">
+        <div class="col p-0">
+            <label class="form-label mb-1" for="ciudad">Ciudad:</label>
             <input class="form-control" type="text" id="ciudad" formControlName="ciudad">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
     </div>
-    
-    <h6>Opcionales:</h6>
-    <div class="input-group row">
-        <div class="col-6">
-            <label class="form-label" for="direccion">Dirección:</label>
+    <hr class="mb-1">
+    <h6 class="m-1 mt-0">Opcionales:</h6>
+    <div class="input-group row m-0">
+        <div class="col-6 ps-0">
+            <label class="form-label mb-1" for="direccion">Dirección:</label>
             <input class="form-control" type="text" id="direccion" formControlName="direccion">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-            <label class="form-label" for="fechanac">Fecha de nacimiento:</label>
+        <div class="col-6 pe-0">
+            <label class="form-label mb-1" for="fechanac">Fecha de nacimiento:</label>
             <input class="form-control" type="date" id="fechanac" formControlName="fechanac">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="input-group row">
-        <div class="col">
-            <label class="form-label" for="email">Correo electrónico:</label>
+    <div class="input-group row m-0">
+        <div class="col p-0">
+            <label class="form-label mb-1" for="email">Correo electrónico:</label>
             <input class="form-control" type="text" id="email" formControlName="email">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="input-group row">
-        <div class="col">
-            <label class="form-label" for="nacionalidad">Nacionalidad:</label>
+    <div class="input-group row m-0">
+        <div class="col p-0">
+            <label class="form-label mb-1" for="nacionalidad">Nacionalidad:</label>
             <input class="form-control" type="text" id="cnacionalidad" formControlName="nacionalidad">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

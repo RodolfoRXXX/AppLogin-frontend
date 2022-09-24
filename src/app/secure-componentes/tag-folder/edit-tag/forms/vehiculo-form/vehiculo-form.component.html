@@ -1,44 +1,86 @@
 <div [formGroup]="form">
-    <div class="input-group row">
-        <div class="col-6">
-            <label class="form-label" for="marca">Marca:</label>
+    <div class="input-group row m-0">
+        <div class="col-6 ps-0">
+            <label class="form-label mb-1" for="marca">Marca:</label>
             <input class="form-control" type="text" id="marca" formControlName="marca">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-            <label class="form-label" for="modelo">Modelo:</label>
+        <div class="col-6 pe-0">
+            <label class="form-label mb-1" for="modelo">Modelo:</label>
             <input class="form-control" type="text" id="modelo" formControlName="modelo">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="input-group row">
-        <div class="col-2">
-            <label class="form-label" for="color">Color:</label>
+    <div class="input-group row m-0">
+        <div class="col-2 ps-0">
+            <label class="form-label mb-1" for="color">Color:</label>
             <input class="form-control" type="text" id="color" formControlName="color">
         </div>
         <div class="col-4">
-            <label class="form-label" for="anio">Año:</label>
+            <label class="form-label mb-1" for="anio">Año:</label>
             <input class="form-control" type="number" id="anio" formControlName="anio">
         </div>
-        <div class="col-6">
-            <label class="form-label" for="patente">Patente:</label>
+        <div class="col-6 pe-0">
+            <label class="form-label mb-1" for="patente">Patente:</label>
             <input class="form-control" type="text" id="patente" formControlName="patente">
         </div>
     </div>
-    <div class="input-group row">
-        <div class="col">
-            <label class="form-label" for="ciudad">Ciudad:</label>
-            <input class="form-control" type="text" id="codarea" formControlName="ciudad">
+    <div style="height: 18px; font-size: 0.9rem; ">
+        <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+          <span *ngIf="true">Este campo es requerido.</span>
+          <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+          <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
         </div>
     </div>
-    
-    <h6>Opcionales:</h6>
-    <div class="input-group row">
-        <div class="col-6">
-            <label class="form-label" for="aseguradora">Aseguradora:</label>
-            <input class="form-control" type="text" id="aseguradora" formControlName="aseguradora">
+    <div class="input-group row m-0">
+        <div class="col p-0">
+            <label class="form-label mb-1" for="ciudad">Ciudad:</label>
+            <input class="form-control" type="text" id="codarea" formControlName="ciudad">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
-        <div class="col-6">
-            <label class="form-label" for="nroseguro">Nro. de seguro:</label>
+    </div>
+    <hr class="mb-1">
+    <h6 class="m-1 mt-0">Opcionales:</h6>
+    <div class="input-group row m-0">
+        <div class="col-6 ps-0">
+            <label class="form-label mb-1" for="aseguradora">Aseguradora:</label>
+            <input class="form-control" type="text" id="aseguradora" formControlName="aseguradora">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 pe-0">
+            <label class="form-label mb-1" for="nroseguro">Nro. de seguro:</label>
             <input class="form-control" type="number" id="nroseguro" formControlName="nroseguro">
+            <div style="height: 18px; font-size: 0.9rem; ">
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
+                  <span *ngIf="true">Este campo es requerido.</span>
+                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
+                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

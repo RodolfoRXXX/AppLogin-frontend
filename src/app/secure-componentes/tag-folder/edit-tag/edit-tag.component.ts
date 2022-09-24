@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ComunicationService } from 'src/app/services/comunication.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
+import { mascota, Persona, Vehiculo } from 'src/app/entidades/tag';
 
 @Component({
   selector: 'app-edit-tag',
@@ -10,42 +12,203 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class EditTagComponent implements OnInit {
 
+  load_form: boolean = false;
+  show_form: boolean = false;
+  error_form: boolean = false;
+  tipo_form: string = 'persona';
   navActive:number = 1;
   form: FormGroup;
-  activeTipo: boolean = true;
-  activeOthers: boolean = false;
-  tagChoosen:string = 'persona';
+  activeTabs: boolean = false;
   tag:any = { tipo:null, id:null };
+  persona: Persona;
+  mascota: mascota;
+  vehiculo: Vehiculo;
+  foto_formulario: string;
   @ViewChild('selectTipo') selectTipo: ElementRef;
 
   constructor(
     private _com: ComunicationService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _api: ApiService
   ) { }
 
   ngOnInit(): void {
-    this._com.setTabEditor('Creando Tag');
+    this.load_form = true;
     this._activatedRoute.params.subscribe( (params: Params) => {
       this.tag.tipo = params['tipo'];
       this.tag.id   = params['id'];
-      if(params['tipo'] === 'personal'){
-            //bloquea la pestaña tipo y deja activa la segunda "datos", guarda el tipo "persona" en una variable del formulario
-        if (params['id'] != '0') {
-          //1) busca el registro de ese id en la tabla personas 
-          //2) carga el formulario personas con el registro encontrado y lo pasa como parámetro para que complete el formulario 
-        } else {
-          //1) carga el formulario personas vacío, pero se empieza a ver desde la solapa "datos", este tag será personal
+      if(parseInt(params['id']) == 0){
+        //Creando
+        switch (params['tipo']) {
+          case 'personal':
+            this.createFormPersona();
+            this._com.setTabEditor('Creando Tag-ID: Personal');
+            this.tipo_form = 'persona';
+            this.foto_formulario = '../../../../assets/img/blanck_persona.png'
+            this.load_form = false;
+            this.show_form = true;
+            this.activeTabs = true;
+            break;
+          case 'persona':
+            this.createFormPersona();
+            this._com.setTabEditor('Creando Tag-ID: Persona');
+            this.tipo_form = 'persona';
+            this.foto_formulario = '../../../../assets/img/blanck_persona.png'
+            this.load_form = false;
+            this.show_form = true;
+            this.activeTabs = true;
+            break;
+          case 'mascota':
+            this.createFormMascota();
+            this._com.setTabEditor('Creando Tag-ID: Mascota');
+            this.tipo_form = 'mascota';
+            this.foto_formulario = '../../../../assets/img/blanck_mascota.png'
+            this.load_form = false;
+            this.show_form = true;
+            this.activeTabs = true;
+            break;
+          case 'vehiculo':
+            this.createFormVehiculo();
+            this._com.setTabEditor('Creando Tag-ID: Vehiculo');
+            this.tipo_form = 'vehiculo';
+            this.foto_formulario = '../../../../assets/img/blanck_vehiculo.png'
+            this.load_form = false;
+            this.show_form = true;
+            this.activeTabs = true;
+            break;
+          default:
+            this.load_form = false;
+            this.error_form = true;
+            this.activeTabs = false;
+            break;
         }
-      } else{ //aquí el "tipo" es el tipo de tag, que será diferente a "personal" pudiendo ser persona/mascota/vehiculo
-        if (params['id'] != '0') {
-          //1) busca el registro de ese id en la tabla pasada como "tipo"
-          //2) carga el formulario personas con el registro encontrado y lo pasa como parámetro para que complete el formulario
-          //3) coloca en el select el valor del "tipo" así se desbloquean las demás solapas
-        } else {
-          //1) carga el formulario vacío para que el usuario pueda elegir el tipo de tag, que será un adicional
+      } else if(parseInt(params['id']) > 0){
+        //editando
+        switch (params['tipo']) {
+          case 'persona':
+            this._api.postTypeRequest('profile/getTag', {id:params['id'], tabla:"personas"}).subscribe({
+              next: (res: any) => {
+                if(res.status == 1){
+                  if(res.data.length){
+                    this.persona = res.data[0];
+                    console.log(this.persona);
+                    this.createFormPersona(this.persona);
+                    this._com.setTabEditor('Editando Tag-ID: ' + this.persona.nombre + ' ' + this.persona.apellido);
+                    this.tipo_form = 'persona';
+                    this.foto_formulario = this.persona.foto!=''?this.persona.foto:'../../../../assets/img/blanck_persona.png';
+                    this.load_form = false;
+                    this.show_form = true;
+                    this.activeTabs = true;
+                  } else{
+                    //no encontró el tag del id
+                    this.load_form = false;
+                    this.error_form = true;
+                    this.activeTabs = false;
+                  }  
+                } else{
+                  //ventana de error
+                  this.load_form = false;
+                  this.error_form = true;
+                  this.activeTabs = false;
+                }
+              },
+              error: (error) => {
+                console.warn(error);
+                  //ventana de error
+                  this.load_form = false;
+                  this.error_form = true;
+                  this.activeTabs = false;
+              },
+              complete: () => {
+              }
+            });
+            break;
+          case 'mascota':
+            this._api.postTypeRequest('profile/getTag', {id:params['id'], tabla:"mascotas"}).subscribe({
+              next: (res: any) => {
+                if(res.status == 1){
+                  if(res.data.length){
+                    this.mascota = res.data[0];
+                    console.log(this.mascota);
+                    this.createFormMascota(this.mascota);
+                    this._com.setTabEditor('Editando Tag-ID: ' + this.mascota.nombre + ' - ' + this.mascota.especie);
+                    this.tipo_form = 'mascota';
+                    this.foto_formulario = this.mascota.foto!=''?this.mascota.foto:'../../../../assets/img/blanck_mascota.png';
+                    this.load_form = false;
+                    this.show_form = true;
+                    this.activeTabs = true;
+                  } else{
+                    //no encontró el tag del id
+                    this.load_form = false;
+                    this.error_form = true;
+                    this.activeTabs = false;
+                  }  
+                } else{
+                  //ventana de error
+                  this.load_form = false;
+                  this.error_form = true;
+                  this.activeTabs = false;
+                }
+              },
+              error: (error) => {
+                console.warn(error);
+                  //ventana de error
+                  this.load_form = false;
+                  this.error_form = true;
+                  this.activeTabs = false;
+              },
+              complete: () => {
+              }
+            });
+            break;
+          case 'vehiculo':
+            this._api.postTypeRequest('profile/getTag', {id:params['id'], tabla:"vehiculos"}).subscribe({
+              next: (res: any) => {
+                if(res.status == 1){
+                  if(res.data.length){
+                    this.vehiculo = res.data[0];
+                    console.log(this.vehiculo);
+                    this.createFormVehiculo(this.vehiculo);
+                    this._com.setTabEditor('Editando Tag-ID: ' + this.vehiculo.marca + ' - ' + this.vehiculo.modelo);
+                    this.tipo_form = 'vehiculo';
+                    this.foto_formulario = this.vehiculo.foto!=''?this.vehiculo.foto:'../../../../assets/img/blanck_vehiculo.png';
+                    this.load_form = false;
+                    this.show_form = true;
+                    this.activeTabs = true;
+                  } else{
+                    //no encontró el tag del id
+                    this.load_form = false;
+                    this.error_form = true;
+                    this.activeTabs = false;
+                  }  
+                } else{
+                  //ventana de error
+                  this.load_form = false;
+                  this.error_form = true;
+                  this.activeTabs = false;
+                }
+              },
+              error: (error) => {
+                console.warn(error);
+                  //ventana de error
+                  this.load_form = false;
+                  this.error_form = true;
+                  this.activeTabs = false;
+              },
+              complete: () => {
+              }
+            });
+            break;
+          default:
+            //vuelve atrás
+            break;
         }
+      } else{
+        //error
+        this.load_form = false;
+        this.error_form = true;
+        this.activeTabs = false;
       }
-
     } )
   }
 
@@ -54,75 +217,69 @@ export class EditTagComponent implements OnInit {
   }
 
   onChange(e:any){
-    this.tagChoosen = e.value;
-    (e.value=='persona')?this.createFormPersona():'';
-    (e.value=='mascota')?this.createFormMascota():'';
-    (e.value=='vehiculo')?this.createFormVehiculo():'';
-    this.activeOthers = true;
-    this._com.setTabEditor('Creando Tag: ' + e.value);
+    
   }
 
   onSubmit(){
     console.log(this.form.value);
   }
 
-  createFormPersona(){
+  createFormPersona(data?:Persona){
     this.form = new FormGroup({
-      foto: new FormControl(''),
-      nombre: new FormControl(''),
-      apellido: new FormControl(''),
-      ciudad: new FormControl(''),
-      direccion: new FormControl(''),
-      email: new FormControl(''),
-      fechanac: new FormControl(''),
-      nacionalidad: new FormControl(''),
-      infoimportante: new FormControl(''),
-      nombrecontacto: new FormControl(''),
-      codarea: new FormControl(''),
-      telcontacto: new FormControl(''),
-      wspcontacto: new FormControl(''),
-      id_autor: new FormControl(''),
-      nivel: new FormControl('')
+      foto: new FormControl((data)?data.foto:''),
+      nombre: new FormControl((data)?data.nombre:''),
+      apellido: new FormControl((data)?data.apellido:''),
+      ciudad: new FormControl((data)?data.ciudad:''),
+      direccion: new FormControl((data)?data.direccion:''),
+      email: new FormControl((data)?data.email:''),
+      fechanac: new FormControl((data)?data.fechanac:''),
+      nacionalidad: new FormControl((data)?data.nacionalidad:''),
+      observaciones: new FormControl((data)?data.observaciones:''),
+      nombreresp: new FormControl((data)?data.nombreresp:''),
+      telresp: new FormControl((data)?data.telresp:''),
+      wspresp: new FormControl((data)?data.wspresp:''),
+      id_autor: new FormControl((data)?data.id_autor:''),
+      nivel: new FormControl((data)?data.nivel:''),
+      tabla: new FormControl('personas')
     })
   }
 
-  createFormMascota(){
+  createFormMascota(data?:mascota){
     this.form = new FormGroup({
-      foto: new FormControl(''),
-      nombre: new FormControl(''),
-      especie: new FormControl(''),
-      ciudad: new FormControl(''),
-      direccion: new FormControl(''),
-      detalle: new FormControl(''),
-      fechanac: new FormControl(''),
-      infoimportante: new FormControl(''),
-      nombrecontacto: new FormControl(''),
-      codarea: new FormControl(''),
-      telcontacto: new FormControl(''),
-      wspcontacto: new FormControl(''),
-      id_autor: new FormControl(''),
-      nivel: new FormControl('')
+      foto: new FormControl((data)?data.foto:''),
+      nombre: new FormControl((data)?data.nombre:''),
+      especie: new FormControl((data)?data.especie:''),
+      ciudad: new FormControl((data)?data.ciudad:''),
+      direccion: new FormControl((data)?data.direccion:''),
+      fechanac: new FormControl((data)?data.fechanac:''),
+      observaciones: new FormControl((data)?data.observaciones:''),
+      nombreresp: new FormControl((data)?data.nombreresp:''),
+      telresp: new FormControl((data)?data.telresp:''),
+      wspresp: new FormControl((data)?data.wspresp:''),
+      id_autor: new FormControl((data)?data.id_autor:''),
+      nivel: new FormControl((data)?data.nivel:''),
+      tabla: new FormControl('mascotas')
     })
   }
 
-  createFormVehiculo(){
+  createFormVehiculo(data?:Vehiculo){
     this.form = new FormGroup({
-      foto: new FormControl(''),
-      marca: new FormControl(''),
-      modelo: new FormControl(''),
-      anio: new FormControl(''),
-      color: new FormControl(''),
-      patente: new FormControl(''),
-      ciudad: new FormControl(''),
-      aseguradora: new FormControl(''),
-      nroseguro: new FormControl(''),
-      infoimportante: new FormControl(''),
-      nombrecontacto: new FormControl(''),
-      codarea: new FormControl(''),
-      telcontacto: new FormControl(''),
-      wspcontacto: new FormControl(''),
-      id_autor: new FormControl(''),
-      nivel: new FormControl('')
+      foto: new FormControl((data)?data.foto:''),
+      marca: new FormControl((data)?data.marca:''),
+      modelo: new FormControl((data)?data.modelo:''),
+      anio: new FormControl((data)?data.anio:''),
+      color: new FormControl((data)?data.color:''),
+      patente: new FormControl((data)?data.patente:''),
+      ciudad: new FormControl((data)?data.ciudad:''),
+      aseguradora: new FormControl((data)?data.aseguradora:''),
+      nroseguro: new FormControl((data)?data.nroseguro:''),
+      observaciones: new FormControl((data)?data.observaciones:''),
+      nombreresp: new FormControl((data)?data.nombreresp:''),
+      telresp: new FormControl((data)?data.telresp:''),
+      wspresp: new FormControl((data)?data.wspresp:''),
+      id_autor: new FormControl((data)?data.id_autor:''),
+      nivel: new FormControl((data)?data.nivel:''),
+      tabla: new FormControl('vehiculos')
     })
   }
 
