@@ -31,3 +31,8 @@ export const validarEmail: ValidatorFn = (control: AbstractControl): ValidationE
     ? null 
     : { noIguales: true }
 };
+
+//Función que verifica el tamaño de la imagen ingresada
+export function validarImagen(params:File) {
+  
+}

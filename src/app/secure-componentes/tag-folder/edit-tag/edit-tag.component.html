@@ -20,14 +20,20 @@
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="padding-content-form" *ngIf="navActive == 1">
                 <div class="row">
-                    <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+                    <div class="col-md-6 img-box">
                         <label for="inputimg" class="control-label img-align" title="Cargar una nueva imagen">
                             <img [src]="foto_formulario"
                                   class="img-rounded" 
                                   alt="Image" 
-                                  style="width: 50%;" >  
+                            />
                         </label>
-                        <input type="file" id="inputimg" class="form-control" required="required" formControlName="foto" style="display: none;">
+                        <input type="file" 
+                               id="inputimg" 
+                               class="form-control" 
+                               formControlName="foto" 
+                               style="display: none;"
+                               (change)="capturaFile($event)" 
+                        />
                         <div style="height: 18px; font-size: 0.9rem; margin-top: 0.5rem; margin-bottom: 1rem;">
                             <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
                               <span *ngIf="true">Este campo es requerido.</span>

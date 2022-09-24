@@ -1,9 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, ElementRef, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ComunicationService } from 'src/app/services/comunication.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { mascota, Persona, Vehiculo } from 'src/app/entidades/tag';
+import { emailValidator } from '../../function/functions';
+import { AuthService } from 'src/app/services/auth.service';
+import { FileServicesService } from 'src/app/services/file-services.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-tag',
@@ -12,6 +16,9 @@ import { mascota, Persona, Vehiculo } from 'src/app/entidades/tag';
 })
 export class EditTagComponent implements OnInit {
 
+  userId: any;
+
+  archivos: any = [];
   load_form: boolean = false;
   show_form: boolean = false;
   error_form: boolean = false;
@@ -29,10 +36,17 @@ export class EditTagComponent implements OnInit {
   constructor(
     private _com: ComunicationService,
     private _activatedRoute: ActivatedRoute,
-    private _api: ApiService
+    private _api: ApiService,
+    private _auth: AuthService,
+    private _fileservice: FileServicesService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
+    let data = this._auth.getUserId();
+    if(data){
+      this.userId = (JSON.parse(data));
+    }
     this.load_form = true;
     this._activatedRoute.params.subscribe( (params: Params) => {
       this.tag.tipo = params['tipo'];
@@ -41,7 +55,7 @@ export class EditTagComponent implements OnInit {
         //Creando
         switch (params['tipo']) {
           case 'personal':
-            this.createFormPersona();
+            this.createFormPersona(this.userId, 'personal');
             this._com.setTabEditor('Creando Tag-ID: Personal');
             this.tipo_form = 'persona';
             this.foto_formulario = '../../../../assets/img/blanck_persona.png'
@@ -50,7 +64,7 @@ export class EditTagComponent implements OnInit {
             this.activeTabs = true;
             break;
           case 'persona':
-            this.createFormPersona();
+            this.createFormPersona(this.userId, 'adicional');
             this._com.setTabEditor('Creando Tag-ID: Persona');
             this.tipo_form = 'persona';
             this.foto_formulario = '../../../../assets/img/blanck_persona.png'
@@ -59,7 +73,7 @@ export class EditTagComponent implements OnInit {
             this.activeTabs = true;
             break;
           case 'mascota':
-            this.createFormMascota();
+            this.createFormMascota(this.userId, 'adicional');
             this._com.setTabEditor('Creando Tag-ID: Mascota');
             this.tipo_form = 'mascota';
             this.foto_formulario = '../../../../assets/img/blanck_mascota.png'
@@ -68,7 +82,7 @@ export class EditTagComponent implements OnInit {
             this.activeTabs = true;
             break;
           case 'vehiculo':
-            this.createFormVehiculo();
+            this.createFormVehiculo(this.userId, 'adicional');
             this._com.setTabEditor('Creando Tag-ID: Vehiculo');
             this.tipo_form = 'vehiculo';
             this.foto_formulario = '../../../../assets/img/blanck_vehiculo.png'
@@ -92,7 +106,7 @@ export class EditTagComponent implements OnInit {
                   if(res.data.length){
                     this.persona = res.data[0];
                     console.log(this.persona);
-                    this.createFormPersona(this.persona);
+                    this.createFormPersona(this.userId, 'personal', this.persona);
                     this._com.setTabEditor('Editando Tag-ID: ' + this.persona.nombre + ' ' + this.persona.apellido);
                     this.tipo_form = 'persona';
                     this.foto_formulario = this.persona.foto!=''?this.persona.foto:'../../../../assets/img/blanck_persona.png';
@@ -130,7 +144,7 @@ export class EditTagComponent implements OnInit {
                   if(res.data.length){
                     this.mascota = res.data[0];
                     console.log(this.mascota);
-                    this.createFormMascota(this.mascota);
+                    this.createFormMascota(this.userId, 'adicional', this.mascota);
                     this._com.setTabEditor('Editando Tag-ID: ' + this.mascota.nombre + ' - ' + this.mascota.especie);
                     this.tipo_form = 'mascota';
                     this.foto_formulario = this.mascota.foto!=''?this.mascota.foto:'../../../../assets/img/blanck_mascota.png';
@@ -168,7 +182,7 @@ export class EditTagComponent implements OnInit {
                   if(res.data.length){
                     this.vehiculo = res.data[0];
                     console.log(this.vehiculo);
-                    this.createFormVehiculo(this.vehiculo);
+                    this.createFormVehiculo(this.userId, 'adicional', this.vehiculo);
                     this._com.setTabEditor('Editando Tag-ID: ' + this.vehiculo.marca + ' - ' + this.vehiculo.modelo);
                     this.tipo_form = 'vehiculo';
                     this.foto_formulario = this.vehiculo.foto!=''?this.vehiculo.foto:'../../../../assets/img/blanck_vehiculo.png';
@@ -216,35 +230,132 @@ export class EditTagComponent implements OnInit {
     this.navActive = e.target.name;
   }
 
-  onChange(e:any){
-    
+  extraerBase64 = async ($event: any) => new Promise((res, rej) => {
+    try {
+      const unSafeImg = window.URL.createObjectURL($event);
+      const image = this.sanitizer.bypassSecurityTrustUrl(unSafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL($event);
+      reader.onload = () => {
+        res({
+          blob: $event,
+          image,
+          base: reader.result
+        })
+      };
+      reader.onerror = error => {
+        res({
+          blob: $event,
+          image,
+          base: null
+        })
+      };
+    } catch (error) {
+        return null;
+    }
+  })
+
+  capturaFile(event:any):any{
+    const archivoCapturado = event.target.files[0];
+    this.extraerBase64(archivoCapturado).then( (imagen:any) => {
+      console.log(imagen);
+      this.foto_formulario = imagen.base;
+    } )
+    //this.archivos.push(archivoCapturado);
+    //console.log(event.target.files[0])
   }
 
   onSubmit(){
     console.log(this.form.value);
   }
 
-  createFormPersona(data?:Persona){
+  createFormPersona(userId:number, nivel:string, data?:Persona){
     this.form = new FormGroup({
-      foto: new FormControl((data)?data.foto:''),
-      nombre: new FormControl((data)?data.nombre:''),
-      apellido: new FormControl((data)?data.apellido:''),
-      ciudad: new FormControl((data)?data.ciudad:''),
-      direccion: new FormControl((data)?data.direccion:''),
-      email: new FormControl((data)?data.email:''),
+      foto: new FormControl((data)?data.foto:'',
+      [
+        Validators.maxLength(255)
+      ]
+    ),
+      nombre: new FormControl((data)?data.nombre:'',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(20)
+        ]
+      ),
+      apellido: new FormControl((data)?data.apellido:'',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ]
+    ),
+      ciudad: new FormControl((data)?data.ciudad:'',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ]
+    ),
+      direccion: new FormControl((data)?data.direccion:'',
+      [
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ]
+    ),
+      email: new FormControl((data)?data.email:'',
+      [
+        emailValidator()
+      ]
+    ),
       fechanac: new FormControl((data)?data.fechanac:''),
-      nacionalidad: new FormControl((data)?data.nacionalidad:''),
-      observaciones: new FormControl((data)?data.observaciones:''),
-      nombreresp: new FormControl((data)?data.nombreresp:''),
-      telresp: new FormControl((data)?data.telresp:''),
-      wspresp: new FormControl((data)?data.wspresp:''),
-      id_autor: new FormControl((data)?data.id_autor:''),
-      nivel: new FormControl((data)?data.nivel:''),
+      nacionalidad: new FormControl((data)?data.nacionalidad:'',
+      [
+        Validators.minLength(4),
+        Validators.maxLength(20),
+        emailValidator()
+      ]
+    ),
+      observaciones: new FormControl((data)?data.observaciones:'',
+      [
+        Validators.maxLength(500)
+      ]
+    ),
+      nombreresp: new FormControl((data)?data.nombreresp:'',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ]
+    ),
+      telresp: new FormControl((data)?data.telresp:'',
+      [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(12)
+      ]
+    ),
+      wspresp: new FormControl((data)?data.wspresp:'',
+      [
+        Validators.minLength(8),
+        Validators.maxLength(12)
+      ]
+    ),
+      id_autor: new FormControl((data)?data.id_autor:userId,
+      [
+        Validators.required
+      ]
+    ),
+      nivel: new FormControl((data)?data.nivel:nivel,
+      [
+        Validators.required
+      ]
+    ),
       tabla: new FormControl('personas')
     })
   }
 
-  createFormMascota(data?:mascota){
+  createFormMascota(userId:number, nivel:string, data?:mascota){
     this.form = new FormGroup({
       foto: new FormControl((data)?data.foto:''),
       nombre: new FormControl((data)?data.nombre:''),
@@ -256,13 +367,13 @@ export class EditTagComponent implements OnInit {
       nombreresp: new FormControl((data)?data.nombreresp:''),
       telresp: new FormControl((data)?data.telresp:''),
       wspresp: new FormControl((data)?data.wspresp:''),
-      id_autor: new FormControl((data)?data.id_autor:''),
-      nivel: new FormControl((data)?data.nivel:''),
+      id_autor: new FormControl((data)?data.id_autor:userId),
+      nivel: new FormControl((data)?data.nivel:nivel),
       tabla: new FormControl('mascotas')
     })
   }
 
-  createFormVehiculo(data?:Vehiculo){
+  createFormVehiculo(userId:number, nivel:string, data?:Vehiculo){
     this.form = new FormGroup({
       foto: new FormControl((data)?data.foto:''),
       marca: new FormControl((data)?data.marca:''),
@@ -277,8 +388,8 @@ export class EditTagComponent implements OnInit {
       nombreresp: new FormControl((data)?data.nombreresp:''),
       telresp: new FormControl((data)?data.telresp:''),
       wspresp: new FormControl((data)?data.wspresp:''),
-      id_autor: new FormControl((data)?data.id_autor:''),
-      nivel: new FormControl((data)?data.nivel:''),
+      id_autor: new FormControl((data)?data.id_autor:userId),
+      nivel: new FormControl((data)?data.nivel:nivel),
       tabla: new FormControl('vehiculos')
     })
   }
