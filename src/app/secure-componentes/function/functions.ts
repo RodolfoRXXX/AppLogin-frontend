@@ -5,7 +5,7 @@ import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn } from "@angu
 
     export function emailValidator():ValidatorFn{
       return (control: AbstractControl):ValidationErrors|null => {
-        const incorrecto = emailReg.test(control.value);
+        const incorrecto = emailReg.test(control.value)||(control.value.length == 0);
         return !incorrecto ? {incorrectoName: {value: control.value}} : null;
       };
     }

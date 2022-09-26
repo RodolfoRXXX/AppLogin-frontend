@@ -29,7 +29,9 @@
 
 .img-align>img {
     transition: all 0.25s ease;
-    width: 50%;
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
     cursor: pointer;
     border-radius: 50%;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
@@ -38,6 +40,16 @@
 .img-align>img:hover {
     transition: all 0.25s ease;
     filter: opacity(.5);
+}
+
+.img-validated {
+    border: 2px solid white;
+    outline: 4px solid #198754;
+}
+
+.img-nonvalidated {
+    border: 2px solid white;
+    outline: 4px solid red;
 }
 
 /* Extra small devices (phones, 600px and down) */

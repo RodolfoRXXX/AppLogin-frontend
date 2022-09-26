@@ -21,24 +21,28 @@
             <div class="padding-content-form" *ngIf="navActive == 1">
                 <div class="row">
                     <div class="col-md-6 img-box">
+                        <label for="imd-id" class="control-label mb-3">Imagen del ID</label>
                         <label for="inputimg" class="control-label img-align" title="Cargar una nueva imagen">
                             <img [src]="foto_formulario"
                                   class="img-rounded" 
-                                  alt="Image" 
+                                  alt="Image"
+                                  id="imd-id"
+                                  [ngClass]="(estado_foto == undefined)?'':((estado_foto == '')?'':((estado_foto == 'ok')?'img-validated':'img-nonvalidated'))"
                             />
                         </label>
                         <input type="file" 
                                id="inputimg" 
                                class="form-control" 
-                               formControlName="foto" 
                                style="display: none;"
                                (change)="capturaFile($event)" 
                         />
-                        <div style="height: 18px; font-size: 0.9rem; margin-top: 0.5rem; margin-bottom: 1rem;">
-                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                              <span *ngIf="true">Este campo es requerido.</span>
-                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                        <div style="height: 18px; font-size: 0.9rem; margin-top: 1rem; margin-bottom: 1rem;">
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(estado_foto == 'peso')||(estado_foto == 'formato')">
+                              <span *ngIf="(estado_foto == 'peso')">La imagen elegida debe tener menos de 10mb.</span>
+                              <span *ngIf="(estado_foto == 'formato')">Formato de imagen incompatible. (Formatos aceptados: .jpeg/jpg/png)</span>
+                            </div>
+                            <div class="valid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(estado_foto == 'ok')">
+                                <span class="fw-bold">La imagen es correcta!</span>
                             </div>
                         </div>
                     </div>
@@ -51,38 +55,62 @@
             </div>
             <div class="padding-content-form" *ngIf="navActive == 2">
                 <div class="input-group row m-0">
-                    <div class="col p-0">
-                        <label class="form-label" for="nombreresp">Nombre del contacto:</label>
-                        <input class="form-control" type="text" id="nombreresp" formControlName="nombreresp">
-                        <div style="height: 18px; font-size: 0.9rem; ">
-                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                              <span *ngIf="true">Este campo es requerido.</span>
-                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="input-group row m-0">
                     <div class="col-6 ps-0">
-                        <label class="form-label" for="telefono">Teléfono:</label>
-                        <input class="form-control" type="number" id="telefono" formControlName="telresp">
+                        <label class="form-label" for="nombreresp">
+                            Nombre del contacto: <span class="text-danger fw-bold">*</span>
+                        </label>
+                        <input class="form-control" 
+                               type="text" 
+                               id="nombreresp" 
+                               formControlName="nombreresp"
+                               placeholder="Escribí aquí"
+                               [ngClass]="form.get('nombreresp')?.valid?'is-valid':(((form.get('nombreresp')?.invalid)&&(form.get('nombreresp')?.dirty||form.get('nombreresp')?.touched))?'is-invalid':'')"
+                        />
                         <div style="height: 18px; font-size: 0.9rem; ">
-                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                              <span *ngIf="true">Este campo es requerido.</span>
-                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nombreresp')?.invalid)&&(form.get('nombreresp')?.dirty||form.get('nombreresp')?.touched)">
+                              <span *ngIf="form.get('nombreresp')?.errors?.['required']">El nombre es requerido*.</span>
+                              <span *ngIf="form.get('nombreresp')?.errors?.['minlength']">El nombre debe tener más de 4 caracteres.</span>
+                              <span *ngIf="form.get('nombreresp')?.errors?.['maxlength']">El nombre debe tener menos de 20 caracteres.</span>
                             </div>
                         </div>
                     </div>
                     <div class="col-6 pe-0">
-                        <label class="form-label" for="wspresp">Whatsapp:</label>
-                        <input class="form-control" type="number" id="wspresp" formControlName="wspresp">
+                        <label class="form-label" for="telefono">
+                            Teléfono: <span class="text-danger fw-bold">*</span>
+                        </label>
+                        <input class="form-control" 
+                               type="text" 
+                               id="telefono" 
+                               formControlName="telresp"
+                               placeholder="Cod. área sin '0' y el número de teléfono"
+                               [ngClass]="form.get('telresp')?.valid?'is-valid':(((form.get('telresp')?.invalid)&&(form.get('telresp')?.dirty||form.get('telresp')?.touched))?'is-invalid':'')"
+                        />
                         <div style="height: 18px; font-size: 0.9rem; ">
-                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                              <span *ngIf="true">Este campo es requerido.</span>
-                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('telresp')?.invalid)&&(form.get('telresp')?.dirty||form.get('telresp')?.touched)">
+                              <span *ngIf="form.get('telresp')?.errors?.['required']">El número de teléfono es requerido.</span>
+                              <span *ngIf="form.get('telresp')?.errors?.['minlength']">El número de teléfono debe tener más de 7 caracteres.</span>
+                              <span *ngIf="form.get('telresp')?.errors?.['maxlength']">El número de teléfono debe tener menos de 13 caracteres.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h6 class="mb-0 mt-1">Opcionales:</h6>
+                <hr class="mb-2 mt-1"> 
+                <p class="text-muted ms-1 mb-2" style="height: 18px; font-size: 0.9rem; ">Generá un vínculo directo al whatsapp del responsable</p>
+                <div class="input-group row m-0">
+                    <div class="col p-0">
+                        <label class="form-label" for="wspresp">Whatsapp:</label>
+                        <input class="form-control" 
+                               type="text" 
+                               id="wspresp"
+                               formControlName="wspresp"
+                               placeholder="Cod. área sin '0' y el número de whatsapp"
+                               [ngClass]="(form.get('wspresp')?.value.length == 0)?'':((form.get('wspresp')?.invalid)&&(form.get('wspresp')?.dirty||form.get('wspresp')?.touched)?'is-invalid':('is-valid'))"
+                        />
+                        <div style="height: 18px; font-size: 0.9rem; ">
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('wspresp')?.invalid)&&(form.get('wspresp')?.dirty||form.get('wspresp')?.touched)">
+                              <span *ngIf="form.get('wspresp')?.errors?.['minlength']">El teléfono debe tener más de 7 caracteres.</span>
+                              <span *ngIf="form.get('wspresp')?.errors?.['maxlength']">El teléfono debe tener menos de 13 caracteres.</span>
                             </div>
                         </div>
                     </div>
@@ -90,22 +118,30 @@
             </div>
             <div class="padding-content-form" *ngIf="navActive == 3">
                 <div class="form-group">
-                    <label for="textarea" class="control-label mb-2">Ingresá aquí información importante sobre la persona, mascota o vehículo del Tag.</label>
+                    <label for="textarea" class="control-label mb-2">Observaciones</label>
                     <div>
-                        <textarea name="" id="textarea" class="form-control" rows="3" required="required" placeholder="Escribe aquí..." formControlName="observaciones"></textarea>
+                        <textarea id="textarea" 
+                                  class="form-control" 
+                                  rows="6" 
+                                  placeholder="Ingresá aquí detalles o información sobre la persona, mascota o vehículo que se necesite conocer." 
+                                  formControlName="observaciones"
+                                  [ngClass]="(form.get('observaciones')?.value.length == 0)?'':((form.get('observaciones')?.invalid)&&(form.get('observaciones')?.dirty||form.get('observaciones')?.touched)?'is-invalid':('is-valid'))"
+                        ></textarea>
                         <div style="height: 18px; font-size: 0.9rem; ">
-                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                              <span *ngIf="true">Este campo es requerido.</span>
-                              <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                              <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                            <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('observaciones')?.invalid)&&(form.get('observaciones')?.dirty||form.get('observaciones')?.touched)">
+                              <span *ngIf="form.get('observaciones')?.errors?.['minlength']">La observación debe tener más de 5 caracteres.</span>
+                              <span *ngIf="form.get('observaciones')?.errors?.['maxlength']">La observación debe tener menos de 255 caracteres.</span>
                             </div>
                         </div>
                     </div>
                 </div>  
             </div>
             <div class="d-flex justify-content-end padding-content-form pt-0">
-                <button class="btn btn-danger me-3">Cancelar</button>
-                <button class="btn btn-primary">Crear</button>
+                <button class="btn btn-danger me-3" type="reset" (click)="cancelForm()">Cancelar</button>
+                <button class="btn btn-primary" type="submit" [disabled]="(form.invalid) || (estado_foto == 'peso') || (estado_foto == 'formato')">
+                    <span *ngIf="true">Crear</span>
+                    <span *ngIf="!true">Actualizar</span>
+                </button>
             </div>
         </form>
     </div>

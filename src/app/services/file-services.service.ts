@@ -11,8 +11,29 @@ export class FileServicesService {
     private _sanitizer: DomSanitizer
   ) { }
 
-  generateSafeImageUrl(image:any) {
-    return this._sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(image[0]));
-  }
+  extraerBase64 = async ($event: any) => new Promise((res, rej) => {
+    try {
+      const unSafeImg = window.URL.createObjectURL($event);
+      const image = this._sanitizer.bypassSecurityTrustUrl(unSafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL($event);
+      reader.onload = () => {
+        res({
+          blob: $event,
+          image,
+          base: reader.result
+        })
+      };
+      reader.onerror = error => {
+        res({
+          blob: $event,
+          image,
+          base: null
+        })
+      };
+    } catch (error) {
+        return null;
+    }
+  })
 
 }

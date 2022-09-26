@@ -1,63 +1,91 @@
 <div [formGroup]="form">
     <div class="input-group row m-0">
         <div class="col-6 ps-0">
-            <label class="form-label mb-1" for="nombre">Nombre:</label>
-            <input class="form-control" type="text" id="nombre" formControlName="nombre">
+            <label class="form-label mb-1" for="nombre">
+                Nombre: <span class="text-danger fw-bold">*</span>
+            </label>
+            <input class="form-control" 
+                   type="text" 
+                   id="nombre" 
+                   formControlName="nombre"
+                   [ngClass]="form.get('nombre')?.valid?'is-valid':(((form.get('nombre')?.invalid)&&(form.get('nombre')?.dirty||form.get('nombre')?.touched))?'is-invalid':'')"
+            />
             <div style="height: 18px; font-size: 0.9rem; ">
-                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                  <span *ngIf="true">Este campo es requerido.</span>
-                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nombre')?.invalid)&&(form.get('nombre')?.dirty||form.get('nombre')?.touched)">
+                    <span *ngIf="form.get('nombre')?.errors?.['required']">El nombre es requerido.</span>
+                    <span *ngIf="form.get('nombre')?.errors?.['minlength']">El nombre debe tener más de 3 caracteres.</span>
+                    <span *ngIf="form.get('nombre')?.errors?.['maxlength']">El nombre debe tener menos de 20 caracteres.</span>
                 </div>
             </div>
         </div>
         <div class="col-6 pe-0">
-            <label class="form-label mb-1" for="apellido">Apellido:</label>
-            <input class="form-control" type="text" id="apellido" formControlName="apellido">
+            <label class="form-label mb-1" for="apellido">
+                Apellido: <span class="text-danger fw-bold">*</span>
+            </label>
+            <input class="form-control" 
+                   type="text" 
+                   id="apellido" 
+                   formControlName="apellido"
+                   [ngClass]="form.get('apellido')?.valid?'is-valid':(((form.get('apellido')?.invalid)&&(form.get('apellido')?.dirty||form.get('apellido')?.touched))?'is-invalid':'')"
+            />
             <div style="height: 18px; font-size: 0.9rem; ">
-                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                  <span *ngIf="true">Este campo es requerido.</span>
-                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('apellido')?.invalid)&&(form.get('apellido')?.dirty||form.get('apellido')?.touched)">
+                    <span *ngIf="form.get('apellido')?.errors?.['required']">El apellido es requerido.</span>
+                    <span *ngIf="form.get('apellido')?.errors?.['minlength']">El apellido debe tener más de 3 caracteres.</span>
+                    <span *ngIf="form.get('apellido')?.errors?.['maxlength']">El apellido debe tener menos de 20 caracteres.</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="input-group row m-0">
         <div class="col p-0">
-            <label class="form-label mb-1" for="ciudad">Ciudad:</label>
-            <input class="form-control" type="text" id="ciudad" formControlName="ciudad">
+            <label class="form-label mb-1" for="ciudad">
+                Ciudad: <span class="text-danger fw-bold">*</span>
+            </label>
+            <input class="form-control"
+                   type="text" 
+                   id="ciudad" 
+                   formControlName="ciudad"
+                   [ngClass]="form.get('ciudad')?.valid?'is-valid':(((form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched))?'is-invalid':'')"
+            />
             <div style="height: 18px; font-size: 0.9rem; ">
-                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                  <span *ngIf="true">Este campo es requerido.</span>
-                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched)">
+                    <span *ngIf="form.get('ciudad')?.errors?.['required']">La ciudad es requerida.</span>
+                    <span *ngIf="form.get('ciudad')?.errors?.['minlength']">La ciudad debe tener más de 4 caracteres.</span>
+                    <span *ngIf="form.get('ciudad')?.errors?.['maxlength']">La ciudad debe tener menos de 20 caracteres.</span>
                 </div>
             </div>
         </div>
     </div>
-    <hr class="mb-1">
-    <h6 class="m-1 mt-0">Opcionales:</h6>
+    <h6 class="mb-0 mt-1">Opcionales:</h6>
+    <hr class="mb-2 mt-1"> 
     <div class="input-group row m-0">
         <div class="col-6 ps-0">
             <label class="form-label mb-1" for="direccion">Dirección:</label>
-            <input class="form-control" type="text" id="direccion" formControlName="direccion">
+            <input class="form-control" 
+                   type="text" 
+                   id="direccion" 
+                   formControlName="direccion"
+                   [ngClass]="(form.get('direccion')?.value.length == 0)?'':((form.get('direccion')?.invalid)&&(form.get('direccion')?.dirty||form.get('direccion')?.touched)?'is-invalid':('is-valid'))"
+            />
             <div style="height: 18px; font-size: 0.9rem; ">
-                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                  <span *ngIf="true">Este campo es requerido.</span>
-                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('direccion')?.invalid)&&(form.get('direccion')?.dirty||form.get('direccion')?.touched)">
+                    <span *ngIf="form.get('direccion')?.errors?.['minlength']">La direccion debe tener más de 4 caracteres.</span>
+                    <span *ngIf="form.get('direccion')?.errors?.['maxlength']">La direccion debe tener menos de 50 caracteres.</span>
                 </div>
             </div>
         </div>
         <div class="col-6 pe-0">
             <label class="form-label mb-1" for="fechanac">Fecha de nacimiento:</label>
-            <input class="form-control" type="date" id="fechanac" formControlName="fechanac">
+            <input class="form-control" 
+                   type="date" 
+                   id="fechanac" 
+                   formControlName="fechanac"
+                   [ngClass]="(form.get('fechanac')?.value.length == 0)?'':((form.get('fechanac')?.invalid)&&(form.get('fechanac')?.dirty||form.get('fechanac')?.touched)?'is-invalid':('is-valid'))"
+            />
             <div style="height: 18px; font-size: 0.9rem; ">
-                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                  <span *ngIf="true">Este campo es requerido.</span>
-                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('fechanac')?.invalid)&&(form.get('fechanac')?.dirty||form.get('fechanac')?.touched)">
+                    <span *ngIf="form.get('fechanac')?.invalid">Ingresá una fecha de nacimiento correcta.</span>
                 </div>
             </div>
         </div>
@@ -65,12 +93,15 @@
     <div class="input-group row m-0">
         <div class="col p-0">
             <label class="form-label mb-1" for="email">Correo electrónico:</label>
-            <input class="form-control" type="text" id="email" formControlName="email">
-            <div style="height: 18px; font-size: 0.9rem; ">
-                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                  <span *ngIf="true">Este campo es requerido.</span>
-                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+            <input class="form-control" 
+                   type="email" 
+                   id="email" 
+                   formControlName="email"
+                   [ngClass]="(form.get('email')?.value.length == 0)?'':((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)?'is-invalid':('is-valid'))"
+            />
+            <div style="height: 15px; font-size: 0.9rem;">
+                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)&&(form.get('email')?.value.length > 0)">
+                  <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
                 </div>
             </div>
         </div>
@@ -78,12 +109,16 @@
     <div class="input-group row m-0">
         <div class="col p-0">
             <label class="form-label mb-1" for="nacionalidad">Nacionalidad:</label>
-            <input class="form-control" type="text" id="cnacionalidad" formControlName="nacionalidad">
+            <input class="form-control" 
+                   type="text" 
+                   id="nacionalidad" 
+                   formControlName="nacionalidad"
+                   [ngClass]="(form.get('nacionalidad')?.value.length == 0)?'':((form.get('nacionalidad')?.invalid)&&(form.get('nacionalidad')?.dirty||form.get('nacionalidad')?.touched)?'is-invalid':('is-valid'))"
+            />
             <div style="height: 18px; font-size: 0.9rem; ">
-                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="true">
-                  <span *ngIf="true">Este campo es requerido.</span>
-                  <span *ngIf="">La contraseña debe tener más de 4 caracteres.</span>
-                  <span *ngIf="">La contraseña debe tener menos de 20 caracteres.</span>
+                <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nacionalidad')?.invalid)&&(form.get('nacionalidad')?.dirty||form.get('nacionalidad')?.touched)">
+                    <span *ngIf="form.get('nacionalidad')?.errors?.['minlength']">La nacionalidad debe tener más de 4 caracteres.</span>
+                    <span *ngIf="form.get('nacionalidad')?.errors?.['maxlength']">La nacionalidad debe tener menos de 30 caracteres.</span>
                 </div>
             </div>
         </div>
