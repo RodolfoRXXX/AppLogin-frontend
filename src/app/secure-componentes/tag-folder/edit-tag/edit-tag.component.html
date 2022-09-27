@@ -6,10 +6,13 @@
                                 name="1" (click)="onTabClick($event)">Datos</a></li>
         <li class="nav-item"><a class="nav-link nav-a" 
                                 [ngClass]="!activeTabs?'disabled':(navActive == 2?'active':'')"
-                                name="2" (click)="onTabClick($event)">Contacto</a></li>
+                                name="2" (click)="onTabClick($event)">Redes</a></li>
         <li class="nav-item"><a class="nav-link nav-a" 
                                 [ngClass]="!activeTabs?'disabled':(navActive == 3?'active':'')"
-                                name="3" (click)="onTabClick($event)">Información importante</a></li>
+                                name="3" (click)="onTabClick($event)">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link nav-a" 
+                                [ngClass]="!activeTabs?'disabled':(navActive == 4?'active':'')"
+                                name="4" (click)="onTabClick($event)">Información importante</a></li>
     </ul>
     <div class="d-flex justify-content-center p-4" *ngIf="load_form">
         <div class="spinner-border text-primary" role="status">
@@ -54,6 +57,86 @@
                 </div>
             </div>
             <div class="padding-content-form" *ngIf="navActive == 2">
+                <h6>Creá acceso a tus redes sociales</h6>
+                <div class="d-flex flex-wrap">
+                    <div class="rounded box-redes" (click)="open(modal_redes)">
+                        <i class="fa-solid fa-link"></i>
+                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span> 
+                    </div>
+                    <div class="rounded box-redes" (click)="open(modal_redes)">
+                        <i class="fa-solid fa-link"></i>
+                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span>
+                    </div>
+                    <div class="rounded box-redes" (click)="open(modal_redes)">
+                        <i class="fa-solid fa-link"></i>
+                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span>
+                    </div>
+                    <div class="rounded box-redes" (click)="open(modal_redes)">
+                        <i class="fa-solid fa-link"></i>
+                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span>
+                    </div>
+                    <div class="rounded box-redes" (click)="open(modal_redes)">
+                        <i class="fa-solid fa-link"></i>
+                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span>
+                    </div>
+                </div>
+                <ng-template #modal_redes let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Redes sociales</h4>
+                      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group row">
+                            <div class="col-12 d-flex" style="overflow: auto; padding: 0.5rem 0;">
+                                <div class="rounded d-flex justify-content-center align-items-center m-1 p-2" title="Whatsapp" style="width: 45px; height: 45px; box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;">
+                                    <i class="fa-brands fa-whatsapp fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-twitter fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-instagram fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-facebook fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-linkedin fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-facebook fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-pinterest fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-telegram fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-youtube fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-tiktok fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-discord fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-github fa-2x"></i>
+                                </div>
+                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
+                                    <i class="fa-brands fa-internet-explorer fa-2x"></i>
+                                </div>
+                            </div>
+                            <div class="col-12">Link</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Guardar</button>
+                    </div>
+                  </ng-template>
+            </div>
+            <div class="padding-content-form" *ngIf="navActive == 3">
                 <div class="input-group row m-0">
                     <div class="col-6 ps-0">
                         <label class="form-label" for="nombreresp">
@@ -116,7 +199,7 @@
                     </div>
                 </div>
             </div>
-            <div class="padding-content-form" *ngIf="navActive == 3">
+            <div class="padding-content-form" *ngIf="navActive == 4">
                 <div class="form-group">
                     <label for="textarea" class="control-label mb-2">Observaciones</label>
                     <div>
@@ -136,7 +219,7 @@
                     </div>
                 </div>  
             </div>
-            <div class="d-flex justify-content-end padding-content-form pt-0">
+            <div class="d-flex justify-content-end padding-content-form pt-2 border-top">
                 <button class="btn btn-danger me-3" type="reset" (click)="cancelForm()">Cancelar</button>
                 <button class="btn btn-primary" type="submit" [disabled]="(form.invalid) || (estado_foto == 'peso') || (estado_foto == 'formato')">
                     <span *ngIf="true">Crear</span>

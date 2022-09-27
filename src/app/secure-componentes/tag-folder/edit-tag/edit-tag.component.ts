@@ -7,6 +7,7 @@ import { mascota, Persona, Vehiculo } from 'src/app/entidades/tag';
 import { emailValidator } from '../../function/functions';
 import { AuthService } from 'src/app/services/auth.service';
 import { FileServicesService } from 'src/app/services/file-services.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-edit-tag',
@@ -35,6 +36,7 @@ export class EditTagComponent implements OnInit {
   data_form: FormData = new FormData;
 
   @ViewChild('selectTipo') selectTipo: ElementRef;
+  @ViewChild('modal_redes') modal_redes: ElementRef;
 
   constructor(
     private _com: ComunicationService,
@@ -42,7 +44,8 @@ export class EditTagComponent implements OnInit {
     private _api: ApiService,
     private _auth: AuthService,
     private _fileservice: FileServicesService,
-    private _router: Router
+    private _router: Router,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -233,6 +236,9 @@ export class EditTagComponent implements OnInit {
     this.navActive = e.target.name;
   }
 
+  open(content:any) {
+    this.modalService.open(content, { centered: true })
+  }
 
   capturaFile(event:any):any{
     const archivoCapturado = event.target.files[0];
