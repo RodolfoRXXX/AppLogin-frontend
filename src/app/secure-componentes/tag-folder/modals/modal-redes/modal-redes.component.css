@@ -1,0 +1,22 @@
+
+.outbox_social {
+    display: flex;
+    overflow: auto;
+    padding: 0.5rem 0;
+}
+
+.box-lit-social {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.25rem;
+    padding: 1rem;
+    width: 45px;
+    height: 45px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.box-lit-social:hover {
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+}

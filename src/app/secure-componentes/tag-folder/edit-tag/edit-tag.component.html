@@ -81,60 +81,8 @@
                     </div>
                 </div>
                 <ng-template #modal_redes let-modal>
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">Redes sociales</h4>
-                      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="input-group row">
-                            <div class="col-12 d-flex" style="overflow: auto; padding: 0.5rem 0;">
-                                <div class="rounded d-flex justify-content-center align-items-center m-1 p-2" title="Whatsapp" style="width: 45px; height: 45px; box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;">
-                                    <i class="fa-brands fa-whatsapp fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-twitter fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-instagram fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-facebook fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-linkedin fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-facebook fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-pinterest fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-telegram fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-youtube fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-tiktok fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-discord fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-github fa-2x"></i>
-                                </div>
-                                <div class="border rounded d-flex justify-content-center align-items-center m-1 p-2" style="width: 45px; height: 45px;">
-                                    <i class="fa-brands fa-internet-explorer fa-2x"></i>
-                                </div>
-                            </div>
-                            <div class="col-12">Link</div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Guardar</button>
-                    </div>
-                  </ng-template>
+                    <app-modal-redes (cerrado)="cerrar()"></app-modal-redes>
+                </ng-template>
             </div>
             <div class="padding-content-form" *ngIf="navActive == 3">
                 <div class="input-group row m-0">

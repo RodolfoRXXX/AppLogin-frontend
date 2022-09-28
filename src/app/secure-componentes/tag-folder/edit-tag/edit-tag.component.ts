@@ -7,7 +7,8 @@ import { mascota, Persona, Vehiculo } from 'src/app/entidades/tag';
 import { emailValidator } from '../../function/functions';
 import { AuthService } from 'src/app/services/auth.service';
 import { FileServicesService } from 'src/app/services/file-services.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { array_social, social } from 'src/app/entidades/array_social';
 
 @Component({
   selector: 'app-edit-tag',
@@ -30,6 +31,11 @@ export class EditTagComponent implements OnInit {
   mascota: mascota;
   vehiculo: Vehiculo;
 
+  redes: social[] = array_social;
+  redSeleccionado: number;
+  redTexto: string = '';
+  redDetalle: string = '';
+
   foto_formulario: string;
   estado_foto: string = '';
 
@@ -45,8 +51,12 @@ export class EditTagComponent implements OnInit {
     private _auth: AuthService,
     private _fileservice: FileServicesService,
     private _router: Router,
-    private modalService: NgbModal
-  ) { }
+    private modalService: NgbModal,
+    config: NgbModalConfig
+  ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
 
   ngOnInit(): void {
     let data = this._auth.getUserId();
@@ -236,9 +246,13 @@ export class EditTagComponent implements OnInit {
     this.navActive = e.target.name;
   }
 
-  open(content:any) {
-    this.modalService.open(content, { centered: true })
-  }
+  //Abrir y cerrar modal redes
+    open(content:any) {
+      this.modalService.open(content, { centered: true })
+    }
+    cerrar(){
+      this.modalService.dismissAll();
+    }
 
   capturaFile(event:any):any{
     const archivoCapturado = event.target.files[0];
