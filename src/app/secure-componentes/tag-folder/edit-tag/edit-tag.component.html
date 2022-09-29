@@ -21,6 +21,7 @@
     </div>
     <div *ngIf="show_form">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <!-- Solapa de datos -->
             <div class="padding-content-form" *ngIf="navActive == 1">
                 <div class="row">
                     <div class="col-md-6 img-box">
@@ -56,34 +57,26 @@
                     </div>
                 </div>
             </div>
+            <!-- Solapa de redes -->
             <div class="padding-content-form" *ngIf="navActive == 2">
                 <h6>Creá acceso a tus redes sociales</h6>
+                <div class="rounded box-redes" (click)="open(modal_redes, null, undefined)" >
+                    <i class="fa-solid fa-link" ></i>
+                    <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span> 
+                </div>
                 <div class="d-flex flex-wrap">
-                    <div class="rounded box-redes" (click)="open(modal_redes)">
-                        <i class="fa-solid fa-link"></i>
-                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span> 
-                    </div>
-                    <div class="rounded box-redes" (click)="open(modal_redes)">
-                        <i class="fa-solid fa-link"></i>
-                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span>
-                    </div>
-                    <div class="rounded box-redes" (click)="open(modal_redes)">
-                        <i class="fa-solid fa-link"></i>
-                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span>
-                    </div>
-                    <div class="rounded box-redes" (click)="open(modal_redes)">
-                        <i class="fa-solid fa-link"></i>
-                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span>
-                    </div>
-                    <div class="rounded box-redes" (click)="open(modal_redes)">
-                        <i class="fa-solid fa-link"></i>
-                        <span class="ms-2" style="font-size: 0.8rem;">Agregar red</span>
+                    <div *ngFor="let social of sociales; index as i">
+                        <div class="rounded box-redes" (click)="open(modal_redes, social, i)" title="{{social.link}}">
+                            <i class="fa-brands" [ngClass]="redes[social.id_red].clase" [style.color]="redes[social.id_red].color"></i>
+                            <span class="ms-2" style="font-size: 0.8rem;">{{ redes[social.id_red].nombre }}</span>
+                        </div>
                     </div>
                 </div>
                 <ng-template #modal_redes let-modal>
-                    <app-modal-redes (cerrado)="cerrar()"></app-modal-redes>
+                    <app-modal-redes [data_user]="data_user" (cerrado)="cerrar($event)"></app-modal-redes>
                 </ng-template>
             </div>
+            <!-- Solapa de contacto -->
             <div class="padding-content-form" *ngIf="navActive == 3">
                 <div class="input-group row m-0">
                     <div class="col-6 ps-0">
@@ -147,6 +140,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Solapa de observaciones -->
             <div class="padding-content-form" *ngIf="navActive == 4">
                 <div class="form-group">
                     <label for="textarea" class="control-label mb-2">Observaciones</label>

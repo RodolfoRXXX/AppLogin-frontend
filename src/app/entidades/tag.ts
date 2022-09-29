@@ -13,7 +13,7 @@ export interface Persona{
     fechanac: Date,
     nacionalidad: string,
     observaciones: string,
-    red1: string,
+    red: string,
     red2: string,
     red3: string,
     red4: string,

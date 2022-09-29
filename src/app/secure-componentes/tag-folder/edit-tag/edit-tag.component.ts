@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ComunicationService } from 'src/app/services/comunication.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, TitleStrategy } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { mascota, Persona, Vehiculo } from 'src/app/entidades/tag';
 import { emailValidator } from '../../function/functions';
@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FileServicesService } from 'src/app/services/file-services.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { array_social, social } from 'src/app/entidades/array_social';
+import { social_data } from 'src/app/entidades/social_form';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-edit-tag',
@@ -31,13 +33,14 @@ export class EditTagComponent implements OnInit {
   mascota: mascota;
   vehiculo: Vehiculo;
 
-  redes: social[] = array_social;
-  redSeleccionado: number;
-  redTexto: string = '';
-  redDetalle: string = '';
-
   foto_formulario: string;
   estado_foto: string = '';
+
+  data_user:Object = {};
+  redes: social[] = array_social;
+  sociales: social_data[];
+
+  red_input_seleccion: number|undefined;
 
   data_form: FormData = new FormData;
 
@@ -56,6 +59,7 @@ export class EditTagComponent implements OnInit {
   ) { 
     config.backdrop = 'static';
     config.keyboard = false;
+    this.sociales = [];
   }
 
   ngOnInit(): void {
@@ -126,6 +130,7 @@ export class EditTagComponent implements OnInit {
                     this._com.setTabEditor('Editando Tag-ID: ' + this.persona.nombre + ' ' + this.persona.apellido);
                     this.tipo_form = 'persona';
                     this.foto_formulario = this.persona.foto!=''?this.persona.foto:'../../../../assets/img/blanck_persona.png';
+                    this.sociales = (this.persona.red != '')?JSON.parse(this.persona.red):[];
                     this.load_form = false;
                     this.show_form = true;
                     this.activeTabs = true;
@@ -247,11 +252,25 @@ export class EditTagComponent implements OnInit {
   }
 
   //Abrir y cerrar modal redes
-    open(content:any) {
-      this.modalService.open(content, { centered: true })
+    open( content:any, social:any, red_input:number|undefined ) {
+      this.red_input_seleccion = red_input;
+      this.data_user = {
+        valor: social,
+        usados: this.sociales
+      };
+      this.modalService.open(content, { centered: true });
     }
-    cerrar(){
-      this.modalService.dismissAll();
+    cerrar( e:any ){
+      if(e){
+        if(this.red_input_seleccion != undefined){
+          this.sociales[this.red_input_seleccion] = e;
+        } else{
+          this.sociales.push(e);
+        }
+      }
+        this.modalService.dismissAll();
+        this.red_input_seleccion = undefined;
+        console.log(this.sociales);
     }
 
   capturaFile(event:any):any{

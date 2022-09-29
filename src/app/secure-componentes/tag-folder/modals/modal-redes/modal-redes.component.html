@@ -1,20 +1,21 @@
 <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Redes sociales</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="cerrar()"></button>
+    <button type="button" class="btn-close" aria-label="Close" (click)="cerrar('nok')"></button>
   </div>
   <div class="modal-body" style="padding: 0.5rem 1.5rem 0.75rem;">
       <div class="input-group row m-0">
           <label for="label_lit_social" class="mb-2">Elegí una red social</label>
               <div class="col-12 border outbox_social" id="label_lit_social" >
-                  <div *ngFor="let red of redes">
+                  <div *ngFor="let red of redes; index as i">
                       <button type="button" 
                               class="rounded box-lit-social fa-brands fa-2x" 
-                              name="{{ red.id }}" 
+                              name="{{ i }}" 
                               title="{{ red.nombre }}"
                               [ngClass]="red.clase"
                               [style.color]="red.color"
-                              [style.boxShadow]="(redSeleccionado == red.id)?'rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px':''"
-                              (click)="seleccionarRed($event)"
+                              [style.boxShadow]="(this.social.id_red == i)?'rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px':''"
+                              (click)="seleccionarRed(i)"
+                              *ngIf="!comprobar(i)"
                       >
                       </button>
                   </div>
@@ -22,12 +23,12 @@
           <div class="col-12 mt-3 p-0">
               <label for="input_lit_social" class="mb-2 ps-3">Escribí tu usuario/número en la red social elegida</label>
               <div class="input-group" id="input_lit-social">
-                  <span class="input-group-text">{{ this.redTexto }}</span>
-                  <input type="text" class="form-control" placeholder={{this.redDetalle}} [disabled]="this.redTexto == ''" (change)="crearVinculo($event)">
+                  <span class="input-group-text">{{ this.red_nombre }}</span>
+                  <input type="text" class="form-control" placeholder={{this.red_placeholder}} [value]="input" [disabled]="this.social.id_red < 0" #val_input (change)="crearVinculo($event)">
               </div>
           </div>
       </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="cerrar($event)" [disabled]="this.redFormato == ''">Guardar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="cerrar('ok')" [disabled]="(this.val_input.value == '')||(this.data_user.valor?.link == this.social.link)">Guardar</button>
   </div>
