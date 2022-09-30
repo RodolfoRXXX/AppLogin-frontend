@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal-confirmacion',
@@ -10,6 +10,9 @@ export class ModalConfirmacionComponent implements OnInit {
   //evento de cierre de modal y guardar valores elegidos
   @Output() cerrado: EventEmitter<any>;
 
+  //texto que va a mostrar el modal
+  @Input() texto: any;
+
   constructor() { 
     this.cerrado = new EventEmitter();
    }
@@ -17,7 +20,7 @@ export class ModalConfirmacionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cerrar( value:string ){
+  cerrar( value:boolean ){
       this.cerrado.emit(value);
   }
 

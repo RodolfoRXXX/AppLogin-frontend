@@ -35,11 +35,13 @@ export class EditTagComponent implements OnInit {
   foto_formulario: string;
   estado_foto: string = '';
 
+  texto_confirmacion: string;
   data_user:Object = {};
   redes: social[] = array_social;
   sociales: social_data[];
 
   red_input_seleccion: number|undefined;
+  red_delete_selection: number;
 
   data_form: FormData = new FormData;
 
@@ -274,12 +276,17 @@ export class EditTagComponent implements OnInit {
 
   //maneja el modal de confirmacion de eliminación
     modal_confirmar( e:any, i:number ){
+      this.red_delete_selection = i;
+      this.texto_confirmacion = 'Estás seguro de eliminar el vínculo a ' + this.redes[this.sociales[i].id_red].nombre + '?';
       e.stopPropagation();
       this.modalService.open(this.modal_confirmacion, { centered: true, size: 'sm' });
     }
-    cerrar_confirma( e:any ){
+    cerrar_confirma( value:boolean){
       this.modalService.dismissAll();
-      console.log(e);
+      console.log(value);
+      if(value){
+        this.sociales.splice(this.red_delete_selection, 1);
+      }
     }
 
   capturaFile(event:any):any{

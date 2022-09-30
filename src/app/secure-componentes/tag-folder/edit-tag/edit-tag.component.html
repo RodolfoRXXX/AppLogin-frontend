@@ -77,7 +77,7 @@
                     <app-modal-redes [data_user]="data_user" (cerrado)="cerrar($event)"></app-modal-redes>
                 </ng-template>
                 <ng-template #modal_confirmacion let-modal>
-                    <app-modal-confirmacion (cerrado)="cerrar_confirma($event)"></app-modal-confirmacion>
+                    <app-modal-confirmacion [texto]="texto_confirmacion" (cerrado)="cerrar_confirma($event)"></app-modal-confirmacion>
                 </ng-template>
             </div>
             <!-- Solapa de contacto -->
