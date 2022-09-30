@@ -10,7 +10,6 @@ import { FileServicesService } from 'src/app/services/file-services.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { social_data } from 'src/app/entidades/social_form';
-import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-edit-tag',
@@ -46,6 +45,7 @@ export class EditTagComponent implements OnInit {
 
   @ViewChild('selectTipo') selectTipo: ElementRef;
   @ViewChild('modal_redes') modal_redes: ElementRef;
+  @ViewChild('modal_confirmacion') modal_confirmacion: ElementRef;
 
   constructor(
     private _com: ComunicationService,
@@ -125,7 +125,6 @@ export class EditTagComponent implements OnInit {
                 if(res.status == 1){
                   if(res.data.length){
                     this.persona = res.data[0];
-                    console.log(this.persona);
                     this.createFormPersona(this.userId, 'personal', this.persona);
                     this._com.setTabEditor('Editando Tag-ID: ' + this.persona.nombre + ' ' + this.persona.apellido);
                     this.tipo_form = 'persona';
@@ -271,6 +270,16 @@ export class EditTagComponent implements OnInit {
         this.modalService.dismissAll();
         this.red_input_seleccion = undefined;
         console.log(this.sociales);
+    }
+
+  //maneja el modal de confirmacion de eliminación
+    modal_confirmar( e:any, i:number ){
+      e.stopPropagation();
+      this.modalService.open(this.modal_confirmacion, { centered: true, size: 'sm' });
+    }
+    cerrar_confirma( e:any ){
+      this.modalService.dismissAll();
+      console.log(e);
     }
 
   capturaFile(event:any):any{

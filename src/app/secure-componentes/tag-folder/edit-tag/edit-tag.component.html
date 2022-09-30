@@ -4,7 +4,7 @@
         <li class="nav-item"><a class="nav-link nav-a" 
                                 [ngClass]="!activeTabs?'disabled':(navActive == 1?'active':'')"
                                 name="1" (click)="onTabClick($event)">Datos</a></li>
-        <li class="nav-item"><a class="nav-link nav-a" 
+        <li class="nav-item" *ngIf="this.tipo_form == 'persona'"><a class="nav-link nav-a" 
                                 [ngClass]="!activeTabs?'disabled':(navActive == 2?'active':'')"
                                 name="2" (click)="onTabClick($event)">Redes</a></li>
         <li class="nav-item"><a class="nav-link nav-a" 
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <!-- Solapa de redes -->
-            <div class="padding-content-form" *ngIf="navActive == 2">
+            <div class="padding-content-form" *ngIf="(navActive == 2)&&(this.tipo_form == 'persona')">
                 <h6>Creá acceso a tus redes sociales</h6>
                 <div class="rounded box-redes" (click)="open(modal_redes, null, undefined)" >
                     <i class="fa-solid fa-link" ></i>
@@ -69,11 +69,15 @@
                         <div class="rounded box-redes" (click)="open(modal_redes, social, i)" title="{{social.link}}">
                             <i class="fa-brands" [ngClass]="redes[social.id_red].clase" [style.color]="redes[social.id_red].color"></i>
                             <span class="ms-2" style="font-size: 0.8rem;">{{ redes[social.id_red].nombre }}</span>
+                            <i class="fa-solid fa-circle-xmark red-close" title="eliminar" (click)="modal_confirmar($event, i)"></i>
                         </div>
                     </div>
                 </div>
                 <ng-template #modal_redes let-modal>
                     <app-modal-redes [data_user]="data_user" (cerrado)="cerrar($event)"></app-modal-redes>
+                </ng-template>
+                <ng-template #modal_confirmacion let-modal>
+                    <app-modal-confirmacion (cerrado)="cerrar_confirma($event)"></app-modal-confirmacion>
                 </ng-template>
             </div>
             <!-- Solapa de contacto -->

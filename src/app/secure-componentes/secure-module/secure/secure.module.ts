@@ -21,6 +21,7 @@ import { PersonaFormComponent } from '../../tag-folder/edit-tag/forms/persona-fo
 import { MascotaFormComponent } from '../../tag-folder/edit-tag/forms/mascota-form/mascota-form.component';
 import { VehiculoFormComponent } from '../../tag-folder/edit-tag/forms/vehiculo-form/vehiculo-form.component';
 import { ModalRedesComponent } from '../../tag-folder/modals/modal-redes/modal-redes.component';
+import { ModalConfirmacionComponent } from '../../tag-folder/modals/modal-confirmacion/modal-confirmacion.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ModalRedesComponent } from '../../tag-folder/modals/modal-redes/modal-r
     PersonaFormComponent,
     MascotaFormComponent,
     VehiculoFormComponent,
-    ModalRedesComponent
+    ModalRedesComponent,
+    ModalConfirmacionComponent
   ],
   imports: [
     CommonModule,
