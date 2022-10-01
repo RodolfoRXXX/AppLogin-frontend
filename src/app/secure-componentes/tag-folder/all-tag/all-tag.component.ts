@@ -44,7 +44,7 @@ export class AllTagComponent implements OnInit {
     let data = this._auth.getUserId();
     if(data){
       this.userId = (JSON.parse(data));
-      this._api.postTypeRequest('profile/getAllTags', {id:this.userId, tabla:"personas"}).subscribe({
+      this._api.postTypeRequest('profile/get-all-tag', {id:this.userId, tabla:"personas"}).subscribe({
         next: (res: any) => {
           if(res.status == 1){
             if(res.data.length){
@@ -78,7 +78,7 @@ export class AllTagComponent implements OnInit {
           this.load_tag_persona = false;
         }
       });
-      this._api.postTypeRequest('profile/getAllTags', {id:this.userId, tabla:"mascotas"}).subscribe({
+      this._api.postTypeRequest('profile/get-all-tag', {id:this.userId, tabla:"mascotas"}).subscribe({
         next: (res: any) => {
           if(res.status == 1){
             if(res.data.length){
@@ -102,7 +102,7 @@ export class AllTagComponent implements OnInit {
           this.load_tag_mascota = false;
         }
       })
-      this._api.postTypeRequest('profile/getAllTags', {id:this.userId, tabla:"vehiculos"}).subscribe({
+      this._api.postTypeRequest('profile/get-all-tag', {id:this.userId, tabla:"vehiculos"}).subscribe({
         next: (res: any) => {
           if(res.status == 1){
             if(res.data.length){

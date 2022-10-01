@@ -1,0 +1,28 @@
+[33medbc6cb[m[33m ([m[1;36mHEAD -> [m[1;32msecondary[m[33m, [m[1;31morigin/secondary[m[33m)[m Modal confirmación terminado y eliminar redes
+[33m3988b3e[m Trabajo sobre modal confirmacion
+[33mb83a2b3[m Modal redes terminado
+[33m7439e14[m Trabajando sobre el modal agregar redes II, creado componente aparte - casi terminado
+[33m4b715c8[m Trabajando sobre el modal para agregar redes
+[33mb719bde[m Formulario personas casi terminado, falta cargar información de redes
+[33mcf646cb[m En proceso de cargar imágenes desde el formulario
+[33mf6195b6[m Trabajo sobre el formulario de creación/modificación de tags
+[33mea5a803[m Recupero los tags de la base de datos y los muestro
+[33m330e215[m Detalles del frontend casi terminados y empiezo a crear conexión con el backend para recuperar los registros de tags de un usuario
+[33m0ea1735[m Trabajando con edit-tag II
+[33m086edb2[m Trabajando sobre el edit-tag
+[33mc9b036a[m Navbar, login, register y menu lateral configurado para ser responsivo
+[33m62b4c66[m verificador de cuenta terminado
+[33m6d5f1a5[m verificaciones de correo electrónico y codeEmail
+[33m3b17a0a[m Editar email y password - olvido de password - terminados
+[33me71256e[m Pruebas login observables
+[33m2c8be1e[m Actualización de logout
+[33m9c1b939[m Login y Register actualizados
+[33m13b8778[m Login front y lógica terminado
+[33m235bf5e[m Reubicación de rutas y creación del componente logout
+[33m03682cb[m Cambio para creación de rama secondary
+[33m9a2dc7f[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m Login/register terminado con token - estructuras básicas
+[33m1ab3f86[m Formularios login y register - lógica y front terminados
+[33m85662a0[m Se realizan los servicios a inyectar en la app
+[33m4aebc67[m Componentes navbar, login, register, module Auth y routing creados
+[33ma36e0da[m Archivos base del front-end
+[33m9b323fd[m first commit

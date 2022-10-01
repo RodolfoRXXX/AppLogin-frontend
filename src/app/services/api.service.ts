@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { catchError, throwError } from 'rxjs';
  
@@ -12,6 +12,11 @@ export class ApiService {
 
   constructor( private _http: HttpClient ) { }
 
+  /*httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'multipart/json'
+    })
+  }; */
 
   /*getTypeRequest(url:any){
     return this._http.get(`${this.baseUrl}${url}`).pipe(

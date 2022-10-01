@@ -18,36 +18,37 @@ import { social_data } from 'src/app/entidades/social_form';
 })
 export class EditTagComponent implements OnInit {
 
-  userId: any;
+  //Variables
+    userId: any;
 
-  load_form: boolean = false;
-  show_form: boolean = false;
-  error_form: boolean = false;
-  tipo_form: string = 'persona';
-  navActive:number = 1;
-  form: FormGroup;
-  activeTabs: boolean = false;
-  tag:any = { tipo:null, id:null };
-  persona: Persona;
-  mascota: mascota;
-  vehiculo: Vehiculo;
+    load_form: boolean;
+    show_form: boolean;
+    error_form: boolean;
+    tipo_form: string;
+    navActive:number;
+    form: FormGroup;
+    activeTabs: boolean;
+    tag:any;
+    persona: Persona;
+    mascota: mascota;
+    vehiculo: Vehiculo;
 
-  foto_formulario: string;
-  estado_foto: string = '';
+    foto_formulario: string;
+    estado_foto: string;
 
-  texto_confirmacion: string;
-  data_user:Object = {};
-  redes: social[] = array_social;
-  sociales: social_data[];
+    texto_confirmacion: string;
+    data_user:Object;
+    redes: social[];
+    sociales: social_data[];
 
-  red_input_seleccion: number|undefined;
-  red_delete_selection: number;
+    red_input_seleccion: number|undefined;
+    red_delete_selection: number;
 
-  data_form: FormData = new FormData;
+    data_form: FormData;
 
-  @ViewChild('selectTipo') selectTipo: ElementRef;
-  @ViewChild('modal_redes') modal_redes: ElementRef;
-  @ViewChild('modal_confirmacion') modal_confirmacion: ElementRef;
+    @ViewChild('selectTipo') selectTipo: ElementRef;
+    @ViewChild('modal_redes') modal_redes: ElementRef;
+    @ViewChild('modal_confirmacion') modal_confirmacion: ElementRef;
 
   constructor(
     private _com: ComunicationService,
@@ -61,7 +62,19 @@ export class EditTagComponent implements OnInit {
   ) { 
     config.backdrop = 'static';
     config.keyboard = false;
+
+    this.load_form = false;
+    this.show_form = false;
+    this.error_form = false;
+    this.tipo_form = 'persona';
+    this.navActive = 1;
+    this.activeTabs = false;
+    this.tag = { tipo:null, id:null };
+    this.estado_foto = '';
+    this.data_user = {};
+    this.redes = array_social;
     this.sociales = [];
+    this.data_form = new FormData;
   }
 
   ngOnInit(): void {
@@ -122,7 +135,7 @@ export class EditTagComponent implements OnInit {
         //editando
         switch (params['tipo']) {
           case 'persona':
-            this._api.postTypeRequest('profile/getTag', {id:params['id'], tabla:"personas"}).subscribe({
+            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:"personas"}).subscribe({
               next: (res: any) => {
                 if(res.status == 1){
                   if(res.data.length){
@@ -262,30 +275,31 @@ export class EditTagComponent implements OnInit {
       this.modalService.open(content, { centered: true });
     }
     cerrar( e:any ){
+      this.modalService.dismissAll();
       if(e){
         if(this.red_input_seleccion != undefined){
           this.sociales[this.red_input_seleccion] = e;
         } else{
           this.sociales.push(e);
         }
+        this.data_form.append('red', JSON.stringify(this.sociales));
       }
-        this.modalService.dismissAll();
         this.red_input_seleccion = undefined;
-        console.log(this.sociales);
     }
 
   //maneja el modal de confirmacion de eliminación
-    modal_confirmar( e:any, i:number ){
+    abrir_confirmar( e:any, i:number ){
       this.red_delete_selection = i;
       this.texto_confirmacion = 'Estás seguro de eliminar el vínculo a ' + this.redes[this.sociales[i].id_red].nombre + '?';
       e.stopPropagation();
       this.modalService.open(this.modal_confirmacion, { centered: true, size: 'sm' });
     }
-    cerrar_confirma( value:boolean){
+    cerrar_confirmar( value:boolean){
       this.modalService.dismissAll();
       console.log(value);
       if(value){
         this.sociales.splice(this.red_delete_selection, 1);
+        this.data_form.append('red', JSON.stringify(this.sociales));
       }
     }
 
@@ -294,10 +308,9 @@ export class EditTagComponent implements OnInit {
     if ((archivoCapturado.type == 'image/jpg') || (archivoCapturado.type == 'image/jpeg') || (archivoCapturado.type == 'image/png')){
       if (archivoCapturado.size < 10485760) {
         this._fileservice.extraerBase64(archivoCapturado).then( (imagen:any) => {
-          console.log(imagen);
           this.foto_formulario = imagen.base;
           this.estado_foto = 'ok';
-          this.data_form.append('foto', imagen.base);
+          this.data_form.append('foto', archivoCapturado);
         });
       } else{
         //error de peso mayor
@@ -313,6 +326,26 @@ export class EditTagComponent implements OnInit {
     this.data_form.append('data', JSON.stringify(this.form.value));
     console.log(this.data_form.get('data'));
     console.log(this.data_form.get('foto'));
+    console.log(this.data_form.get('red'));
+
+    //this.estadoSmt = 'load';
+    this._api.postTypeRequest('profile/create-tag', JSON.stringify({data:this.data_form})).subscribe( (res:any) => {
+      console.log(res);
+      /*if ((res.status)&&(res.status != 0)){
+        if(res.data.length > 0){
+          //this.estadoSmt = 'ok';
+          //this.estadoLogin(true, 'alert-success', 'Acceso autorizado!');
+          this._router.navigate(['profile/tags/all-tag']);
+        } else{
+          //this.estadoSmt = 'error';
+          //this.estadoLogin(true, 'alert-danger', 'Usuario o contraseña incorrectos.');
+        }
+          
+      } else{
+        //this.estadoSmt = 'error';
+        //this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intente nuevamente.');
+      }*/
+    } )
   }
 
   cancelForm(){
