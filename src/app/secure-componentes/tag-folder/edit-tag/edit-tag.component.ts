@@ -10,6 +10,7 @@ import { FileServicesService } from 'src/app/services/file-services.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { social_data } from 'src/app/entidades/social_form';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-tag',
@@ -46,11 +47,14 @@ export class EditTagComponent implements OnInit {
 
     data_form: FormData;
 
+    foto: any = '';
+
     @ViewChild('selectTipo') selectTipo: ElementRef;
     @ViewChild('modal_redes') modal_redes: ElementRef;
     @ViewChild('modal_confirmacion') modal_confirmacion: ElementRef;
 
   constructor(
+    private _http: HttpClient,
     private _com: ComunicationService,
     private _activatedRoute: ActivatedRoute,
     private _api: ApiService,
@@ -74,7 +78,7 @@ export class EditTagComponent implements OnInit {
     this.data_user = {};
     this.redes = array_social;
     this.sociales = [];
-    this.data_form = new FormData;
+    this.data_form = new FormData();
   }
 
   ngOnInit(): void {
@@ -310,7 +314,8 @@ export class EditTagComponent implements OnInit {
         this._fileservice.extraerBase64(archivoCapturado).then( (imagen:any) => {
           this.foto_formulario = imagen.base;
           this.estado_foto = 'ok';
-          this.data_form.append('foto', archivoCapturado);
+          this.data_form.append('file', archivoCapturado);
+          this.foto = imagen.base;
         });
       } else{
         //error de peso mayor
@@ -323,29 +328,11 @@ export class EditTagComponent implements OnInit {
   }
 
   onSubmit(){
-    this.data_form.append('data', JSON.stringify(this.form.value));
-    console.log(this.data_form.get('data'));
-    console.log(this.data_form.get('foto'));
-    console.log(this.data_form.get('red'));
+    var file = this.foto;
+    this._api.postTypeRequest('profile/create-tag', {data:file, form: this.form.value}).subscribe( (value) => {
+      console.log(value);
+    })
 
-    //this.estadoSmt = 'load';
-    this._api.postTypeRequest('profile/create-tag', JSON.stringify({data:this.data_form})).subscribe( (res:any) => {
-      console.log(res);
-      /*if ((res.status)&&(res.status != 0)){
-        if(res.data.length > 0){
-          //this.estadoSmt = 'ok';
-          //this.estadoLogin(true, 'alert-success', 'Acceso autorizado!');
-          this._router.navigate(['profile/tags/all-tag']);
-        } else{
-          //this.estadoSmt = 'error';
-          //this.estadoLogin(true, 'alert-danger', 'Usuario o contraseña incorrectos.');
-        }
-          
-      } else{
-        //this.estadoSmt = 'error';
-        //this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intente nuevamente.');
-      }*/
-    } )
   }
 
   cancelForm(){

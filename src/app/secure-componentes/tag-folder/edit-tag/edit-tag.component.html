@@ -20,7 +20,7 @@
         </div>
     </div>
     <div *ngIf="show_form">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
             <!-- Solapa de datos -->
             <div class="padding-content-form" *ngIf="navActive == 1">
                 <div class="row">
@@ -38,6 +38,7 @@
                                id="inputimg" 
                                class="form-control" 
                                style="display: none;"
+                               accept="image/*"
                                (change)="capturaFile($event)" 
                         />
                         <div style="height: 18px; font-size: 0.9rem; margin-top: 1rem; margin-bottom: 1rem;">

@@ -12,11 +12,17 @@ export class ApiService {
 
   constructor( private _http: HttpClient ) { }
 
-  /*httpOptions = {
+  httpJson = {
     headers: new HttpHeaders({
-      'Content-Type': 'multipart/json'
+      'Content-Type': 'application/json'
     })
-  }; */
+  };
+
+  httpFormData = {
+    headers: new HttpHeaders({
+      'Content-Type': 'multipart/form-data'
+    })
+  };
 
   /*getTypeRequest(url:any){
     return this._http.get(`${this.baseUrl}${url}`).pipe(
