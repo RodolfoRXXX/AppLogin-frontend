@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ComunicationService } from 'src/app/services/comunication.service';
-import { ActivatedRoute, Params, Router, TitleStrategy } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { mascota, Persona, Vehiculo } from 'src/app/entidades/tag';
 import { emailValidator } from '../../function/functions';
@@ -10,7 +10,7 @@ import { FileServicesService } from 'src/app/services/file-services.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { social_data } from 'src/app/entidades/social_form';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-tag',
@@ -45,10 +45,6 @@ export class EditTagComponent implements OnInit {
     red_input_seleccion: number|undefined;
     red_delete_selection: number;
 
-    data_form: FormData;
-
-    foto: any = '';
-
     @ViewChild('selectTipo') selectTipo: ElementRef;
     @ViewChild('modal_redes') modal_redes: ElementRef;
     @ViewChild('modal_confirmacion') modal_confirmacion: ElementRef;
@@ -78,7 +74,6 @@ export class EditTagComponent implements OnInit {
     this.data_user = {};
     this.redes = array_social;
     this.sociales = [];
-    this.data_form = new FormData();
   }
 
   ngOnInit(): void {
@@ -286,7 +281,7 @@ export class EditTagComponent implements OnInit {
         } else{
           this.sociales.push(e);
         }
-        this.data_form.append('red', JSON.stringify(this.sociales));
+        this.form.patchValue({ red:JSON.stringify(this.sociales) });
       }
         this.red_input_seleccion = undefined;
     }
@@ -300,10 +295,9 @@ export class EditTagComponent implements OnInit {
     }
     cerrar_confirmar( value:boolean){
       this.modalService.dismissAll();
-      console.log(value);
       if(value){
         this.sociales.splice(this.red_delete_selection, 1);
-        this.data_form.append('red', JSON.stringify(this.sociales));
+        this.form.patchValue({ red:JSON.stringify(this.sociales) });
       }
     }
 
@@ -314,8 +308,7 @@ export class EditTagComponent implements OnInit {
         this._fileservice.extraerBase64(archivoCapturado).then( (imagen:any) => {
           this.foto_formulario = imagen.base;
           this.estado_foto = 'ok';
-          this.data_form.append('file', archivoCapturado);
-          this.foto = imagen.base;
+          this.form.patchValue({ foto:imagen.base });
         });
       } else{
         //error de peso mayor
@@ -328,11 +321,25 @@ export class EditTagComponent implements OnInit {
   }
 
   onSubmit(){
-    var file = this.foto;
-    this._api.postTypeRequest('profile/create-tag', {data:file, form: this.form.value}).subscribe( (value) => {
-      console.log(value);
-    })
+    if(!this.tag.id || this.tag.id < 0){
+      //error
+      this.load_form = false;
+      this.error_form = true;
+      this.activeTabs = false;
+    } else{
+      let ruta = '';
+      if(this.tag.id == 0){
+        //Crea tag
+        ruta = 'profile/create-tag';
+      } else if(this.tag.id > 0){
+        //Edita tag
+        ruta = 'profile/edit-tag';
+      }
+        this._api.postTypeRequest(ruta, this.form.value).subscribe( (value) => {
+          console.log(value);
+        })
 
+    }
   }
 
   cancelForm(){
@@ -341,6 +348,8 @@ export class EditTagComponent implements OnInit {
 
   createFormPersona(userId:number, nivel:string, data?:Persona){
     this.form = new FormGroup({
+      id: new FormControl((data)?data.id:''),
+      foto: new FormControl(''),
       nombre: new FormControl((data)?data.nombre:'',
         [
           Validators.required,
@@ -373,6 +382,7 @@ export class EditTagComponent implements OnInit {
         emailValidator()
       ]
     ),
+      red: new FormControl((data)?data.red:''),
       fechanac: new FormControl((data)?data.fechanac:''),
       nacionalidad: new FormControl((data)?data.nacionalidad:'',
       [
