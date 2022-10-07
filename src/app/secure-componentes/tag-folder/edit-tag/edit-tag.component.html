@@ -93,7 +93,7 @@
                                id="nombreresp" 
                                formControlName="nombreresp"
                                placeholder="Escribí aquí"
-                               [ngClass]="form.get('nombreresp')?.valid?'is-valid':(((form.get('nombreresp')?.invalid)&&(form.get('nombreresp')?.dirty||form.get('nombreresp')?.touched))?'is-invalid':'')"
+                               [ngClass]="((form.get('nombreresp')?.valid)&&(form.get('nombreresp')?.dirty))?'is-valid':(((form.get('nombreresp')?.invalid)&&(form.get('nombreresp')?.dirty||form.get('nombreresp')?.touched))?'is-invalid':'')"
                         />
                         <div style="height: 18px; font-size: 0.9rem; ">
                             <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nombreresp')?.invalid)&&(form.get('nombreresp')?.dirty||form.get('nombreresp')?.touched)">
@@ -112,7 +112,7 @@
                                id="telefono" 
                                formControlName="telresp"
                                placeholder="Cod. área sin '0' y el número de teléfono"
-                               [ngClass]="form.get('telresp')?.valid?'is-valid':(((form.get('telresp')?.invalid)&&(form.get('telresp')?.dirty||form.get('telresp')?.touched))?'is-invalid':'')"
+                               [ngClass]="((form.get('telresp')?.valid)&&(form.get('telresp')?.dirty))?'is-valid':(((form.get('telresp')?.invalid)&&(form.get('telresp')?.dirty||form.get('telresp')?.touched))?'is-invalid':'')"
                         />
                         <div style="height: 18px; font-size: 0.9rem; ">
                             <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('telresp')?.invalid)&&(form.get('telresp')?.dirty||form.get('telresp')?.touched)">
@@ -134,7 +134,7 @@
                                id="wspresp"
                                formControlName="wspresp"
                                placeholder="Cod. área sin '0' y el número de whatsapp"
-                               [ngClass]="(form.get('wspresp')?.value.length == 0)?'':((form.get('wspresp')?.invalid)&&(form.get('wspresp')?.dirty||form.get('wspresp')?.touched)?'is-invalid':('is-valid'))"
+                               [ngClass]="((form.get('wspresp')?.value.length == 0)||(!form.get('wspresp')?.dirty))?'':((form.get('wspresp')?.invalid)&&(form.get('wspresp')?.dirty||form.get('wspresp')?.touched)?'is-invalid':('is-valid'))"
                         />
                         <div style="height: 18px; font-size: 0.9rem; ">
                             <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('wspresp')?.invalid)&&(form.get('wspresp')?.dirty||form.get('wspresp')?.touched)">
@@ -155,7 +155,7 @@
                                   rows="6" 
                                   placeholder="Ingresá aquí detalles o información sobre la persona, mascota o vehículo que se necesite conocer." 
                                   formControlName="observaciones"
-                                  [ngClass]="(form.get('observaciones')?.value.length == 0)?'':((form.get('observaciones')?.invalid)&&(form.get('observaciones')?.dirty||form.get('observaciones')?.touched)?'is-invalid':('is-valid'))"
+                                  [ngClass]="((form.get('observaciones')?.value.length == 0)||(!form.get('observaciones')?.dirty))?'':((form.get('observaciones')?.invalid)&&(form.get('observaciones')?.dirty||form.get('observaciones')?.touched)?'is-invalid':('is-valid'))"
                         ></textarea>
                         <div style="height: 18px; font-size: 0.9rem; ">
                             <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('observaciones')?.invalid)&&(form.get('observaciones')?.dirty||form.get('observaciones')?.touched)">
@@ -168,7 +168,7 @@
             </div>
             <div class="d-flex justify-content-end padding-content-form pt-2 border-top">
                 <button class="btn btn-danger me-3" type="reset" (click)="cancelForm()">Cancelar</button>
-                <button class="btn btn-primary" type="submit" [disabled]="(form.invalid) || (estado_foto == 'peso') || (estado_foto == 'formato')">
+                <button class="btn btn-primary" type="submit" [disabled]="(form.invalid) || (form.pristine) || (estado_foto == 'peso' || estado_foto == 'formato')">
                     <span *ngIf="true">Crear</span>
                     <span *ngIf="!true">Actualizar</span>
                 </button>

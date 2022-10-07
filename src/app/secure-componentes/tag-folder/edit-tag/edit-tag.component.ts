@@ -10,7 +10,6 @@ import { FileServicesService } from 'src/app/services/file-services.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { social_data } from 'src/app/entidades/social_form';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-tag',
@@ -178,7 +177,7 @@ export class EditTagComponent implements OnInit {
             });
             break;
           case 'mascota':
-            this._api.postTypeRequest('profile/getTag', {id:params['id'], tabla:"mascotas"}).subscribe({
+            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:"mascotas"}).subscribe({
               next: (res: any) => {
                 if(res.status == 1){
                   if(res.data.length){
@@ -187,7 +186,7 @@ export class EditTagComponent implements OnInit {
                     this.createFormMascota(this.userId, 'adicional', this.mascota);
                     this._com.setTabEditor('Editando Tag-ID: ' + this.mascota.nombre + ' - ' + this.mascota.especie);
                     this.tipo_form = 'mascota';
-                    this.foto_formulario = this.mascota.foto!=''?this.mascota.foto:this.foto_mascota_blanck;
+                    this.foto_formulario = this.mascota.foto!=''?(this.URL + this.mascota.foto):this.foto_mascota_blanck;
                     this.load_form = false;
                     this.show_form = true;
                     this.activeTabs = true;
@@ -216,7 +215,7 @@ export class EditTagComponent implements OnInit {
             });
             break;
           case 'vehiculo':
-            this._api.postTypeRequest('profile/getTag', {id:params['id'], tabla:"vehiculos"}).subscribe({
+            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:"vehiculos"}).subscribe({
               next: (res: any) => {
                 if(res.status == 1){
                   if(res.data.length){
@@ -225,7 +224,7 @@ export class EditTagComponent implements OnInit {
                     this.createFormVehiculo(this.userId, 'adicional', this.vehiculo);
                     this._com.setTabEditor('Editando Tag-ID: ' + this.vehiculo.marca + ' - ' + this.vehiculo.modelo);
                     this.tipo_form = 'vehiculo';
-                    this.foto_formulario = this.vehiculo.foto!=''?this.vehiculo.foto:this.foto_vehiculo_blanck;
+                    this.foto_formulario = this.vehiculo.foto!=''?(this.URL + this.vehiculo.foto):this.foto_vehiculo_blanck;
                     this.load_form = false;
                     this.show_form = true;
                     this.activeTabs = true;
@@ -381,7 +380,7 @@ export class EditTagComponent implements OnInit {
 
   createFormPersona(userId:number, nivel:string, data?:Persona){
     this.form = new FormGroup({
-      id: new FormControl((data)?data.id:''),
+      id: new FormControl((data)?data.id:'0'),
       foto: new FormControl((data)?data.foto:''),
       nombre: new FormControl((data)?data.nombre:'',
         [
@@ -465,17 +464,72 @@ export class EditTagComponent implements OnInit {
 
   createFormMascota(userId:number, nivel:string, data?:mascota){
     this.form = new FormGroup({
-      nombre: new FormControl((data)?data.nombre:''),
-      especie: new FormControl((data)?data.especie:''),
-      ciudad: new FormControl((data)?data.ciudad:''),
-      direccion: new FormControl((data)?data.direccion:''),
+      id: new FormControl((data)?data.id:'0'),
+      foto: new FormControl((data)?data.foto:''),
+      nombre: new FormControl((data)?data.nombre:'',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20)
+      ]
+    ),
+      especie: new FormControl((data)?data.especie:'',
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20)
+      ]
+    ),
+      ciudad: new FormControl((data)?data.ciudad:'',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ]
+    ),
+      direccion: new FormControl((data)?data.direccion:'',
+      [
+        Validators.minLength(4),
+        Validators.maxLength(50)
+      ]
+    ),
       fechanac: new FormControl((data)?data.fechanac:''),
-      observaciones: new FormControl((data)?data.observaciones:''),
-      nombreresp: new FormControl((data)?data.nombreresp:''),
-      telresp: new FormControl((data)?data.telresp:''),
-      wspresp: new FormControl((data)?data.wspresp:''),
-      id_autor: new FormControl((data)?data.id_autor:userId),
-      nivel: new FormControl((data)?data.nivel:nivel),
+      observaciones: new FormControl((data)?data.observaciones:'',
+      [
+        Validators.minLength(5),
+        Validators.maxLength(255)
+      ]
+    ),
+      nombreresp: new FormControl((data)?data.nombreresp:'',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ]
+    ),
+      telresp: new FormControl((data)?data.telresp:'',
+      [
+        Validators.required,
+        Validators.minLength(7),
+        Validators.maxLength(13)
+      ]
+    ),
+      wspresp: new FormControl((data)?data.wspresp:'',
+      [
+        Validators.minLength(7),
+        Validators.maxLength(13)
+      ]
+    ),
+      id_autor: new FormControl((data)?data.id_autor:userId,
+      [
+        Validators.required
+      ]
+    ),
+      nivel: new FormControl((data)?data.nivel:nivel,
+      [
+        Validators.required
+      ]
+    ),
       tabla: new FormControl('mascotas')
     })
   }

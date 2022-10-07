@@ -8,7 +8,7 @@
                    type="text" 
                    id="nombre" 
                    formControlName="nombre"
-                   [ngClass]="form.get('nombre')?.valid?'is-valid':(((form.get('nombre')?.invalid)&&(form.get('nombre')?.dirty||form.get('nombre')?.touched))?'is-invalid':'')"
+                   [ngClass]="((form.get('nombre')?.valid)&&(form.get('nombre')?.dirty))?'is-valid':(((form.get('nombre')?.invalid)&&(form.get('nombre')?.dirty||form.get('nombre')?.touched))?'is-invalid':'')"
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nombre')?.invalid)&&(form.get('nombre')?.dirty||form.get('nombre')?.touched)">
@@ -26,7 +26,7 @@
                    type="text" 
                    id="apellido" 
                    formControlName="apellido"
-                   [ngClass]="form.get('apellido')?.valid?'is-valid':(((form.get('apellido')?.invalid)&&(form.get('apellido')?.dirty||form.get('apellido')?.touched))?'is-invalid':'')"
+                   [ngClass]="((form.get('apellido')?.valid)&&(form.get('apellido')?.dirty))?'is-valid':(((form.get('apellido')?.invalid)&&(form.get('apellido')?.dirty||form.get('apellido')?.touched))?'is-invalid':'')"
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('apellido')?.invalid)&&(form.get('apellido')?.dirty||form.get('apellido')?.touched)">
@@ -46,7 +46,7 @@
                    type="text" 
                    id="ciudad" 
                    formControlName="ciudad"
-                   [ngClass]="form.get('ciudad')?.valid?'is-valid':(((form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched))?'is-invalid':'')"
+                   [ngClass]="((form.get('ciudad')?.valid)&&(form.get('ciudad')?.dirty))?'is-valid':(((form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched))?'is-invalid':'')"
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched)">
@@ -66,7 +66,7 @@
                    type="text" 
                    id="direccion" 
                    formControlName="direccion"
-                   [ngClass]="(form.get('direccion')?.value.length == 0)?'':((form.get('direccion')?.invalid)&&(form.get('direccion')?.dirty||form.get('direccion')?.touched)?'is-invalid':('is-valid'))"
+                   [ngClass]="((form.get('direccion')?.value.length == 0)||(!form.get('direccion')?.dirty))?'':((form.get('direccion')?.invalid)&&(form.get('direccion')?.dirty||form.get('direccion')?.touched)?'is-invalid':('is-valid'))"
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('direccion')?.invalid)&&(form.get('direccion')?.dirty||form.get('direccion')?.touched)">
@@ -81,7 +81,7 @@
                    type="date" 
                    id="fechanac" 
                    formControlName="fechanac"
-                   [ngClass]="(form.get('fechanac')?.value.length == 0)?'':((form.get('fechanac')?.invalid)&&(form.get('fechanac')?.dirty||form.get('fechanac')?.touched)?'is-invalid':('is-valid'))"
+                   [ngClass]="((form.get('fechanac')?.value.length == 0)||(!form.get('fechanac')?.dirty))?'':((form.get('fechanac')?.invalid)&&(form.get('fechanac')?.dirty||form.get('fechanac')?.touched)?'is-invalid':('is-valid'))"
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('fechanac')?.invalid)&&(form.get('fechanac')?.dirty||form.get('fechanac')?.touched)">
@@ -97,7 +97,7 @@
                    type="email" 
                    id="email" 
                    formControlName="email"
-                   [ngClass]="(form.get('email')?.value.length == 0)?'':((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)?'is-invalid':('is-valid'))"
+                   [ngClass]="((form.get('email')?.value.length == 0)||(!form.get('email')?.dirty))?'':((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)?'is-invalid':('is-valid'))"
             />
             <div style="height: 15px; font-size: 0.9rem;">
                 <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)&&(form.get('email')?.value.length > 0)">
@@ -113,7 +113,7 @@
                    type="text" 
                    id="nacionalidad" 
                    formControlName="nacionalidad"
-                   [ngClass]="(form.get('nacionalidad')?.value.length == 0)?'':((form.get('nacionalidad')?.invalid)&&(form.get('nacionalidad')?.dirty||form.get('nacionalidad')?.touched)?'is-invalid':('is-valid'))"
+                   [ngClass]="((form.get('nacionalidad')?.value.length == 0)||(!form.get('nacionalidad')?.dirty))?'':((form.get('nacionalidad')?.invalid)&&(form.get('nacionalidad')?.dirty||form.get('nacionalidad')?.touched)?'is-invalid':('is-valid'))"
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nacionalidad')?.invalid)&&(form.get('nacionalidad')?.dirty||form.get('nacionalidad')?.touched)">
