@@ -22,17 +22,18 @@
             <label class="form-label mb-1 ms-1" for="especie">
                 Especie: <span class="text-danger fw-bold">*</span>
             </label>
-            <input class="form-control input-style" 
-                   type="text" 
-                   id="especie" 
-                   formControlName="especie"
-                   [ngClass]="((form.get('especie')?.valid)&&(form.get('especie')?.dirty))?'is-valid':(((form.get('especie')?.invalid)&&(form.get('especie')?.dirty||form.get('especie')?.touched))?'is-invalid':'')"
-            />
+            <select class="form-select input-style"
+                    type="text" 
+                    id="especie" 
+                    formControlName="especie"
+                    [ngClass]="((form.get('especie')?.valid)&&(form.get('especie')?.dirty))?'is-valid':(((form.get('especie')?.invalid)&&(form.get('especie')?.dirty||form.get('especie')?.touched))?'is-invalid':'')"
+            >
+                <option value="" selected disabled>Seleccioná una especie</option>
+                <option [value]="especie" *ngFor="let especie of especies">{{especie}}</option>
+            </select>
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('especie')?.invalid)&&(form.get('especie')?.dirty||form.get('especie')?.touched)">
-                  <span *ngIf="form.get('apellido')?.errors?.['required']">"Especie" es requerida.</span>
-                  <span *ngIf="form.get('apellido')?.errors?.['minlength']">"Especie" mín. 3 caracteres.</span>
-                  <span *ngIf="form.get('apellido')?.errors?.['maxlength']">"Especie" máx. 20 caracteres.</span>
+                  <span *ngIf="form.get('especie')?.errors?.['required']">"Especie" es requerida.</span>
                 </div>
             </div>
         </div>

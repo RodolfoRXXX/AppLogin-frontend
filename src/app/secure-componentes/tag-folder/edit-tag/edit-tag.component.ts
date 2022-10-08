@@ -478,9 +478,7 @@ export class EditTagComponent implements OnInit {
     ),
       especie: new FormControl((data)?data.especie:'',
       [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20)
+        Validators.required
       ]
     ),
       ciudad: new FormControl((data)?data.ciudad:'',
@@ -539,20 +537,96 @@ export class EditTagComponent implements OnInit {
 
   createFormVehiculo(userId:number, nivel:string, data?:Vehiculo){
     this.form = new FormGroup({
-      marca: new FormControl((data)?data.marca:''),
-      modelo: new FormControl((data)?data.modelo:''),
-      anio: new FormControl((data)?data.anio:''),
-      color: new FormControl((data)?data.color:''),
-      patente: new FormControl((data)?data.patente:''),
-      ciudad: new FormControl((data)?data.ciudad:''),
-      aseguradora: new FormControl((data)?data.aseguradora:''),
-      nroseguro: new FormControl((data)?data.nroseguro:''),
-      observaciones: new FormControl((data)?data.observaciones:''),
-      nombreresp: new FormControl((data)?data.nombreresp:''),
-      telresp: new FormControl((data)?data.telresp:''),
-      wspresp: new FormControl((data)?data.wspresp:''),
-      id_autor: new FormControl((data)?data.id_autor:userId),
-      nivel: new FormControl((data)?data.nivel:nivel),
+      id: new FormControl((data)?data.id:'0'),
+      foto: new FormControl((data)?data.foto:''),
+      marca: new FormControl((data)?data.marca:'',
+      [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(20)
+      ]
+    ),
+      modelo: new FormControl((data)?data.modelo:'',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20)
+      ]
+    ),
+      color: new FormControl((data)?data.color:'',
+      [
+        Validators.required
+      ]
+    ),
+      anio: new FormControl((data)?data.anio:'',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(4)
+      ]
+    ),
+      patente: new FormControl((data)?data.patente:'',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(10)
+      ]
+    ),
+      ciudad: new FormControl((data)?data.ciudad:'',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ]
+    ),
+      aseguradora: new FormControl((data)?data.aseguradora:'',
+      [
+        Validators.minLength(3),
+        Validators.maxLength(30)
+      ]
+    ),
+      nroseguro: new FormControl((data)?data.nroseguro:'',
+      [
+        Validators.minLength(3),
+        Validators.maxLength(40)
+      ]
+    ),
+      observaciones: new FormControl((data)?data.observaciones:'',
+      [
+        Validators.minLength(5),
+        Validators.maxLength(255)
+      ]
+    ),
+      nombreresp: new FormControl((data)?data.nombreresp:'',
+      [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.maxLength(20)
+      ]
+    ),
+      telresp: new FormControl((data)?data.telresp:'',
+      [
+        Validators.required,
+        Validators.minLength(7),
+        Validators.maxLength(13)
+      ]
+    ),
+      wspresp: new FormControl((data)?data.wspresp:'',
+      [
+        Validators.minLength(7),
+        Validators.maxLength(13)
+      ]
+    ),
+      id_autor: new FormControl((data)?data.id_autor:userId,
+      [
+        Validators.required
+      ]
+    ),
+      nivel: new FormControl((data)?data.nivel:nivel,
+      [
+        Validators.required
+      ]
+    ),
       tabla: new FormControl('vehiculos')
     })
   }

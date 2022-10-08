@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { array_colores } from 'src/app/entidades/array_colores';
 
 @Component({
   selector: 'app-vehiculo-form',
@@ -9,8 +10,11 @@ import { FormGroup } from '@angular/forms';
 export class VehiculoFormComponent implements OnInit {
 
   @Input() form: FormGroup;
+  colores:string[];
 
-  constructor() { }
+  constructor() { 
+    this.colores = array_colores;
+  }
 
   ngOnInit(): void {
   }
