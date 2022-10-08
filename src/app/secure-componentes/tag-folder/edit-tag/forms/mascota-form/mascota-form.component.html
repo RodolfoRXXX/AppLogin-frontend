@@ -1,10 +1,10 @@
 <div [formGroup]="form">
     <div class="input-group row m-0">
         <div class="col-6 ps-0">
-            <label class="form-label mb-1" for="nombre">
+            <label class="form-label mb-1 ms-1" for="nombre">
                 Nombre: <span class="text-danger fw-bold">*</span>
             </label>
-            <input class="form-control" 
+            <input class="form-control input-style" 
                    type="text" 
                    id="nombre" 
                    formControlName="nombre"
@@ -12,17 +12,17 @@
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nombre')?.invalid)&&(form.get('nombre')?.dirty||form.get('nombre')?.touched)">
-                  <span *ngIf="form.get('nombre')?.errors?.['required']">El nombre es requerido.</span>
-                  <span *ngIf="form.get('nombre')?.errors?.['minlength']">El nombre debe tener más de 2 caracteres.</span>
-                  <span *ngIf="form.get('nombre')?.errors?.['maxlength']">El nombre debe tener menos de 20 caracteres.</span>
+                  <span *ngIf="form.get('nombre')?.errors?.['required']">"Nombre" es requerido.</span>
+                  <span *ngIf="form.get('nombre')?.errors?.['minlength']">"Nombre" mín. 2 caracteres.</span>
+                  <span *ngIf="form.get('nombre')?.errors?.['maxlength']">"Nombre" máx. 20 caracteres.</span>
                 </div>
             </div>
         </div>
         <div class="col-6 pe-0">
-            <label class="form-label mb-1" for="especie">
+            <label class="form-label mb-1 ms-1" for="especie">
                 Especie: <span class="text-danger fw-bold">*</span>
             </label>
-            <input class="form-control" 
+            <input class="form-control input-style" 
                    type="text" 
                    id="especie" 
                    formControlName="especie"
@@ -30,19 +30,19 @@
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('especie')?.invalid)&&(form.get('especie')?.dirty||form.get('especie')?.touched)">
-                  <span *ngIf="form.get('apellido')?.errors?.['required']">La especie es requerida.</span>
-                  <span *ngIf="form.get('apellido')?.errors?.['minlength']">La especie debe tener más de 3 caracteres.</span>
-                  <span *ngIf="form.get('apellido')?.errors?.['maxlength']">La especie debe tener menos de 20 caracteres.</span>
+                  <span *ngIf="form.get('apellido')?.errors?.['required']">"Especie" es requerida.</span>
+                  <span *ngIf="form.get('apellido')?.errors?.['minlength']">"Especie" mín. 3 caracteres.</span>
+                  <span *ngIf="form.get('apellido')?.errors?.['maxlength']">"Especie" máx. 20 caracteres.</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="input-group row m-0">
         <div class="col p-0">
-            <label class="form-label mb-1" for="ciudad">
+            <label class="form-label mb-1 ms-1" for="ciudad">
                 Ciudad: <span class="text-danger fw-bold">*</span>
             </label>
-            <input class="form-control" 
+            <input class="form-control input-style" 
                    type="text" 
                    id="ciudad" 
                    formControlName="ciudad"
@@ -50,19 +50,19 @@
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched)">
-                    <span *ngIf="form.get('ciudad')?.errors?.['required']">La ciudad es requerida.</span>
-                    <span *ngIf="form.get('ciudad')?.errors?.['minlength']">La ciudad debe tener más de 4 caracteres.</span>
-                    <span *ngIf="form.get('ciudad')?.errors?.['maxlength']">La ciudad debe tener menos de 20 caracteres.</span>
+                    <span *ngIf="form.get('ciudad')?.errors?.['required']">"Ciudad" es requerida.</span>
+                    <span *ngIf="form.get('ciudad')?.errors?.['minlength']">"Ciudad" mín. 4 caracteres.</span>
+                    <span *ngIf="form.get('ciudad')?.errors?.['maxlength']">"Ciudad" máx. 20 caracteres.</span>
                 </div>
             </div>
         </div>
     </div>
     <div class="input-group row m-0">
         <div class="col p-0">
-            <label class="form-label mb-1" for="direccion">
+            <label class="form-label mb-1 ms-1" for="direccion">
                 Dirección: <span class="text-danger fw-bold">*</span>
             </label>
-            <input class="form-control" 
+            <input class="form-control input-style" 
                    type="text" 
                    id="direccion" 
                    formControlName="direccion"
@@ -70,9 +70,9 @@
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('direccion')?.invalid)&&(form.get('direccion')?.dirty||form.get('direccion')?.touched)">
-                    <span *ngIf="form.get('direccion')?.errors?.['required']">La dirección es requerida.</span>
-                    <span *ngIf="form.get('direccion')?.errors?.['minlength']">La dirección debe tener más de 4 caracteres.</span>
-                    <span *ngIf="form.get('direccion')?.errors?.['maxlength']">La dirección debe tener menos de 50 caracteres.</span>
+                    <span *ngIf="form.get('direccion')?.errors?.['required']">"Dirección" es requerida.</span>
+                    <span *ngIf="form.get('direccion')?.errors?.['minlength']">"Dirección" mín. 4 caracteres.</span>
+                    <span *ngIf="form.get('direccion')?.errors?.['maxlength']">"Dirección" máx. 50 caracteres.</span>
                 </div>
             </div>
         </div>
@@ -81,8 +81,8 @@
     <h6 class="m-1 mt-0">Opcionales:</h6>
     <div class="input-group row m-0">
         <div class="col p-0">
-            <label class="form-label mb-1" for="fechanac">Fecha de nacimiento:</label>
-            <input class="form-control" 
+            <label class="form-label mb-1 ms-1" for="fechanac">Fecha de nacimiento:</label>
+            <input class="form-control input-style" 
                    type="date" 
                    id="fechanac" 
                    formControlName="fechanac"
@@ -90,7 +90,7 @@
             />
             <div style="height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('fechanac')?.invalid)&&(form.get('fechanac')?.dirty||form.get('fechanac')?.touched)">
-                    <span *ngIf="form.get('fechanac')?.invalid">Ingresá una fecha de nacimiento correcta.</span>
+                    <span *ngIf="form.get('fechanac')?.invalid">Fecha de nacimiento incorrecta.</span>
                 </div>
             </div>
         </div>

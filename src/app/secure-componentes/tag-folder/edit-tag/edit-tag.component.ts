@@ -21,6 +21,7 @@ export class EditTagComponent implements OnInit {
   //Variables
     userId: any;
 
+    estado_form: boolean;
     load_form: boolean;
     show_form: boolean;
     error_form: boolean;
@@ -65,6 +66,7 @@ export class EditTagComponent implements OnInit {
     config.backdrop = 'static';
     config.keyboard = false;
 
+    this.estado_form = true;
     this.load_form = false;
     this.show_form = false;
     this.error_form = false;
@@ -145,7 +147,7 @@ export class EditTagComponent implements OnInit {
                   if(res.data.length){
                     this.persona = res.data[0];
                     this.createFormPersona(this.userId, 'personal', this.persona);
-                    this._com.setTabEditor('Editando Tag-ID: ' + this.persona.nombre + ' ' + this.persona.apellido);
+                    this._com.setTabEditor(this.persona.nombre + ' ' + this.persona.apellido);
                     this.tipo_form = 'persona';
                     this.foto_formulario = this.persona.foto!=''?(this.URL + this.persona.foto):this.foto_persona_blanck;
                     this.sociales = (this.persona.red != '')?JSON.parse(this.persona.red):[];
@@ -184,7 +186,7 @@ export class EditTagComponent implements OnInit {
                     this.mascota = res.data[0];
                     console.log(this.mascota);
                     this.createFormMascota(this.userId, 'adicional', this.mascota);
-                    this._com.setTabEditor('Editando Tag-ID: ' + this.mascota.nombre + ' - ' + this.mascota.especie);
+                    this._com.setTabEditor(this.mascota.nombre + ' - ' + this.mascota.especie);
                     this.tipo_form = 'mascota';
                     this.foto_formulario = this.mascota.foto!=''?(this.URL + this.mascota.foto):this.foto_mascota_blanck;
                     this.load_form = false;
@@ -222,7 +224,7 @@ export class EditTagComponent implements OnInit {
                     this.vehiculo = res.data[0];
                     console.log(this.vehiculo);
                     this.createFormVehiculo(this.userId, 'adicional', this.vehiculo);
-                    this._com.setTabEditor('Editando Tag-ID: ' + this.vehiculo.marca + ' - ' + this.vehiculo.modelo);
+                    this._com.setTabEditor(this.vehiculo.marca + ' - ' + this.vehiculo.modelo);
                     this.tipo_form = 'vehiculo';
                     this.foto_formulario = this.vehiculo.foto!=''?(this.URL + this.vehiculo.foto):this.foto_vehiculo_blanck;
                     this.load_form = false;
@@ -326,6 +328,7 @@ export class EditTagComponent implements OnInit {
   }
 
   onSubmit(){
+    this.estado_form = false;
     try {
       if(!this.tag.id || this.tag.id < 0){
         //error
@@ -353,15 +356,15 @@ export class EditTagComponent implements OnInit {
             throw 'error de operación';
           }
           if((status != 0)&&(data.affectedRows != 0)){
-            this._com.setNotifier({display: true, state:'alert-success', text:text_notifier})
+            this._com.setNotifier({display: true, state:'alert-success', text:text_notifier, time:2500})
             setTimeout(() => {
               this._router.navigate(['profile/tags/all-tag']);
-            }, 3000);
+            }, 2500);
           } else{
-            this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intente nuevamente.'})
+            this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intente nuevamente.', time:2500})
             setTimeout(() => {
               this.ngOnInit();
-            }, 3000);
+            }, 2500);
           }
         }
       }

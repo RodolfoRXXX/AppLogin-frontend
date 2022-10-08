@@ -128,7 +128,7 @@ export class EmailCheckerComponent implements OnInit {
       let dataCode = JSON.parse(data)[0].codeEmail;
       //LLAMAR A UNA FUNCION QUE ENVIE POR CORREO "dataEmail" EL "dataCode" y devuelva el estado del envío
       console.log(dataEmail, dataCode);
-      this._com.setNotifier({display: true, state:'alert-success', text:'Se ha reenviado el código a tu correo electrónico!'})
+      this._com.setNotifier({display: true, state:'alert-success', text:'Se ha reenviado el código a tu correo electrónico!', time:3500})
     }
   }
 

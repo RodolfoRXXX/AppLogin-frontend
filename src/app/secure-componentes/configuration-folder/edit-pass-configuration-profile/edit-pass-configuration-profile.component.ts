@@ -92,13 +92,13 @@ export class EditPassConfigurationProfileComponent implements OnInit {
     this._api.putTypeRequest('profile/updatepassword', this.form.value).subscribe( (res:any) => {
       if((res.status != 0)&&(res.data.affectedRows != 0)){
         this.estadoSmt = 'ok';
-        this._com.setNotifier({display: true, state:'alert-success', text:'La contraseña se ha actualizado con éxito!'})
+        this._com.setNotifier({display: true, state:'alert-success', text:'La contraseña se ha actualizado con éxito!', time:3500})
         setTimeout(() => {
           this._router.navigate(['logout']);
         }, 3500);
       } else{
         this.estadoSmt = 'error';
-        this._com.setNotifier({display: true, state:'alert-danger', text:'La contraseña no se ha podido actualizar. Intente nuevamente.'})
+        this._com.setNotifier({display: true, state:'alert-danger', text:'La contraseña no se ha podido actualizar. Intente nuevamente.', time:3500})
         setTimeout(() => {
           this.ngOnInit();
         }, 3500);

@@ -66,13 +66,13 @@ export class EditEmailConfigurationProfileComponent implements OnInit {
     this._api.putTypeRequest('profile/updateemail', this.form.value).subscribe( (res:any) => {
       if((res.status != 0)&&(res.data.affectedRows != 0)){
         this.estadoSmt = 'ok';
-        this._com.setNotifier({display: true, state:'alert-success', text:'Se ha enviado un código a tu nuevo correo electrónico. Verificalo!'})
+        this._com.setNotifier({display: true, state:'alert-success', text:'Se ha enviado un código a tu nuevo correo electrónico. Verificalo!', time:3500})
         setTimeout(() => {
           this._router.navigate(['logout']);
         }, 3500);
       } else{
         this.estadoSmt = 'error';
-        this._com.setNotifier({display: true, state:'alert-danger', text:'El correo electrónico no se ha podido actualizar. Intente nuevamente.'})
+        this._com.setNotifier({display: true, state:'alert-danger', text:'El correo electrónico no se ha podido actualizar. Intente nuevamente.', time:3500})
         setTimeout(() => {
           this.ngOnInit();
         }, 3500);
