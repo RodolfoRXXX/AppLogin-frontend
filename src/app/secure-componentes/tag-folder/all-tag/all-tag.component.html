@@ -11,14 +11,53 @@
                 <ng-container *ngFor="let persona of personas">
                     <ngb-panel *ngIf="persona.nivel == 'personal'">
                         <ng-template ngbPanelTitle>
+                            <span class="me-5"><i class="fa-solid fa-qrcode fa-2x"></i></span>
                             <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
                             <span class="text-start">Nombre: <span class="d-block"><b>{{ persona.nombre + ' ' + persona.apellido }}</b></span></span>
                         </ng-template>
                         <ng-template ngbPanelContent>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-outline-success" (click)="editTag('persona', persona.id )">Editar</button>
-                                <button class="btn btn-outline-warning" (click)="verTag('persona', persona.id)">Ver Tag</button>
-                                <button class="btn btn-outline-danger"  (click)="vincularTag('persona', persona.id)">Editar Vinculación</button>
+                            <!-- ACA IRIA LA ETIQUETA DE LA VISTA DEL TAG
+                            -->
+                            <div>
+                                <app-vista-tag></app-vista-tag>
+                            </div>
+                            <div class="d-flex">
+                                <button class="btn w-25 btn-box-util"
+                                        title="Editar tag"
+                                        triggers="mouseenter:mouseleave"
+                                        popoverTitle="Editar"
+                                        ngbPopover="Editá la información de este tag."
+                                        (click)="editTag('persona', persona.id )">
+                                    <i class="fa-solid fa-pen-to-square" style="color: rgb(88, 88, 248);"></i>
+                                    Editar
+                                </button>
+                                <button class="btn w-25 btn-box-util"
+                                        title="Alerta tag"
+                                        triggers="mouseenter:mouseleave"
+                                        popoverTitle="Alerta"
+                                        ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
+                                        (click)="verTag('persona', persona.id)">
+                                    <i class="fa-solid fa-triangle-exclamation" style="color: rgb(244, 208, 63);"></i>
+                                    Alerta
+                                </button>
+                                <button class="btn w-25 btn-box-util"
+                                        title="Eliminar tag"
+                                        triggers="mouseenter:mouseleave"
+                                        popoverTitle="Eliminar"
+                                        ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
+                                        (click)="vincularTag('persona', persona.id)">
+                                    <i class="fa-solid fa-trash" style="color: rgb(231, 76, 60);"></i>
+                                    Eliminar
+                                </button>
+                                <button class="btn w-25 btn-box-util"
+                                        title="Vincular tag"
+                                        triggers="mouseenter:mouseleave"
+                                        popoverTitle="Vincular"
+                                        ngbPopover="Vinculá este tag con un QR para que puedan acceder a él."
+                                        (click)="vincularTag('persona', persona.id)">
+                                    <i class="fa-solid fa-qrcode" style="color: rgb(40, 180, 99);"></i>
+                                    Vincular
+                                </button>
                             </div>
                         </ng-template>
                     </ngb-panel>
@@ -63,14 +102,28 @@
                 <ng-container *ngFor="let persona of personas">
                     <ngb-panel *ngIf="persona.nivel == 'adicional'">
                         <ng-template ngbPanelTitle>
+                            <span class="me-5"><i class="fa-solid fa-qrcode fa-2x"></i></span>
                             <span class="me-5">Tipo: <span class="d-block"><b>Persona</b></span></span>
                             <span class="text-start">Nombre: <span class="d-block"><b>{{ persona.nombre + ' ' + persona.apellido }}</b></span></span>
                         </ng-template>
                         <ng-template ngbPanelContent>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-outline-success" (click)="editTag('persona', persona.id)">Editar</button>
-                                <button class="btn btn-outline-warning" (click)="verTag('persona', persona.id)">Ver Tag</button>
-                                <button class="btn btn-outline-danger" (click)="vincularTag('persona', persona.id)">Editar Vinculación</button>
+                            <div class="d-flex">
+                                <button class="btn w-25 btn-box-util" (click)="editTag('persona', persona.id )" title="Editar tag">
+                                    <i class="fa-solid fa-pen-to-square" style="color: rgb(88, 88, 248);"></i>
+                                    Editar
+                                </button>
+                                <button class="btn w-25 btn-box-util" (click)="verTag('persona', persona.id)" title="Alerta tag">
+                                    <i class="fa-solid fa-triangle-exclamation" style="color: rgb(244, 208, 63);"></i>
+                                    Alerta
+                                </button>
+                                <button class="btn w-25 btn-box-util"  (click)="vincularTag('persona', persona.id)" title="Eliminar tag">
+                                    <i class="fa-solid fa-trash" style="color: rgb(231, 76, 60);"></i>
+                                    Eliminar
+                                </button>
+                                <button class="btn w-25 btn-box-util"  (click)="vincularTag('persona', persona.id)" title="Vincular tag">
+                                    <i class="fa-solid fa-qrcode" style="color: rgb(40, 180, 99 );"></i>
+                                    Vincular
+                                </button>
                             </div>
                         </ng-template>
                     </ngb-panel>
@@ -115,14 +168,28 @@
                 <ng-container *ngFor="let mascota of mascotas">
                     <ngb-panel>
                         <ng-template ngbPanelTitle>
+                            <span class="me-5"><i class="fa-solid fa-qrcode fa-2x"></i></span>
                             <span class="me-5">Tipo: <span class="d-block"><b>Mascota</b></span></span>
                             <span class="text-start">Nombre: <span class="d-block"><b>{{ mascota.especie }}</b> - <b>{{ mascota.nombre }}</b></span></span>
                         </ng-template>
                         <ng-template ngbPanelContent>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-outline-success" (click)="editTag('mascota', mascota.id)">Editar</button>
-                                <button class="btn btn-outline-warning" (click)="verTag('mascota', mascota.id)">Ver Tag</button>
-                                <button class="btn btn-outline-danger" (click)="vincularTag('mascota', mascota.id)">Editar Vinculación</button>
+                            <div class="d-flex">
+                                <button class="btn w-25 btn-box-util" (click)="editTag('mascota', mascota.id )" title="Editar tag">
+                                    <i class="fa-solid fa-pen-to-square" style="color: rgb(88, 88, 248);"></i>
+                                    Editar
+                                </button>
+                                <button class="btn w-25 btn-box-util" (click)="verTag('mascota', mascota.id)" title="Alerta tag">
+                                    <i class="fa-solid fa-triangle-exclamation" style="color: rgb(244, 208, 63);"></i>
+                                    Alerta
+                                </button>
+                                <button class="btn w-25 btn-box-util"  (click)="vincularTag('mascota', mascota.id)" title="Eliminar tag">
+                                    <i class="fa-solid fa-trash" style="color: rgb(231, 76, 60);"></i>
+                                    Eliminar
+                                </button>
+                                <button class="btn w-25 btn-box-util"  (click)="vincularTag('mascota', mascota.id)" title="Vincular tag">
+                                    <i class="fa-solid fa-qrcode" style="color: rgb(40, 180, 99 );"></i>
+                                    Vincular
+                                </button>
                             </div>
                         </ng-template>
                     </ngb-panel>
@@ -167,14 +234,28 @@
                 <ng-container *ngFor="let vehiculo of vehiculos">
                     <ngb-panel>
                         <ng-template ngbPanelTitle>
+                            <span class="me-5"><i class="fa-solid fa-qrcode fa-2x"></i></span>
                             <span class="me-5">Tipo: <span class="d-block"><b>Vehículo</b></span></span>
                             <span class="text-start">Nombre: <span class="d-block"><b>{{ vehiculo.marca }}</b> - <b>{{ vehiculo.modelo }}</b> - <b>{{ vehiculo.color }}</b></span></span>
                         </ng-template>
                         <ng-template ngbPanelContent>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-outline-success" (click)="editTag('vehiculo', vehiculo.id)">Editar</button>
-                                <button class="btn btn-outline-warning" (click)="verTag('vehiculo', vehiculo.id)">Ver Tag</button>
-                                <button class="btn btn-outline-danger" (click)="vincularTag('vehiculo', vehiculo.id)">Editar Vinculación</button>
+                            <div class="d-flex">
+                                <button class="btn w-25 btn-box-util" (click)="editTag('vehiculo', vehiculo.id )" title="Editar tag">
+                                    <i class="fa-solid fa-pen-to-square" style="color: rgb(88, 88, 248);"></i>
+                                    Editar
+                                </button>
+                                <button class="btn w-25 btn-box-util" (click)="verTag('vehiculo', vehiculo.id)" title="Alerta tag">
+                                    <i class="fa-solid fa-triangle-exclamation" style="color: rgb(244, 208, 63);"></i>
+                                    Alerta
+                                </button>
+                                <button class="btn w-25 btn-box-util"  (click)="vincularTag('vehiculo', vehiculo.id)" title="Eliminar tag">
+                                    <i class="fa-solid fa-trash" style="color: rgb(231, 76, 60);"></i>
+                                    Eliminar
+                                </button>
+                                <button class="btn w-25 btn-box-util"  (click)="vincularTag('vehiculo', vehiculo.id)" title="Vincular tag">
+                                    <i class="fa-solid fa-qrcode" style="color: rgb(40, 180, 99 );"></i>
+                                    Vincular
+                                </button>
                             </div>
                         </ng-template>
                     </ngb-panel>

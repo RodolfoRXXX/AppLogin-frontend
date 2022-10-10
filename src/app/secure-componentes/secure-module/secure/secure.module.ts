@@ -22,6 +22,7 @@ import { MascotaFormComponent } from '../../tag-folder/edit-tag/forms/mascota-fo
 import { VehiculoFormComponent } from '../../tag-folder/edit-tag/forms/vehiculo-form/vehiculo-form.component';
 import { ModalRedesComponent } from '../../tag-folder/modals/modal-redes/modal-redes.component';
 import { ModalConfirmacionComponent } from '../../tag-folder/modals/modal-confirmacion/modal-confirmacion.component';
+import { VistaTagComponent } from '../../tag-folder/vista-tag/vista-tag.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ModalConfirmacionComponent } from '../../tag-folder/modals/modal-confir
     MascotaFormComponent,
     VehiculoFormComponent,
     ModalRedesComponent,
-    ModalConfirmacionComponent
+    ModalConfirmacionComponent,
+    VistaTagComponent
   ],
   imports: [
     CommonModule,

@@ -561,8 +561,8 @@ export class EditTagComponent implements OnInit {
       anio: new FormControl((data)?data.anio:'',
       [
         Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(4)
+        Validators.min(1500),
+        Validators.max(2100)
       ]
     ),
       patente: new FormControl((data)?data.patente:'',
