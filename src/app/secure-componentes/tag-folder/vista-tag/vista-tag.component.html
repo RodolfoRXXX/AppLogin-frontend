@@ -1,6 +1,6 @@
 <div class="mb-2 p-1">
     <div class="card-box rounded">
-        <div class="card-box-header" [style.background]="(this.datos.fondo)?(this.datos.fondo):'bg-secondary'">
+        <div class="card-box-header" [style.background]="(this.datos.estado == 'link')?link:((this.datos.estado == 'alert')?alert:nolink)">
             <img class="img-circle-section" [src]="foto_perfil" alt="{{ this.datos.nivel }}" >
         </div>
         <div class="card-box-body bg-light">
@@ -44,7 +44,7 @@
                         <app-detail-tag [tipo]="this.tipo" [dato]="this.datos"></app-detail-tag>
                     </div>
                     <div class="data-section-info" *ngIf="leaf_selected == 'contact'">
-                        <h6>Nombre del contacto:</h6>
+                        <h6>Contactarse en caso de emergencia con:</h6>
                         <p class="ms-1">{{ (datos.nombreresp != '')?(datos.nombreresp):'Sin información' }}</p>
                         <h6>Teléfono del contacto:</h6>
                         <p class="ms-1">{{ (datos.telresp != '')?(datos.telresp):'Sin información' }}</p>
@@ -55,7 +55,7 @@
                                title="{{this.redes[0].formato + this.datos.wspresp}}"
                                [style.background]="this.redes[0].color"
                             >
-                                Enviame un mensaje
+                                Hablar con {{ datos.nombreresp }}
                                 <i class="fa-brands fs-social ms-2" [ngClass]="redes[0].clase"></i>
                             </a>
                         </div>

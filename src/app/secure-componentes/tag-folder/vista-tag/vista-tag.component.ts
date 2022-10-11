@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { array_social, social } from 'src/app/entidades/array_social';
+import { globalVariable } from 'src/app/entidades/global_variables';
 import { social_data } from 'src/app/entidades/social_form';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vista-tag',
@@ -9,15 +11,12 @@ import { social_data } from 'src/app/entidades/social_form';
 })
 export class VistaTagComponent implements OnInit {
 
-  /*
-  amarillo: #fcca46
-  verde: #28b463
-  rojo: #cb4335
-  */
+  link = globalVariable.LINK;
+  nolink = globalVariable.NOLINK;
+  alert = globalVariable.ALERT;
 
   @Input() datos:any;
   @Input() tipo:string;
-  URL: string = 'http://localhost:4000/uploads/';
 
   redes: social[];
   sociales: social_data[];
@@ -37,19 +36,19 @@ export class VistaTagComponent implements OnInit {
     console.log(this.datos)
     switch (this.tipo) {
       case 'persona' :
-        (this.datos.foto != '')?(this.foto_perfil = this.URL + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
+        (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
         this.usuario = this.datos.nombre + ' ' + this.datos.apellido;
         this.sociales = (this.datos.red != '')?JSON.parse(this.datos.red):[];
     
         break;
       case 'mascota' :
-        (this.datos.foto != '')?(this.foto_perfil = this.URL + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_mascota.png');
+        (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_mascota.png');
         this.usuario = this.datos.nombre;
 
 
         break;
       case 'vehiculo' :
-        (this.datos.foto != '')?(this.foto_perfil = this.URL + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_vehiculo.png');
+        (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_vehiculo.png');
         this.usuario = this.datos.marca + ' ' + this.datos.modelo;
 
 

@@ -4,6 +4,7 @@ import { mascota, Persona, Vehiculo } from 'src/app/entidades/tag';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { globalVariable } from 'src/app/entidades/global_variables';
 
 @Component({
   selector: 'app-all-tag',
@@ -11,6 +12,10 @@ import { ComunicationService } from 'src/app/services/comunication.service';
   styleUrls: ['./all-tag.component.css']
 })
 export class AllTagComponent implements OnInit {
+
+  link = globalVariable.LINK;
+  nolink = globalVariable.NOLINK;
+  alert = globalVariable.ALERT;
 
   tag_personal_exist: boolean = false; //Se comprueba si hay un tag-ID personal creado
   tag_adic_persona_existe: boolean = false; //tag adicional persona

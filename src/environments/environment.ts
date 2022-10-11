@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  URL : 'http://localhost:4000/'
+  URL : 'http://localhost:4000/',
+  SERVER : 'http://localhost:4000/uploads/'
 };
 
 /*

@@ -10,6 +10,7 @@ import { FileServicesService } from 'src/app/services/file-services.service';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { social_data } from 'src/app/entidades/social_form';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-tag',
@@ -36,7 +37,6 @@ export class EditTagComponent implements OnInit {
 
     foto_formulario: string;
     estado_foto: string;
-    URL: string = 'http://localhost:4000/uploads/';
     foto_persona_blanck: string;
     foto_mascota_blanck: string;
     foto_vehiculo_blanck: string;
@@ -149,7 +149,7 @@ export class EditTagComponent implements OnInit {
                     this.createFormPersona(this.userId, 'personal', this.persona);
                     this._com.setTabEditor(this.persona.nombre + ' ' + this.persona.apellido);
                     this.tipo_form = 'persona';
-                    this.foto_formulario = this.persona.foto!=''?(this.URL + this.persona.foto):this.foto_persona_blanck;
+                    this.foto_formulario = this.persona.foto!=''?(environment.SERVER + this.persona.foto):this.foto_persona_blanck;
                     this.sociales = (this.persona.red != '')?JSON.parse(this.persona.red):[];
                     this.load_form = false;
                     this.show_form = true;
@@ -188,7 +188,7 @@ export class EditTagComponent implements OnInit {
                     this.createFormMascota(this.userId, 'adicional', this.mascota);
                     this._com.setTabEditor(this.mascota.nombre + ' - ' + this.mascota.especie);
                     this.tipo_form = 'mascota';
-                    this.foto_formulario = this.mascota.foto!=''?(this.URL + this.mascota.foto):this.foto_mascota_blanck;
+                    this.foto_formulario = this.mascota.foto!=''?(environment.SERVER + this.mascota.foto):this.foto_mascota_blanck;
                     this.load_form = false;
                     this.show_form = true;
                     this.activeTabs = true;
@@ -226,7 +226,7 @@ export class EditTagComponent implements OnInit {
                     this.createFormVehiculo(this.userId, 'adicional', this.vehiculo);
                     this._com.setTabEditor(this.vehiculo.marca + ' - ' + this.vehiculo.modelo);
                     this.tipo_form = 'vehiculo';
-                    this.foto_formulario = this.vehiculo.foto!=''?(this.URL + this.vehiculo.foto):this.foto_vehiculo_blanck;
+                    this.foto_formulario = this.vehiculo.foto!=''?(environment.SERVER + this.vehiculo.foto):this.foto_vehiculo_blanck;
                     this.load_form = false;
                     this.show_form = true;
                     this.activeTabs = true;
