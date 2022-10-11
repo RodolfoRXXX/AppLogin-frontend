@@ -1,14 +1,35 @@
+.card-box {
+    border: none; 
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.card-box-header {
+    position: relative;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    height: 180px;
+}
+
 .img-circle-section {
-    width: 40%;
-    margin: 2rem 30% 1rem;
-    border: 4px solid white;
+    position: absolute;
+    bottom: -120px;
+    width: 45%;
+    margin: 0 27.5%;
+    border: 8px solid white;
     border-radius: 50%;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.card-box-body {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: calc(100% - 180px);
+    padding-top: 130px;
 }
 
 .box-section {
     margin: 0.25rem 3rem 0.5rem;
     padding-top: 0.25rem;
+    padding-bottom: 2.75rem;
 }
 
 .icon-section {
@@ -25,15 +46,17 @@
     justify-content: center;
     align-items: center;
     margin: 0 0.5rem;
-    padding-top: 0.65rem;
+    padding-top: 0.5rem;
 }
 
 .btn-circle-section:hover {
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background-color: white;
 }
 
 .btn-circle-section:active {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+    background-color: white;
 }
 
 .fs-social {
@@ -41,7 +64,7 @@
 }
 
 .data-section {
-    margin-top: 0.75rem;
+    margin-top: 1rem;
 }
 
 .data-section-box {
@@ -66,6 +89,13 @@
     border-top-right-radius: 5px;
 }
 
+.leaf-box {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    position: relative;
+    bottom: 1px;
+}
+
 .fs-data {
     font-size: 1.1em;
 }
@@ -73,9 +103,22 @@
 .data-section-info {
     width: 100%;
     background-color: white;
-    height: 150px;
-    padding: 1rem;
+    min-height: 200px;
+    padding: 1.5rem 1.5rem 0.25rem;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.a-socialresp-box {
+    border: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.a-socialresp-box:hover, .a-socialresp-box:active {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }

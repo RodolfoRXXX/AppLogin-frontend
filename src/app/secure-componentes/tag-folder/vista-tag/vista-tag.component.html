@@ -1,53 +1,71 @@
-<div class="mb-2 p-2" [style.background]="(this.datos.fondo)?(this.datos.fondo):'bg-secondary'">
-    <img class="img-circle-section" [src]="foto_perfil" alt="{{ this.datos.nivel }}">
-    <div>
-        <h2 class="text-center">{{ usuario }}</h2>
-        <div class="text-center">{{ this.datos.ciudad }}</div>
-    </div>
-    <div class="box-section">
-        <div class="icon-section" *ngIf="this.sociales.length">
-            <ng-container *ngFor="let social of sociales">
-                <a type="button" class="btn btn-circle-section" title="{{ social.link }}" [href]=social.link>
-                    <i class="fa-brands fs-social" [ngClass]="redes[social.id_red].clase"></i>
-                </a>
-            </ng-container>
+<div class="mb-2 p-1">
+    <div class="card-box rounded">
+        <div class="card-box-header" [style.background]="(this.datos.fondo)?(this.datos.fondo):'bg-secondary'">
+            <img class="img-circle-section" [src]="foto_perfil" alt="{{ this.datos.nivel }}" >
         </div>
-        <div class="data-section" style="height: 200px;">
-            <div class="data-section-box">
-                <div class="col"
-                     title="Datos personales"
-                     [ngClass]="(leaf_selected == 'data')?'bg-light':''" 
-                     (click)="select_leaf('data')"
-                >
-                     <i class="fas fa-id-card fs-data"></i>
+        <div class="card-box-body bg-light">
+            <div>
+                <h2 class="text-center">{{ usuario }}</h2>
+                <div class="text-center">{{ this.datos.ciudad }}</div>
+            </div>
+            <div class="box-section">
+                <div class="icon-section" *ngIf="this.sociales.length">
+                    <ng-container *ngFor="let social of sociales">
+                        <a type="button" class="btn btn-circle-section" title="{{ social.link }}" [href]=social.link>
+                            <i class="fa-brands fs-social" [ngClass]="redes[social.id_red].clase"></i>
+                        </a>
+                    </ng-container>
                 </div>
-                <div class="col"
-                     title="Contacto responsable"
-                     [ngClass]="(leaf_selected == 'contact')?'bg-light':''" 
-                     (click)="select_leaf('contact')"
-                >
-                    <i class="fas fa-user-friends fs-data"></i>
+                <div class="data-section">
+                    <div class="data-section-box">
+                        <div class="col"
+                            title="Datos personales"
+                            [ngClass]="(leaf_selected == 'data')?'leaf-box':''" 
+                            (click)="select_leaf('data')"
+                        >
+                            <i class="fas fa-id-card fs-data"></i>
+                        </div>
+                        <div class="col"
+                            title="Contacto responsable"
+                            [ngClass]="(leaf_selected == 'contact')?'leaf-box':''" 
+                            (click)="select_leaf('contact')"
+                        >
+                            <i class="fas fa-user-friends fs-data"></i>
+                        </div>
+                        <div class="col"
+                            title="Información importante"
+                            [ngClass]="(leaf_selected == 'info')?'leaf-box':''"  
+                            (click)="select_leaf('info')"
+                        >
+                            <i class="fas fa-info fs-data"></i>
+                        </div>
+                    </div>
+                    <div class="data-section-info" *ngIf="leaf_selected == 'data'">
+                        <app-detail-tag [tipo]="this.tipo" [dato]="this.datos"></app-detail-tag>
+                    </div>
+                    <div class="data-section-info" *ngIf="leaf_selected == 'contact'">
+                        <h6>Nombre del contacto:</h6>
+                        <p class="ms-1">{{ (datos.nombreresp != '')?(datos.nombreresp):'Sin información' }}</p>
+                        <h6>Teléfono del contacto:</h6>
+                        <p class="ms-1">{{ (datos.telresp != '')?(datos.telresp):'Sin información' }}</p>
+                        <div class="mb-2" *ngIf="this.datos.wspresp.length">
+                            <a type="button" 
+                               class="btn a-socialresp-box" 
+                               [href]="(this.redes[0].formato + this.datos.wspresp)"
+                               title="{{this.redes[0].formato + this.datos.wspresp}}"
+                               [style.background]="this.redes[0].color"
+                            >
+                                Enviame un mensaje
+                                <i class="fa-brands fs-social ms-2" [ngClass]="redes[0].clase"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="data-section-info" *ngIf="leaf_selected == 'info'">
+                        <h6>Información importante:</h6>
+                        <p class="ms-1">{{ (datos.observaciones != '')?(datos.observaciones):'Sin información' }}</p>
+                    </div>
                 </div>
-                <div class="col"
-                    title="Información importante"
-                     [ngClass]="(leaf_selected == 'info')?'bg-light':''"  
-                     (click)="select_leaf('info')"
-                >
-                    <i class="fas fa-info fs-data"></i>
-                </div>
             </div>
-            <div class="data-section-info" *ngIf="leaf_selected == 'data'">
-                <h4>Datos personales</h4>
-
-            </div>
-            <div class="data-section-info" *ngIf="leaf_selected == 'contact'">
-                <h4>Contacto</h4>
-
-            </div>
-            <div class="data-section-info" *ngIf="leaf_selected == 'info'">
-                <h4>Información</h4>
-
-            </div>
-        </div>
+        </div>  
     </div>
 </div>

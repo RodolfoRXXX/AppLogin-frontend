@@ -23,6 +23,7 @@ import { VehiculoFormComponent } from '../../tag-folder/edit-tag/forms/vehiculo-
 import { ModalRedesComponent } from '../../tag-folder/modals/modal-redes/modal-redes.component';
 import { ModalConfirmacionComponent } from '../../tag-folder/modals/modal-confirmacion/modal-confirmacion.component';
 import { VistaTagComponent } from '../../tag-folder/vista-tag/vista-tag.component';
+import { DetailTagComponent } from '../../tag-folder/vista-tag/componentes/detail-tag/detail-tag.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { VistaTagComponent } from '../../tag-folder/vista-tag/vista-tag.componen
     VehiculoFormComponent,
     ModalRedesComponent,
     ModalConfirmacionComponent,
-    VistaTagComponent
+    VistaTagComponent,
+    DetailTagComponent
   ],
   imports: [
     CommonModule,
