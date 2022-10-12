@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
   getUser(){
     let data = this._auth.getUserDetails();
     if(data){
-      (data)?(this.user = JSON.parse(data)[0].email):'';
+      (data)?(this.user = JSON.parse(data)[0].nombre):'';
     }
   }
 

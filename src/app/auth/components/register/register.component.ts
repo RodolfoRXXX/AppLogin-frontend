@@ -14,6 +14,11 @@ import { md5 } from 'src/app/auth/function/md5';
 })
 export class RegisterComponent implements OnInit {
 
+  type_input_password:string;
+  type_input_password_rep:string;
+  ver_password:boolean
+  ver_password_rep:boolean
+
   estadoSmt: string = 'registro';
   isLogin: boolean = false;
   displayLogin: boolean = false;
@@ -26,7 +31,12 @@ export class RegisterComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private _com: ComunicationService
-  ) { }
+  ) { 
+    this.type_input_password = 'password';
+    this.type_input_password_rep = 'password';
+    this.ver_password = false;
+    this.ver_password_rep = false;
+   }
 
   ngOnInit(): void {
     this.isUserLogin();
@@ -35,6 +45,12 @@ export class RegisterComponent implements OnInit {
 
   crearFormulario(){
     this.form = new FormGroup({
+      nombre: new FormControl('',
+      [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(15)
+      ]),
       email: new FormControl('',
       [
         Validators.required,
@@ -47,10 +63,6 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(20)
       ]),
       passwordRep: new FormControl('',
-      [
-        Validators.required
-      ]),
-      rol: new FormControl('',
       [
         Validators.required
       ]),
@@ -70,6 +82,16 @@ export class RegisterComponent implements OnInit {
     this.displayLogin = display;
     this.classLogin = clase;
     this.messageLogin = message;
+  }
+
+  toggle_password(type:string, state:boolean){
+    this.type_input_password = type;
+    this.ver_password = state;
+  }
+
+  toggle_password_rep(type:string, state:boolean){
+    this.type_input_password_rep = type;
+    this.ver_password_rep = state;
   }
 
   onSubmit(){

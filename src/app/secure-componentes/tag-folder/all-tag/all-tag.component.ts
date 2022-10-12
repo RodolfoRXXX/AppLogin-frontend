@@ -17,17 +17,17 @@ export class AllTagComponent implements OnInit {
   nolink = globalVariable.NOLINK;
   alert = globalVariable.ALERT;
 
-  tag_personal_exist: boolean = false; //Se comprueba si hay un tag-ID personal creado
-  tag_adic_persona_existe: boolean = false; //tag adicional persona
-  tag_adic_mascota_existe: boolean = false; //tag adicional mascota
-  tag_adic_vehiculo_existe: boolean = false; //tag adicional vehiculo
-  error_carga_persona: boolean = false;
-  error_carga_mascota: boolean = false;
-  error_carga_vehiculo: boolean = false;
-  load_tag_personal: boolean = false;
-  load_tag_persona: boolean = false;
-  load_tag_mascota: boolean = false;
-  load_tag_vehiculo: boolean = false;
+  tag_personal_exist: boolean; //Se comprueba si hay un tag-ID personal creado
+  tag_adic_persona_existe: boolean; //tag adicional persona
+  tag_adic_mascota_existe: boolean; //tag adicional mascota
+  tag_adic_vehiculo_existe: boolean; //tag adicional vehiculo
+  error_carga_persona: boolean;
+  error_carga_mascota: boolean;
+  error_carga_vehiculo: boolean;
+  load_tag_personal: boolean;
+  load_tag_persona: boolean;
+  load_tag_mascota: boolean;
+  load_tag_vehiculo: boolean;
   userId: any;
   personas: Persona[];
   mascotas: mascota[];
@@ -38,7 +38,19 @@ export class AllTagComponent implements OnInit {
     private _com: ComunicationService,
     private _auth: AuthService,
     private _api: ApiService
-  ) { }
+  ) { 
+    this.tag_personal_exist = false;
+    this.tag_adic_persona_existe = false;
+    this.tag_adic_mascota_existe = false;
+    this.tag_adic_vehiculo_existe = false;
+    this.error_carga_persona = false;
+    this.error_carga_mascota = false;
+    this.error_carga_vehiculo = false;
+    this.load_tag_personal = false;
+    this.load_tag_persona = false;
+    this.load_tag_mascota = false;
+    this.load_tag_vehiculo = false;
+   }
 
   ngOnInit(): void {
     this.load_tag_personal = true;
@@ -77,6 +89,8 @@ export class AllTagComponent implements OnInit {
           console.warn(error);
             //ventana de error
             this.error_carga_persona = true;
+            this.load_tag_personal = false;
+            this.load_tag_persona = false;
         },
         complete: () => {
           this.load_tag_personal = false;

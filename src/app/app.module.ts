@@ -14,6 +14,7 @@ import { InterceptorServiceService } from './services/interceptor-service.servic
 import { SecureModule } from './secure-componentes/secure-module/secure/secure.module';
 import { NotifierComponent } from './nonsecure-componentes/notifier/notifier.component';
 import { NgbdOffcanvasBasic } from './nav/menu-lateral-offcanvas/menu-lateral-offcanvas.component';
+import { ModalSesionComponent } from './modals/modal-sesion/modal-sesion.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NgbdOffcanvasBasic } from './nav/menu-lateral-offcanvas/menu-lateral-of
     NavbarComponent,
     HomeComponent,
     NotifierComponent,
-    NgbdOffcanvasBasic
+    NgbdOffcanvasBasic,
+    ModalSesionComponent
   ],
   imports: [
     BrowserModule,

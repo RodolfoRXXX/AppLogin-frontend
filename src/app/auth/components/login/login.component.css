@@ -1,0 +1,30 @@
+.input-style {
+    border: none;
+    border-bottom: 1px solid rgb(172, 170, 170);
+    border-radius: 0;
+    background-color: #F6FBFF;
+}
+
+.input-style:focus {
+    outline: 0;
+    box-shadow: none;
+    background-color: #f0f8ff;
+}
+
+.input-style-pass {
+    border: none;
+    border-bottom: 1px solid rgb(172, 170, 170);
+    border-radius: 0;
+    background-color: #F6FBFF;
+    padding-right: calc(3em + 0.75rem);
+}
+
+.password-view {
+    position: absolute;
+    right: 10%;
+    top: 17%;
+}
+
+.password-view>i {
+    cursor: pointer;
+}

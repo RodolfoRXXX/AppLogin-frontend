@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -13,19 +13,28 @@ import { emailValidator } from '../../function/functions';
 })
 export class LoginComponent implements OnInit {
 
-  isLogin: boolean = false;
-  displayLogin: boolean = false;
+  type_input_password:string;
+  ver_password:boolean
+
+  isLogin: boolean;
+  displayLogin: boolean;
   messageLogin: string;
   classLogin: string;
   form: FormGroup;
-  estadoSmt: string = 'ingreso';
+  estadoSmt: string;
 
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
     private _router: Router,
     private _com: ComunicationService
-  ) { }
+  ) {
+    this.type_input_password = 'password';
+    this.ver_password = false;
+    this.isLogin = false;
+    this.displayLogin = false;
+    this.estadoSmt = 'ingreso';
+   }
 
   ngOnInit(): void {
     this.isUserLogin();
@@ -59,6 +68,11 @@ export class LoginComponent implements OnInit {
     this.displayLogin = display;
     this.classLogin = clase;
     this.messageLogin = message;
+  }
+
+  toggle_password(type:string, state:boolean){
+    this.type_input_password = type;
+    this.ver_password = state;
   }
 
   onSubmit(){

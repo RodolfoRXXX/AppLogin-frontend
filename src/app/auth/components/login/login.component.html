@@ -1,6 +1,5 @@
-
-<div class="card col-md-4 mt-3" 
-     style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; margin: auto; "     
+<div class="card col-md-3 mt-3" 
+     style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px; margin: auto; "     
 >
     <div class="card-header text-center">
         Inicio de sesión
@@ -10,7 +9,7 @@
             <div class="mb-1">
               <label for="InputEmail" class="form-label">Correo electrónico</label>
               <input type="email" 
-                     class="form-control"
+                     class="form-control input-style"
                      id="InputEmail" 
                      aria-describedby="emailHelp"
                      formControlName="email"
@@ -19,37 +18,38 @@
               />
               <div style="height: 15px; font-size: 0.9rem;">
                 <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
-                  <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
-                  <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
+                  <span *ngIf="form.get('email')?.errors?.['required']">"Correo electrónico" es requerido.</span>
+                  <span *ngIf="form.get('email')?.errors?.['incorrectoName'] && !form.get('email')?.errors?.['required']">El formato del "Correo electrónico" no es correcto.</span>
                 </div>
               </div>
             </div>
             <div class="mb-2">
               <label for="InputPassword" class="form-label">Contraseña</label>
-              <input type="password" 
-                     class="form-control mb-1" 
-                     id="InputPassword"
-                     formControlName="password"
-                     (focus)="actualizarSmt()"
-                     [ngClass]="form.get('password')?.valid?'is-valid':(((form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched))?'is-invalid':'')"   
-              />
+              <div class="position-relative">
+                <input [type]="type_input_password"
+                      class="form-control input-style-pass mb-1" 
+                      id="InputPassword"
+                      formControlName="password"
+                      (focus)="actualizarSmt()"
+                      [ngClass]="form.get('password')?.valid?'is-valid':(((form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched))?'is-invalid':'')"   
+                />
+                <div class="password-view">
+                  <i class="fas fa-eye text-muted" title="Ocultar contraseña" *ngIf="ver_password" (click)="toggle_password('password', false)"></i>
+                  <i class="fas fa-eye-slash text-muted" title="Mostrar contraseña" *ngIf="!ver_password" (click)="toggle_password('text', true)"></i>
+                </div>
+              </div>
+              
               <div style="height: 15px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched)">
-                  <span *ngIf="form.get('password')?.errors?.['required']">Este campo es requerido.</span>
-                  <span *ngIf="form.get('password')?.errors?.['minlength']">La contraseña debe tener más de 4 caracteres.</span>
-                  <span *ngIf="form.get('password')?.errors?.['maxlength']">La contraseña debe tener menos de 20 caracteres.</span>
+                  <span *ngIf="form.get('password')?.errors?.['required']">"Contraseña" es requerida.</span>
+                  <span *ngIf="form.get('password')?.errors?.['minlength']">"Contraseña" mín. 4 caracteres.</span>
+                  <span *ngIf="form.get('password')?.errors?.['maxlength']">"Contraseña" máx. 20 caracteres.</span>
                 </div>
               </div>
             </div>
-            <a type="button" class="d-block mt-0 mb-2 text-start" style="font-size: 0.8rem;" (click)="irForgot()">Olvidaste tu contraseña?</a>
-            <!--<div class="mb-2 form-check">
-              <input type="checkbox" 
-                     class="form-check-input" 
-                     id="Check"
-                     formControlName="recuerdame"       
-              />
-              <label class="form-check-label" for="Check">Recuérdame</label>
-            </div>-->
+            <div class="d-flex justify-content-start">
+              <a type="button" class="d-block mt-0 mb-2 text-start" style="font-size: 0.8rem;" (click)="irForgot()">Olvidaste tu contraseña?</a>
+            </div>
             <button type="submit" 
                     class="btn btn-primary form-control" 
                     [disabled]="form.invalid || estadoSmt != 'ingreso'"
@@ -63,7 +63,10 @@
               <p class="mb-0 d-block text-center">{{ messageLogin }}</p>
             </div>
         </form>
-        <a type="button" class="d-block mt-2 text-end" style="font-size: 0.8rem;" (click)="irRegistro()">No tenés una cuenta? Registrate!</a>
+        <div class="d-flex justify-content-end">
+          <a type="button" class="mt-2" style="font-size: 0.8rem;" (click)="irRegistro()">No tenés una cuenta? Registrate!</a>
+        </div>
+        
     </div>
     <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
        

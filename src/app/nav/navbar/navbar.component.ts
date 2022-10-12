@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
 
@@ -9,13 +11,21 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 })
 export class NavbarComponent implements OnInit {
 
+  texto_sesion: string;
   isLogin: boolean = false;
   userId: string|null;
+  @ViewChild('modal_sesion') modal_sesion: ElementRef;
 
   constructor( 
     private _auth: AuthService,
-    private _com: ComunicationService
-  ) { }
+    private _com: ComunicationService,
+    private _router: Router,
+    private modalService: NgbModal,
+    config: NgbModalConfig
+  ) { 
+    config.backdrop = 'static';
+    config.keyboard = false;
+   }
 
   ngOnInit(): void {
     this.isUserLogin();
@@ -40,5 +50,15 @@ export class NavbarComponent implements OnInit {
     this._com.setMenuOffCanvas();
   }
 
+  cerrar_sesion(){
+    this.texto_sesion = 'Estas por salir de la sesión';
+      this.modalService.open(this.modal_sesion, { centered: true, size: 'sm' });
+  }
+  confirma_sesion(e:boolean){
+    this.modalService.dismissAll();
+      if(e){
+        this._router.navigate(['logout']);
+      }
+  }
 
 }

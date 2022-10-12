@@ -1,15 +1,16 @@
-<div class="card col-md-4 mt-3" 
-     style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; margin: auto; "     
+<div class="card col-md-3 mt-3" 
+    style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px; margin: auto; "     
 >
     <div class="card-header text-center">
         Reenvío de datos
     </div>
     <div class="card-body" *ngIf='!isLogin'>
         <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
-            <div class="mb-2">
-              <label for="InputEmail" class="form-label">Correo electrónico</label>
+            <div class="mb-3">
+              <label for="InputEmail" class="form-label mb-0">Correo electrónico</label>
+              <div id="emailHelp" class="form-text" style="font-size: 0.8rem;">Ingresá el correo electrónico de la cuenta así podremos enviarte las credenciales de ingreso.</div>
               <input type="email" 
-                     class="form-control"
+                     class="form-control input-style"
                      id="InputEmail" 
                      aria-describedby="emailHelp"
                      formControlName="email"
@@ -37,7 +38,9 @@
               <p class="mb-0 d-block text-center">{{ messageLogin }}</p>
             </div>
         </form>
-        <a type="button" class="d-block mt-2 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Tenés una cuenta? Ingresá!</a>
+        <div class="d-flex justify-content-end">
+          <a type="button" class="d-block mt-2 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Tenés una cuenta? Ingresá!</a>
+        </div>
     </div>
     <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
        
