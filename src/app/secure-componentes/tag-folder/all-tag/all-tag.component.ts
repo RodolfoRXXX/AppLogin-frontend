@@ -153,7 +153,7 @@ export class AllTagComponent implements OnInit {
     this._router.navigate([`profile/tags/ver-tag/${tipo}/${id}`]);
   }
   vincularTag(tipo:string, id:number){
-    this._router.navigate([`profile/tags/vincular-tag/${tipo}/${id}`]);
+    this._router.navigate([`profile/tags/link-tag/${tipo}/${id}`]);
 }
 
 }

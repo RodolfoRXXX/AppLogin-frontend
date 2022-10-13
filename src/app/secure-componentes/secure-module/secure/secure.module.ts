@@ -24,6 +24,7 @@ import { ModalRedesComponent } from '../../tag-folder/modals/modal-redes/modal-r
 import { ModalConfirmacionComponent } from '../../tag-folder/modals/modal-confirmacion/modal-confirmacion.component';
 import { VistaTagComponent } from '../../tag-folder/vista-tag/vista-tag.component';
 import { DetailTagComponent } from '../../tag-folder/vista-tag/componentes/detail-tag/detail-tag.component';
+import { LinkTagComponent } from '../../tag-folder/link-tag/link-tag.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { DetailTagComponent } from '../../tag-folder/vista-tag/componentes/detai
     ModalRedesComponent,
     ModalConfirmacionComponent,
     VistaTagComponent,
-    DetailTagComponent
+    DetailTagComponent,
+    LinkTagComponent
   ],
   imports: [
     CommonModule,
