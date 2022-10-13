@@ -46,107 +46,105 @@ export class AllTagComponent implements OnInit {
     this.error_carga_persona = false;
     this.error_carga_mascota = false;
     this.error_carga_vehiculo = false;
-    this.load_tag_personal = false;
-    this.load_tag_persona = false;
-    this.load_tag_mascota = false;
-    this.load_tag_vehiculo = false;
-   }
-
-  ngOnInit(): void {
     this.load_tag_personal = true;
     this.load_tag_persona = true;
     this.load_tag_mascota = true;
     this.load_tag_vehiculo = true;
+   }
+
+  ngOnInit(): void {
     this._com.setTabEditor('Mis Tags');
     let data = this._auth.getUserId();
     if(data){
       this.userId = (JSON.parse(data));
-      this._api.postTypeRequest('profile/get-all-tag', {id:this.userId, tabla:"personas"}).subscribe({
+      this.datos_tag( this.userId, 'personas' );
+      this.datos_tag( this.userId, 'mascotas' );
+      this.datos_tag( this.userId, 'vehiculos', );
+    }
+  }
+
+  //Función que pide los datos de las tag a la db
+    datos_tag( id_user:number, tabla:string){
+      if(tabla == 'personas'){
+        this.load_tag_personal = true;
+        this.load_tag_persona = true;
+      } else if(tabla == 'mascotas'){
+        this.load_tag_mascota = true;
+      } else if(tabla == 'vehiculos'){
+        this.load_tag_vehiculo = true;
+      }
+      this._api.postTypeRequest('profile/get-all-tag', {id:id_user, tabla:tabla}).subscribe({
         next: (res: any) => {
           if(res.status == 1){
             if(res.data.length){
-              this.personas = res.data;
-              this.personas.forEach(element => {
+              let usuario = res.data;
+              if(tabla == 'personas'){
+                this.personas = res.data
+              } else if(tabla == 'mascotas'){
+                this.mascotas = res.data;
+              } else if(tabla == 'vehiculos'){
+                this.vehiculos = res.data;
+              }
+              usuario.forEach( (element:any) => {
                 if (element.nivel == 'personal') {
                   this.tag_personal_exist = true;
                 } else if(element.nivel == 'adicional'){
-                  this.tag_adic_persona_existe = true;
-                } else{
-                  this.tag_personal_exist = true;
-                  this.tag_adic_persona_existe = true;
+                  if(tabla == 'personas'){
+                      this.tag_adic_persona_existe = true;
+                  } else if(tabla == 'mascotas'){
+                      this.tag_adic_mascota_existe = true;
+                  } else if(tabla == 'vehiculos'){
+                      this.tag_adic_vehiculo_existe = true;
+                  }
                 }
               });
             } else{
-              this.tag_personal_exist = false;
-              this.tag_adic_persona_existe = false;
+              if(tabla == 'personas'){
+                this.tag_personal_exist = false;
+                this.tag_adic_persona_existe = false;
+              } else if(tabla == 'mascotas'){
+                this.tag_adic_mascota_existe = false;
+              } else if(tabla == 'vehiculos'){
+                this.tag_adic_vehiculo_existe = false;
+              }
             }  
           } else{
             //ventana de error
-            this.error_carga_persona = true;
+            if(tabla == 'personas'){
+              this.error_carga_persona = true;
+            } else if(tabla == 'mascotas'){
+              this.error_carga_mascota = true;
+            } else if(tabla == 'vehiculos'){
+              this.error_carga_vehiculo = true;
+            }
           }
         },
         error: (error) => {
-          console.warn(error);
             //ventana de error
-            this.error_carga_persona = true;
+            if(tabla == 'personas'){
+              this.load_tag_personal = false;
+              this.load_tag_persona = false;
+              this.error_carga_persona = true;
+            } else if(tabla == 'mascotas'){
+              this.load_tag_mascota = false;
+              this.error_carga_mascota = true;
+            } else if(tabla == 'vehiculos'){
+              this.load_tag_vehiculo = false;
+              this.error_carga_vehiculo = true;
+            }
+        },
+        complete: () => {
+          if(tabla == 'personas'){
             this.load_tag_personal = false;
             this.load_tag_persona = false;
-        },
-        complete: () => {
-          this.load_tag_personal = false;
-          this.load_tag_persona = false;
+          } else if(tabla == 'mascotas'){
+            this.load_tag_mascota = false;
+          } else if(tabla == 'vehiculos'){
+            this.load_tag_vehiculo = false;
+          }
         }
       });
-      this._api.postTypeRequest('profile/get-all-tag', {id:this.userId, tabla:"mascotas"}).subscribe({
-        next: (res: any) => {
-          if(res.status == 1){
-            if(res.data.length){
-              this.mascotas = res.data;
-              this.tag_adic_mascota_existe = true;
-            } else{
-              this.tag_adic_mascota_existe = false;
-            }  
-          } else{
-            //ventana de error
-            this.error_carga_mascota = true;
-          }
-        },
-        error: (error) => {
-          console.warn(error);
-            //ventana de error
-            this.error_carga_mascota = true;
-            this.load_tag_mascota = false;
-        },
-        complete: () => {
-          this.load_tag_mascota = false;
-        }
-      })
-      this._api.postTypeRequest('profile/get-all-tag', {id:this.userId, tabla:"vehiculos"}).subscribe({
-        next: (res: any) => {
-          if(res.status == 1){
-            if(res.data.length){
-              this.vehiculos = res.data;
-              this.tag_adic_vehiculo_existe = true;
-            } else{
-              this.tag_adic_vehiculo_existe = false;
-            }  
-          } else{
-            //ventana de error
-            this.error_carga_vehiculo = true;
-          }
-        },
-        error: (error) => {
-          console.warn(error);
-            //ventana de error
-            this.error_carga_vehiculo = true;
-            this.load_tag_vehiculo = false;
-        },
-        complete: () => {
-          this.load_tag_vehiculo = false;
-        }
-      })
     }
-  }
 
   editTag(tipo:string, id:number){
       this._router.navigate([`profile/tags/edit-tag/${tipo}/${id}`]);

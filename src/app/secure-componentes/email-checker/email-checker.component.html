@@ -1,5 +1,5 @@
 <div class="card col-md-4 mt-5" 
-     style="box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; margin: auto; "
+     style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px; margin: auto; "
 >
     <!-- Input de números para comprobar cuenta -->
     <div *ngIf="checkerDisplay">
@@ -53,7 +53,9 @@
                            [ngClass]="form.get('6')?.valid?'valid':(((form.get('6')?.invalid)&&(form.get('6')?.dirty||form.get('6')?.touched))?'invalid':'')"
                     />
                 </div>
-                <a type="button" class="d-block mt-0 mb-2 text-start" style="font-size: 0.8rem;" (click)="irModificar()">Modificar el correo electrónico de acceso</a>
+                <div class="d-flex justify-content-start">
+                    <a type="button" class="d-block mt-0 mb-2 text-start" style="font-size: 0.8rem;" (click)="irModificar()">Modificar el correo electrónico de acceso</a>
+                </div>
                 <button type="submit" 
                     class="btn btn-primary form-control" 
                     [disabled]="form.invalid || estadoSmt != 'verificar'"
@@ -66,7 +68,9 @@
             <div class="alert mt-3 mb-1" [ngClass]="classLogin" [hidden]="!displayLogin">
               <p class="mb-0 d-block text-center">{{ messageLogin }}</p>
             </div>
-            <a type="button" class="d-block mt-2 mb-0 text-end" style="font-size: 0.8rem;" (click)="reenviarCodigo()">Reenviarme el código</a>
+            <div class="d-flex justify-content-end">
+                <a type="button" class="d-block mt-2 mb-0 text-end" style="font-size: 0.8rem;" (click)="reenviarCodigo()">Reenviarme el código</a>
+            </div>
             </form>
         </div>
     </div> 
