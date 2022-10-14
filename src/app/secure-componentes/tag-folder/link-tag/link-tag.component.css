@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap');
+
 .input-style {
     border: none;
     border-bottom: 1px solid rgb(172, 170, 170);
@@ -9,6 +11,11 @@
     outline: 0;
     box-shadow: none;
     background-color: #f0f8ff;
+}
+
+.input-code{
+    font-family: 'Noto Sans', sans-serif;
+    text-align: center;
 }
 
 .btn-return {

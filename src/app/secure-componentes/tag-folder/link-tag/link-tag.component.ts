@@ -15,6 +15,8 @@ export class LinkTagComponent implements OnInit {
   estadoSmt:string;
   form:FormGroup;
   tag:any;
+  actual_code:string;
+  state:boolean;
 
   constructor(
     private _api:ApiService,
@@ -24,6 +26,7 @@ export class LinkTagComponent implements OnInit {
   ) { 
     this.estadoSmt = 'vincular';
     this.tag = { tipo:null, id:null };
+    this.state = true;
    }
 
   ngOnInit(): void {
@@ -35,18 +38,20 @@ export class LinkTagComponent implements OnInit {
         next: (res: any) => {
           if(res.status == 1){
             if(res.data != 'nolink'){
+              this.estadoSmt = 'desvincular';
               console.log(res.data)
+              this.actual_code = res.data[0].codigo;
               this.form.patchValue({ codigo:res.data[0].codigo });
             }
           } else{
             //ventana de error
-
+            this.state = false;
           }
         },
         error: (error) => {
           console.warn(error);
-            //ventana de error
-
+          //ventana de error
+          this.state = false;
         },
         complete: () => {
         }
@@ -66,14 +71,59 @@ export class LinkTagComponent implements OnInit {
       codigo: new FormControl('',
       [
         Validators.required,
-        Validators.minLength(9),
-        Validators.maxLength(11)
+        Validators.minLength(10),
+        Validators.maxLength(10)
       ])
     })
   }
 
   onSubmit(){
     console.log(this.form.value);
+    if( this.estadoSmt == 'vincular'){
+      //Vincular
+        //(SELECT tablaqr) se debe comprobar que el código existe en tablaqr
+        //si existe, devuelve el registro / si no existe, devuelve error
+        //(UPDATE personas/mascotas/vehiculos) el id del registro se actualiza en el registro de personas, mascotas o vehiculos
+        //(UPDATE tablaqr) se actualiza el tipo(personas, mascotas o vehiculos) de ese registro en tablaqr
+      this._api.postTypeRequest('profile/update-link-tag', this.form.value).subscribe({
+        next: (res: any) => {
+          if(res.status == 1){
+            
+          } else{
+            //ventana de error
+            
+          }
+        },
+        error: (error) => {
+          console.warn(error);
+          //ventana de error
+          
+        }
+      })
+
+    } else if( this.estadoSmt == 'desvincular' ){
+      //desvincular
+        //(SELECT tablaqr) se busca el registro en tablaqr
+        //si no existe devuelve error / si existe, devuelve ok
+        //(UPDATE personas/mascotas/vehiculos) borra el id_qr en personas, mascotas o vehiculos
+        //(UPDATE tablaqr) borra el tipo de el registro en tablaqr
+      this._api.postTypeRequest('profile/update-unlink-tag', this.form.value).subscribe({
+        next: (res: any) => {
+          if(res.status == 1){
+            
+          } else{
+            //ventana de error
+            
+          }
+        },
+        error: (error) => {
+          console.warn(error);
+          //ventana de error
+          
+        }
+      })
+
+    }
   }
 
   volver(){
