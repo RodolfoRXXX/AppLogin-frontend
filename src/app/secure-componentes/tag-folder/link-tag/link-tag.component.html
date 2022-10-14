@@ -9,7 +9,7 @@
         ></i>
     </div>
     <div class="card-body">
-        <div class="border w-100" style="height: 200px;">
+        <div class="border w-100" style="height: 250px;">
             <img src="" alt="imagenQR">
         </div>
         <div>
@@ -23,7 +23,6 @@
                            (focus)="actualizarSmt()"
                            style="text-align: center;"
                            [ngClass]="form.get('codigo')?.valid?'is-valid':(((form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched))?'is-invalid':'')"
-                           [disabled]="(estadoSmt == 'load')||(estadoSmt == 'link')||(estadoSmt == 'nolink')||(estadoSmt == 'error')"
                     />
                     <div style="height: 15px; font-size: 0.8rem;">
                       <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched)">

@@ -70,7 +70,7 @@ export class EditTagComponent implements OnInit {
     this.load_form = false;
     this.show_form = false;
     this.error_form = false;
-    this.tipo_form = 'persona';
+    this.tipo_form = 'personas';
     this.navActive = 1;
     this.activeTabs = false;
     this.tag = { tipo:null, id:null };
@@ -98,7 +98,7 @@ export class EditTagComponent implements OnInit {
           case 'personal':
             this.createFormPersona(this.userId, 'personal');
             this._com.setTabEditor('Creando Tag-ID: Personal');
-            this.tipo_form = 'persona';
+            this.tipo_form = this.tag.tipo;
             this.foto_formulario = '../../../../assets/img/blanck_persona.png'
             this.load_form = false;
             this.show_form = true;
@@ -107,7 +107,7 @@ export class EditTagComponent implements OnInit {
           case 'persona':
             this.createFormPersona(this.userId, 'adicional');
             this._com.setTabEditor('Creando Tag-ID: Persona');
-            this.tipo_form = 'persona';
+            this.tipo_form = this.tag.tipo;
             this.foto_formulario = '../../../../assets/img/blanck_persona.png'
             this.load_form = false;
             this.show_form = true;
@@ -116,7 +116,7 @@ export class EditTagComponent implements OnInit {
           case 'mascota':
             this.createFormMascota(this.userId, 'adicional');
             this._com.setTabEditor('Creando Tag-ID: Mascota');
-            this.tipo_form = 'mascota';
+            this.tipo_form = this.tag.tipo;
             this.foto_formulario = '../../../../assets/img/blanck_mascota.png'
             this.load_form = false;
             this.show_form = true;
@@ -125,7 +125,7 @@ export class EditTagComponent implements OnInit {
           case 'vehiculo':
             this.createFormVehiculo(this.userId, 'adicional');
             this._com.setTabEditor('Creando Tag-ID: Vehiculo');
-            this.tipo_form = 'vehiculo';
+            this.tipo_form = this.tag.tipo;
             this.foto_formulario = '../../../../assets/img/blanck_vehiculo.png'
             this.load_form = false;
             this.show_form = true;
@@ -139,16 +139,16 @@ export class EditTagComponent implements OnInit {
         }
       } else if(parseInt(params['id']) > 0){
         //editando
-        switch (params['tipo']) {
-          case 'persona':
-            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:"personas"}).subscribe({
+        switch (this.tag.tipo) {
+          case 'personas':
+            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:this.tag.tipo}).subscribe({
               next: (res: any) => {
                 if(res.status == 1){
                   if(res.data.length){
                     this.persona = res.data[0];
                     this.createFormPersona(this.userId, 'personal', this.persona);
                     this._com.setTabEditor(this.persona.nombre + ' ' + this.persona.apellido);
-                    this.tipo_form = 'persona';
+                    this.tipo_form = this.tag.tipo;
                     this.foto_formulario = this.persona.foto!=''?(environment.SERVER + this.persona.foto):this.foto_persona_blanck;
                     this.sociales = (this.persona.red != '')?JSON.parse(this.persona.red):[];
                     this.load_form = false;
@@ -178,8 +178,8 @@ export class EditTagComponent implements OnInit {
               }
             });
             break;
-          case 'mascota':
-            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:"mascotas"}).subscribe({
+          case 'mascotas':
+            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:this.tag.tipo}).subscribe({
               next: (res: any) => {
                 if(res.status == 1){
                   if(res.data.length){
@@ -187,7 +187,7 @@ export class EditTagComponent implements OnInit {
                     console.log(this.mascota);
                     this.createFormMascota(this.userId, 'adicional', this.mascota);
                     this._com.setTabEditor(this.mascota.nombre + ' - ' + this.mascota.especie);
-                    this.tipo_form = 'mascota';
+                    this.tipo_form = this.tag.tipo;
                     this.foto_formulario = this.mascota.foto!=''?(environment.SERVER + this.mascota.foto):this.foto_mascota_blanck;
                     this.load_form = false;
                     this.show_form = true;
@@ -216,8 +216,8 @@ export class EditTagComponent implements OnInit {
               }
             });
             break;
-          case 'vehiculo':
-            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:"vehiculos"}).subscribe({
+          case 'vehiculos':
+            this._api.postTypeRequest('profile/get-tag', {id:params['id'], tabla:this.tag.tipo}).subscribe({
               next: (res: any) => {
                 if(res.status == 1){
                   if(res.data.length){
@@ -225,7 +225,7 @@ export class EditTagComponent implements OnInit {
                     console.log(this.vehiculo);
                     this.createFormVehiculo(this.userId, 'adicional', this.vehiculo);
                     this._com.setTabEditor(this.vehiculo.marca + ' - ' + this.vehiculo.modelo);
-                    this.tipo_form = 'vehiculo';
+                    this.tipo_form = this.tag.tipo;
                     this.foto_formulario = this.vehiculo.foto!=''?(environment.SERVER + this.vehiculo.foto):this.foto_vehiculo_blanck;
                     this.load_form = false;
                     this.show_form = true;

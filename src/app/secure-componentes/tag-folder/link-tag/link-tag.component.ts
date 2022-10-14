@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-link-tag',
@@ -17,7 +17,7 @@ export class LinkTagComponent implements OnInit {
   tag:any;
 
   constructor(
-    private _auth:AuthService,
+    private _api:ApiService,
     private _router:Router,
     private _activatedRoute: ActivatedRoute,
     private _com:ComunicationService
@@ -31,8 +31,26 @@ export class LinkTagComponent implements OnInit {
     this._activatedRoute.params.subscribe( (params: Params) => {
       this.tag.tipo = params['tipo'];
       this.tag.id   = params['id'];
+      this._api.postTypeRequest('profile/get-tag-link', {id:params['id'], tabla:params['tipo']}).subscribe({
+        next: (res: any) => {
+          if(res.status == 1){
+            if(res.data != 'nolink'){
+              console.log(res.data)
+              this.form.patchValue({ codigo:res.data[0].codigo });
+            }
+          } else{
+            //ventana de error
 
+          }
+        },
+        error: (error) => {
+          console.warn(error);
+            //ventana de error
 
+        },
+        complete: () => {
+        }
+      })
       this.creaFormulario();
     })
   }
@@ -55,7 +73,7 @@ export class LinkTagComponent implements OnInit {
   }
 
   onSubmit(){
-
+    console.log(this.form.value);
   }
 
   volver(){

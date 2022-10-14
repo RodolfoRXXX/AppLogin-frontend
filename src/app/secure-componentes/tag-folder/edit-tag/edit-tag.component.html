@@ -4,7 +4,7 @@
         <li class="nav-item"><a class="nav-link nav-a" 
                                 [ngClass]="!activeTabs?'disabled':(navActive == 1?'active':'')"
                                 name="1" (click)="onTabClick($event)">Datos</a></li>
-        <li class="nav-item" *ngIf="this.tipo_form == 'persona'"><a class="nav-link nav-a" 
+        <li class="nav-item" *ngIf="this.tipo_form == 'personas'"><a class="nav-link nav-a" 
                                 [ngClass]="!activeTabs?'disabled':(navActive == 2?'active':'')"
                                 name="2" (click)="onTabClick($event)">Redes</a></li>
         <li class="nav-item"><a class="nav-link nav-a" 
@@ -52,14 +52,14 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <app-persona-form [form]="form" *ngIf="tipo_form == 'persona'"></app-persona-form>
-                        <app-mascota-form [form]="form" *ngIf="tipo_form == 'mascota'"></app-mascota-form>
-                        <app-vehiculo-form [form]="form" *ngIf="tipo_form == 'vehiculo'"></app-vehiculo-form>
+                        <app-persona-form [form]="form" *ngIf="tipo_form == 'personas'"></app-persona-form>
+                        <app-mascota-form [form]="form" *ngIf="tipo_form == 'mascotas'"></app-mascota-form>
+                        <app-vehiculo-form [form]="form" *ngIf="tipo_form == 'vehiculos'"></app-vehiculo-form>
                     </div>
                 </div>
             </div>
             <!-- Solapa de redes -->
-            <div class="padding-content-form" *ngIf="(navActive == 2)&&(this.tipo_form == 'persona')">
+            <div class="padding-content-form" *ngIf="(navActive == 2)&&(this.tipo_form == 'personas')">
                 <h6 class="mb-2">Creá acceso a tus redes sociales</h6>
                 <div class="rounded box-redes" (click)="open(modal_redes, null, undefined)" >
                     <i class="fa-solid fa-link" ></i>
