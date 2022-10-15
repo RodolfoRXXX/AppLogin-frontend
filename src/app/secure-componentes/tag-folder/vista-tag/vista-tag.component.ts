@@ -33,7 +33,6 @@ export class VistaTagComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.datos)
     switch (this.tipo) {
       case 'persona' :
         (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 

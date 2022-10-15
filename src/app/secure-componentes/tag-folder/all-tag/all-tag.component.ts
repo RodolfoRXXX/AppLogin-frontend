@@ -149,8 +149,11 @@ export class AllTagComponent implements OnInit {
   editTag(tipo:string, id:number){
       this._router.navigate([`profile/tags/edit-tag/${tipo}/${id}`]);
   }
-  verTag(tipo:string, id:number){
-    this._router.navigate([`profile/tags/ver-tag/${tipo}/${id}`]);
+  alertarTag(tipo:string, id:number){
+    this._router.navigate([`profile/tags/alert-tag/${tipo}/${id}`]);
+  }
+  eliminarTag(tipo:string, id:number){
+    
   }
   vincularTag(tipo:string, id:number){
     this._router.navigate([`profile/tags/link-tag/${tipo}/${id}`]);

@@ -15,6 +15,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { VerificateGuardGuard } from './services/verificate-guard.guard';
 import { AllTagComponent } from './secure-componentes/tag-folder/all-tag/all-tag.component';
 import { LinkTagComponent } from './secure-componentes/tag-folder/link-tag/link-tag.component';
+import { AlertTagComponent } from './secure-componentes/tag-folder/alert-tag/alert-tag.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -32,6 +33,7 @@ const routes: Routes = [
           {path: '', redirectTo: 'all-tag', pathMatch: 'full'},
           {path: 'all-tag', component: AllTagComponent},
           {path: 'edit-tag/:tipo/:id', component: EditTagComponent},
+          {path: 'alert-tag/:tipo/:id', component: AlertTagComponent},
           {path: 'link-tag/:tipo/:id', component: LinkTagComponent}
         ]
       },

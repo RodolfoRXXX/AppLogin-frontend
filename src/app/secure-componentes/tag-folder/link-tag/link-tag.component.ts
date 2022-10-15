@@ -94,8 +94,12 @@ export class LinkTagComponent implements OnInit {
               this._router.navigate(['profile/tags/all-tag']);
             }, 2500);
           } else{
+            let text_error = 'Ha sucedido un error. Intentá nuevamente.';
+            if(res.data == 'codigo inexistente'){
+              text_error = 'El código ingresado no existe';
+            }
             //ventana de error
-            this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
+            this._com.setNotifier({display: true, state:'alert-danger', text:text_error, time:2500})
             setTimeout(() => {
               this.ngOnInit();
             }, 2500);

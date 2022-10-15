@@ -38,7 +38,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Alerta"
                                         ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
-                                        (click)="verTag('personas', persona.id)">
+                                        (click)="alertarTag('personas', persona.id)">
                                     <i class="fa-solid fa-triangle-exclamation" style="color: rgb(231, 76, 60);"></i>
                                     Alerta
                                 </button>
@@ -47,7 +47,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Eliminar"
                                         ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
-                                        (click)="vincularTag('personas', persona.id)">
+                                        (click)="eliminarTag('personas', persona.id)">
                                     <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
                                     Eliminar
                                 </button>
@@ -131,7 +131,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Alerta"
                                         ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
-                                        (click)="verTag('personas', persona.id)">
+                                        (click)="alertarTag('personas', persona.id)">
                                     <i class="fa-solid fa-triangle-exclamation" style="color: rgb(231, 76, 60);"></i>
                                     Alerta
                                 </button>
@@ -140,7 +140,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Eliminar"
                                         ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
-                                        (click)="vincularTag('personas', persona.id)">
+                                        (click)="eliminarTag('personas', persona.id)">
                                     <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
                                     Eliminar
                                 </button>
@@ -224,7 +224,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Alerta"
                                         ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
-                                        (click)="verTag('mascotas', mascota.id)">
+                                        (click)="alertarTag('mascotas', mascota.id)">
                                     <i class="fa-solid fa-triangle-exclamation" style="color: rgb(231, 76, 60);"></i>
                                     Alerta
                                 </button>
@@ -233,7 +233,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Eliminar"
                                         ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
-                                        (click)="vincularTag('mascotas', mascota.id)">
+                                        (click)="eliminarTag('mascotas', mascota.id)">
                                     <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
                                     Eliminar
                                 </button>
@@ -317,7 +317,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Alerta"
                                         ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
-                                        (click)="verTag('vehiculos', vehiculo.id)">
+                                        (click)="alertarTag('vehiculos', vehiculo.id)">
                                     <i class="fa-solid fa-triangle-exclamation" style="color: rgb(231, 76, 60);"></i>
                                     Alerta
                                 </button>
@@ -326,7 +326,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Eliminar"
                                         ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
-                                        (click)="vincularTag('vehiculos', vehiculo.id)">
+                                        (click)="eliminarTag('vehiculos', vehiculo.id)">
                                     <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
                                     Eliminar
                                 </button>

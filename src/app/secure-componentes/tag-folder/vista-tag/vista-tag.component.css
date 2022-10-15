@@ -12,7 +12,7 @@
 
 .img-circle-section {
     position: absolute;
-    bottom: -120px;
+    bottom: -105px;
     width: 45%;
     margin: 0 27.5%;
     border: 8px solid white;
@@ -23,7 +23,7 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     height: calc(100% - 180px);
-    padding-top: 130px;
+    padding-top: 120px;
 }
 
 .box-section {
