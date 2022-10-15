@@ -56,7 +56,7 @@ export class LinkTagComponent implements OnInit {
         complete: () => {
         }
       })
-      this.creaFormulario();
+      this.creaFormulario(this.tag.id, this.tag.tipo);
     })
   }
 
@@ -66,13 +66,21 @@ export class LinkTagComponent implements OnInit {
     }
   }
 
-  creaFormulario(){
+  creaFormulario( id:any, tabla:string ){
     this.form = new FormGroup({
+      id: new FormControl(id,
+      [
+        Validators.required
+      ]),
       codigo: new FormControl('',
       [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(10)
+      ]),
+      tabla: new FormControl(tabla,
+      [
+        Validators.required
       ])
     })
   }
@@ -82,16 +90,16 @@ export class LinkTagComponent implements OnInit {
     if( this.estadoSmt == 'vincular'){
       //Vincular
         //(SELECT tablaqr) se debe comprobar que el código existe en tablaqr
-        //si existe, devuelve el registro / si no existe, devuelve error
+        //si existe, devuelve el registro / si no existe, devuelve que no existe
         //(UPDATE personas/mascotas/vehiculos) el id del registro se actualiza en el registro de personas, mascotas o vehiculos
         //(UPDATE tablaqr) se actualiza el tipo(personas, mascotas o vehiculos) de ese registro en tablaqr
-      this._api.postTypeRequest('profile/update-link-tag', this.form.value).subscribe({
+      this._api.postTypeRequest('profile/update-tag-link', this.form.value).subscribe({
         next: (res: any) => {
           if(res.status == 1){
-            
+            console.log(res)
           } else{
             //ventana de error
-            
+            console.log(res)
           }
         },
         error: (error) => {
@@ -107,7 +115,7 @@ export class LinkTagComponent implements OnInit {
         //si no existe devuelve error / si existe, devuelve ok
         //(UPDATE personas/mascotas/vehiculos) borra el id_qr en personas, mascotas o vehiculos
         //(UPDATE tablaqr) borra el tipo de el registro en tablaqr
-      this._api.postTypeRequest('profile/update-unlink-tag', this.form.value).subscribe({
+      this._api.postTypeRequest('profile/update-tag-unlink', this.form.value).subscribe({
         next: (res: any) => {
           if(res.status == 1){
             
