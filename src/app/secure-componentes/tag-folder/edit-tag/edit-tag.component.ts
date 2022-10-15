@@ -361,7 +361,7 @@ export class EditTagComponent implements OnInit {
               this._router.navigate(['profile/tags/all-tag']);
             }, 2500);
           } else{
-            this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intente nuevamente.', time:2500})
+            this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
             setTimeout(() => {
               this.ngOnInit();
             }, 2500);

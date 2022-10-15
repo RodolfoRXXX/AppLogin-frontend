@@ -15,8 +15,8 @@ export class LinkTagComponent implements OnInit {
   estadoSmt:string;
   form:FormGroup;
   tag:any;
-  actual_code:string;
   state:boolean;
+  unlink:boolean;
 
   constructor(
     private _api:ApiService,
@@ -27,6 +27,7 @@ export class LinkTagComponent implements OnInit {
     this.estadoSmt = 'vincular';
     this.tag = { tipo:null, id:null };
     this.state = true;
+    this.unlink = false;
    }
 
   ngOnInit(): void {
@@ -39,9 +40,8 @@ export class LinkTagComponent implements OnInit {
           if(res.status == 1){
             if(res.data != 'nolink'){
               this.estadoSmt = 'desvincular';
-              console.log(res.data)
-              this.actual_code = res.data[0].codigo;
               this.form.patchValue({ codigo:res.data[0].codigo });
+              this.unlink = true;
             }
           } else{
             //ventana de error
@@ -52,8 +52,6 @@ export class LinkTagComponent implements OnInit {
           console.warn(error);
           //ventana de error
           this.state = false;
-        },
-        complete: () => {
         }
       })
       this.creaFormulario(this.tag.id, this.tag.tipo);
@@ -86,51 +84,52 @@ export class LinkTagComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.form.value);
     if( this.estadoSmt == 'vincular'){
       //Vincular
-        //(SELECT tablaqr) se debe comprobar que el código existe en tablaqr
-        //si existe, devuelve el registro / si no existe, devuelve que no existe
-        //(UPDATE personas/mascotas/vehiculos) el id del registro se actualiza en el registro de personas, mascotas o vehiculos
-        //(UPDATE tablaqr) se actualiza el tipo(personas, mascotas o vehiculos) de ese registro en tablaqr
       this._api.postTypeRequest('profile/update-tag-link', this.form.value).subscribe({
         next: (res: any) => {
           if(res.status == 1){
-            console.log(res)
+            this._com.setNotifier({display: true, state:'alert-success', text:'La vinculación fue un éxito!', time:2500})
+            setTimeout(() => {
+              this._router.navigate(['profile/tags/all-tag']);
+            }, 2500);
           } else{
             //ventana de error
-            console.log(res)
+            this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
+            setTimeout(() => {
+              this.ngOnInit();
+            }, 2500);
           }
         },
         error: (error) => {
           console.warn(error);
           //ventana de error
-          
+          this.state = false;
         }
       })
-
     } else if( this.estadoSmt == 'desvincular' ){
       //desvincular
-        //(SELECT tablaqr) se busca el registro en tablaqr
-        //si no existe devuelve error / si existe, devuelve ok
-        //(UPDATE personas/mascotas/vehiculos) borra el id_qr en personas, mascotas o vehiculos
-        //(UPDATE tablaqr) borra el tipo de el registro en tablaqr
       this._api.postTypeRequest('profile/update-tag-unlink', this.form.value).subscribe({
         next: (res: any) => {
           if(res.status == 1){
-            
+            this._com.setNotifier({display: true, state:'alert-success', text:'Desvinculaste el tag-qr.', time:2500})
+            setTimeout(() => {
+              this._router.navigate(['profile/tags/all-tag']);
+            }, 2500);
           } else{
             //ventana de error
-            
+            this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
+            setTimeout(() => {
+              this.ngOnInit();
+            }, 2500);
           }
         },
         error: (error) => {
           console.warn(error);
           //ventana de error
-          
+          this.state = false;
         }
       })
-
     }
   }
 

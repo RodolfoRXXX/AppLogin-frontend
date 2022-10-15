@@ -16,21 +16,20 @@
             <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
                 <div class="mb-2">
                     <p class="text-muted text-center ms-1 mb-2" style="font-size: 0.9rem; ">Ingresá aquí el código que se encuentra en tu Tag-qr.</p>
-                    <input type="text" 
+                    <fieldset [disabled]="unlink">
+                        <input type="text" 
                            class="form-control input-style input-code"
                            aria-describedby="codeHelp"
                            formControlName="codigo"
                            (focus)="actualizarSmt()"
                            [ngClass]="form.get('codigo')?.valid?'is-valid':(((form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched))?'is-invalid':'')"
                     />
+                    </fieldset>
                     <div style="height: 15px; font-size: 0.8rem;">
                       <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched)">
                         <span *ngIf="form.get('codigo')?.errors?.['required']">Tenés que ingresar un código.</span>
                         <span *ngIf="form.get('codigo')?.errors?.['minlength']">El código debe contener 10 caracteres.</span>
                         <span *ngIf="form.get('codigo')?.errors?.['maxlength']">El código debe contener 10 caracteres.</span>
-                      </div>
-                      <div class="valid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('codigo')?.valid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched)&&(form.get('codigo')?.value == actual_code)">
-                        <span>El código ingresado es igual al actual.</span>
                       </div>
                     </div>
                 </div>
