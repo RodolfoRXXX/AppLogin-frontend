@@ -6,7 +6,7 @@
     </ul>
     <div class="col-md-6 ms-auto me-auto">
         <!-- Tag personal -->
-        <div class="rounded accordion-box-principal" *ngIf="tag_personal_exist">
+        <div class="rounded accordion-box-principal" *ngIf="tag_personal_existe">
             <ngb-accordion #acc="ngbAccordion">
                 <ng-container *ngFor="let persona of personas">
                     <ngb-panel *ngIf="persona.nivel == 'personal'">
@@ -48,8 +48,9 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Eliminar"
                                         ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
-                                        (click)="eliminarTag('personas', persona.id)">
-                                    <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
+                                        [disabled]="persona.estado != 'nolink'"
+                                        (click)="eliminarTag('personas', 'personal', (persona.nombre + ' ' + persona.apellido), persona.id)">
+                                        <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
                                     Eliminar
                                 </button>
                                 <button class="btn w-25 btn-box-util"
@@ -68,7 +69,7 @@
             </ngb-accordion>
         </div>
         <!-- Alerta en caso de error de carga -->
-        <div class="p-3 pb-2" *ngIf="error_carga_persona && !load_tag_personal">
+        <div class="p-3 pb-2" *ngIf="error_carga_personal && !load_tag_personal">
             <div class="alert alert-danger mb-0">
                 <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualice la página.</p>
             </div>
@@ -80,14 +81,14 @@
             </div>
         </div>
         <!-- Alerta que aparece si no hay tag -->
-        <div class="p-3 pb-2" *ngIf="!tag_personal_exist && !load_tag_personal && !error_carga_persona">
+        <div class="p-3 pb-2" *ngIf="!tag_personal_existe && !load_tag_personal && !error_carga_personal">
             <div class="alert alert-info mb-0">
                 <p class="d-block text-center mb-0">Aún no creaste tu Tag personal. Empezá ahora!</p>
             </div>
         </div>
         <!-- Botón que aparece si no hay tag -->
         <div class="d-flex justify-content-end">
-            <button class="btn btn-primary btn-crearTag" *ngIf="!tag_personal_exist && !load_tag_personal" (click)="editTag('personas', 'personal', 0)" [disabled]="tag_personal_exist || load_tag_personal">Crear mi Tag-ID Personal</button>
+            <button class="btn btn-primary btn-crearTag" *ngIf="!tag_personal_existe && !load_tag_personal" (click)="editTag('personas', 'personal', 0)" [disabled]="tag_personal_existe || load_tag_personal">Crear mi Tag-ID Personal</button>
         </div>
     </div>
 </div>
@@ -142,7 +143,8 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Eliminar"
                                         ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
-                                        (click)="eliminarTag('personas', persona.id)">
+                                        [disabled]="persona.estado != 'nolink'"
+                                        (click)="eliminarTag('personas', 'persona', (persona.nombre + ' ' + persona.apellido), persona.id)">
                                     <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
                                     Eliminar
                                 </button>
@@ -236,7 +238,8 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Eliminar"
                                         ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
-                                        (click)="eliminarTag('mascotas', mascota.id)">
+                                        [disabled]="mascota.estado != 'nolink'"
+                                        (click)="eliminarTag('mascotas', 'mascota', (mascota.especie + '-' + mascota.nombre), mascota.id)">
                                     <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
                                     Eliminar
                                 </button>
@@ -330,7 +333,8 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Eliminar"
                                         ngbPopover="Eliminá este tag. Recordá desvincularlo del QR."
-                                        (click)="eliminarTag('vehiculos', vehiculo.id)">
+                                        [disabled]="vehiculo.estado != 'nolink'"
+                                        (click)="eliminarTag('vehiculos', 'vehiculo', (vehiculo.marca + '-' + vehiculo.modelo), vehiculo.id)">
                                     <i class="fa-solid fa-trash" style="color: rgb(105, 103, 101);"></i>
                                     Eliminar
                                 </button>
@@ -373,3 +377,7 @@
         </div>
     </div>
 </div>
+
+<ng-template #modal_confirmacion let-modal>
+    <app-modal-confirmacion [texto]="texto_confirmacion" (cerrado)="cerrar_confirmar($event)"></app-modal-confirmacion>
+</ng-template>
