@@ -146,8 +146,8 @@ export class AllTagComponent implements OnInit {
       });
     }
 
-  editTag(tipo:string, id:number){
-      this._router.navigate([`profile/tags/edit-tag/${tipo}/${id}`]);
+  editTag(tipo:string, nivel:string, id:number){
+      this._router.navigate([`profile/tags/edit-tag/${tipo}/${nivel}/${id}`]);
   }
   alertarTag(tipo:string, id:number){
     this._router.navigate([`profile/tags/alert-tag/${tipo}/${id}`]);

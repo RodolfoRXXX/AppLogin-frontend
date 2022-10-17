@@ -32,7 +32,7 @@ const routes: Routes = [
         children: [
           {path: '', redirectTo: 'all-tag', pathMatch: 'full'},
           {path: 'all-tag', component: AllTagComponent},
-          {path: 'edit-tag/:tipo/:id', component: EditTagComponent},
+          {path: 'edit-tag/:tipo/:nivel/:id', component: EditTagComponent},
           {path: 'alert-tag/:tipo/:id', component: AlertTagComponent},
           {path: 'link-tag/:tipo/:id', component: LinkTagComponent}
         ]

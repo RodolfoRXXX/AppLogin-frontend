@@ -73,7 +73,7 @@ export class EditTagComponent implements OnInit {
     this.tipo_form = 'personas';
     this.navActive = 1;
     this.activeTabs = false;
-    this.tag = { tipo:null, id:null };
+    this.tag = { tipo:null, nivel:null, id:null };
     this.estado_foto = '';
     this.data_user = {};
     this.redes = array_social;
@@ -91,29 +91,26 @@ export class EditTagComponent implements OnInit {
     this.load_form = true;
     this._activatedRoute.params.subscribe( (params: Params) => {
       this.tag.tipo = params['tipo'];
+      this.tag.nivel = params['nivel'];
       this.tag.id   = params['id'];
       if(parseInt(params['id']) == 0){
         //Creando
         switch (params['tipo']) {
-          case 'personal':
-            this.createFormPersona(this.userId, 'personal');
-            this._com.setTabEditor('Creando Tag-ID: Personal');
+          case 'personas':
+            if(this.tag.nivel == 'personal'){
+              this.createFormPersona(this.userId, 'personal');
+              this._com.setTabEditor('Creando Tag-ID: Personal');
+            } else{
+              this.createFormPersona(this.userId, 'adicional');
+              this._com.setTabEditor('Creando Tag-ID: Persona');
+            }
             this.tipo_form = this.tag.tipo;
             this.foto_formulario = '../../../../assets/img/blanck_persona.png'
             this.load_form = false;
             this.show_form = true;
             this.activeTabs = true;
             break;
-          case 'persona':
-            this.createFormPersona(this.userId, 'adicional');
-            this._com.setTabEditor('Creando Tag-ID: Persona');
-            this.tipo_form = this.tag.tipo;
-            this.foto_formulario = '../../../../assets/img/blanck_persona.png'
-            this.load_form = false;
-            this.show_form = true;
-            this.activeTabs = true;
-            break;
-          case 'mascota':
+          case 'mascotas':
             this.createFormMascota(this.userId, 'adicional');
             this._com.setTabEditor('Creando Tag-ID: Mascota');
             this.tipo_form = this.tag.tipo;
@@ -122,7 +119,7 @@ export class EditTagComponent implements OnInit {
             this.show_form = true;
             this.activeTabs = true;
             break;
-          case 'vehiculo':
+          case 'vehiculos':
             this.createFormVehiculo(this.userId, 'adicional');
             this._com.setTabEditor('Creando Tag-ID: Vehiculo');
             this.tipo_form = this.tag.tipo;

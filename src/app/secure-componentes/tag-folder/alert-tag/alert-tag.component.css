@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@600&display=swap');
+
+.input-style {
+    border: none;
+    border-bottom: 1px solid rgb(172, 170, 170);
+    border-radius: 0;
+    background-color: #F6FBFF;
+}
+
+.input-style:focus {
+    outline: 0;
+    box-shadow: none;
+    background-color: #f0f8ff;
+}
+
+.input-code{
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.btn-return {
+    position:absolute;
+    left: 15px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.btn-return:hover {
+    opacity: 0.7;
+}

@@ -21,7 +21,6 @@
                            class="form-control input-style input-code"
                            aria-describedby="codeHelp"
                            formControlName="codigo"
-                           (focus)="actualizarSmt()"
                            [ngClass]="form.get('codigo')?.valid?'is-valid':(((form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched))?'is-invalid':'')"
                     />
                     </fieldset>

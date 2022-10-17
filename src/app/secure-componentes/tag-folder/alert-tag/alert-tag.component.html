@@ -1,1 +1,77 @@
-<p>alert-tag works!</p>
+<div class="card col-md-3 mt-3" 
+     style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px; margin: auto; "     
+>
+    <div class="card-header text-center">
+        Vincular Tag
+        <i class="fa-solid fa-arrow-left btn-return"
+           title="Volver"
+           (click)="volver()"
+        ></i>
+    </div>
+    <div class="card-body">
+        <div class="border w-100" style="height: 250px;">
+            <img src="" alt="imagenQR">
+        </div>
+        <div>
+            <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
+                <div class="mb-2">
+                    <p class="text-muted text-center ms-1 mb-2" style="font-size: 0.8rem; ">Creá un alerta sobre este tag para que puedan ayudarte a encontrarlo. Al crear un alerta, recibirás la ubicación de cualquier dispositivo que haya encontrado y leído el tag.</p>
+                    <textarea rows="3"
+                              class="form-control input-style input-code"
+                              formControlName="obsestado"
+                              placeholder="Escribí aquí..."
+                              [ngClass]="form.get('obsestado')?.valid?'is-valid':(((form.get('obsestado')?.invalid)&&(form.get('obsestado')?.dirty||form.get('obsestado')?.touched))?'is-invalid':'')"
+                    ></textarea>
+                    <div style="min-height: 15px; font-size: 0.8rem;">
+                      <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('obsestado')?.invalid)&&(form.get('obsestado')?.dirty||form.get('obsestado')?.touched)">
+                        <span *ngIf="form.get('obsestado')?.errors?.['required']">Escribí información importante sobre este tag para que puedan ayudarte a encontrarlo.</span>
+                        <span *ngIf="form.get('obsestado')?.errors?.['minlength']">Mín. 5 caracteres.</span>
+                        <span *ngIf="form.get('obsestado')?.errors?.['maxlength']">Máx. 150 caracteres.</span>
+                      </div>
+                    </div>
+                </div>
+                <div class="alert alert-danger text-center mb-0" style="font-size: 0.8rem;" *ngIf="!state">
+                    Ha ocurrido un problema durante la carga. Por favor actualizá la página.
+                </div>
+                <div *ngIf="state">
+                    <div *ngIf="create_alert">
+                        <button type="submit"
+                            *ngIf="state"
+                            class="btn btn-primary form-control" 
+                            [disabled]="form.invalid || (estadoSmt_crear == 'load' ||  estadoSmt_crear == 'creado' ||  estadoSmt_crear == 'error')"
+                        >
+                            <span *ngIf="estadoSmt_crear == 'crear'">Crear alerta</span>
+                            <span *ngIf="estadoSmt_crear == 'load'">Loading...</span>
+                            <span *ngIf="estadoSmt_crear == 'creado'">Creado!</span>
+                            <span *ngIf="estadoSmt_crear == 'error'">Error!</span>
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-between" *ngIf="!create_alert">
+                        <button type="button"
+                            (click)="confirmar_eliminar()"
+                            class="btn btn-danger form-control me-2" 
+                            [disabled]="form.invalid || (estadoSmt_eliminar == 'load' ||  estadoSmt_eliminar == 'eliminado' ||  estadoSmt_eliminar == 'error')"
+                        >
+                            <span *ngIf="estadoSmt_eliminar == 'eliminar'">Eliminar alerta</span>
+                            <span *ngIf="estadoSmt_eliminar == 'load'">Loading...</span>
+                            <span *ngIf="estadoSmt_eliminar == 'eliminado'">Eliminado!</span>
+                            <span *ngIf="estadoSmt_eliminar == 'error'">Error!</span>
+                        </button>
+                        <button type="submit"
+                            class="btn btn-primary form-control" 
+                            [disabled]="form.invalid || (estadoSmt_editar == 'load' ||  estadoSmt_editar == 'editado' ||  estadoSmt_editar == 'error' || (actual_obs == form.get('obsestado')?.value))"
+                        >
+                            <span *ngIf="estadoSmt_editar == 'editar'">Editar alerta</span>
+                            <span *ngIf="estadoSmt_editar == 'load'">Loading...</span>
+                            <span *ngIf="estadoSmt_editar == 'editado'">Editado!</span>
+                            <span *ngIf="estadoSmt_editar == 'error'">Error!</span>
+                        </button>
+                    </div>
+                </div> 
+            </form>
+            <ng-template #modal_confirmacion let-modal>
+                <app-modal-confirmacion [texto]="texto_confirmacion" (cerrado)="cerrar_confirmar($event)"></app-modal-confirmacion>
+            </ng-template>
+        </div>
+    </div>
+</div>

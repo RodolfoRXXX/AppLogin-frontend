@@ -11,7 +11,6 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class LinkTagComponent implements OnInit {
 
-  userId:any;
   estadoSmt:string;
   form:FormGroup;
   tag:any;
@@ -58,12 +57,6 @@ export class LinkTagComponent implements OnInit {
     })
   }
 
-  actualizarSmt(){
-    if(this.estadoSmt == 'error'){
-      this.estadoSmt = 'vincular';
-    }
-  }
-
   creaFormulario( id:any, tabla:string ){
     this.form = new FormGroup({
       id: new FormControl(id,
@@ -85,15 +78,18 @@ export class LinkTagComponent implements OnInit {
 
   onSubmit(){
     if( this.estadoSmt == 'vincular'){
+      this.estadoSmt = 'load';
       //Vincular
-      this._api.postTypeRequest('profile/update-tag-link', this.form.value).subscribe({
+      this._api.putTypeRequest('profile/update-tag-link', this.form.value).subscribe({
         next: (res: any) => {
           if(res.status == 1){
+            this.estadoSmt = 'link';
             this._com.setNotifier({display: true, state:'alert-success', text:'La vinculación fue un éxito!', time:2500})
             setTimeout(() => {
               this._router.navigate(['profile/tags/all-tag']);
             }, 2500);
           } else{
+            this.estadoSmt = 'error';
             let text_error = 'Ha sucedido un error. Intentá nuevamente.';
             if(res.data == 'codigo inexistente'){
               text_error = 'El código ingresado no existe';
@@ -112,17 +108,24 @@ export class LinkTagComponent implements OnInit {
         }
       })
     } else if( this.estadoSmt == 'desvincular' ){
+      this.estadoSmt = 'load';
       //desvincular
-      this._api.postTypeRequest('profile/update-tag-unlink', this.form.value).subscribe({
+      this._api.putTypeRequest('profile/update-tag-unlink', this.form.value).subscribe({
         next: (res: any) => {
           if(res.status == 1){
+            this.estadoSmt = 'nolink';
             this._com.setNotifier({display: true, state:'alert-success', text:'Desvinculaste el tag-qr.', time:2500})
             setTimeout(() => {
               this._router.navigate(['profile/tags/all-tag']);
             }, 2500);
           } else{
+            this.estadoSmt = 'error';
+            let text_error = 'Ha sucedido un error. Intentá nuevamente.';
+            if(res.data == 'codigo inexistente'){
+              text_error = 'El código ingresado no existe';
+            }
             //ventana de error
-            this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
+            this._com.setNotifier({display: true, state:'alert-danger', text:text_error, time:2500})
             setTimeout(() => {
               this.ngOnInit();
             }, 2500);

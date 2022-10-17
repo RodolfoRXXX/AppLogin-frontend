@@ -29,7 +29,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Editar"
                                         ngbPopover="Editá la información de este tag."
-                                        (click)="editTag('personas', persona.id )">
+                                        (click)="editTag('personas', 'personal', persona.id )">
                                     <i class="fa-solid fa-pen-to-square" style="color: rgb(88, 88, 248);"></i>
                                     Editar
                                 </button>
@@ -38,6 +38,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Alerta"
                                         ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
+                                        [disabled]="persona.estado == 'nolink'"
                                         (click)="alertarTag('personas', persona.id)">
                                     <i class="fa-solid fa-triangle-exclamation" style="color: rgb(231, 76, 60);"></i>
                                     Alerta
@@ -86,7 +87,7 @@
         </div>
         <!-- Botón que aparece si no hay tag -->
         <div class="d-flex justify-content-end">
-            <button class="btn btn-primary btn-crearTag" *ngIf="!tag_personal_exist && !load_tag_personal" (click)="editTag('personal', 0)" [disabled]="tag_personal_exist || load_tag_personal">Crear mi Tag-ID Personal</button>
+            <button class="btn btn-primary btn-crearTag" *ngIf="!tag_personal_exist && !load_tag_personal" (click)="editTag('personas', 'personal', 0)" [disabled]="tag_personal_exist || load_tag_personal">Crear mi Tag-ID Personal</button>
         </div>
     </div>
 </div>
@@ -122,7 +123,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Editar"
                                         ngbPopover="Editá la información de este tag."
-                                        (click)="editTag('personas', persona.id )">
+                                        (click)="editTag('personas', 'adicional', persona.id )">
                                     <i class="fa-solid fa-pen-to-square" style="color: rgb(88, 88, 248);"></i>
                                     Editar
                                 </button>
@@ -131,6 +132,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Alerta"
                                         ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
+                                        [disabled]="persona.estado == 'nolink'"
                                         (click)="alertarTag('personas', persona.id)">
                                     <i class="fa-solid fa-triangle-exclamation" style="color: rgb(231, 76, 60);"></i>
                                     Alerta
@@ -179,7 +181,7 @@
         </div>
         <!-- Botón que aparece si no hay tag -->
         <div class="d-flex justify-content-end">
-            <button class="btn btn-primary btn-crearTag" (click)="editTag('persona', 0)">Crear Tag-ID Persona</button>
+            <button class="btn btn-primary btn-crearTag" (click)="editTag('personas', 'adicional', 0)">Crear Tag-ID Persona</button>
         </div>
     </div>
 </div>
@@ -215,7 +217,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Editar"
                                         ngbPopover="Editá la información de este tag."
-                                        (click)="editTag('mascotas', mascota.id )">
+                                        (click)="editTag('mascotas', 'adicional', mascota.id )">
                                     <i class="fa-solid fa-pen-to-square" style="color: rgb(88, 88, 248);"></i>
                                     Editar
                                 </button>
@@ -224,6 +226,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Alerta"
                                         ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
+                                        [disabled]="mascota.estado == 'nolink'"
                                         (click)="alertarTag('mascotas', mascota.id)">
                                     <i class="fa-solid fa-triangle-exclamation" style="color: rgb(231, 76, 60);"></i>
                                     Alerta
@@ -272,7 +275,7 @@
         </div>
         <!-- Botón que aparece si no hay tag -->
         <div class="d-flex justify-content-end">
-            <button class="btn btn-primary btn-crearTag" (click)="editTag('mascota', 0)">Crear Tag-ID Mascota</button>
+            <button class="btn btn-primary btn-crearTag" (click)="editTag('mascotas', 'adicional', 0)">Crear Tag-ID Mascota</button>
         </div>
     </div>
 </div>
@@ -308,7 +311,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Editar"
                                         ngbPopover="Editá la información de este tag."
-                                        (click)="editTag('vehiculos', vehiculo.id )">
+                                        (click)="editTag('vehiculos', 'adicional', vehiculo.id )">
                                     <i class="fa-solid fa-pen-to-square" style="color: rgb(88, 88, 248);"></i>
                                     Editar
                                 </button>
@@ -317,6 +320,7 @@
                                         triggers="mouseenter:mouseleave"
                                         popoverTitle="Alerta"
                                         ngbPopover="Cambiá el estado del tag para que te ayuden a localizar al objeto o individuo del tag."
+                                        [disabled]="vehiculo.estado == 'nolink'"
                                         (click)="alertarTag('vehiculos', vehiculo.id)">
                                     <i class="fa-solid fa-triangle-exclamation" style="color: rgb(231, 76, 60);"></i>
                                     Alerta
@@ -365,7 +369,7 @@
         </div>
         <!-- Botón que aparece si no hay tag -->
         <div class="d-flex justify-content-end">
-            <button class="btn btn-primary btn-crearTag" (click)="editTag('vehiculo', 0)">Crear Tag-ID Vehículo</button>
+            <button class="btn btn-primary btn-crearTag" (click)="editTag('vehiculos', 'adicional', 0)">Crear Tag-ID Vehículo</button>
         </div>
     </div>
 </div>
