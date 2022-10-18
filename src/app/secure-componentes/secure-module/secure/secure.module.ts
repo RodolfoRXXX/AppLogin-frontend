@@ -26,6 +26,7 @@ import { VistaTagComponent } from '../../tag-folder/vista-tag/vista-tag.componen
 import { DetailTagComponent } from '../../tag-folder/vista-tag/componentes/detail-tag/detail-tag.component';
 import { LinkTagComponent } from '../../tag-folder/link-tag/link-tag.component';
 import { AlertTagComponent } from '../../tag-folder/alert-tag/alert-tag.component';
+import { EditNameConfigurationProfileComponent } from '../../configuration-folder/edit-name-configuration-profile/edit-name-configuration-profile.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AlertTagComponent } from '../../tag-folder/alert-tag/alert-tag.componen
     ConfigurationProfileComponent,
     EditEmailConfigurationProfileComponent,
     EditPassConfigurationProfileComponent,
+    EditNameConfigurationProfileComponent,
     EmailCheckerComponent,
     MenuLateralComponent,
     TagsProfileComponent,

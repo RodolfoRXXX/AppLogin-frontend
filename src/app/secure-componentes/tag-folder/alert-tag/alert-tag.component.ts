@@ -23,6 +23,7 @@ export class AlertTagComponent implements OnInit {
   texto_confirmacion:string;
 
   @ViewChild('modal_confirmacion') modal_confirmacion: ElementRef;
+  fecha:any;
 
   constructor(
     private _router:Router,
@@ -37,6 +38,7 @@ export class AlertTagComponent implements OnInit {
     this.tag = { tipo:null, id:null };
     this.state = true;
     this.create_alert = true;
+    this.fecha = (new Date).toLocaleDateString();
   }
 
   //maneja el modal de confirmacion de eliminación
@@ -83,10 +85,10 @@ export class AlertTagComponent implements OnInit {
       this._api.postTypeRequest('profile/get-tag-alert', {id:params['id'], tabla:params['tipo']}).subscribe({
         next: (res: any) => {
           if(res.status == 1){
-            console.log(res)
             if(res.data[0].estado == 'alert'){
               this.create_alert = false;
               this.form.patchValue({ obsestado:res.data[0].obsestado });
+              this.form.patchValue({ fechaestado:res.data[0].fechaestado });
               this.actual_obs = res.data[0].obsestado;
             }
           } else{
@@ -115,6 +117,11 @@ export class AlertTagComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(150)
       ]),
+      fechaestado: new FormControl(this.fecha,
+      [
+        Validators.required
+      ]
+      ),
       tabla: new FormControl(tabla,
       [
         Validators.required

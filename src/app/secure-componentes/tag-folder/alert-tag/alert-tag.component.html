@@ -44,7 +44,7 @@
                         <button type="button"
                             (click)="confirmar_eliminar()"
                             class="btn btn-danger form-control me-2" 
-                            [disabled]="form.invalid || (estadoSmt_eliminar == 'load' ||  estadoSmt_eliminar == 'eliminado' ||  estadoSmt_eliminar == 'error')"
+                            [disabled]="(estadoSmt_eliminar == 'load' ||  estadoSmt_eliminar == 'eliminado' ||  estadoSmt_eliminar == 'error')"
                         >
                             <span *ngIf="estadoSmt_eliminar == 'eliminar'">Eliminar alerta</span>
                             <span *ngIf="estadoSmt_eliminar == 'load'">Loading...</span>

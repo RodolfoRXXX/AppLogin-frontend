@@ -1,40 +1,39 @@
-
 <form [formGroup]="form" class="p-3" (ngSubmit)="onSubmit()">
 
     <!-- Nuevo email -->
     <div class="mb-2">
-      <label for="InputEmail" class="form-label ps-2">Ingresa tu nueva cuenta de correo</label>
+      <label for="InputEmail" class="form-label ps-2">Ingresá tu nueva cuenta de correo</label>
       <input type="email" 
              class="form-control"
              id="InputEmail" 
              aria-describedby="newEmailHelp"
              formControlName="email"
-             placeholder="Ingresá tu nueva cuenta de correo electrónico"
+             placeholder="Escribí aquí..."
              (focus)="actualizarSmt()"
              [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
       />
-      <div style="height: 15px; font-size: 0.9rem;">
+      <div style="min-height: 15px; font-size: 0.9rem;">
         <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
-          <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
-          <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
+          <span *ngIf="form.get('email')?.errors?.['required']">El correo electrónico nuevo es requerido.</span>
+          <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato del correo es incorrecto.</span>
         </div>
       </div>
     </div>
 
     <!-- Repetir nuevo email -->
     <div class="mb-2">
-        <label for="InputReEmail" class="form-label ps-2">Repetir correo electrónico nuevo</label>
+        <label for="InputReEmail" class="form-label ps-2">Repetí el correo electrónico nuevo</label>
         <input type="email" 
                class="form-control"
                id="InputReEmail" 
                aria-describedby="reEmailHelp"
                formControlName="reemail"
-               placeholder="Repetí el correo electrónico nuevo"
+               placeholder="Escribí aquí..."
                [ngClass]="(form.get('reemail')?.valid)&&(!form.errors?.['noIguales'])?'is-valid':( (form.get('reemail')?.invalid || form.errors?.['noIguales']) && (form.get('reemail')?.dirty||form.get('reemail')?.touched)?'is-invalid':'')"
         />
-        <div style="height: 15px; font-size: 0.9rem;">
+        <div style="min-height: 15px; font-size: 0.9rem;">
           <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('reemail')?.invalid || form.errors?.['noIguales'])&&(form.get('reemail')?.dirty||form.get('reemail')?.touched)">
-            <span *ngIf="form.get('reemail')?.errors?.['required']">Este dato es requerido.</span>
+            <span *ngIf="form.get('reemail')?.errors?.['required']">Este campo es requerido.</span>
             <span *ngIf="form.errors?.['noIguales']">El correo electrónico ingresado no es el mismo.</span>
           </div>
         </div>
@@ -43,8 +42,7 @@
 
     <button type="submit" 
             class="btn btn-primary form-control mt-1" 
-            [disabled]="form.invalid || estadoSmt != 'actualizar'"
-            [ngClass]="(estadoSmt == 'ok')?'bg-success':((estadoSmt == 'error')?'bg-danger':'bg-primary')"        
+            [disabled]="form.invalid || estadoSmt != 'actualizar'"      
     >
       <span *ngIf="estadoSmt == 'actualizar'">Actualizar</span>
       <span *ngIf="estadoSmt == 'load'">Loading...</span>
