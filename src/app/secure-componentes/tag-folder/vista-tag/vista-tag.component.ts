@@ -23,6 +23,7 @@ export class VistaTagComponent implements OnInit {
   usuario:string;
   leaf_selected:string;
   foto_perfil:string;
+  view_tag:string;
 
   constructor() { 
     this.leaf_selected = 'data';
@@ -30,6 +31,7 @@ export class VistaTagComponent implements OnInit {
     this.usuario = '';
     this.redes = array_social;
     this.sociales = [];
+    this.view_tag = 'load';
   }
 
   ngOnInit(): void {
@@ -38,23 +40,21 @@ export class VistaTagComponent implements OnInit {
         (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
         this.usuario = this.datos.nombre + ' ' + this.datos.apellido;
         this.sociales = (this.datos.red != '')?JSON.parse(this.datos.red):[];
-    
+        this.view_tag = 'ok';
         break;
       case 'mascota' :
         (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_mascota.png');
         this.usuario = this.datos.nombre;
-
-
+        this.view_tag = 'ok';
         break;
       case 'vehiculo' :
         (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_vehiculo.png');
         this.usuario = this.datos.marca + ' ' + this.datos.modelo;
-
-
+        this.view_tag = 'ok';
         break;
       default:
         //Error!!!
-
+        this.view_tag = 'error';
         break;
     }
   }

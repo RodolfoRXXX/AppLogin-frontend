@@ -29,8 +29,8 @@ export class TagsProfileComponent implements OnInit {
     this.changeDetector.detectChanges();
   }
 
-  irTablero(){
-    this._router.navigate(['profile']);
+  volver(){
+    this._router.navigate(['profile/tags/all-tag']);
   }
 
 }

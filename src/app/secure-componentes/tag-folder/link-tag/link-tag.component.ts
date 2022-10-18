@@ -14,8 +14,9 @@ export class LinkTagComponent implements OnInit {
   estadoSmt:string;
   form:FormGroup;
   tag:any;
-  state:boolean;
+  state:string;
   unlink:boolean;
+  view_tag:string;
 
   constructor(
     private _api:ApiService,
@@ -25,7 +26,7 @@ export class LinkTagComponent implements OnInit {
   ) { 
     this.estadoSmt = 'vincular';
     this.tag = { tipo:null, id:null };
-    this.state = true;
+    this.state = 'load';
     this.unlink = false;
    }
 
@@ -41,16 +42,16 @@ export class LinkTagComponent implements OnInit {
               this.estadoSmt = 'desvincular';
               this.form.patchValue({ codigo:res.data[0].codigo });
               this.unlink = true;
+              this.state = 'ok';
             }
           } else{
             //ventana de error
-            this.state = false;
+            this.state = 'error';
           }
         },
         error: (error) => {
-          console.warn(error);
           //ventana de error
-          this.state = false;
+          this.state = 'error';
         }
       })
       this.creaFormulario(this.tag.id, this.tag.tipo);
@@ -102,9 +103,8 @@ export class LinkTagComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.warn(error);
           //ventana de error
-          this.state = false;
+          this.estadoSmt = 'error';
         }
       })
     } else if( this.estadoSmt == 'desvincular' ){
@@ -132,16 +132,11 @@ export class LinkTagComponent implements OnInit {
           }
         },
         error: (error) => {
-          console.warn(error);
           //ventana de error
-          this.state = false;
+          this.estadoSmt = 'error';
         }
       })
     }
-  }
-
-  volver(){
-    this._router.navigate(['profile/tags/all-tag']);
   }
 
 }

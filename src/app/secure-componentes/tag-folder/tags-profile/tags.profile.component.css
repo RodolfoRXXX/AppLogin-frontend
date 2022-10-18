@@ -1,18 +1,28 @@
 /* Extra small devices (phones, 600px and down) */
 
 .tag-profile-content {
-    padding: 0 0 1.5rem;
+    padding: 0.75rem 0 0;
+    background-color: rgb(247, 247, 247);
 }
 
 .color-nav-tab {
     background-color: rgb(247, 247, 247);
 }
 
-@media only screen and (max-width: 768px) {
+.btn-return {
+    position:absolute;
+    left: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.6;
+}
 
-    .tag-profile-content {
-        padding: 0;
-    }
+.btn-return:hover {
+    opacity: 0.8;
+}
+
+@media only screen and (max-width: 768px) {
+    
 
 }
 

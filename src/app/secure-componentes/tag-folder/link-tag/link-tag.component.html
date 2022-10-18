@@ -3,40 +3,45 @@
 >
     <div class="card-header text-center">
         Vincular Tag
-        <i class="fa-solid fa-arrow-left btn-return"
-           title="Volver"
-           (click)="volver()"
-        ></i>
     </div>
     <div class="card-body">
-        <div class="border w-100" style="height: 250px;">
-            <img src="" alt="imagenQR">
+        <!-- Caja principal -->
+        <div>
+            <img class="link-tag-img" src="../../../../assets/img/link-tag-img.jpeg" alt="link-tag-img">
         </div>
         <div>
             <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
                 <div class="mb-2">
-                    <p class="text-muted text-center ms-1 mb-2" style="font-size: 0.9rem; ">Ingresá aquí el código que se encuentra en tu Tag-qr.</p>
+                    <p class="text-muted text-center ms-1 mb-2" style="font-size: 0.9rem; ">Ingresá aquí el código del Tag-qr con el que queres vincularte.</p>
                     <fieldset [disabled]="unlink">
                         <input type="text" 
-                           class="form-control input-style input-code"
-                           aria-describedby="codeHelp"
-                           formControlName="codigo"
-                           [ngClass]="form.get('codigo')?.valid?'is-valid':(((form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched))?'is-invalid':'')"
+                            class="form-control input-style input-code"
+                            aria-describedby="codeHelp"
+                            formControlName="codigo"
+                            [ngClass]="form.get('codigo')?.valid?'is-valid':(((form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched))?'is-invalid':'')"
                     />
                     </fieldset>
                     <div style="height: 15px; font-size: 0.8rem;">
-                      <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched)">
+                        <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched)">
                         <span *ngIf="form.get('codigo')?.errors?.['required']">Tenés que ingresar un código.</span>
                         <span *ngIf="form.get('codigo')?.errors?.['minlength']">El código debe contener 10 caracteres.</span>
                         <span *ngIf="form.get('codigo')?.errors?.['maxlength']">El código debe contener 10 caracteres.</span>
-                      </div>
+                        </div>
                     </div>
                 </div>
-                <div class="alert alert-danger text-center mb-0" style="font-size: 0.8rem;" *ngIf="!state">
+                <!-- Spinner load -->
+                <div class="d-flex justify-content-center p-4" *ngIf="state == 'load'">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">...loading</span>
+                    </div>
+                </div>
+                <!-- Error -->
+                <div class="alert alert-danger text-center mb-0" style="font-size: 0.8rem;" *ngIf="state == 'error'">
                     Ha ocurrido un problema durante la carga. Por favor actualizá la página.
                 </div>
+                <!-- Ok -->
                 <button type="submit"
-                        *ngIf="state"
+                        *ngIf="state == 'ok'"
                         class="btn btn-primary form-control" 
                         [disabled]="form.invalid || (estadoSmt == 'load' ||  estadoSmt == 'link' ||  estadoSmt == 'nolink' ||  estadoSmt == 'error')"
                 >

@@ -1,16 +1,10 @@
-<div class="card col-md-3 mt-3" 
-     style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px; margin: auto; "     
->
+<div class="card col-md-3 background-card border-danger">
     <div class="card-header text-center">
-        Vincular Tag
-        <i class="fa-solid fa-arrow-left btn-return"
-           title="Volver"
-           (click)="volver()"
-        ></i>
+        Crear un alerta
     </div>
     <div class="card-body">
-        <div class="border w-100" style="height: 250px;">
-            <img src="" alt="imagenQR">
+        <div class="p-3 ps-5 pe-5">
+            <img class="alert-tag-img" src="../../../../assets/img/img-alert.png" alt="iimg-alert">
         </div>
         <div>
             <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">

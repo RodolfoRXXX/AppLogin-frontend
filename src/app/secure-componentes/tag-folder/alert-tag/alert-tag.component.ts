@@ -182,8 +182,4 @@ export class AlertTagComponent implements OnInit {
     }
   }
 
-  volver(){
-    this._router.navigate(['profile/tags/all-tag']);
-  }
-
 }

@@ -1,5 +1,12 @@
 <div class="mb-2 p-1">
-    <div class="card-box rounded">
+    <!-- Spinner load -->
+    <div class="d-flex justify-content-center p-4" *ngIf="view_tag == 'load'">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">...loading</span>
+        </div>
+    </div>
+    <!-- Caja principal de vista -->
+    <div class="card-box rounded" *ngIf="view_tag == 'ok'">
         <div class="card-box-header" [style.background]="(this.datos.estado == 'link')?link:((this.datos.estado == 'alert')?alert:nolink)">
             <img class="img-circle-section" [src]="foto_perfil" alt="{{ this.datos.nivel }}" >
         </div>
@@ -66,6 +73,10 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
+    </div>
+    <!-- Caja de error -->
+    <div class="alert alert-danger mb-0" *ngIf="view_tag == 'error'">
+        <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualizá la página.</p>
     </div>
 </div>
