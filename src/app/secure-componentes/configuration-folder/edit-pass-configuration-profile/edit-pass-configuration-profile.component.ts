@@ -17,15 +17,18 @@ export class EditPassConfigurationProfileComponent implements OnInit {
 
   @ViewChild('oldPasswordInput') oldPasswordInput: ElementRef;
   form: FormGroup;
-  estadoSmt: string = 'actualizar';
-  estadoValidacion: string = 'verificar';
+  estadoSmt: string;
+  estadoValidacion: string;
 
   constructor( 
     private _auth: AuthService,
     private _api: ApiService,
     private _com: ComunicationService,
     private _router: Router
-  ) { }
+  ) {
+    this.estadoSmt = 'actualizar';
+    this.estadoValidacion = 'verificar';
+  }
 
   ngOnInit(): void {
     let data = this._auth.getUserDetails();

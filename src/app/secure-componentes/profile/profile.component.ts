@@ -10,21 +10,19 @@ import { AuthService } from 'src/app/services/auth.service';
 export class ProfileComponent implements OnInit {
 
   public protectedData: any;
-  public loading: boolean = false;
-  user: string = "";
+  public loading: boolean;
+  user: string;
 
   constructor(
     private _api: ApiService,
     private _auth: AuthService
-  ) { }
+  ) {
+    this.loading = false;
+    this.user = '';
+  }
 
   ngOnInit(): void {
-
-    /*this._api.getTypeRequest('profile/profile').subscribe((res:any) => {
-      this.protectedData = res
-    });*/
     this.getUser();
-
   }
 
   getUser(){

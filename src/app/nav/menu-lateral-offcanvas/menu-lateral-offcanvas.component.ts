@@ -11,13 +11,15 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 })
 export class NgbdOffcanvasBasic implements OnInit {
   @ViewChild(TemplateRef) content: '#content';
-  user: string = "";
+  user: string;
 
   constructor(
     private offcanvasService: NgbOffcanvas,
     private _com: ComunicationService,
     private _auth: AuthService
-  ) {}
+  ) {
+    this.user = '';
+  }
 
   ngOnInit(): void {
     this.getUser();

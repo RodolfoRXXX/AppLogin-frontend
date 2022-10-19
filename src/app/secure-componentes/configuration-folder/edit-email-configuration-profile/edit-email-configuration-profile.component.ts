@@ -15,14 +15,16 @@ import { md5 } from 'src/app/secure-componentes/function/md5';
 export class EditEmailConfigurationProfileComponent implements OnInit {
 
   form: FormGroup;
-  estadoSmt: string = 'actualizar';
+  estadoSmt: string;
 
   constructor(
     private _auth: AuthService,
     private _api: ApiService,
     private _com: ComunicationService,
     private _router: Router
-  ) { }
+  ) {
+    this.estadoSmt = 'actualizar';
+  }
 
   ngOnInit(): void {
     let data = this._auth.getUserDetails();

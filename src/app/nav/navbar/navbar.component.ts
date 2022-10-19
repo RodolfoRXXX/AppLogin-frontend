@@ -12,7 +12,7 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 export class NavbarComponent implements OnInit {
 
   texto_sesion: string;
-  isLogin: boolean = false;
+  isLogin: boolean;
   userId: string|null;
   @ViewChild('modal_sesion') modal_sesion: ElementRef;
 
@@ -25,7 +25,8 @@ export class NavbarComponent implements OnInit {
   ) { 
     config.backdrop = 'static';
     config.keyboard = false;
-   }
+    this.isLogin = false;
+  }
 
   ngOnInit(): void {
     this.isUserLogin();

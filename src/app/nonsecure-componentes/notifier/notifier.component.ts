@@ -8,14 +8,16 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 })
 export class NotifierComponent implements OnInit {
 
-  display: boolean = false;
+  display: boolean;
   state: string;
   text: string;
   time: number;
 
   constructor(
     private _com: ComunicationService
-  ) { }
+  ) {
+    this.display = false;
+  }
 
   ngOnInit(): void {
     this._com.getNotifier().subscribe( (value:any) => {

@@ -19,9 +19,9 @@ export class RegisterComponent implements OnInit {
   ver_password:boolean
   ver_password_rep:boolean
 
-  estadoSmt: string = 'registro';
-  isLogin: boolean = false;
-  displayLogin: boolean = false;
+  estadoSmt: string;
+  isLogin: boolean;
+  displayLogin: boolean;
   messageLogin: string;
   classLogin: string;
   form: FormGroup;
@@ -31,7 +31,10 @@ export class RegisterComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private _com: ComunicationService
-  ) { 
+  ) {
+    this.estadoSmt = 'registro';
+    this.isLogin = false;
+    this.displayLogin = false;
     this.type_input_password = 'password';
     this.type_input_password_rep = 'password';
     this.ver_password = false;

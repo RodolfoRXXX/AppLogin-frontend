@@ -12,9 +12,9 @@ import { emailValidator } from '../../function/functions';
 })
 export class ForgotComponent implements OnInit {
 
-  estadoSmt: string = 'envio';
-  isLogin: boolean = false;
-  displayLogin: boolean = false;
+  estadoSmt: string;
+  isLogin: boolean;
+  displayLogin: boolean;
   messageLogin: string;
   classLogin: string;
   form: FormGroup;
@@ -23,7 +23,11 @@ export class ForgotComponent implements OnInit {
     private _auth: AuthService,
     private _router: Router,
     private _api: ApiService
-  ) { }
+  ) {
+    this.estadoSmt = 'envio';
+    this.isLogin = false;
+    this.displayLogin = false;
+  }
 
   ngOnInit(): void {
     this.isUserLogin();

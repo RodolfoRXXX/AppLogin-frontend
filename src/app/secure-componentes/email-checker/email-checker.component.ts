@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -13,18 +13,22 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 export class EmailCheckerComponent implements OnInit {
 
   form: FormGroup;
-  estadoSmt: string = 'verificar';
-  displayLogin: boolean = false;
+  estadoSmt: string;
+  displayLogin: boolean;
   classLogin: string;
   messageLogin: string;
-  checkerDisplay: boolean = true;
+  checkerDisplay: boolean;
 
   constructor(
     private _auth: AuthService,
     private _api: ApiService,
     private _com: ComunicationService,
     private _router: Router
-  ) { }
+  ) {
+    this.estadoSmt = 'verificar';
+    this.displayLogin = false;
+    this.checkerDisplay = true;
+  }
 
   ngOnInit(): void {
     let data = this._auth.getUserDetails();
