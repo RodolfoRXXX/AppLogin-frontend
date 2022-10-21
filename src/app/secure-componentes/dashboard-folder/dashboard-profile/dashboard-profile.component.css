@@ -1,0 +1,166 @@
+/* Extra small devices (phones, 600px and down) */
+
+.dashboard-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 3rem 0;
+    height: 150px;
+}
+
+.color-nav-tab {
+    background-color: rgb(247, 247, 247);
+}
+
+.img-content {
+    height: 100%;
+}
+
+.dashboard-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 3rem 0;
+}
+
+.dashboard-info a {
+    color: rgb(35, 60, 132)!important;
+}
+
+.card-info {
+    width: 240px;
+    height: 120px;
+    margin: 0.5rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem;
+}
+
+.dashboard-info-const {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+}
+
+.card-info-const {
+    width: 240px;
+    height: 120px;
+    margin-right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem;
+}
+
+.dashboard-profile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 3rem;
+}
+
+.card-profile {
+    width: 120px;
+    height: 120px;
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.75rem 0.25rem;
+    cursor: pointer;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+    transition: all 0.4s ease;
+}
+.card-profile p {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+    color: #6c757d;
+}
+.card-profile:hover, .card-profile:active {
+    background: linear-gradient(to bottom, rgb(98, 161, 255), rgb(156, 196, 254));
+    transition: all 0.4s ease;
+}
+.card-profile:hover p, .card-profile:active p {
+    color: black!important;
+}
+
+.btn-return {
+    position:absolute;
+    left: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.btn-return:hover {
+    opacity: 0.8;
+}
+
+.color_alert {
+    background-color: #EC7063;
+}
+.color_account {
+    background-color: #ffdb4d;
+}
+.color_info {
+    background-color: #58D68D;
+}
+
+.btn-a:focus, .btn-a:hover, .btn-a:active {
+    box-shadow: none;
+}
+
+@media only screen and (max-width: 768px) {
+    
+    .dashboard-nav {
+        padding: 1rem 1rem 0;
+    }
+
+    .dashboard-info {
+        padding: 1rem 0.25rem 0;
+    }
+
+    .dashboard-info-const {
+        width: 100%;
+    }
+
+    .card-info-const {
+        margin-right: 0;
+    }
+
+    .dashboard-profile {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .card-profile {
+        margin: 0.5rem 0.5rem;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+
+
+}

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,18 +11,71 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DashboardProfileComponent implements OnInit {
 
-  userId: any;
+  @ViewChild('modal_ubicacion') modal_ubicacion: ElementRef;
+
+  userId:any;
+  user:string;
+  email:string;
+  active:boolean;
+  card_total:number;
+  card_link:number;
+  card_nolink:number;
+  card_alert:number;
 
   constructor(
-    private _auth: AuthService
-  ) { }
+    private _auth: AuthService,
+    private _api:ApiService,
+    private _router:Router,
+    private modalService: NgbModal
+  ) {
+    this.card_total = 0;
+    this.card_link = 0;
+    this.card_nolink = 0;
+    this.card_alert = 0;
+  }
 
   ngOnInit(): void {
-    let data = this._auth.getUserId();
+    let data = this._auth.getUserDetails();
     if(data){
-      this.userId = (JSON.parse(data));
+      this.user = JSON.parse(data)[0].nombre;
+      this.email = JSON.parse(data)[0].email;
+      this.userId = JSON.parse(data)[0].id;
+      (JSON.parse(data)[0].active == 1)?(this.active = true):(this.active = false);
+      this.cargar_tarjetas(this.userId);
     }
-    
+  }
+
+  cargar_tarjetas(id:any){
+    this._api.postTypeRequest('profile/get-data-card', {id}).subscribe({
+      next: (res: any) => {
+        if(res.status == 1){
+          //;
+          console.log(res)
+          this.card_total = res.data.total;
+          this.card_link = res.data.link;
+          this.card_nolink = res.data.nolink;
+          this.card_alert = res.data.alert;
+        } else{
+          //ventana de error
+
+        }
+      },
+      error: (error) => {
+        //ventana de error
+      }
+    })
+  }
+
+  ver_ubicacion(){
+    this.modalService.open(this.modal_ubicacion, { centered: true });
+  }
+
+  activar_cuenta(){
+    this._router.navigate(['verificate']);
+  }
+
+  configurar_email(){
+    this._router.navigate(['profile/configuration']);
   }
 
 
