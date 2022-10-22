@@ -57,11 +57,23 @@
 }
 
 .dashboard-profile {
+    padding: 3rem;
+}
+
+.box-profile-data {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    padding: 3rem;
+}
+.box-profile-load {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+}
+.box-profile-error {
+    padding: 0 1rem;
 }
 
 .card-profile {
@@ -73,21 +85,13 @@
     align-items: center;
     justify-content: space-around;
     padding: 0.75rem 0.25rem;
-    cursor: pointer;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-    transition: all 0.4s ease;
+    background: linear-gradient(to bottom, rgb(98, 161, 255), rgb(156, 196, 254));
 }
 .card-profile p {
     font-size: 0.75rem;
     margin-bottom: 0;
-    color: #6c757d;
-}
-.card-profile:hover, .card-profile:active {
-    background: linear-gradient(to bottom, rgb(98, 161, 255), rgb(156, 196, 254));
-    transition: all 0.4s ease;
-}
-.card-profile:hover p, .card-profile:active p {
-    color: black!important;
+    color: black;
 }
 
 .btn-return {
@@ -140,6 +144,10 @@
 
     .card-profile {
         margin: 0.5rem 0.5rem;
+    }
+
+    .box-profile-error {
+        padding: 0 0.5rem;
     }
 
 }

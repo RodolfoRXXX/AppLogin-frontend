@@ -25,21 +25,36 @@
 </section>
 <!-- Contenido del tag -->
 <section class="dashboard-profile">
-    <div class="card-profile rounded">
-        <i class="fa-solid fa-user-tag fa-2x"></i>
-        <p class="d-block text-center">Tags creados<br><b>({{ card_total }})</b></p>
+    <!-- Datos ok -->
+    <div class="box-profile-data" *ngIf="state == 'ok'">
+        <div class="card-profile rounded">
+            <i class="fa-solid fa-user-tag fa-2x"></i>
+            <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
+        </div>
+        <div class="card-profile rounded">
+            <i class="fa-solid fa-user-check fa-2x"></i>
+            <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
+        </div>
+        <div class="card-profile rounded">
+            <i class="fa-solid fa-user-xmark fa-2x"></i>
+            <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
+        </div>
+        <div class="card-profile rounded">
+            <i class="fa-solid fa-person-circle-exclamation fa-2x"></i>
+            <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
+        </div>
     </div>
-    <div class="card-profile rounded">
-        <i class="fa-solid fa-user-check fa-2x"></i>
-        <p class="d-block text-center">Tags vinculados<br><b>({{ card_link }})</b></p>
+    <!-- Loading de carga -->
+    <div class="box-profile-load" *ngIf="state == 'load'">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">...loading</span>
+        </div>
     </div>
-    <div class="card-profile rounded">
-        <i class="fa-solid fa-user-xmark fa-2x"></i>
-        <p class="d-block text-center">Tags no vinculados<br><b>({{ card_nolink }})</b></p>
-    </div>
-    <div class="card-profile rounded">
-        <i class="fa-solid fa-person-circle-exclamation fa-2x"></i>
-        <p class="d-block text-center">Tags en alerta<br><b>({{ card_alert }})</b></p>
+    <!-- Error de carga de datos -->
+    <div class="box-profile-error" *ngIf="state == 'error'">
+        <div class="alert alert-danger">
+            <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
+        </div>
     </div>
 </section>
 

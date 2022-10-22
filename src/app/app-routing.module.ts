@@ -16,6 +16,7 @@ import { VerificateGuardGuard } from './services/verificate-guard.guard';
 import { AllTagComponent } from './secure-componentes/tag-folder/all-tag/all-tag.component';
 import { LinkTagComponent } from './secure-componentes/tag-folder/link-tag/link-tag.component';
 import { AlertTagComponent } from './secure-componentes/tag-folder/alert-tag/alert-tag.component';
+import { VistaTagComponent } from './secure-componentes/tag-folder/vista-tag/vista-tag.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forgot', component: ForgotComponent},
+  {path: 'view-tag/:code', component: VistaTagComponent},
   {path: 'verificate', component: EmailCheckerComponent, canActivate: [AuthGuardService]},
   {path: 'profile', component: ProfileComponent,
     children: [

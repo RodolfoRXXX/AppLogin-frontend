@@ -21,6 +21,7 @@ export class DashboardProfileComponent implements OnInit {
   card_link:number;
   card_nolink:number;
   card_alert:number;
+  state:string;
 
   constructor(
     private _auth: AuthService,
@@ -32,6 +33,7 @@ export class DashboardProfileComponent implements OnInit {
     this.card_link = 0;
     this.card_nolink = 0;
     this.card_alert = 0;
+    this.state = 'load';
   }
 
   ngOnInit(): void {
@@ -55,13 +57,15 @@ export class DashboardProfileComponent implements OnInit {
           this.card_link = res.data.link;
           this.card_nolink = res.data.nolink;
           this.card_alert = res.data.alert;
+          this.state = 'ok';
         } else{
           //ventana de error
-
+          this.state = 'error';
         }
       },
       error: (error) => {
         //ventana de error
+        this.state = 'error';
       }
     })
   }

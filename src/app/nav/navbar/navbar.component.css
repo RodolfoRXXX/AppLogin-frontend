@@ -13,18 +13,31 @@
 }
 
 .nav-brand {
-    text-align: left;
+    margin: 0.25rem 0 0.25rem 2.5rem;
+    padding: 0;
+    height: 50px;
 }
 
 .navbar-color {
     background: linear-gradient(to bottom, rgb(13, 110, 253), rgb(102, 161, 250));
 }
 
+.img-logo {
+    height: 95%;
+    object-fit: contain;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {
 
     .nav-brand {
-        text-align: center;
+        margin: 0.25rem auto;
+        padding: 0;
+        height: 50px;
     }
 
     .display-menu {
