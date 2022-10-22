@@ -15,6 +15,7 @@ import { SecureModule } from './secure-componentes/secure-module/secure/secure.m
 import { NotifierComponent } from './nonsecure-componentes/notifier/notifier.component';
 import { NgbdOffcanvasBasic } from './nav/menu-lateral-offcanvas/menu-lateral-offcanvas.component';
 import { ModalSesionComponent } from './modals/modal-sesion/modal-sesion.component';
+import { PageNotFoundComponent } from './nonsecure-componentes/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ModalSesionComponent } from './modals/modal-sesion/modal-sesion.compone
     HomeComponent,
     NotifierComponent,
     NgbdOffcanvasBasic,
-    ModalSesionComponent
+    ModalSesionComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

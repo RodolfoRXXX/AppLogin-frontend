@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { globalVariable } from 'src/app/entidades/global_variables';
 import { social_data } from 'src/app/entidades/social_form';
+import { ApiService } from 'src/app/services/api.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -25,7 +27,11 @@ export class VistaTagComponent implements OnInit {
   foto_perfil:string;
   view_tag:string;
 
-  constructor() { 
+  constructor(
+    private _route:ActivatedRoute,
+    private _api:ApiService,
+    private _router:Router
+  ) { 
     this.leaf_selected = 'data';
     this.foto_perfil = '../../../../assets/img/blanck_persona.png';
     this.usuario = '';
@@ -35,21 +41,49 @@ export class VistaTagComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    switch (this.tipo) {
-      case 'persona' :
-        (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
-        this.usuario = this.datos.nombre + ' ' + this.datos.apellido;
-        this.sociales = (this.datos.red != '')?JSON.parse(this.datos.red):[];
+    if((!this.tipo)||(!this.datos)){
+      this._route.queryParams.subscribe( (params:any) => {
+        if(!params.code){
+          //ruta no completa luego de "view-tag"
+          this._router.navigate(['page-not-found']);
+        } else{
+          //Hay al menos un valor del parámetro "code" 
+          this._api.postTypeRequest('user/get-tag-out', {code:params.code}).subscribe({
+            next: (res: any) => {
+              console.log(res);
+              this.carga_datos( res.tipo, res.data[0] )
+            },
+            error: (error) => {
+                //ventana de error
+                console.log(error);
+                this.view_tag = 'error';
+            }
+          })
+        }
+      })
+    } else{
+      this.carga_datos( this.tipo, this.datos )
+    }
+  }
+
+  carga_datos( tipo:string, datos:any ){
+    this.tipo = tipo;
+    this.datos = datos;
+    switch (tipo) {
+      case 'personas' :
+        (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
+        this.usuario = datos.nombre + ' ' + datos.apellido;
+        this.sociales = (datos.red != '')?JSON.parse(datos.red):[];
         this.view_tag = 'ok';
         break;
-      case 'mascota' :
-        (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_mascota.png');
-        this.usuario = this.datos.nombre;
+      case 'mascotas' :
+        (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_mascota.png');
+        this.usuario = datos.nombre;
         this.view_tag = 'ok';
         break;
-      case 'vehiculo' :
-        (this.datos.foto != '')?(this.foto_perfil = environment.SERVER + this.datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_vehiculo.png');
-        this.usuario = this.datos.marca + ' ' + this.datos.modelo;
+      case 'vehiculos' :
+        (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_vehiculo.png');
+        this.usuario = datos.marca + ' ' + datos.modelo;
         this.view_tag = 'ok';
         break;
       default:

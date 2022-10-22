@@ -4,7 +4,7 @@
     <ul class="nav nav-tabs padding-nav-tab color-nav-tab">
         <li class="nav-item"><a class="nav-link active">Tag-ID personal</a></li>
     </ul>
-    <div class="col-md-6 ms-auto me-auto">
+    <div class="">
         <!-- Tag personal -->
         <div class="rounded accordion-box-principal" *ngIf="tag_personal_existe">
             <ngb-accordion #acc="ngbAccordion">
@@ -21,7 +21,7 @@
                         </ng-template>
                         <ng-template ngbPanelContent>
                             <div>
-                                <app-vista-tag [datos]="persona" [tipo]="'persona'"></app-vista-tag>
+                                <app-vista-tag [datos]="persona" [tipo]="'personas'"></app-vista-tag>
                             </div>
                             <div class="d-flex">
                                 <button class="btn w-25 btn-box-util"
@@ -116,7 +116,7 @@
                         </ng-template>
                         <ng-template ngbPanelContent>
                             <div>
-                                <app-vista-tag [datos]="persona" [tipo]="'persona'"></app-vista-tag>
+                                <app-vista-tag [datos]="persona" [tipo]="'personas'"></app-vista-tag>
                             </div>
                             <div class="d-flex">
                                 <button class="btn w-25 btn-box-util"
@@ -211,7 +211,7 @@
                         </ng-template>
                         <ng-template ngbPanelContent>
                             <div>
-                                <app-vista-tag [datos]="mascota" [tipo]="'mascota'"></app-vista-tag>
+                                <app-vista-tag [datos]="mascota" [tipo]="'mascotas'"></app-vista-tag>
                             </div>
                             <div class="d-flex">
                                 <button class="btn w-25 btn-box-util"
@@ -306,7 +306,7 @@
                         </ng-template>
                         <ng-template ngbPanelContent>
                             <div>
-                                <app-vista-tag [datos]="vehiculo" [tipo]="'vehiculo'"></app-vista-tag>
+                                <app-vista-tag [datos]="vehiculo" [tipo]="'vehiculos'"></app-vista-tag>
                             </div>
                             <div class="d-flex">
                                 <button class="btn w-25 btn-box-util"

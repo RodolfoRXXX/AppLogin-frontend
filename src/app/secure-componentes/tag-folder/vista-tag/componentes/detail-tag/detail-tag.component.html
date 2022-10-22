@@ -1,4 +1,4 @@
-<div *ngIf="tipo == 'persona'">
+<div *ngIf="tipo == 'personas'">
     <h6>Correo electrónico:</h6>
     <p class="ms-1">{{ (dato.email != '')?(dato.email):'Sin información' }}</p>
     <h6>Dirección:</h6>
@@ -8,7 +8,7 @@
     <h6>Nacionalidad:</h6>
     <p class="ms-1">{{ (dato.nacionalidad != '')?(dato.nacionalidad):'Sin información' }}</p>
 </div>
-<div *ngIf="tipo == 'mascota'">
+<div *ngIf="tipo == 'mascotas'">
     <h6>Especie:</h6>
     <p class="ms-1">{{ (dato.especie != '')?(dato.especie):'Sin información' }}</p>
     <h6>Dirección:</h6>
@@ -16,7 +16,7 @@
     <h6>Fecha de nacimiento:</h6>
     <p class="ms-1">{{ (dato.fechanac != '')?(dato.fechanac|date:'dd-MM-yyyy'):'Sin información' }}</p>
 </div>
-<div *ngIf="tipo == 'vehiculo'">
+<div *ngIf="tipo == 'vehiculos'">
     <h6>Color:</h6>
     <p class="ms-1">{{ (dato.color != '')?(dato.color):'Sin información' }}</p>
     <h6>Patente:</h6>

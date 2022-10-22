@@ -17,6 +17,7 @@ import { AllTagComponent } from './secure-componentes/tag-folder/all-tag/all-tag
 import { LinkTagComponent } from './secure-componentes/tag-folder/link-tag/link-tag.component';
 import { AlertTagComponent } from './secure-componentes/tag-folder/alert-tag/alert-tag.component';
 import { VistaTagComponent } from './secure-componentes/tag-folder/vista-tag/vista-tag.component';
+import { PageNotFoundComponent } from './nonsecure-componentes/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -24,7 +25,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forgot', component: ForgotComponent},
-  {path: 'view-tag/:code', component: VistaTagComponent},
+  {path: 'view-tag', component: VistaTagComponent},
   {path: 'verificate', component: EmailCheckerComponent, canActivate: [AuthGuardService]},
   {path: 'profile', component: ProfileComponent,
     children: [
@@ -43,7 +44,9 @@ const routes: Routes = [
     ],
     canActivate: [AuthGuardService, VerificateGuardGuard],
   },
-  {path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService]}
+  {path: 'logout', component: LogoutComponent, canActivate: [AuthGuardService]},
+  {path: '**', component: PageNotFoundComponent},
+  {path: 'page-not-found', component: PageNotFoundComponent}
 ];
 
 @NgModule({
