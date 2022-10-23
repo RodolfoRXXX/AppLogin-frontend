@@ -1,0 +1,13 @@
+.main-content {
+    min-height: calc(100vh - 148px);
+    background-color: rgb(247, 247, 247);
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+
+    .main-content {
+        min-height: calc(100vh - 196px);
+    }
+
+}

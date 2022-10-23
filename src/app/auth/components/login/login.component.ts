@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   type_input_password:string;
   ver_password:boolean
 
-  isLogin: boolean;
   displayLogin: boolean;
   messageLogin: string;
   classLogin: string;
@@ -31,7 +30,6 @@ export class LoginComponent implements OnInit {
   ) {
     this.type_input_password = 'password';
     this.ver_password = false;
-    this.isLogin = false;
     this.displayLogin = false;
     this.estadoSmt = 'ingreso';
    }
@@ -111,7 +109,7 @@ export class LoginComponent implements OnInit {
 
   isUserLogin(){
     if (this._auth.getUserDetails() != null) {
-      this.isLogin = true;
+      this._router.navigate(['profile']);
     }
   }
 

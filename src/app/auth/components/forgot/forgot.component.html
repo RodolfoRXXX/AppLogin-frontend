@@ -1,14 +1,12 @@
-<div class="card col-md-3 mt-3" 
-    style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px; margin: auto; "     
->
-    <div class="card-header text-center">
-        Reenvío de datos
-    </div>
-    <div class="card-body" *ngIf='!isLogin'>
+<div class="main-content">
+  <div class="header-content col-md-3">
+    <p>Reenvío de credenciales</p>
+  </div>
+    <div class="body-content col-md-3">
         <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
             <div class="mb-3">
               <label for="InputEmail" class="form-label mb-0">Correo electrónico</label>
-              <div id="emailHelp" class="form-text" style="font-size: 0.8rem;">Ingresá el correo electrónico de la cuenta así podremos enviarte las credenciales de ingreso.</div>
+              <div id="emailHelp" class="form-text mb-3" style="font-size: 0.8rem;">Ingresá el correo electrónico de la cuenta así podremos enviarte las credenciales de ingreso.</div>
               <input type="email" 
                      class="form-control input-style"
                      id="InputEmail" 
@@ -17,7 +15,7 @@
                      (focus)="actualizarSmt()"
                      [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
               />
-              <div style="height: 15px; font-size: 0.9rem;">
+              <div style="min-height: 15px; font-size: 0.9rem;">
                 <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
                   <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
                   <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
@@ -41,10 +39,5 @@
         <div class="d-flex justify-content-end">
           <a type="button" class="d-block mt-2 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Tenés una cuenta? Ingresá!</a>
         </div>
-    </div>
-    <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
-       
-        <h1>Estás logueado</h1>
-          
     </div>
 </div>

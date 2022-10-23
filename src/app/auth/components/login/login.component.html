@@ -1,10 +1,8 @@
-<div class="card col-md-3 mt-3" 
-     style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px; margin: auto; "     
->
-    <div class="card-header text-center">
-        Inicio de sesión
+<div class="main-content">
+    <div class="header-content col-md-3">
+        <p>Inicio de sesión</p>
     </div>
-    <div class="card-body" *ngIf='!isLogin'>
+    <div class="body-content col-md-3">
         <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
             <div class="mb-1">
               <label for="InputEmail" class="form-label">Correo electrónico</label>
@@ -16,7 +14,7 @@
                      (focus)="actualizarSmt()"
                      [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
               />
-              <div style="height: 15px; font-size: 0.9rem;">
+              <div style="min-height: 15px; font-size: 0.9rem;">
                 <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
                   <span *ngIf="form.get('email')?.errors?.['required']">"Correo electrónico" es requerido.</span>
                   <span *ngIf="form.get('email')?.errors?.['incorrectoName'] && !form.get('email')?.errors?.['required']">El formato del "Correo electrónico" no es correcto.</span>
@@ -39,7 +37,7 @@
                 </div>
               </div>
               
-              <div style="height: 15px; font-size: 0.9rem; ">
+              <div style="min-height: 15px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('password')?.invalid)&&(form.get('password')?.dirty||form.get('password')?.touched)">
                   <span *ngIf="form.get('password')?.errors?.['required']">"Contraseña" es requerida.</span>
                   <span *ngIf="form.get('password')?.errors?.['minlength']">"Contraseña" mín. 4 caracteres.</span>
@@ -65,13 +63,6 @@
         </form>
         <div class="d-flex justify-content-end">
           <a type="button" class="mt-2" style="font-size: 0.8rem;" (click)="irRegistro()">No tenés una cuenta? Registrate!</a>
-        </div>
-        
-    </div>
-    <div class = 'col-md-4 offset-4 mt-5' *ngIf='isLogin'>
-       
-        <h1>Estás logueado</h1>
-        <button class = 'btn btn-outline-info' (click)='logout()'>Log-out</button>
-          
+        </div> 
     </div>
 </div>

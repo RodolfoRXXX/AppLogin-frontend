@@ -1,17 +1,27 @@
-<!-- Modificación de password -->
-<section class="col-md-6 content-section">
-    <h5 class="border-bottom"><i class="fa-solid fa-unlock-keyhole"></i> Modificar contraseña</h5>
-    <app-edit-pass-configuration-profile></app-edit-pass-configuration-profile>
-</section>
-<hr class="mb-1">
-<!-- Modificación de email -->
-<section class="col-md-6 content-section">
-    <h5 class="border-bottom"><i class="fa-solid fa-envelope"></i> Modificar correo de usuario</h5>
-    <app-edit-email-configuration-profile></app-edit-email-configuration-profile>
-</section>
-<hr class="mb-1">
-<!-- Modificación de nombre de usuario -->
-<section class="col-md-6 content-section">
-    <h5 class="border-bottom"><i class="fa-solid fa-id-badge"></i> Modificar nombre de usuario</h5>
-    <app-edit-name-configuration-profile></app-edit-name-configuration-profile>
-</section>
+<nav class="configuration-nav color-nav-tab">
+    <h2 class="me-4 mb-0">Configuración</h2>
+</nav>
+<!-- Solapa Modificar contraseña -->
+<ul class="nav nav-tabs padding-nav-tab color-nav-tab">
+    <li class="nav-item"><a class="nav-link active"><i class="fa-solid fa-unlock-keyhole me-1"></i> Modificar contraseña</a></li>
+</ul>
+    <!-- modificar contraseña -->
+    <section class="col-md-6 content-section">
+        <app-edit-pass-configuration-profile></app-edit-pass-configuration-profile>
+    </section>
+<!-- Solapa Modificar correo de usuario -->
+<ul class="nav nav-tabs padding-nav-tab color-nav-tab-adic">
+    <li class="nav-item"><a class="nav-link active"><i class="fa-solid fa-envelope me-1"></i> Modificar correo de usuario</a></li>
+</ul>
+    <!-- Modificar email de usuario -->
+    <section class="col-md-6 content-section">
+        <app-edit-email-configuration-profile></app-edit-email-configuration-profile>
+    </section>
+<!-- Solapa Modificar nombre de usuario -->
+<ul class="nav nav-tabs padding-nav-tab color-nav-tab-adic">
+    <li class="nav-item"><a class="nav-link active"><i class="fa-solid fa-id-badge me-1"></i> Modificar nombre de usuario</a></li>
+</ul>
+    <!-- Modificar nombre de usuario -->
+    <section class="col-md-6 content-section">
+        <app-edit-name-configuration-profile></app-edit-name-configuration-profile>
+    </section>

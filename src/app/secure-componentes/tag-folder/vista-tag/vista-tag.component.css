@@ -1,35 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+.link:before {background-color: #28b463;}
+.nolink:before {background-color: #fcca46;}
+.alert:before {background-color: #cb4335;}
+
+.body-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+  }
+
 .card-box {
-    border: none; 
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-}
-
-.card-box-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #F9F9F9;
+    border-radius: 10px;
+    padding: 25px 50px;
     position: relative;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    height: 180px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-bottom: 0;
 }
-
-.img-circle-section {
+.card-box::before {
+    content: "";
     position: absolute;
-    bottom: -105px;
-    width: 45%;
-    margin: 0 27.5%;
-    border: 8px solid white;
-    border-radius: 50%;
+    top: 0;
+    left: 0;
+    height: 22%;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
 }
 
-.card-box-body {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    height: calc(100% - 180px);
-    padding-top: 120px;
+.img-box {
+    position: relative;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    padding: 5px;
+    margin-bottom: 10px;
 }
+
+.img-item {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #F9F9F9;;
+}
+
+.img-alert {
+    border: 1px solid white;
+    border-radius: 50%;
+    position: absolute; top: 30px; right: 30px;
+    background-color: white;
+}
+
+.text-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    font-family: "Poppins", sans-serif;
+  }
+  .name {
+    font-size: 2.5rem;
+    font-weight: 500;
+  }
+  .city {
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
 
 .box-section {
-    margin: 0.25rem 3rem 0.5rem;
+    width: 100%;
     padding-top: 0.25rem;
-    padding-bottom: 2.75rem;
 }
 
 .icon-section {
@@ -39,32 +86,27 @@
 }
 
 .btn-circle-section {
-    height: 3em;
-    width: 3em;
-    background-color: none;
+    height: 3.5em;
+    width: 3.5em;
+    border-radius: 50%;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 0.5rem;
-    padding-top: 0.5rem;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
-.btn-circle-section:hover {
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    background-color: white;
-}
-
-.btn-circle-section:active {
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
-    background-color: white;
+.btn-circle-section:hover, .btn-circle-section:active {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
 
 .fs-social {
-    font-size: 1.8em;
+    font-size: 2em;
 }
 
 .data-section {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .data-section-box {
@@ -91,23 +133,28 @@
 
 .leaf-box {
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px -4px -12px;
     position: relative;
     bottom: 1px;
 }
 
 .fs-data {
     font-size: 1.1em;
+    opacity: 0.6;
+}
+
+.leaf-box i {
+    opacity: 1;
 }
 
 .data-section-info {
     width: 100%;
-    background-color: white;
-    min-height: 200px;
+    background-color: #fff;
+    min-height: 300px;
     padding: 1.5rem 1.5rem 0.25rem;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
 
 .a-socialresp-box {
@@ -121,4 +168,34 @@
 
 .a-socialresp-box:hover, .a-socialresp-box:active {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+
+    .body-card {
+        margin: 20px;
+      }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+
+
 }

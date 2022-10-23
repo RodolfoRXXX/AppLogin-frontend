@@ -20,7 +20,6 @@ export class RegisterComponent implements OnInit {
   ver_password_rep:boolean
 
   estadoSmt: string;
-  isLogin: boolean;
   displayLogin: boolean;
   messageLogin: string;
   classLogin: string;
@@ -33,7 +32,6 @@ export class RegisterComponent implements OnInit {
     private _com: ComunicationService
   ) {
     this.estadoSmt = 'registro';
-    this.isLogin = false;
     this.displayLogin = false;
     this.type_input_password = 'password';
     this.type_input_password_rep = 'password';
@@ -137,7 +135,7 @@ export class RegisterComponent implements OnInit {
 
   isUserLogin(){
     if (this._auth.getUserDetails() != null) {
-      this.isLogin = true;
+      this._router.navigate(['profile']);
     }
   }
 

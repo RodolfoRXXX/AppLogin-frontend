@@ -50,7 +50,6 @@ export class VistaTagComponent implements OnInit {
           //Hay al menos un valor del parámetro "code" 
           this._api.postTypeRequest('user/get-tag-out', {code:params.code}).subscribe({
             next: (res: any) => {
-              console.log(res);
               this.carga_datos( res.tipo, res.data[0] )
             },
             error: (error) => {

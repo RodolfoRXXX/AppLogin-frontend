@@ -13,7 +13,6 @@ import { emailValidator } from '../../function/functions';
 export class ForgotComponent implements OnInit {
 
   estadoSmt: string;
-  isLogin: boolean;
   displayLogin: boolean;
   messageLogin: string;
   classLogin: string;
@@ -25,7 +24,6 @@ export class ForgotComponent implements OnInit {
     private _api: ApiService
   ) {
     this.estadoSmt = 'envio';
-    this.isLogin = false;
     this.displayLogin = false;
   }
 
@@ -81,7 +79,7 @@ export class ForgotComponent implements OnInit {
 
   isUserLogin(){
     if (this._auth.getUserDetails() != null) {
-      this.isLogin = true;
+      this._router.navigate(['profile']);
     }
   }
 

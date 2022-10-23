@@ -1,3 +1,26 @@
+
+.configuration-nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.75rem 3rem 0;
+    height: 96px;
+    position: relative;
+}
+
+.color-nav-tab {
+    background-color: rgb(247, 247, 247);
+}
+
 .content-section {
-    padding: 1rem 2rem;
+    padding: 0.75rem 0 0;
+    background-color: #fff;
+}
+
+.padding-nav-tab {
+    padding: 0.75rem 1rem 0;
+}
+
+.color-nav-tab-adic {
+    background: linear-gradient(to bottom, white, rgb(247, 247, 247));
 }

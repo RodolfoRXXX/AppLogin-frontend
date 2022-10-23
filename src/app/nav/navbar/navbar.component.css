@@ -1,5 +1,7 @@
-.nav-shadow {
+.nav-prop {
     box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    padding: 0 1rem;
+    height: 74px;
 }
 
 .display-menu {
@@ -13,7 +15,7 @@
 }
 
 .nav-brand {
-    margin: 0.25rem 0 0.25rem 2.5rem;
+    margin: 0.75rem 0 0.75rem 2.5rem;
     padding: 0;
     height: 50px;
 }
@@ -23,7 +25,7 @@
 }
 
 .img-logo {
-    height: 95%;
+    height: 100%;
     object-fit: contain;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -34,8 +36,12 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {
 
+    .nav-prop {
+        height: 122px;
+    }
+
     .nav-brand {
-        margin: 0.25rem auto;
+        margin: 1rem auto;
         padding: 0;
         height: 50px;
     }
