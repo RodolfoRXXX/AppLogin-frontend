@@ -51,8 +51,7 @@ export class DashboardProfileComponent implements OnInit {
     this._api.postTypeRequest('profile/get-data-card', {id}).subscribe({
       next: (res: any) => {
         if(res.status == 1){
-          //;
-          console.log(res)
+          //Ok;
           this.card_total = res.data.total;
           this.card_link = res.data.link;
           this.card_nolink = res.data.nolink;

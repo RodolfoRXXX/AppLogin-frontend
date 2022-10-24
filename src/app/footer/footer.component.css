@@ -1,7 +1,6 @@
 .footer-section {
     padding: 1rem;
-    border-top: 0.25px solid rgb(102, 161, 250);
     width: 100%;
-    background-color: #fff;
+    background-color: rgb(226, 239, 255);
     height: 74px;
 }

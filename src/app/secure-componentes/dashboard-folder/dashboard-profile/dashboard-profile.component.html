@@ -1,62 +1,64 @@
-<nav class="dashboard-nav color-nav-tab border-bottom">
-    <h2>Hola {{ user }}!</h2>
-    <img class="img-content" src="../../../../assets/img/rest_img.png" alt="rest_img">
-</nav>
-<!-- Contenido del usuario -->
-<section class="dashboard-info">
-    <div class="card-info border rounded color_alert" *ngIf="!false">
-        <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Tag en alerta</p>
-        <h5 class="text-center">Han encontrado tu tag!</h5>
-        <button type="button" class="btn btn-link text-end btn-a" title="Ver ubicación" (click)="ver_ubicacion()">Ver ubicación</button>
-    </div>
-    <div class="dashboard-info-const">
-        <div class="card-info-const border rounded color_account">
-            <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Estado de tu cuenta</p>
-            <h5 class="text-center" *ngIf="active">Activa</h5>
-            <h5 class="text-center" *ngIf="!active">Inactiva</h5>
-            <button type="button" class="btn btn-link text-end btn-a" title="Activar cuenta" [disabled]="active" (click)="activar_cuenta()">Activar cuenta</button>
+<div class="main-content">
+    <nav class="dashboard-nav border-bottom">
+        <h2>Hola {{ user }}!</h2>
+        <img class="img-content" src="../../../../assets/img/rest_img.png" alt="rest_img">
+    </nav>
+    <!-- Contenido del usuario -->
+    <section class="dashboard-info">
+        <div class="card-info border rounded color_alert" *ngIf="!false">
+            <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Tag en alerta</p>
+            <h5 class="text-center">Han encontrado tu tag!</h5>
+            <button type="button" class="btn btn-link text-end btn-a" title="Ver ubicación" (click)="ver_ubicacion()">Ver ubicación</button>
         </div>
-        <div class="card-info-const border rounded color_info">
-            <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Correo electrónico</p>
-            <h5 class="text-center">{{ email }}</h5>
-            <button type="button" class="btn btn-link text-end btn-a" title="Configurar correo" (click)="configurar_email()">Modificar cuenta</button>
+        <div class="dashboard-info-const">
+            <div class="card-info-const border rounded color_account">
+                <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Estado de tu cuenta</p>
+                <h5 class="text-center" *ngIf="active">Activa</h5>
+                <h5 class="text-center" *ngIf="!active">Inactiva</h5>
+                <button type="button" class="btn btn-link text-end btn-a" title="Activar cuenta" [disabled]="active" (click)="activar_cuenta()">Activar cuenta</button>
+            </div>
+            <div class="card-info-const border rounded color_info">
+                <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Correo electrónico</p>
+                <h5 class="text-center">{{ email }}</h5>
+                <button type="button" class="btn btn-link text-end btn-a" title="Configurar correo" (click)="configurar_email()">Modificar cuenta</button>
+            </div>
         </div>
-    </div>
-</section>
-<!-- Contenido del tag -->
-<section class="dashboard-profile">
-    <!-- Datos ok -->
-    <div class="box-profile-data" *ngIf="state == 'ok'">
-        <div class="card-profile rounded">
-            <i class="fa-solid fa-user-tag fa-2x"></i>
-            <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
+    </section>
+    <!-- Contenido del tag -->
+    <section class="dashboard-profile">
+        <!-- Datos ok -->
+        <div class="box-profile-data" *ngIf="state == 'ok'">
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-tag fa-2x"></i>
+                <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-check fa-2x"></i>
+                <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-xmark fa-2x"></i>
+                <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-person-circle-exclamation fa-2x"></i>
+                <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
+            </div>
         </div>
-        <div class="card-profile rounded">
-            <i class="fa-solid fa-user-check fa-2x"></i>
-            <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
+        <!-- Loading de carga -->
+        <div class="box-profile-load" *ngIf="state == 'load'">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">...loading</span>
+            </div>
         </div>
-        <div class="card-profile rounded">
-            <i class="fa-solid fa-user-xmark fa-2x"></i>
-            <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
+        <!-- Error de carga de datos -->
+        <div class="box-profile-error" *ngIf="state == 'error'">
+            <div class="alert alert-danger">
+                <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
+            </div>
         </div>
-        <div class="card-profile rounded">
-            <i class="fa-solid fa-person-circle-exclamation fa-2x"></i>
-            <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
-        </div>
-    </div>
-    <!-- Loading de carga -->
-    <div class="box-profile-load" *ngIf="state == 'load'">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">...loading</span>
-        </div>
-    </div>
-    <!-- Error de carga de datos -->
-    <div class="box-profile-error" *ngIf="state == 'error'">
-        <div class="alert alert-danger">
-            <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
-        </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <!-- Modal ubicación -->
 <ng-template #modal_ubicacion let-modal>

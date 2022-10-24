@@ -1,13 +1,19 @@
 <nav class="navbar ps-3">
     <ul class="navbar-nav d-flex flex-column p-1 pe-3 w-100">
       <li class="nav-item mb-1" >
-        <a class="nav-link ps-3 rounded" routerLink = "dashboard" routerLinkActive = "active">Tablero</a>
+        <a class="nav-link ps-3 rounded" routerLink="dashboard" routerLinkActive="active">Tablero</a>
       </li>
       <li class="nav-item mb-1" >
-        <a class="nav-link ps-3 rounded" routerLink = "tags" routerLinkActive = "active">Mis tags</a>
+        <a class="nav-link ps-3 rounded" routerLink="tags" routerLinkActive="active">Mis tags</a>
       </li>
       <li class="nav-item mb-1">
-        <a class="nav-link ps-3 rounded" routerLink = "configuration" routerLinkActive = "active" >Configuración</a>
+        <a class="nav-link ps-3 rounded" routerLink="configuration" routerLinkActive="active" >Configuración</a>
+      </li>
+      <li class="nav-item mb-1">
+        <a class="nav-link ps-3 rounded" (click)="cerrar_sesion()" style="cursor: pointer;" title="cerrar sesión" >Cerrar sesión</a>
       </li>
     </ul>
+    <ng-template #modal_sesion let-modal>
+      <app-modal-sesion [texto]="texto_sesion" (cerrado)="confirma_sesion($event)"></app-modal-sesion>
+    </ng-template>
 </nav>

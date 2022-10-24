@@ -1,7 +1,7 @@
-<div class="d-flex">
+<div class="main-content">
     <!-- Barra lateral de navegación -->
     <section class="profile-section-name display-menu-fijo">
-      <div class="p-3 border-bottom ms-1 me-3">
+      <div class="p-4 border-bottom">
         <h6 class="mb-0"><span class="text-muted fs-09r">Usuario:</span> {{ user }}</h6>
       </div>  
       <app-menu-lateral></app-menu-lateral>
@@ -10,7 +10,10 @@
     <section class="profile-section-content">
         <router-outlet></router-outlet>
     </section>
+    <!-- Menú lateral off-canvas -->
+    <menu-lateral-offcanvas></menu-lateral-offcanvas>
 </div>
+
 
 
 

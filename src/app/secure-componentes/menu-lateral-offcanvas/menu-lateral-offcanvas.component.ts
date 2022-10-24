@@ -1,6 +1,7 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
 
-import {NgbOffcanvas} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalConfig, NgbOffcanvas} from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
 
@@ -12,18 +13,25 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 export class NgbdOffcanvasBasic implements OnInit {
   @ViewChild(TemplateRef) content: '#content';
   user: string;
+  texto_sesion: string;
+  @ViewChild('modal_sesion') modal_sesion: ElementRef;
 
   constructor(
     private offcanvasService: NgbOffcanvas,
     private _com: ComunicationService,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _router:Router,
+    private modalService: NgbModal,
+    config: NgbModalConfig
   ) {
     this.user = '';
+    config.backdrop = 'static';
+    config.keyboard = false;
   }
 
   ngOnInit(): void {
     this.getUser();
-    this._com.getMenuOffCanvas().subscribe( value => {
+    this._com.getMenuOffCanvas().subscribe( () => {
       this.open();
     } )
   };
@@ -39,6 +47,17 @@ export class NgbdOffcanvasBasic implements OnInit {
     if(data){
       (data)?(this.user = JSON.parse(data)[0].nombre):'';
     }
+  }
+
+  cerrar_sesion(){
+    this.texto_sesion = 'Estas por salir de la sesión';
+      this.modalService.open(this.modal_sesion, { centered: true, size: 'sm' });
+  }
+  confirma_sesion(e:boolean){
+    this.modalService.dismissAll();
+      if(e){
+        this._router.navigate(['logout']);
+      }
   }
 
 }
