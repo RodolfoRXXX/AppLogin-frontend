@@ -18,10 +18,12 @@ import { LinkTagComponent } from './secure-componentes/tag-folder/link-tag/link-
 import { AlertTagComponent } from './secure-componentes/tag-folder/alert-tag/alert-tag.component';
 import { VistaTagComponent } from './secure-componentes/tag-folder/vista-tag/vista-tag.component';
 import { PageNotFoundComponent } from './nonsecure-componentes/page-not-found/page-not-found.component';
+import { LostTagComponent } from './nonsecure-componentes/lost-tag/lost-tag.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'lost', component: LostTagComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'forgot', component: ForgotComponent},

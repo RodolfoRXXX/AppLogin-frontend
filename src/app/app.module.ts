@@ -16,6 +16,7 @@ import { NotifierComponent } from './nonsecure-componentes/notifier/notifier.com
 import { PageNotFoundComponent } from './nonsecure-componentes/page-not-found/page-not-found.component';
 import { FooterComponent } from './footer/footer.component';
 import { LostTagComponent } from './nonsecure-componentes/lost-tag/lost-tag.component';
+import { CardAlertComponent } from './nonsecure-componentes/lost-tag/components/card-alert/card-alert.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LostTagComponent } from './nonsecure-componentes/lost-tag/lost-tag.comp
     NotifierComponent,
     PageNotFoundComponent,
     FooterComponent,
-    LostTagComponent
+    LostTagComponent,
+    CardAlertComponent
   ],
   imports: [
     BrowserModule,
