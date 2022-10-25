@@ -9,6 +9,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
 }
 
 .body-card {
@@ -175,6 +177,21 @@
 
 .a-socialresp-box:hover, .a-socialresp-box:active {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+.img-qr {
+    height: 100px;
+    margin: 2rem;
+}
+
+.info-content {
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    margin: 1rem;
 }
 
 /* Extra small devices (phones, 600px and down) */

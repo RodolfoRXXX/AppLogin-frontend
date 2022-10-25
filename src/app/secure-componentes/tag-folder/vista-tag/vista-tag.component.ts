@@ -50,11 +50,28 @@ export class VistaTagComponent implements OnInit {
           //Hay al menos un valor del parámetro "code" 
           this._api.postTypeRequest('user/get-tag-out', {code:params.code}).subscribe({
             next: (res: any) => {
-              this.carga_datos( res.tipo, res.data[0] )
+              if(res.status != 1){
+                switch (res.data) {
+                  case 'noqr':
+                    //qr inexistente en la db
+                    this.view_tag = 'noqr';
+                    break;
+                  case 'nolink':
+                    //qr libre
+                    this.view_tag = 'nolink';
+                    break;
+                  default:
+                    //error genérico o no encuentra el tag de dicho qr, actualiza
+                    this.view_tag = 'error';
+                    break;
+                }
+              } else{
+                this.carga_datos( res.tipo, res.data[0] )
+                this.view_tag = 'ok';
+              }
             },
             error: (error) => {
                 //ventana de error
-                console.log(error);
                 this.view_tag = 'error';
             }
           })

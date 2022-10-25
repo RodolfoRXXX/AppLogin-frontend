@@ -1,7 +1,7 @@
 <div class="main-body">
     <div class="body-card">
         <!-- Spinner load -->
-        <div class="d-flex justify-content-center p-4" *ngIf="view_tag == 'load'">
+        <div class="info-content" *ngIf="view_tag == 'load'" style="box-shadow: none; ">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">...loading</span>
             </div>
@@ -78,10 +78,22 @@
                 </div>
             </div>
         </div>
+        <!-- QR inexistente -->
+        <div class="alert alert-danger info-content" *ngIf="view_tag == 'noqr'">
+            <h3 class="text-center">Oops..!</h3>
+                <img class="img-qr" src="../../../assets/img/qr-nolink.png" alt="qr-nolink">
+            <h4 class="text-center">El QR leído no existe!</h4>
+        </div>
+        <!-- QR libre -->
+        <div class="alert alert-success info-content" *ngIf="view_tag == 'nolink'">
+            <h3 class="text-center">El QR está libre!</h3>
+                <img class="img-qr" src="../../../assets/img/qr-libre.png" alt="qr-libre">
+            <h4 class="text-center">Podés vincularlo a cualquier Tag.</h4>
+        </div>
         <!-- Caja de error -->
-        <div class="alert alert-danger mb-0" *ngIf="view_tag == 'error'">
+        <div class="alert alert-danger info-content" *ngIf="view_tag == 'error'">
             <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualizá la página.</p>
         </div>
-</div>
+    </div>
 </div>
 
