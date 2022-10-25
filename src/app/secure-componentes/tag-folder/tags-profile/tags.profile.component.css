@@ -8,6 +8,14 @@
     position: relative;
 }
 
+.title-box {
+    margin: 0 1rem;
+    border-radius: 10px;
+    padding: 0.75rem;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
 .tag-profile-content {
     background-color: rgb(247, 247, 247);
 }
@@ -30,6 +38,9 @@
 
 @media only screen and (max-width: 768px) {
     
+    .title-box {
+        margin: 0;
+    }
 
 }
 

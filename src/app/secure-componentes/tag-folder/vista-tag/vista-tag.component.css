@@ -4,12 +4,19 @@
 .nolink:before {background-color: #fcca46;}
 .alert:before {background-color: #cb4335;}
 
+.main-body {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .body-card {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px auto;
-  }
+    width: 520px;
+}
 
 .card-box {
     display: flex;
@@ -173,16 +180,16 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {
 
-    .body-card {
-        margin: 20px;
-      }
+    
 
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+/* Medium devices (landscape tablets, 878px and up) */
+@media only screen and (max-width: 878px) {
 
-
+    .body-card {
+        width: 100%;
+    }
 
 }
 

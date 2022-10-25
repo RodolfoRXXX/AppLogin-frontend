@@ -1,15 +1,15 @@
-<div class="card col-md-3 background-card border-danger">
-    <div class="card-header text-center">
-        Crear un alerta
+<div class="main-content">
+    <div class="header-content col-md-3">
+        <p>Crear un nuevo alerta</p>
     </div>
-    <div class="card-body">
-        <div class="p-3 ps-5 pe-5">
+    <div class="body-content col-md-3">
+        <div class="box-img">
             <img class="alert-tag-img" src="../../../../assets/img/img-alert.png" alt="iimg-alert">
         </div>
         <div>
             <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
                 <div class="mb-2">
-                    <p class="text-muted text-center ms-1 mb-2" style="font-size: 0.8rem; ">Creá un alerta sobre este tag para que puedan ayudarte a encontrarlo. Al crear un alerta, recibirás la ubicación de cualquier dispositivo que haya encontrado y leído el tag.</p>
+                    <p class="text-muted text-center ms-1 mb-2" style="font-size: 14px;">Creá un alerta sobre este tag para que puedan ayudarte a encontrarlo. Al crear un alerta, recibirás la ubicación de cualquier dispositivo que haya encontrado y leído el tag.</p>
                     <textarea rows="3"
                               class="form-control input-style input-code"
                               formControlName="obsestado"

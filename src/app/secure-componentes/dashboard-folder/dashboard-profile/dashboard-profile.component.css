@@ -20,11 +20,10 @@
 }
 
 .dashboard-info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 1rem 3rem 0;
+    width: 100%;
+    display: grid;
+    align-content: center;
+    padding: 2rem;
     background-color: #fff;
 }
 
@@ -33,27 +32,8 @@
 }
 
 .card-info {
-    width: 240px;
+    min-width: 240px;
     height: 120px;
-    margin: 0.5rem 0.75rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0.25rem 0.5rem;
-}
-
-.dashboard-info-const {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 0.75rem;
-}
-
-.card-info-const {
-    width: 240px;
-    height: 120px;
-    margin-right: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -66,9 +46,11 @@
 }
 
 .box-profile-data {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 30px;
+    justify-content: center;
     align-items: center;
 }
 .box-profile-load {
@@ -78,13 +60,12 @@
     height: 120px;
 }
 .box-profile-error {
-    padding: 0 1rem;
+    padding: 1rem;
 }
 
 .card-profile {
     width: 120px;
     height: 120px;
-    margin: 0 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -132,19 +113,18 @@
     }
 
     .dashboard-info {
-        padding: 1rem 0.25rem 0;
-    }
-
-    .dashboard-info-const {
-        width: 100%;
-    }
-
-    .card-info-const {
-        margin-right: 0;
+        grid-template-columns: auto;
+        gap: 10px 5px;
+        padding: 1rem;
     }
 
     .dashboard-profile {
-        padding: 1.5rem 0.5rem;
+        padding: 1.5rem;
+    }
+
+    .box-profile-data {
+        grid-template-columns: auto auto;
+        gap: 30px;
     }
 
     .card-profile {
@@ -160,20 +140,44 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
 
+    .dashboard-info {
+        grid-template-columns: auto;
+        gap: 10px 5px;
+    }
 
+    .box-profile-data {
+        grid-template-columns: auto auto auto;
+        gap: 30px;
+    }
 
 }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+/* Large devices (laptops/desktops, 878px and up) */
+@media only screen and (min-width: 878px) {
 
-
+    .dashboard-info {
+        grid-template-columns: auto auto;
+        gap: 10px;
+    }
+    
+    .box-profile-data {
+        grid-template-columns: auto auto auto auto;
+        gap: 30px;
+    }
 
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
 
+    .dashboard-info {
+        grid-template-columns: auto auto auto;
+        gap: 10px;
+    }
 
+    .box-profile-data {
+        grid-template-columns: auto auto auto auto;
+        gap: 30px;
+    }
 
 }

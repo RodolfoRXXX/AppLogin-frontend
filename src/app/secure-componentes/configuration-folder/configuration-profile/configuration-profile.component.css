@@ -9,6 +9,14 @@
     background-color: rgb(247, 247, 247);
 }
 
+.title-box {
+    margin: 0 1rem;
+    border-radius: 10px;
+    padding: 0.75rem;
+    background-color: #fff;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
 .content-section {
     padding: 0.75rem 0 0;
     background-color: #fff;
@@ -20,4 +28,33 @@
 
 .color-nav-tab-adic {
     background: linear-gradient(to bottom, white, rgb(247, 247, 247));
+}
+
+@media only screen and (max-width: 768px) {
+    
+    .title-box {
+        margin: 0;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+
+
 }

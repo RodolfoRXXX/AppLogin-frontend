@@ -78,7 +78,7 @@ export class AlertTagComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._com.setTabEditor('Crear un alerta');
+    this._com.setTabEditor('Creando un alerta');
     this._activatedRoute.params.subscribe( (params: Params) => {
       this.tag.tipo = params['tipo'];
       this.tag.id   = params['id'];

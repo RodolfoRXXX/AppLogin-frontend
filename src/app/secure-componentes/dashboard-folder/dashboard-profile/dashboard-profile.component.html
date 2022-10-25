@@ -10,18 +10,16 @@
             <h5 class="text-center">Han encontrado tu tag!</h5>
             <button type="button" class="btn btn-link text-end btn-a" title="Ver ubicación" (click)="ver_ubicacion()">Ver ubicación</button>
         </div>
-        <div class="dashboard-info-const">
-            <div class="card-info-const border rounded color_account">
-                <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Estado de tu cuenta</p>
-                <h5 class="text-center" *ngIf="active">Activa</h5>
-                <h5 class="text-center" *ngIf="!active">Inactiva</h5>
-                <button type="button" class="btn btn-link text-end btn-a" title="Activar cuenta" [disabled]="active" (click)="activar_cuenta()">Activar cuenta</button>
-            </div>
-            <div class="card-info-const border rounded color_info">
-                <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Correo electrónico</p>
-                <h5 class="text-center">{{ email }}</h5>
-                <button type="button" class="btn btn-link text-end btn-a" title="Configurar correo" (click)="configurar_email()">Modificar cuenta</button>
-            </div>
+        <div class="card-info border rounded color_account">
+            <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Estado de tu cuenta</p>
+            <h5 class="text-center" *ngIf="active">Activa</h5>
+            <h5 class="text-center" *ngIf="!active">Inactiva</h5>
+            <button type="button" class="btn btn-link text-end btn-a" title="Activar cuenta" [disabled]="active" (click)="activar_cuenta()">Activar cuenta</button>
+        </div>
+        <div class="card-info border rounded color_info">
+            <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Correo electrónico</p>
+            <h5 class="text-center">{{ email }}</h5>
+            <button type="button" class="btn btn-link text-end btn-a" title="Configurar correo" (click)="configurar_email()">Modificar cuenta</button>
         </div>
     </section>
     <!-- Contenido del tag -->
