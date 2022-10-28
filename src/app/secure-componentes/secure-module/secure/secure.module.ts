@@ -28,7 +28,6 @@ import { LinkTagComponent } from '../../tag-folder/link-tag/link-tag.component';
 import { AlertTagComponent } from '../../tag-folder/alert-tag/alert-tag.component';
 import { EditNameConfigurationProfileComponent } from '../../configuration-folder/edit-name-configuration-profile/edit-name-configuration-profile.component';
 import { ModalUbicacionComponent } from '../../modals/modal-ubicacion/modal-ubicacion.component';
-import { NgbdOffcanvasBasic } from '../../menu-lateral-offcanvas/menu-lateral-offcanvas.component';
 import { ModalSesionComponent } from '../../modals/modal-sesion/modal-sesion.component';
 
 
@@ -43,7 +42,6 @@ import { ModalSesionComponent } from '../../modals/modal-sesion/modal-sesion.com
     EditNameConfigurationProfileComponent,
     EmailCheckerComponent,
     MenuLateralComponent,
-    NgbdOffcanvasBasic,
     TagsProfileComponent,
     EditTagComponent,
     AllTagComponent,

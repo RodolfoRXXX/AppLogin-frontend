@@ -10,21 +10,18 @@
         <nav class="navbar">
             <ul class="navbar-nav d-flex flex-column p-1 pe-3 w-100">
               <li class="nav-item mb-1" >
-                <a class="nav-link ps-3 rounded" routerLink="dashboard" routerLinkActive="active" (click)="offcanvas.dismiss()">Tablero</a>
+                <a class="nav-link ps-3 rounded" routerLink="profile/dashboard" routerLinkActive="active" (click)="offcanvas.dismiss()">Tablero</a>
               </li>
               <li class="nav-item mb-1" >
-                <a class="nav-link ps-3 rounded" routerLink="tags" routerLinkActive="active" (click)="offcanvas.dismiss()">Mis tags</a>
+                <a class="nav-link ps-3 rounded" routerLink="profile/tags" routerLinkActive="active" (click)="offcanvas.dismiss()">Mis tags</a>
               </li>
               <li class="nav-item mb-1">
-                  <a class="nav-link ps-3 rounded" routerLink="configuration" routerLinkActive="active" (click)="offcanvas.dismiss()">Configuración</a>
+                  <a class="nav-link ps-3 rounded" routerLink="profile/configuration" routerLinkActive="active" (click)="offcanvas.dismiss()">Configuración</a>
               </li>
               <li class="nav-item mb-1">
-                <a class="nav-link ps-3 rounded" (click)="cerrar_sesion(); offcanvas.dismiss()" style="cursor: pointer;" title="cerrar sesión" >Cerrar sesión</a>
+                <a class="nav-link ps-3 rounded" (click)="cerrar_sesion()" style="cursor: pointer;" title="cerrar sesión" >Cerrar sesión</a>
               </li>
             </ul>
         </nav>
     </div>
-</ng-template>
-<ng-template #modal_sesion let-modal>
-  <app-modal-sesion [texto]="texto_sesion" (cerrado)="confirma_sesion($event)"></app-modal-sesion>
 </ng-template>

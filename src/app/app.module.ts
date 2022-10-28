@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './nonsecure-componentes/page-not-found/pa
 import { FooterComponent } from './footer/footer.component';
 import { LostTagComponent } from './nonsecure-componentes/lost-tag/lost-tag.component';
 import { CardAlertComponent } from './nonsecure-componentes/lost-tag/components/card-alert/card-alert.component';
+import { NgbdOffcanvasBasic } from './nav/menu-lateral-offcanvas/menu-lateral-offcanvas.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CardAlertComponent } from './nonsecure-componentes/lost-tag/components/
     PageNotFoundComponent,
     FooterComponent,
     LostTagComponent,
-    CardAlertComponent
+    CardAlertComponent,
+    NgbdOffcanvasBasic
   ],
   imports: [
     BrowserModule,

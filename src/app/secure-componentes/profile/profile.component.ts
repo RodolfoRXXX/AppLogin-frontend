@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
+import { ComunicationService } from 'src/app/services/comunication.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,20 +11,32 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
+  @ViewChild('modal_sesion') modal_sesion: ElementRef;
+
   public protectedData: any;
   public loading: boolean;
   user: string;
+  texto_sesion: string;
 
   constructor(
-    private _api: ApiService,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _router:Router,
+    private _com:ComunicationService,
+    private modalService: NgbModal,
+    config: NgbModalConfig
   ) {
     this.loading = false;
     this.user = '';
+    config.backdrop = 'static';
+    config.keyboard = false;
+    this.texto_sesion = 'Estas por salir de la sesión';
   }
 
   ngOnInit(): void {
     this.getUser();
+    this._com.getCloseSession().subscribe(() => {
+      this.modalService.open(this.modal_sesion, { centered: true, size: 'sm' });
+    })
   }
 
   getUser(){
@@ -30,6 +44,13 @@ export class ProfileComponent implements OnInit {
     if(data){
       (data)?(this.user = JSON.parse(data)[0].nombre):'';
     }
+  }
+
+  confirma_sesion(e:boolean){
+    this.modalService.dismissAll();
+      if(e){
+        this._router.navigate(['logout']);
+      }
   }
 
 }

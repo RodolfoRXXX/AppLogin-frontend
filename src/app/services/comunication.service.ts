@@ -10,6 +10,7 @@ export class ComunicationService {
   notifierObservable: Subject<any> = new Subject();
   menuOffcanvasObservable: Subject<any> = new Subject();
   tabEditorStateObservable: Subject<any> = new Subject();
+  closeSessionObservable: Subject<any> = new Subject();
 
   constructor() { }
 
@@ -43,6 +44,14 @@ export class ComunicationService {
   }
   getTabEditor(){
     return this.tabEditorStateObservable.asObservable();
+  }
+
+  //Observable que cierra sesión
+  setCloseSession(){
+    this.closeSessionObservable.next('');
+  }
+  getCloseSession(){
+    return this.closeSessionObservable.asObservable();
   }
 
 }

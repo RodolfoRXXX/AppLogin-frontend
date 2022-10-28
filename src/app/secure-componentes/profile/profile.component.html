@@ -10,12 +10,7 @@
     <section class="profile-section-content">
         <router-outlet></router-outlet>
     </section>
-    <!-- Menú lateral off-canvas -->
-    <menu-lateral-offcanvas></menu-lateral-offcanvas>
 </div>
-
-
-
-
-
-
+<ng-template #modal_sesion let-modal>
+  <app-modal-sesion [texto]="texto_sesion" (cerrado)="confirma_sesion($event)"></app-modal-sesion>
+</ng-template>

@@ -24,15 +24,16 @@ export class MenuLateralComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cerrar_sesion(){
-    this.texto_sesion = 'Estas por salir de la sesión';
-      this.modalService.open(this.modal_sesion, { centered: true, size: 'sm' });
-  }
   confirma_sesion(e:boolean){
     this.modalService.dismissAll();
       if(e){
         this._router.navigate(['logout']);
       }
+  }
+
+  cerrar_sesion(){
+    this.texto_sesion = 'Estas por salir de la sesión';
+      this.modalService.open(this.modal_sesion, { centered: true, size: 'sm' });
   }
 
 }
