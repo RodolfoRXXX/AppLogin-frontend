@@ -18,7 +18,7 @@
               <div style="min-height: 15px; font-size: 0.9rem;">
                 <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
                   <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
-                  <span *ngIf="form.get('email')?.errors?.['incorrectoName']">El formato es incorrecto.</span>
+                  <span *ngIf="form.get('email')?.errors?.['incorrectoName'] && !form.get('email')?.errors?.['required']">El formato es incorrecto.</span>
                 </div>
               </div>
             </div>

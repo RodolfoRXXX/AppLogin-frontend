@@ -100,30 +100,39 @@ export class RegisterComponent implements OnInit {
     let e = md5(this.form.get('email')?.value).slice(0,6);
     this.form.controls['codeEmail'].setValue(e);
     
-    this._api.postTypeRequest('user/register', this.form.value).subscribe( (res:any) => {
-      if ((res.status)&&(res.status != 0)){
-        if(res.data != 'existente'){
-          this.estadoSmt = 'ok';
-          this.estadoLogin(true, 'alert-success', 'Usuario creado exitósamente!');
-          this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
-          this._auth.setDataInLocalStorage('token', res.token);
-          this._auth.setDataInLocalStorage('userId', res.data[0].id);
-          this._com.setDataId(res.data[0].id);
-          setTimeout(() => {
-            this._router.navigate(['verificate']);
-          }, 2500);
-          //AQUI DEBE ENVIAR EL CORREO ELECTRONICO CON EL "codeEmail" para verificar
+    this._api.postTypeRequest('user/register', this.form.value).subscribe({
+      next: (res: any) => {
+        if(res.status == 1){
+          if(res.data == 'existente'){
+            this.estadoSmt = 'error';
+            this.estadoLogin(true, 'alert-danger', 'Usuario existente');
+            this._com.setDataId(null);
+            setTimeout(() => {
+              this._router.navigate(['login']);
+            }, 2500);
+          } else{
+            this.estadoSmt = 'ok';
+            this.estadoLogin(true, 'alert-success', 'Usuario creado exitósamente!');
+            this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
+            this._auth.setDataInLocalStorage('token', res.token);
+            this._auth.setDataInLocalStorage('userId', res.data[0].id);
+            this._com.setDataId(res.data[0].id);
+            setTimeout(() => {
+              this._router.navigate(['verificate']);
+            }, 2500);
+            //AQUI DEBE ENVIAR EL CORREO ELECTRONICO CON EL "codeEmail" PARA VERIFICAR
+          }
         } else{
+          //devuelve error
           this.estadoSmt = 'error';
-          this.estadoLogin(true, 'alert-danger', 'Usuario existente');
+          this.estadoLogin(true, 'alert-warning', 'Hubo un problema al crear las credenciales. Intentá nuevamente.');
           this._com.setDataId(null);
-          setTimeout(() => {
-            this._router.navigate(['login']);
-          }, 2500);
         }
-      } else{
+      },
+      error: (error) => {
+        //ventana de error
         this.estadoSmt = 'error';
-        this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intente nuevamente.');
+        this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intentá nuevamente.');
         this._com.setDataId(null);
       }
     });

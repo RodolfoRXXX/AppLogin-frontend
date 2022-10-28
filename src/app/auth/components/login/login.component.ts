@@ -75,28 +75,36 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     this.estadoSmt = 'load';
-    this._api.postTypeRequest('user/login', this.form.value).subscribe( (res:any) => {
-      if ((res.status)&&(res.status != 0)){
-        if(res.data.length > 0){
-          this.estadoSmt = 'ok';
-          this.estadoLogin(true, 'alert-success', 'Acceso autorizado!');
-          this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
-          this._auth.setDataInLocalStorage('token', res.token);
-          this._auth.setDataInLocalStorage('userId', res.data[0].id);
-          this._com.setDataId(res.data[0].id);
-          this._router.navigate(['profile']);
+    this._api.postTypeRequest('user/login', this.form.value).subscribe({
+      next: (res: any) => {
+        if(res.status == 1){
+          if(res.data.length > 0){
+            this.estadoSmt = 'ok';
+            this.estadoLogin(true, 'alert-success', 'Acceso autorizado!');
+            this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
+            this._auth.setDataInLocalStorage('token', res.token);
+            this._auth.setDataInLocalStorage('userId', res.data[0].id);
+            this._com.setDataId(res.data[0].id);
+            this._router.navigate(['profile']);
+          } else{
+            this.estadoSmt = 'error';
+            this.estadoLogin(true, 'alert-danger', 'Usuario o contraseña incorrectos.');
+            this._com.setDataId(null);
+          }
         } else{
+          //devuelve error
           this.estadoSmt = 'error';
-          this.estadoLogin(true, 'alert-danger', 'Usuario o contraseña incorrectos.');
+          this.estadoLogin(true, 'alert-warning', 'Hubo un problema al validar las credenciales. Intentá nuevamente.');
           this._com.setDataId(null);
         }
-          
-      } else{
+      },
+      error: (error) => {
+        //ventana de error
         this.estadoSmt = 'error';
-        this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intente nuevamente.');
+        this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intentá nuevamente.');
         this._com.setDataId(null);
       }
-    } )
+    })
   }
 
   irRegistro(){

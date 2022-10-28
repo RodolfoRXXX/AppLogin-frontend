@@ -57,22 +57,30 @@ export class ForgotComponent implements OnInit {
 
   onSubmit(){
     this.estadoSmt = 'load';
-    this._api.postTypeRequest('user/forgot', this.form.value).subscribe( (res:any) => {
-      if ((res.status)&&(res.status != 0)){
-        if(res.data.length > 0){
-          this.estadoSmt = 'ok';
-          //aquí se debe llamar a una función que envíe un correo
-          this.estadoLogin(true, 'alert-success', 'Los datos han sido enviados a tu cuenta de correo electrónico.');
-          setTimeout(() => {
-            this._router.navigate(['login']);
-          }, 2500);
+    this._api.postTypeRequest('user/forgot', this.form.value).subscribe({
+      next: (res: any) => {
+        if(res.status == 1){
+          if(res.data == 'noencontrado'){
+            this.estadoSmt = 'error';
+            this.estadoLogin(true, 'alert-danger', 'Correo electrónico no encontrado.');
+          } else{
+            this.estadoSmt = 'ok';
+            //LLAMAR A UNA FUNCION QUE ENVIE EL CORREO CON LAS CREDENCIALES
+            this.estadoLogin(true, 'alert-success', 'Los credenciales de acceso han sido enviadas a tu cuenta de correo electrónico.');
+            setTimeout(() => {
+              this._router.navigate(['login']);
+            }, 5000);
+          }
         } else{
+          //devuelve error
           this.estadoSmt = 'error';
-          this.estadoLogin(true, 'alert-danger', 'Correo electrónico no encontrado.');
+          this.estadoLogin(true, 'alert-warning', 'Hubo un problema al consultar el correo electrónico. Intentá nuevamente.');
         }
-      } else{
+      },
+      error: (error) => {
+        //ventana de error
         this.estadoSmt = 'error';
-        this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intente nuevamente.');
+        this.estadoLogin(true, 'alert-warning', 'No se ha podido conectar con la base de datos. Intentá nuevamente.');
       }
     });
   }
