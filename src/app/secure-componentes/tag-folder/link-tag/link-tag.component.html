@@ -19,7 +19,7 @@
                             [ngClass]="form.get('codigo')?.valid?'is-valid':(((form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched))?'is-invalid':'')"
                     />
                     </fieldset>
-                    <div style="height: 15px; font-size: 0.8rem;">
+                    <div style="min-height: 15px; font-size: 0.8rem;">
                         <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched)">
                         <span *ngIf="form.get('codigo')?.errors?.['required']">Tenés que ingresar un código.</span>
                         <span *ngIf="form.get('codigo')?.errors?.['minlength']">El código debe contener 10 caracteres.</span>

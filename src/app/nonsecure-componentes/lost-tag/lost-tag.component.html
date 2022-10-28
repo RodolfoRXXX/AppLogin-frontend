@@ -1,24 +1,55 @@
 <div class="body-content">
     <div class="title-content">
-        <div class="title-header">
-            <p>Tags perdidos</p>
-        </div>
+        <h3 class="title-header">Tags perdidos</h3>
         <div class="title-body">
-            <p>Filtrar por: </p>
-            <select class="form-control" name="" id="">
-                <option value="" disabled selected>Elegí un tipo <i class="fa-solid fa-chevron-down"></i></option>
-                <option value="">Personas</option>
-                <option value="">Mascotas</option>
-                <option value="">Vehículos</option>
+            <h5 class="text-nowrap mb-0">Filtrar por: </h5>
+            <select class="form-select" name="" id="" (change)="filtro($event)">
+                <option value="" disabled selected>Elegí un tipo... </option>
+                <option value="todos" [disabled]="length_data == 0">Todos</option>
+                <option value="personas" [disabled]="!data_personas.length">Personas</option>
+                <option value="mascotas" [disabled]="!data_mascotas.length">Mascotas</option>
+                <option value="vehiculos" [disabled]="!data_vehiculos.length">Vehículos</option>
             </select>
         </div> 
     </div>
-    <div class="card-deck card-content">
-            <app-card-alert></app-card-alert>
-            <app-card-alert></app-card-alert>
-            <app-card-alert></app-card-alert>
-            <app-card-alert></app-card-alert>
-            <app-card-alert></app-card-alert>
+    <div class="box-card">
+        <!-- content card -->
+        <div class="card-content" *ngIf="card_show == 'ok'">
+            <ng-container *ngFor="let persona of personas">
+                <app-card-alert [persona]=persona [tipo]="'personas'" *ngIf="(tipo == 'todos')||(tipo == 'personas')"></app-card-alert>
+            </ng-container>
+            <ng-container *ngFor="let mascota of mascotas">
+                <app-card-alert [mascota]=mascota [tipo]="'mascotas'" *ngIf="(tipo == 'todos')||(tipo == 'mascotas')"></app-card-alert>
+            </ng-container>
+            <ng-container *ngFor="let vehiculo of vehiculos">
+                <app-card-alert [vehiculo]=vehiculo [tipo]="'vehiculos'" *ngIf="(tipo == 'todos')||(tipo == 'vehiculos')"></app-card-alert>
+            </ng-container>
+        </div>
+        <!-- content load -->
+        <div class="load-content" *ngIf="card_show == 'load'">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">...loading</span>
+            </div>
+        </div>
+        <!-- content error -->
+        <div class="notag-content" *ngIf="card_show == 'error'">
+            <div class="alert alert-danger">
+                <h5 class="text-center">Hubo un problema al cargar los datos.<br>Actualizá la página.</h5>
+            </div>
+        </div>
+        <!-- content empty -->
+        <div class="notag-content" *ngIf="card_show == 'empty'">
+            <div class="alert alert-success">
+                <h4 class="text-center mb-0">Yupiii...!</h4>
+                <img class="img-no-tag" src="../../../assets/img/celebration.png" alt="happy-no-tag">
+                <h5 class="text-center">No hay tags perdidos!</h5>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <ng-container *ngIf="length_data">
+            <ngb-pagination [collectionSize]="length_data" [(page)]="page" (pageChange)="change_page()"></ngb-pagination>
+        </ng-container>
     </div>
 </div>
 

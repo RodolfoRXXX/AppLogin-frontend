@@ -1,13 +1,33 @@
 <div class="body-content">
-    <div class="card card-content">
-        <img class="card-img-top" src="../../../../../assets/img/gato.jpg" style="height: fit-content;" alt="Card image cap">
+    <div class="card card-content" *ngIf="estado == 'ok'">
+        <img class="card-img-top img-box" [src]="foto_perfil" alt="foto_perfil_tag">
         <i class="fa-solid fa-circle-exclamation fa-2x img-alert text-danger" title="Perdido!"></i>
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead to additional content. This content is a little bit longer. This content is longer.</p>
+            <h5 class="card-title">{{titulo}}</h5>
+            <p class="card-text">{{texto}}</p>
+            <div class="d-flex justify-content-end">
+                <span class="badge rounded-pill bg-primary badge-content" title="Llamame!" *ngIf="wsp == ''">
+                    <i class="fa-solid fa-phone me-1"></i>
+                    {{telefono}}
+                </span>
+                <a type="button" class="badge rounded-pill badge-content badge-wsp" title="Enviame información" [href]=""  *ngIf="wsp != ''">
+                    <i class="fa-brands fs-social fa-whatsapp"></i>
+                    {{wsp}}
+                </a>
+            </div>
         </div>
         <div class="card-footer">
-            <small class="text-danger">Last updated 3 mins ago</small>
+            <small class="text-danger">Emitido el {{fecha}}</small>
+        </div>
+    </div>
+    <div class="load-content" *ngIf="estado == 'load'">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">...loading</span>
+        </div>
+    </div>
+    <div class="error-content" *ngIf="estado == 'error'">
+        <div class="alert alert-danger m-3">
+            <h6 class="text-center">Hubo un error en la carga de datos. Por favor actualizá la página.</h6>
         </div>
     </div>
 </div>

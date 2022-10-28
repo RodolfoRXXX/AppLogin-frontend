@@ -43,6 +43,9 @@ export class LinkTagComponent implements OnInit {
               this.form.patchValue({ codigo:res.data[0].codigo });
               this.unlink = true;
               this.state = 'ok';
+            } else{
+              this.estadoSmt = 'vincular';
+              this.state = 'ok';
             }
           } else{
             //ventana de error

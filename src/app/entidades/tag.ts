@@ -3,7 +3,6 @@ export interface Persona{
     id_autor: string,
     id_qr: string,
     nivel: string,
-    fondo: string,
     foto: string,
     nombre: string,
     apellido: string,
@@ -14,15 +13,12 @@ export interface Persona{
     nacionalidad: string,
     observaciones: string,
     red: string,
-    red2: string,
-    red3: string,
-    red4: string,
-    red5: string,
     nombreresp: string,
     telresp: string,
     wspresp: string,
     estado: string,
-    obsestado: string
+    obsestado: string,
+    fechaestado:string
 }
 
 export interface mascota{
@@ -30,7 +26,6 @@ export interface mascota{
     id_autor: string,
     id_qr: string,
     nivel: string,
-    fondo: string,
     foto: string,
     especie: string,
     nombre: string,
@@ -43,7 +38,8 @@ export interface mascota{
     telresp: string,
     wspresp: string,
     estado: string,
-    obsestado: string
+    obsestado: string,
+    fechaestado:string
 }
 
 export interface Vehiculo{
@@ -51,7 +47,6 @@ export interface Vehiculo{
     id_autor: string,
     id_qr: string,
     nivel: string,
-    fondo: string,
     foto: string,
     marca: string,
     modelo: string,
@@ -66,5 +61,6 @@ export interface Vehiculo{
     telresp: string,
     wspresp: string,
     estado: string,
-    obsestado: string
+    obsestado: string,
+    fechaestado:string
 }
