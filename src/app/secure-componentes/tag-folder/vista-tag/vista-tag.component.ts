@@ -5,6 +5,7 @@ import { array_social, social } from 'src/app/entidades/array_social';
 import { globalVariable } from 'src/app/entidades/global_variables';
 import { social_data } from 'src/app/entidades/social_form';
 import { ApiService } from 'src/app/services/api.service';
+import { ComunicationService } from 'src/app/services/comunication.service';
 import { LocationServiceService } from 'src/app/services/location-service.service';
 import { environment } from 'src/environments/environment';
 
@@ -31,6 +32,7 @@ export class VistaTagComponent implements OnInit {
   foto_perfil:string;
   view_tag:string;
 
+  id_user:number;
   position:any = {
     latitud:null,
     longitud:null,
@@ -41,6 +43,7 @@ export class VistaTagComponent implements OnInit {
     private _route:ActivatedRoute,
     private _api:ApiService,
     private _router:Router,
+    private _com:ComunicationService,
     private _location:LocationServiceService,
     private modalService: NgbModal,
     config: NgbModalConfig
@@ -101,6 +104,7 @@ export class VistaTagComponent implements OnInit {
   carga_datos( tipo:string, datos:any ){
     this.tipo = tipo;
     this.datos = datos;
+    this.id_user = datos.id;
     switch (tipo) {
       case 'personas' :
         (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
@@ -134,14 +138,38 @@ export class VistaTagComponent implements OnInit {
   }
 
   confirm_position(e:any){
-    this.modalService.dismissAll();
     if(e){
       this._location.getPosition().then(pos => {
         this.position.latitud = pos.lat;
         this.position.longitud = pos.lng;
         this.position.fecha = pos.date;
-        console.log(JSON.stringify(this.position));
       })
+      .then(() => { 
+        this._api.postTypeRequest('user/set-position-tag', {tipo:this.tipo, id_user:this.id_user, data:JSON.stringify(this.position)}).subscribe({
+          next: (res: any) => {
+            if(res.status == 1){
+              this._com.setNotifier({display: true, state:'alert-success', text:"La ubicación se envió con éxito. Gracias por tu ayuda!", time:3500})
+            } else{
+              //error
+              this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
+            }
+          },
+          error: (error) => {
+              //error
+              this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
+          },
+          complete: () => {
+            this.modalService.dismissAll();
+          }
+        })
+      })
+      .catch(err => {
+        //error
+        console.log(err)
+        this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
+      })
+    } else{
+      this.modalService.dismissAll();
     }
   }
 

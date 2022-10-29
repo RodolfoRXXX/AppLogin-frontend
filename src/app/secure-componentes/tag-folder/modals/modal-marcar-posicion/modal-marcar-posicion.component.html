@@ -7,5 +7,10 @@
 </div>
 <div class="modal-footer d-flex justify-content-around">
     <a type="button" class="btn btn-ligth" (click)="cerrar(false)">Cancelar</a>
-    <a type="button" class="btn btn-outline-success" (click)="cerrar(true)">Marcar posición</a>
+    <a type="button" class="btn btn-outline-success btn-mark" [ngClass]="!state?'disabled':''" (click)="cerrar(true)">
+        <span class="d-block" *ngIf="state">Marcar posición</span>
+        <div class="spinner-border text-success d-block" style="height:20px; width:20px" role="status" *ngIf="!state">
+            <span class="visually-hidden">...loading</span>
+        </div>
+    </a>
 </div>

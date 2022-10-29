@@ -10,14 +10,18 @@ export class ModalMarcarPosicionComponent implements OnInit {
   //evento de cierre de modal y guardar valores elegidos
   @Output() cerrado: EventEmitter<any>;
 
+  state:boolean;
+
   constructor() {
     this.cerrado = new EventEmitter();
+    this.state = true;
   }
 
   ngOnInit(): void {
   }
 
   cerrar( value:boolean ){
+    this.state = false;
     this.cerrado.emit(value);
 }
 
