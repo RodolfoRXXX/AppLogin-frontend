@@ -8,9 +8,10 @@
         </div>
         <!-- Caja principal de vista -->
         <div class="card-box" *ngIf="view_tag == 'ok'" [ngClass]="(this.datos.estado == 'link')?'link':((this.datos.estado == 'nolink')?'nolink':'alert')">
+            
             <div class="img-box" [style.background-color]="(this.datos.estado == 'link')?link:((this.datos.estado == 'nolink')?nolink:alert)">
                 <img class="img-item" [src]="foto_perfil" alt="{{ this.datos.nivel }}" >
-                <i class="fa-solid fa-circle-exclamation fa-2x img-alert" [style.color]="alert" *ngIf="this.datos.estado == 'alert'" title="Perdido!"></i>
+                <i class="fa-solid fa-street-view fa-2x btn-markposition" [style.color]="alert" *ngIf="this.datos.estado == 'alert'" title="Marcar Posicion" (click)="get_position()"></i>
             </div>
             
             <div class="text-data">
@@ -97,3 +98,6 @@
     </div>
 </div>
 
+<ng-template #modal_posicion let-modal>
+    <app-modal-marcar-posicion (cerrado)="confirm_position($event)"></app-modal-marcar-posicion>
+</ng-template>

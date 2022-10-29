@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { globalVariable } from 'src/app/entidades/global_variables';
 import { social_data } from 'src/app/entidades/social_form';
 import { ApiService } from 'src/app/services/api.service';
+import { LocationServiceService } from 'src/app/services/location-service.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,6 +19,8 @@ export class VistaTagComponent implements OnInit {
   nolink = globalVariable.NOLINK;
   alert = globalVariable.ALERT;
 
+  @ViewChild('modal_posicion') modal_posicion: ElementRef;
+
   @Input() datos:any;
   @Input() tipo:string;
 
@@ -27,10 +31,19 @@ export class VistaTagComponent implements OnInit {
   foto_perfil:string;
   view_tag:string;
 
+  position:any = {
+    latitud:null,
+    longitud:null,
+    fecha:null
+  }
+
   constructor(
     private _route:ActivatedRoute,
     private _api:ApiService,
-    private _router:Router
+    private _router:Router,
+    private _location:LocationServiceService,
+    private modalService: NgbModal,
+    config: NgbModalConfig
   ) { 
     this.leaf_selected = 'data';
     this.foto_perfil = '../../../../assets/img/blanck_persona.png';
@@ -38,6 +51,9 @@ export class VistaTagComponent implements OnInit {
     this.redes = array_social;
     this.sociales = [];
     this.view_tag = 'load';
+
+    config.backdrop = 'static';
+    config.keyboard = false;
   }
 
   ngOnInit(): void {
@@ -111,6 +127,22 @@ export class VistaTagComponent implements OnInit {
 
   select_leaf(text:string){
     this.leaf_selected = text;
+  }
+
+  get_position(){
+    this.modalService.open(this.modal_posicion, { centered: true, size: 'sm' });
+  }
+
+  confirm_position(e:any){
+    this.modalService.dismissAll();
+    if(e){
+      this._location.getPosition().then(pos => {
+        this.position.latitud = pos.lat;
+        this.position.longitud = pos.lng;
+        this.position.fecha = pos.date;
+        console.log(JSON.stringify(this.position));
+      })
+    }
   }
 
 }

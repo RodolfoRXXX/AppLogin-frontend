@@ -29,6 +29,7 @@ import { AlertTagComponent } from '../../tag-folder/alert-tag/alert-tag.componen
 import { EditNameConfigurationProfileComponent } from '../../configuration-folder/edit-name-configuration-profile/edit-name-configuration-profile.component';
 import { ModalUbicacionComponent } from '../../modals/modal-ubicacion/modal-ubicacion.component';
 import { ModalSesionComponent } from '../../modals/modal-sesion/modal-sesion.component';
+import { ModalMarcarPosicionComponent } from '../../tag-folder/modals/modal-marcar-posicion/modal-marcar-posicion.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ModalSesionComponent } from '../../modals/modal-sesion/modal-sesion.com
     DetailTagComponent,
     LinkTagComponent,
     AlertTagComponent,
-    ModalUbicacionComponent
+    ModalUbicacionComponent,
+    ModalMarcarPosicionComponent
   ],
   imports: [
     CommonModule,
