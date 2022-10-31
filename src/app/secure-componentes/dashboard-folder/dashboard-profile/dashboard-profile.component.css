@@ -38,7 +38,38 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 0.25rem 0.5rem;
+    position: relative;
 }
+
+.card-info:nth-child(1) {
+    justify-content: center;
+    align-items: center;
+}
+    .box-alert {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+    }
+    .tag-news {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        color: #fff;
+        background-color: red;
+        border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+    .box-alert-load {
+        display: block;
+        color: #fff;
+        height:30px; width:30px
+    }
+    .box-alert-error{
+        display: flex;
+        align-items: center;
+    }
 
 .dashboard-profile {
     padding: 3rem;
@@ -114,7 +145,7 @@
 
     .dashboard-info {
         grid-template-columns: auto;
-        gap: 10px 5px;
+        gap: 15px 5px;
         padding: 1rem;
     }
 
@@ -142,7 +173,7 @@
 
     .dashboard-info {
         grid-template-columns: auto;
-        gap: 10px 5px;
+        gap: 15px 5px;
     }
 
     .box-profile-data {
@@ -157,7 +188,7 @@
 
     .dashboard-info {
         grid-template-columns: auto auto;
-        gap: 10px;
+        gap: 15px;
     }
     
     .box-profile-data {
@@ -172,7 +203,7 @@
 
     .dashboard-info {
         grid-template-columns: auto auto auto;
-        gap: 10px;
+        gap: 20px;
     }
 
     .box-profile-data {

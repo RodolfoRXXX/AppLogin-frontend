@@ -5,10 +5,22 @@
     </nav>
     <!-- Contenido del usuario -->
     <section class="dashboard-info">
-        <div class="card-info border rounded color_alert" *ngIf="!false">
-            <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Tag en alerta</p>
-            <h5 class="text-center">Han encontrado tu tag!</h5>
-            <button type="button" class="btn btn-link text-end btn-a" title="Ver ubicación" (click)="ver_ubicacion()">Ver ubicación</button>
+        <div class="card-info border rounded color_alert">
+            <div class="box-alert" *ngIf="state_box_alert == 'ok'">
+                <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Tag en alerta</p>
+                <h5 class="text-center mb-0">
+                    <span *ngIf="!isFound">Sin novedades.</span>
+                    <span *ngIf="isFound">Hay novedades sobre tus tags!</span>
+                </h5>
+                <button type="button" class="btn btn-link text-end btn-a" title="Ver mapa" (click)="ver_ubicacion()" [disabled]="!isFound">Ver mapa</button>
+                <i class="fa-solid fa-circle-exclamation tag-news fa-2x" title="Hay novedades sobre tus tags perdidos!" *ngIf="isFound"></i>
+            </div>
+            <div class="spinner-border box-alert-load" role="status" *ngIf="state_box_alert == 'load'">
+                <span class="visually-hidden">...loading</span>
+            </div>
+            <div class="box-alert-error" *ngIf="state_box_alert == 'error'">
+                <h6 class="mb-0 text-center text-light">Ha ocurrido un error durante la carga.<br>Actualizá la página.</h6>
+            </div>
         </div>
         <div class="card-info border rounded color_account">
             <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Estado de tu cuenta</p>
@@ -60,5 +72,5 @@
 
 <!-- Modal ubicación -->
 <ng-template #modal_ubicacion let-modal>
-    <app-modal-ubicacion></app-modal-ubicacion>
+    <app-modal-ubicacion [found_tags]="found_tags"></app-modal-ubicacion>
 </ng-template>

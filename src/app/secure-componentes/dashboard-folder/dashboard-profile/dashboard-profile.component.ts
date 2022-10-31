@@ -22,6 +22,10 @@ export class DashboardProfileComponent implements OnInit {
   card_nolink:number;
   card_alert:number;
   state:string;
+  state_box_alert:string;
+  isFound:boolean;
+
+  found_tags:any;
 
   constructor(
     private _auth: AuthService,
@@ -34,6 +38,8 @@ export class DashboardProfileComponent implements OnInit {
     this.card_nolink = 0;
     this.card_alert = 0;
     this.state = 'load';
+    this.state_box_alert = 'load';
+    this.isFound = false;
   }
 
   ngOnInit(): void {
@@ -43,8 +49,34 @@ export class DashboardProfileComponent implements OnInit {
       this.email = JSON.parse(data)[0].email;
       this.userId = JSON.parse(data)[0].id;
       (JSON.parse(data)[0].active == 1)?(this.active = true):(this.active = false);
+      this.carga_tags_encontrados(this.userId);
       this.cargar_tarjetas(this.userId);
     }
+  }
+
+  carga_tags_encontrados(id:any){
+    this._api.postTypeRequest('profile/get-found-tag', {id}).subscribe({
+      next: (res: any) => {
+        if(res.status == 1){
+          //Ok
+          if((res.data.personas.length + res.data.mascotas.length + res.data.vehiculos.length) > 0){
+            this.found_tags = res.data;
+            this.state_box_alert = 'ok';
+            this.isFound = true;
+          } else{
+            this.isFound = false;
+          }
+          
+        } else{
+          //ventana de error
+          this.state_box_alert = 'error';
+        }
+      },
+      error: (error) => {
+        //ventana de error
+        this.state_box_alert = 'error';
+      }
+    })
   }
 
   cargar_tarjetas(id:any){
