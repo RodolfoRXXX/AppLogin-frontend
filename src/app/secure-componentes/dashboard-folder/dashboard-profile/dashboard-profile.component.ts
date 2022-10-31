@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Map } from 'leaflet';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-dashboard-profile',
@@ -42,6 +44,7 @@ export class DashboardProfileComponent implements OnInit {
     this.isFound = false;
   }
 
+
   ngOnInit(): void {
     let data = this._auth.getUserDetails();
     if(data){
@@ -52,6 +55,27 @@ export class DashboardProfileComponent implements OnInit {
       this.carga_tags_encontrados(this.userId);
       this.cargar_tarjetas(this.userId);
     }
+  }
+
+  ngAfterViewInit(): void{
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+
+    /*const map = new Map('map').setView([51.505, -0.09], 13);
+      tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);*/
   }
 
   carga_tags_encontrados(id:any){
@@ -115,3 +139,7 @@ export class DashboardProfileComponent implements OnInit {
 
 
 }
+function tileLayer(arg0: string, arg1: { maxZoom: number; attribution: string; }) {
+  throw new Error('Function not implemented.');
+}
+

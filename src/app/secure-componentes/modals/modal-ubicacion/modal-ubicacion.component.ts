@@ -9,9 +9,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalUbicacionComponent implements OnInit {
 
+
   @Input() found_tags:any;
-  
-  constructor(private modalService: NgbModal) { }
+
+  constructor(private modalService: NgbModal) {
+
+  }
 
   ngOnInit(): void {
     console.log(this.found_tags)
