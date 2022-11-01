@@ -144,11 +144,12 @@ export class VistaTagComponent implements OnInit {
         this.position.longitud = pos.lng;
         this.position.fecha = pos.date;
       })
-      .then(() => { 
+      .then(() => {
         this._api.postTypeRequest('user/set-position-tag', {tipo:this.tipo, id_user:this.id_user, data:JSON.stringify(this.position)}).subscribe({
           next: (res: any) => {
             if(res.status == 1){
               this._com.setNotifier({display: true, state:'alert-success', text:"La ubicación se envió con éxito. Gracias por tu ayuda!", time:3500})
+              this.envio_email();
             } else{
               //error
               this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
@@ -171,6 +172,12 @@ export class VistaTagComponent implements OnInit {
     } else{
       this.modalService.dismissAll();
     }
+  }
+
+  envio_email(){
+    this._api.postTypeRequest('user/envio-email', {mail:"rromero@limpar.com.ar"}).subscribe( value => {
+      console.log(value);
+    })
   }
 
 }
