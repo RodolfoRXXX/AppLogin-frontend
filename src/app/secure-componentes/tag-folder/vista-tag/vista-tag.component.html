@@ -11,7 +11,7 @@
             
             <div class="img-box" [style.background-color]="(this.datos.estado == 'link')?link:((this.datos.estado == 'nolink')?nolink:alert)">
                 <img class="img-item" [src]="foto_perfil" alt="{{ this.datos.nivel }}" >
-                <button class="btn-markposition" title="Marcar Posicion" (click)="get_position()">
+                <button class="btn-markposition" title="Marcar Posicion" (click)="get_position()" *ngIf="this.datos.estado == 'alert'">
                     <i class="fa-solid fa-street-view fa-2x" [style.color]="alert" *ngIf="this.datos.estado == 'alert'" ></i>
                 </button>
             </div>

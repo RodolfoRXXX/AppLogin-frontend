@@ -68,13 +68,9 @@
             </div>
         </div>
     </section>
-
-    <div id="map">
-    </div>
-
 </div>
 
 <!-- Modal ubicación -->
 <ng-template #modal_ubicacion let-modal>
-    <app-modal-ubicacion [found_tags]="found_tags"></app-modal-ubicacion>
+    <app-modal-ubicacion [datos]="found_tags"></app-modal-ubicacion>
 </ng-template>
