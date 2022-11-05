@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
 import { emailValidator, validarPass} from '../../function/functions';
 import { md5 } from 'src/app/auth/function/md5';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,8 @@ export class RegisterComponent implements OnInit {
     private _api: ApiService,
     private _auth: AuthService,
     private _router: Router,
-    private _com: ComunicationService
+    private _com: ComunicationService,
+    private _email: EmailService
   ) {
     this.estadoSmt = 'registro';
     this.displayLogin = false;
@@ -97,8 +99,8 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
     this.estadoSmt = 'load';
-    let e = md5(this.form.get('email')?.value).slice(0,6);
-    this.form.controls['codeEmail'].setValue(e);
+    let codigo_hash = md5(this.form.get('email')?.value).slice(0,6);
+    this.form.controls['codeEmail'].setValue(codigo_hash);
     
     this._api.postTypeRequest('user/register', this.form.value).subscribe({
       next: (res: any) => {
@@ -111,6 +113,7 @@ export class RegisterComponent implements OnInit {
               this._router.navigate(['login']);
             }, 2500);
           } else{
+            this._email.bifurcador('register', null, this.form.value.email, null, codigo_hash);
             this.estadoSmt = 'ok';
             this.estadoLogin(true, 'alert-success', 'Usuario creado exitósamente!');
             this._auth.setDataInLocalStorage('userData', JSON.stringify(res.data));
@@ -120,7 +123,6 @@ export class RegisterComponent implements OnInit {
             setTimeout(() => {
               this._router.navigate(['verificate']);
             }, 2500);
-            //AQUI DEBE ENVIAR EL CORREO ELECTRONICO CON EL "codeEmail" PARA VERIFICAR
           }
         } else{
           //devuelve error

@@ -6,6 +6,7 @@ import { globalVariable } from 'src/app/entidades/global_variables';
 import { social_data } from 'src/app/entidades/social_form';
 import { ApiService } from 'src/app/services/api.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { EmailService } from 'src/app/services/email.service';
 import { LocationServiceService } from 'src/app/services/location-service.service';
 import { environment } from 'src/environments/environment';
 
@@ -33,6 +34,7 @@ export class VistaTagComponent implements OnInit {
   view_tag:string;
 
   id_user:number;
+  id_autor:number;
   position:any = {
     latitud:null,
     longitud:null,
@@ -40,11 +42,12 @@ export class VistaTagComponent implements OnInit {
   }
 
   constructor(
-    private _route:ActivatedRoute,
-    private _api:ApiService,
-    private _router:Router,
-    private _com:ComunicationService,
-    private _location:LocationServiceService,
+    private _route: ActivatedRoute,
+    private _api: ApiService,
+    private _router: Router,
+    private _com: ComunicationService,
+    private _location: LocationServiceService,
+    private _email: EmailService,
     private modalService: NgbModal,
     config: NgbModalConfig
   ) { 
@@ -105,6 +108,7 @@ export class VistaTagComponent implements OnInit {
     this.tipo = tipo;
     this.datos = datos;
     this.id_user = datos.id;
+    this.id_autor = datos.id_autor;
     switch (tipo) {
       case 'personas' :
         (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
@@ -148,8 +152,8 @@ export class VistaTagComponent implements OnInit {
         this._api.postTypeRequest('user/set-position-tag', {tipo:this.tipo, id_user:this.id_user, data:JSON.stringify(this.position)}).subscribe({
           next: (res: any) => {
             if(res.status == 1){
+              this._email.bifurcador('marker', this.id_autor, null, null, null);
               this._com.setNotifier({display: true, state:'alert-success', text:"La ubicación se envió con éxito. Gracias por tu ayuda!", time:3500})
-              this.envio_email();
             } else{
               //error
               this._com.setNotifier({display: true, state:'alert-danger', text:'Ha sucedido un error. Intentá nuevamente.', time:2500})
@@ -172,12 +176,6 @@ export class VistaTagComponent implements OnInit {
     } else{
       this.modalService.dismissAll();
     }
-  }
-
-  envio_email(){
-    this._api.postTypeRequest('user/envio-email', {mail:"rromero@limpar.com.ar"}).subscribe( value => {
-      console.log(value);
-    })
   }
 
 }

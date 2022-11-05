@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-edit-name-configuration-profile',
@@ -14,12 +15,14 @@ export class EditNameConfigurationProfileComponent implements OnInit {
 
   form: FormGroup;
   estadoSmt: string;
+  email_user:string;
 
   constructor(
     private _auth: AuthService,
     private _api: ApiService,
     private _com: ComunicationService,
-    private _router: Router
+    private _router: Router,
+    private _email: EmailService
   ) { 
     this.estadoSmt = 'actualizar';
   }
@@ -28,6 +31,7 @@ export class EditNameConfigurationProfileComponent implements OnInit {
     let data = this._auth.getUserDetails();
     if(data){
       this.crearFormulario(JSON.parse(data)[0].id);
+      this.email_user = JSON.parse(data)[0].email;
     } else{
       this._router.navigate(['login']);
     }
@@ -59,6 +63,7 @@ export class EditNameConfigurationProfileComponent implements OnInit {
     this._api.putTypeRequest('profile/update-username', this.form.value).subscribe( (res:any) => {
       if((res.status != 0)&&(res.data.affectedRows != 0)){
         this.estadoSmt = 'ok';
+        this._email.bifurcador('change_user', null, this.email_user, null, null);
         this._com.setNotifier({display: true, state:'alert-success', text:'El nombre de usuario se ha modificado con éxito!', time:3500})
         setTimeout(() => {
           this._router.navigate(['logout']);

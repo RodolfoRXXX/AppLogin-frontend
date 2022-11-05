@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-email-checker',
@@ -23,7 +24,8 @@ export class EmailCheckerComponent implements OnInit {
     private _auth: AuthService,
     private _api: ApiService,
     private _com: ComunicationService,
-    private _router: Router
+    private _router: Router,
+    private _email: EmailService
   ) {
     this.estadoSmt = 'verificar';
     this.displayLogin = false;
@@ -130,8 +132,7 @@ export class EmailCheckerComponent implements OnInit {
     if(data){
       let dataEmail = JSON.parse(data)[0].email;
       let dataCode = JSON.parse(data)[0].codeEmail;
-      //LLAMAR A UNA FUNCION QUE ENVIE POR CORREO "dataEmail" EL "dataCode" y devuelva el estado del envío
-      console.log(dataEmail, dataCode);
+      this._email.bifurcador('verificate', null, dataEmail, null, dataCode);
       this._com.setNotifier({display: true, state:'alert-success', text:'Se ha reenviado el código a tu correo electrónico!', time:3500})
     }
   }

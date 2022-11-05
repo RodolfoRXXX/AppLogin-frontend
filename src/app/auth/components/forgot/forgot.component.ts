@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { EmailService } from 'src/app/services/email.service';
 import { emailValidator } from '../../function/functions';
 
 @Component({
@@ -21,7 +22,8 @@ export class ForgotComponent implements OnInit {
   constructor(
     private _auth: AuthService,
     private _router: Router,
-    private _api: ApiService
+    private _api: ApiService,
+    private _email:EmailService
   ) {
     this.estadoSmt = 'envio';
     this.displayLogin = false;
@@ -64,8 +66,8 @@ export class ForgotComponent implements OnInit {
             this.estadoSmt = 'error';
             this.estadoLogin(true, 'alert-danger', 'Correo electrónico no encontrado.');
           } else{
+            this._email.bifurcador('forgot', null, res.data[0].email, res.data[0].password, null);
             this.estadoSmt = 'ok';
-            //LLAMAR A UNA FUNCION QUE ENVIE EL CORREO CON LAS CREDENCIALES
             this.estadoLogin(true, 'alert-success', 'Los credenciales de acceso han sido enviadas a tu cuenta de correo electrónico.');
             setTimeout(() => {
               this._router.navigate(['login']);

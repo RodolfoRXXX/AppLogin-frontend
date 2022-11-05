@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ResolveStart, Router } from '@angular/router';
-import { timeout } from 'rxjs';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
+import { EmailService } from 'src/app/services/email.service';
 import { validarPass } from '../../function/functions';
 import { md5 } from '../../function/md5';
 
@@ -19,12 +19,14 @@ export class EditPassConfigurationProfileComponent implements OnInit {
   form: FormGroup;
   estadoSmt: string;
   estadoValidacion: string;
+  email_user: string;
 
   constructor( 
     private _auth: AuthService,
     private _api: ApiService,
     private _com: ComunicationService,
-    private _router: Router
+    private _router: Router,
+    private _email: EmailService
   ) {
     this.estadoSmt = 'actualizar';
     this.estadoValidacion = 'verificar';
@@ -34,6 +36,7 @@ export class EditPassConfigurationProfileComponent implements OnInit {
     let data = this._auth.getUserDetails();
     if(data){
       this.crearFormulario(JSON.parse(data)[0].id);
+      this.email_user = JSON.parse(data)[0].email;
     } else{
       this._router.navigate(['login']);
     }
@@ -92,8 +95,9 @@ export class EditPassConfigurationProfileComponent implements OnInit {
 
   onSubmit(){
     this.estadoSmt = 'load';
-    this._api.putTypeRequest('profile/updatepassword', this.form.value).subscribe( (res:any) => {
+    this._api.putTypeRequest('profile/update-password', this.form.value).subscribe( (res:any) => {
       if((res.status != 0)&&(res.data.affectedRows != 0)){
+        this._email.bifurcador('change_pass', null, this.email_user, null, null);
         this.estadoSmt = 'ok';
         this._com.setNotifier({display: true, state:'alert-success', text:'La contraseña se ha actualizado con éxito!', time:3500})
         setTimeout(() => {

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
 import { emailValidator, validarEmail } from '../../function/functions';
 import { md5 } from 'src/app/secure-componentes/function/md5';
+import { EmailService } from 'src/app/services/email.service';
 
 @Component({
   selector: 'app-edit-email-configuration-profile',
@@ -21,7 +22,8 @@ export class EditEmailConfigurationProfileComponent implements OnInit {
     private _auth: AuthService,
     private _api: ApiService,
     private _com: ComunicationService,
-    private _router: Router
+    private _router: Router,
+    private _email: EmailService
   ) {
     this.estadoSmt = 'actualizar';
   }
@@ -63,10 +65,11 @@ export class EditEmailConfigurationProfileComponent implements OnInit {
 
   onSubmit(){
     this.estadoSmt = 'load';
-    let e = md5(this.form.get('email')?.value).slice(0,6);
-    this.form.controls['codeEmail'].setValue(e);
-    this._api.putTypeRequest('profile/updateemail', this.form.value).subscribe( (res:any) => {
+    let codigo_hash = md5(this.form.get('email')?.value).slice(0,6);
+    this.form.controls['codeEmail'].setValue(codigo_hash);
+    this._api.putTypeRequest('profile/update-email', this.form.value).subscribe( (res:any) => {
       if((res.status != 0)&&(res.data.affectedRows != 0)){
+        this._email.bifurcador('change_mail', null, this.form.value.email, null, codigo_hash);
         this.estadoSmt = 'ok';
         this._com.setNotifier({display: true, state:'alert-success', text:'Se ha enviado un código a tu nuevo correo electrónico. Verificalo!', time:3500})
         setTimeout(() => {
