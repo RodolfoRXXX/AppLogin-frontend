@@ -16,9 +16,6 @@ export class EmailService {
       case 'register'://(RECIBO: email, código nuevo / BUSCO: - / ENVIO: codigo nuevo )
         this.enviar_mail(_email, tipo, {codigo:_codigo});
         break;
-      case 'forgot'://(RECIBO: email, password / BUSCO: - / ENVIO: email, password )
-        this.enviar_mail(_email, tipo, {email:_email, password:_password});
-        break;
       case 'verificate'://(RECIBO: email, código actual / BUSCO: - / ENVIO: codigo actual )
         this.enviar_mail(_email, tipo, {codigo:_codigo});
         break;
@@ -26,9 +23,6 @@ export class EmailService {
         this.get_mail(_id_autor).subscribe({
           next: (value:any) => {
             this.enviar_mail(value, tipo, {web:'https://www.qrlink.com.ar/profile/tags/all-tag'});
-          },
-          error: (error) => {
-            console.log(error);
           }
         });
         break;
@@ -45,9 +39,7 @@ export class EmailService {
   }
 
   enviar_mail(_email:string, _tipo:string, _data:any){
-    this._api.postTypeRequest('user/envio-email', {email: _email, tipo:_tipo, data:_data}).subscribe( value => {
-      console.log(value);
-    })
+    this._api.postTypeRequest('user/envio-email', {email: _email, tipo:_tipo, data:_data}).subscribe();
   }
 
   public get_mail(_id_autor:any){

@@ -64,11 +64,11 @@ export class DashboardProfileComponent implements OnInit {
           //Ok
           if((res.data.length) > 0){
             this.found_tags = res.data;
-            this.state_box_alert = 'ok';
             this.isFound = true;
           } else{
             this.isFound = false;
           }
+          this.state_box_alert = 'ok';
         } else{
           //ventana de error
           this.state_box_alert = 'error';

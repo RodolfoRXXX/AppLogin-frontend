@@ -1,12 +1,10 @@
-<div class="card col-md-4 mt-5" 
-     style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px; margin: auto; "
->
+<div>
     <!-- Input de números para comprobar cuenta -->
-    <div *ngIf="checkerDisplay">
-        <div class="card-header text-center">
-            Verificá tu correo electrónico
+    <div class="main-content" *ngIf="checkerDisplay">
+        <div class="header-content col-md-3">
+            <p>Verificá tu correo electrónico</p>
         </div>
-        <div class="card-body">
+        <div class="body-content col-md-3">
             <h6 class="text-muted text-center" style="font-size: 0.8rem;">Ingresá el código de 6 dígitos que recibiste en tu correo electrónico</h6>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="d-flex justify-content-around w-100 mt-3 mb-3">
@@ -76,11 +74,11 @@
     </div> 
 
     <!-- Componente para cambiar la cuenta de correo electrónico -->
-    <div *ngIf="!checkerDisplay">
-        <div class="card-header text-center">
-            Actualizá tu correo electrónico
+    <div class="main-content" *ngIf="!checkerDisplay">
+        <div class="header-content col-md-3">
+            <p>Actualizá tu correo electrónico</p>
         </div>
-        <div class="card-body">
+        <div class="body-content col-md-3">
             <app-edit-email-configuration-profile></app-edit-email-configuration-profile>
         </div>
     </div>

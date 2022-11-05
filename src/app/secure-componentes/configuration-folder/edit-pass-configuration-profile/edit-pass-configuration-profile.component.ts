@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ComunicationService } from 'src/app/services/comunication.service';
 import { EmailService } from 'src/app/services/email.service';
 import { validarPass } from '../../function/functions';
-import { md5 } from '../../function/md5';
 
 @Component({
   selector: 'app-edit-pass-configuration-profile',
@@ -15,11 +14,13 @@ import { md5 } from '../../function/md5';
 })
 export class EditPassConfigurationProfileComponent implements OnInit {
 
-  @ViewChild('oldPasswordInput') oldPasswordInput: ElementRef;
+  @ViewChild('InputCode') InputCode: ElementRef;
   form: FormGroup;
   estadoSmt: string;
   estadoValidacion: string;
   email_user: string;
+  actual_code:string;
+  envio:number;
 
   constructor( 
     private _auth: AuthService,
@@ -30,6 +31,7 @@ export class EditPassConfigurationProfileComponent implements OnInit {
   ) {
     this.estadoSmt = 'actualizar';
     this.estadoValidacion = 'verificar';
+    this.envio = 0;
   }
 
   ngOnInit(): void {
@@ -44,11 +46,11 @@ export class EditPassConfigurationProfileComponent implements OnInit {
 
   crearFormulario( id:string ){
     this.form = new FormGroup({
-      oldpassword: new FormControl('',
+      codigo: new FormControl('',
         [
           Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(20)
+          Validators.minLength(6),
+          Validators.maxLength(6)
         ]
       ),
       password: new FormControl('',
@@ -71,46 +73,57 @@ export class EditPassConfigurationProfileComponent implements OnInit {
     }, { validators: validarPass })
   }
 
-  verificarPasswordActual(oldPassword:string){
+  verificarCodigo(code:string){
     this.estadoValidacion = 'loading';
-    var pass = this._auth.getUserDetails();
-    (pass)?(pass = JSON.parse(pass)[0].password):'';
-    let e = md5(oldPassword);
-    if(e===pass){
+    var true_code = this._auth.getUserDetails();
+    (true_code)?(true_code = JSON.parse(true_code)[0].codeEmail):'';
+    if(code===true_code){
       this.estadoValidacion = 'ok';
-      this.oldPasswordInput.nativeElement.classList.add('is-valid');
+      this.InputCode.nativeElement.classList.add('is-valid');
+      this.actual_code = code;
     } else{
       this.estadoValidacion = 'error';
-      this.oldPasswordInput.nativeElement.classList.add('is-invalid');
+      this.InputCode.nativeElement.classList.add('is-invalid');
     }
   }
 
   actualizarSmt(){
     if((this.estadoValidacion == 'error')||(this.estadoValidacion == 'ok')){
       this.estadoValidacion = 'verificar';
-      this.oldPasswordInput.nativeElement.classList.remove('is-valid');
-      this.oldPasswordInput.nativeElement.classList.remove('is-invalid');
+      this.InputCode.nativeElement.classList.remove('is-valid');
+      this.InputCode.nativeElement.classList.remove('is-invalid');
     }
   }
 
   onSubmit(){
     this.estadoSmt = 'load';
-    this._api.putTypeRequest('profile/update-password', this.form.value).subscribe( (res:any) => {
-      if((res.status != 0)&&(res.data.affectedRows != 0)){
-        this._email.bifurcador('change_pass', null, this.email_user, null, null);
-        this.estadoSmt = 'ok';
-        this._com.setNotifier({display: true, state:'alert-success', text:'La contraseña se ha actualizado con éxito!', time:3500})
-        setTimeout(() => {
-          this._router.navigate(['logout']);
-        }, 3500);
-      } else{
-        this.estadoSmt = 'error';
-        this._com.setNotifier({display: true, state:'alert-danger', text:'La contraseña no se ha podido actualizar. Intente nuevamente.', time:3500})
-        setTimeout(() => {
-          this.ngOnInit();
-        }, 3500);
-      }
-    } );
+    if(this.estadoValidacion == 'ok'){
+      this._api.putTypeRequest('profile/update-password', this.form.value).subscribe( (res:any) => {
+        if((res.status != 0)&&(res.data.affectedRows != 0)){
+          this._email.bifurcador('change_pass', null, this.email_user, null, null);
+          this.estadoSmt = 'ok';
+          this._com.setNotifier({display: true, state:'alert-success', text:'La contraseña se ha actualizado con éxito!', time:3500})
+          setTimeout(() => {
+            this._router.navigate(['logout']);
+          }, 3500);
+        } else{
+          this.estadoSmt = 'error';
+          this._com.setNotifier({display: true, state:'alert-danger', text:'La contraseña no se ha podido actualizar. Intente nuevamente.', time:3500})
+          setTimeout(() => {
+            this.ngOnInit();
+          }, 3500);
+        }
+      });
+    }
+  }
+
+  enviar_codigo(){
+    this.envio = 1;
+    this._email.bifurcador('verificate', null, this.email_user, null, this.actual_code );
+    this._com.setNotifier({display: true, state:'alert-success', text:'Se envió el código a tu correo electrónico.', time:2500})
+          setTimeout(() => {
+            this.envio = 2;
+          }, 2500);
   }
 
 }
