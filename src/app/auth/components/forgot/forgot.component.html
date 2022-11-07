@@ -1,43 +1,10 @@
 <div class="main-content">
   <div class="header-content col-md-3">
-    <p>Reenvío de credenciales</p>
+    <p>Recuperá tu cuenta</p>
   </div>
-    <div class="body-content col-md-3">
-        <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
-            <div class="mb-3">
-              <label for="InputEmail" class="form-label mb-0">Correo electrónico</label>
-              <div id="emailHelp" class="form-text mb-3" style="font-size: 0.8rem;">Ingresá el correo electrónico de la cuenta así podremos enviarte las credenciales de ingreso.</div>
-              <input type="email" 
-                     class="form-control input-style"
-                     id="InputEmail" 
-                     aria-describedby="emailHelp"
-                     formControlName="email"
-                     (focus)="actualizarSmt()"
-                     [ngClass]="form.get('email')?.valid?'is-valid':(((form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched))?'is-invalid':'')"
-              />
-              <div style="min-height: 15px; font-size: 0.9rem;">
-                <div class="invalid-feedback d-flex justify-content-start mt-0" *ngIf="(form.get('email')?.invalid)&&(form.get('email')?.dirty||form.get('email')?.touched)">
-                  <span *ngIf="form.get('email')?.errors?.['required']">Este campo es requerido.</span>
-                  <span *ngIf="form.get('email')?.errors?.['incorrectoName'] && !form.get('email')?.errors?.['required']">El formato es incorrecto.</span>
-                </div>
-              </div>
-            </div>
-
-            <button type="submit" 
-                    class="btn btn-primary form-control" 
-                    [disabled]="form.invalid || estadoSmt != 'envio'"
-            >
-              <span *ngIf="estadoSmt == 'envio'">Enviar</span>
-              <span *ngIf="estadoSmt == 'load'">Loading...</span>
-              <span *ngIf="estadoSmt == 'ok'">Ok!</span>
-              <span *ngIf="estadoSmt == 'error'">Error!</span>
-            </button>
-            <div class="alert mt-3 mb-1" [ngClass]="classLogin" [hidden]="!displayLogin">
-              <p class="mb-0 d-block text-center">{{ messageLogin }}</p>
-            </div>
-        </form>
-        <div class="d-flex justify-content-end">
-          <a type="button" class="d-block mt-2 text-end" style="font-size: 0.8rem;" (click)="irLogin()">Tenés una cuenta? Ingresá!</a>
-        </div>
-    </div>
+  <div class="body-content col-md-3">
+    <app-forgot-enviar (estado)="actualizar_proceso($event)" (verificado_email)="guardar_email($event)" *ngIf="estado_proceso == 'enviar'"></app-forgot-enviar>
+    <app-forgot-verificar (estado)="actualizar_proceso($event)" [user_email]="user_email" *ngIf="estado_proceso == 'verificar'"></app-forgot-verificar>
+    <app-forgot-actualizar (estado)="actualizar_proceso($event)" [user_email]="user_email" *ngIf="estado_proceso == 'actualizar'"></app-forgot-actualizar>
+  </div>
 </div>

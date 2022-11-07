@@ -1,0 +1,27 @@
+.is-valid {
+    background-color: rgb(225, 250, 227)!important;
+}
+
+.is-invalid {
+    background-color: rgb(250, 225, 225)!important;
+}
+
+.input-code {
+    width: 10%; 
+    text-align: center; 
+    font-weight: bold;
+    border: none;
+    border-bottom: 1px solid rgb(172, 170, 170);
+    border-radius: 0;
+    background-color: #F6FBFF;
+}
+
+.input-code:focus {
+    outline: 0;
+    box-shadow: none;
+    background-color: #f0f8ff;
+}
+
+.box-load {
+    height:20px; width:20px
+}

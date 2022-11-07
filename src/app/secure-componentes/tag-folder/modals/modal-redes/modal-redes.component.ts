@@ -69,7 +69,6 @@ export class ModalRedesComponent implements OnInit {
     texto = this.red_formato + e.target.value;
     this.social.link = texto;
     this.social.user = e.target.value;
-    console.log(this.social.link)
   }
 
   cerrar(e:any){
