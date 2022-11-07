@@ -21,6 +21,7 @@
              formControlName="codigo"
              placeholder="Escribí aquí..."
              (focus)="actualizarSmt()"
+             [ngClass]="form.get('codigo')?.valid?'is-valid':(((form.get('codigo')?.invalid)&&(form.get('codigo')?.dirty||form.get('codigo')?.touched))?'is-invalid':'')"
         />
         <button type="button" class="btn ms-2" 
                 [ngClass]="( (estadoValidacion == 'verificar')||(estadoValidacion == 'loading') )?'btn-primary':( (estadoValidacion == 'ok')?('btn-success'):((estadoValidacion == 'error')?'btn-danger':'') )" [disabled]="form.get('codigo')?.invalid || (estadoValidacion != 'verificar')" 

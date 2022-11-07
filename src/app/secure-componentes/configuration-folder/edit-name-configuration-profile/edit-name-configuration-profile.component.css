@@ -14,3 +14,11 @@
     box-shadow: none;
     background-color: #f0f8ff;
 }
+
+.is-valid {
+    background-color: rgb(225, 250, 227);
+}
+
+.is-invalid {
+    background-color: rgb(250, 225, 225);
+}
