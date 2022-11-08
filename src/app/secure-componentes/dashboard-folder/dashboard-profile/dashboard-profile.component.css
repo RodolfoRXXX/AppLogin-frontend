@@ -25,7 +25,6 @@
     display: grid;
     align-content: center;
     padding: 2rem;
-    background-color: #fff;
 }
 
 .dashboard-info a {
@@ -40,6 +39,7 @@
     justify-content: space-between;
     padding: 0.25rem 0.5rem;
     position: relative;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .card-info:nth-child(1) {
@@ -73,17 +73,23 @@
     }
 
 .dashboard-profile {
-    padding: 3rem;
-    background-color: #fff;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 20px;
 }
 
 .box-profile-data {
     width: 100%;
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    gap: 30px;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 10px;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
+    padding: 2.5rem 1rem 1rem;
+    position: relative;
 }
 .box-profile-load {
     display: flex;
@@ -96,15 +102,13 @@
 }
 
 .card-profile {
-    width: 120px;
-    height: 120px;
+    width: 200px;
+    height: 50px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    padding: 0.75rem 0.25rem;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
-    background: linear-gradient(to bottom, rgb(98, 161, 255), rgb(156, 196, 254));
+    justify-content: flex-start;
+    padding: 0.75rem 1rem;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .card-profile p {
     font-size: 0.75rem;
@@ -125,13 +129,29 @@
 }
 
 .color_alert {
-    background-color: #EC7063;
+    background: linear-gradient(to right, rgb(236, 112, 99), rgb(230, 171, 164));
 }
 .color_account {
-    background-color: #ffdb4d;
+    background: linear-gradient(to right, rgb(236, 211, 99), rgb(230, 225, 164));
 }
 .color_info {
-    background-color: #58D68D;
+    background: linear-gradient(to right, rgb(99, 236, 151), rgb(164, 230, 197));
+}
+
+.box-card-img{
+    position: absolute;
+    opacity: calc(0.07);
+    overflow: hidden;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.font-card-img{
+    position: absolute;
+    right: -10%;
+    bottom: -65%;
 }
 
 .btn-a:focus, .btn-a:hover, .btn-a:active {
@@ -151,12 +171,13 @@
     }
 
     .dashboard-profile {
-        padding: 1.5rem;
+        padding: 1rem;
+        grid-template-columns: auto;
     }
 
     .box-profile-data {
         grid-template-columns: auto auto;
-        gap: 30px;
+        gap: 10px;
     }
 
     .card-profile {
@@ -178,8 +199,8 @@
     }
 
     .box-profile-data {
-        grid-template-columns: auto auto auto;
-        gap: 30px;
+        grid-template-columns: auto auto;
+        gap: 10px;
     }
 
 }
@@ -193,8 +214,8 @@
     }
     
     .box-profile-data {
-        grid-template-columns: auto auto auto auto;
-        gap: 30px;
+        grid-template-columns: auto auto;
+        gap: 10px;
     }
 
 }
@@ -208,8 +229,8 @@
     }
 
     .box-profile-data {
-        grid-template-columns: auto auto auto auto;
-        gap: 30px;
+        grid-template-columns: auto auto;
+        gap: 10px;
     }
 
 }

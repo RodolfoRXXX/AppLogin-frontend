@@ -6,6 +6,9 @@
     <!-- Contenido del usuario -->
     <section class="dashboard-info">
         <div class="card-info border rounded color_alert">
+            <div class="box-card-img">
+                <img class="font-card-img" src="../../../../assets/img/font-alert.png" alt="imagen-fondo">
+            </div>
             <div class="box-alert" *ngIf="state_box_alert == 'ok'">
                 <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Tag en alerta</p>
                 <h5 class="text-center mb-0">
@@ -23,38 +26,107 @@
             </div>
         </div>
         <div class="card-info border rounded color_account">
+            <div class="box-card-img">
+                <img class="font-card-img" src="../../../../assets/img/font-account.png" alt="imagen-fondo">
+            </div>
             <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Estado de tu cuenta</p>
             <h5 class="text-center" *ngIf="active">Activa</h5>
             <h5 class="text-center" *ngIf="!active">Inactiva</h5>
             <button type="button" class="btn btn-link text-end btn-a" title="Activar cuenta" [disabled]="active" (click)="activar_cuenta()">Activar cuenta</button>
         </div>
         <div class="card-info border rounded color_info">
+            <div class="box-card-img">
+                <img class="font-card-img" src="../../../../assets/img/font-email.png" alt="imagen-fondo">
+            </div>
             <p class="d-block text-left text-light" style="text-shadow: 1px 1px 1px grey;">Correo electrónico</p>
             <h5 class="text-center">{{ email }}</h5>
-            <button type="button" class="btn btn-link text-end btn-a" title="Configurar correo" (click)="configurar_email()">Modificar cuenta</button>
+            <button type="button" class="btn btn-link text-end btn-a" title="Configurar correo" (click)="configurar_email()" style="z-index: 1;">Modificar cuenta</button>
         </div>
     </section>
     <!-- Contenido del tag -->
     <section class="dashboard-profile">
         <!-- Datos ok -->
-        <div class="box-profile-data" *ngIf="state == 'ok'">
+
+        <div class="box-profile-data rounded" *ngIf="state == 'ok'">
+            <h5 class="position-absolute w-100 text-left mb-0 ps-3 pb-1 border-bottom" style="top: 0.5rem; "><i class="fa-solid fa-user-tag me-2"></i>Tags creados</h5>
             <div class="card-profile rounded">
-                <i class="fa-solid fa-user-tag fa-2x"></i>
+                <i class="fa-solid fa-user-tag"></i>
+                <p class="d-block text-center ms-3">Tags creados</p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-check"></i>
+                <p class="d-block text-center ms-3">Tags vinculados</p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-xmark"></i>
+                <p class="d-block text-center ms-3">Tags no vinculados</p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-person-circle-exclamation"></i>
+                <p class="d-block text-center ms-3">Tags en alerta</p>
+            </div>
+        </div>
+
+        <div class="box-profile-data rounded" *ngIf="state == 'ok'">
+            <h5 class="position-absolute w-100 text-left mb-0 ms-3" style="top: 0.5rem; "><i class="fa-solid fa-user-check me-2"></i>Tags vinculados</h5>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-tag"></i>
                 <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
             </div>
             <div class="card-profile rounded">
-                <i class="fa-solid fa-user-check fa-2x"></i>
+                <i class="fa-solid fa-user-check"></i>
                 <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
             </div>
             <div class="card-profile rounded">
-                <i class="fa-solid fa-user-xmark fa-2x"></i>
+                <i class="fa-solid fa-user-xmark"></i>
                 <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
             </div>
             <div class="card-profile rounded">
-                <i class="fa-solid fa-person-circle-exclamation fa-2x"></i>
+                <i class="fa-solid fa-person-circle-exclamation"></i>
                 <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
             </div>
         </div>
+
+        <div class="box-profile-data rounded" *ngIf="state == 'ok'">
+            <h5 class="position-absolute w-100 text-left mb-0 ms-3" style="top: 0.5rem; "><i class="fa-solid fa-user-xmark me-2"></i>Tags no vinculados</h5>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-tag"></i>
+                <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-check"></i>
+                <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-xmark"></i>
+                <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-person-circle-exclamation"></i>
+                <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
+            </div>
+        </div>
+
+        <div class="box-profile-data rounded" *ngIf="state == 'ok'">
+            <h5 class="position-absolute w-100 text-left mb-0 ms-3" style="top: 0.5rem; "><i class="fa-solid fa-person-circle-exclamation me-2"></i>Tags en alerta</h5>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-tag"></i>
+                <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-check"></i>
+                <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-user-xmark"></i>
+                <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
+            </div>
+            <div class="card-profile rounded">
+                <i class="fa-solid fa-person-circle-exclamation"></i>
+                <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
+            </div>
+        </div>
+
         <!-- Loading de carga -->
         <div class="box-profile-load" *ngIf="state == 'load'">
             <div class="spinner-border text-primary" role="status">
