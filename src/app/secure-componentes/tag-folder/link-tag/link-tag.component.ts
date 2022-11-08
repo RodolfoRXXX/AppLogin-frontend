@@ -31,7 +31,7 @@ export class LinkTagComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this._com.setTabEditor('Vinculando Tag');
+    this._com.setTabEditor('Vincular Tag');
     this._activatedRoute.params.subscribe( (params: Params) => {
       this.tag.tipo = params['tipo'];
       this.tag.id   = params['id'];

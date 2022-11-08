@@ -137,4 +137,8 @@ export class EmailCheckerComponent implements OnInit {
     }
   }
 
+  fast_logout(){
+    this._router.navigate(['logout']);
+  }
+
 }

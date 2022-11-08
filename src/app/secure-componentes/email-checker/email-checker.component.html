@@ -2,57 +2,57 @@
     <!-- Input de números para comprobar cuenta -->
     <div class="main-content" *ngIf="checkerDisplay">
         <div class="header-content col-md-3">
-            <p>Verificá tu correo electrónico</p>
+            <p>Verificá tu cuenta</p>
         </div>
         <div class="body-content col-md-3">
-            <h6 class="text-muted text-center" style="font-size: 0.8rem;">Ingresá el código de 6 dígitos que recibiste en tu correo electrónico</h6>
-            <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <div class="d-flex justify-content-around w-100 mt-3 mb-3">
+            <h6 class="text-muted text-center mt-2" style="font-size: 0.8rem;">Ingresá el código de 6 dígitos que recibiste en tu correo electrónico</h6>
+            <form [formGroup]="form" style="padding: 1rem 0 0.5rem;" (ngSubmit)="onSubmit()">
+                <div class="d-flex justify-content-around w-100 mb-3">
                     <input type="text" 
                            formControlName="1" 
                            maxlength="1" 
                            class="input-code"
                            (focus)="actualizarSmt()"
-                           [ngClass]="form.get('1')?.valid?'valid':(((form.get('1')?.invalid)&&(form.get('1')?.dirty||form.get('1')?.touched))?'invalid':'')"
+                           [ngClass]="form.get('1')?.valid?'is-valid':(((form.get('1')?.invalid)&&(form.get('1')?.dirty||form.get('1')?.touched))?'is-invalid':'')"
                     />
                     <input type="text" 
                            formControlName="2" 
                            maxlength="1" 
                            class="input-code"
                            (focus)="actualizarSmt()"
-                           [ngClass]="form.get('2')?.valid?'valid':(((form.get('2')?.invalid)&&(form.get('2')?.dirty||form.get('2')?.touched))?'invalid':'')"
+                           [ngClass]="form.get('2')?.valid?'is-valid':(((form.get('2')?.invalid)&&(form.get('2')?.dirty||form.get('2')?.touched))?'is-invalid':'')"
                     />
                     <input type="text" 
                            formControlName="3" 
                            maxlength="1" 
                            class="input-code"
                            (focus)="actualizarSmt()"
-                           [ngClass]="form.get('3')?.valid?'valid':(((form.get('3')?.invalid)&&(form.get('3')?.dirty||form.get('3')?.touched))?'invalid':'')"
+                           [ngClass]="form.get('3')?.valid?'is-valid':(((form.get('3')?.invalid)&&(form.get('3')?.dirty||form.get('3')?.touched))?'is-invalid':'')"
                     />
                     <input type="text" 
                            formControlName="4" 
                            maxlength="1" 
                            class="input-code"
                            (focus)="actualizarSmt()"
-                           [ngClass]="form.get('4')?.valid?'valid':(((form.get('4')?.invalid)&&(form.get('4')?.dirty||form.get('4')?.touched))?'invalid':'')"
+                           [ngClass]="form.get('4')?.valid?'is-valid':(((form.get('4')?.invalid)&&(form.get('4')?.dirty||form.get('4')?.touched))?'is-invalid':'')"
                     />
                     <input type="text" 
                            formControlName="5" 
                            maxlength="1" 
                            class="input-code"
                            (focus)="actualizarSmt()"
-                           [ngClass]="form.get('5')?.valid?'valid':(((form.get('5')?.invalid)&&(form.get('5')?.dirty||form.get('5')?.touched))?'invalid':'')"
+                           [ngClass]="form.get('5')?.valid?'is-valid':(((form.get('5')?.invalid)&&(form.get('5')?.dirty||form.get('5')?.touched))?'is-invalid':'')"
                     />
                     <input type="text" 
                            formControlName="6" 
                            maxlength="1" 
                            class="input-code"
                            (focus)="actualizarSmt()"
-                           [ngClass]="form.get('6')?.valid?'valid':(((form.get('6')?.invalid)&&(form.get('6')?.dirty||form.get('6')?.touched))?'invalid':'')"
+                           [ngClass]="form.get('6')?.valid?'is-valid':(((form.get('6')?.invalid)&&(form.get('6')?.dirty||form.get('6')?.touched))?'is-invalid':'')"
                     />
                 </div>
                 <div class="d-flex justify-content-start">
-                    <a type="button" class="d-block mt-0 mb-2 text-start" style="font-size: 0.8rem;" (click)="irModificar()">Modificar el correo electrónico de acceso</a>
+                    <a type="button" class="d-block mt-0 mb-3 text-start" style="font-size: 0.8rem;" (click)="irModificar()">Modificar el correo electrónico de acceso</a>
                 </div>
                 <button type="submit" 
                     class="btn btn-primary form-control" 
@@ -67,7 +67,7 @@
               <p class="mb-0 d-block text-center">{{ messageLogin }}</p>
             </div>
             <div class="d-flex justify-content-end">
-                <a type="button" class="d-block mt-2 mb-0 text-end" style="font-size: 0.8rem;" (click)="reenviarCodigo()">Reenviarme el código</a>
+                <a type="button" class="d-block mt-3 mb-0 text-end" style="font-size: 0.8rem;" (click)="reenviarCodigo()">Reenviarme el código</a>
             </div>
             </form>
         </div>
@@ -80,7 +80,13 @@
         </div>
         <div class="body-content col-md-3">
             <app-edit-email-configuration-profile></app-edit-email-configuration-profile>
+            <div class="d-flex justify-content-end pe-3">
+                <a type="button" class="d-block mb-0 text-end" style="font-size: 0.8rem;" (click)="irModificar()">Verificar la cuenta</a>
+            </div>
         </div>
     </div>
+    <button class="btn-fast-logout">
+        <i class="fa-solid fa-right-from-bracket fa-2x" (click)="fast_logout()" title="Cerrar sesión"></i>
+    </button>
 </div>
 

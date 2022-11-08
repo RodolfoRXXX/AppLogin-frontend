@@ -1,6 +1,7 @@
 .main-content {
     min-height: calc(100vh - 148px);
     background-color: rgb(247, 247, 247);
+    position: relative;
 }
 
 /* Extra small devices (phones, 600px and down) */
