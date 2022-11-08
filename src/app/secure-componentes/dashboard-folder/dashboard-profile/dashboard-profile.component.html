@@ -47,98 +47,122 @@
     <section class="dashboard-profile">
         <!-- Datos ok -->
 
-        <div class="box-profile-data rounded" *ngIf="state == 'ok'">
-            <h5 class="position-absolute w-100 text-left mb-0 ps-3 pb-1 border-bottom" style="top: 0.5rem; "><i class="fa-solid fa-user-tag me-2"></i>Tags creados</h5>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-tag"></i>
-                <p class="d-block text-center ms-3">Tags creados</p>
+        <!-- CREADOS -->
+        <div class="box-profile-data rounded">
+            <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-tag me-2"></i>Tags creados</h5>
+            <ng-container *ngFor="let creados of card_creados">
+                <div class="card-profile rounded">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <p class="d-block text-center ms-3">{{ (creados.apellido)?(creados.nombre + ' ' + creados.apellido):((creados.especie)?(creados.especie + ' - ' + creados.nombre):(creados.marca + ' - ' + creados.modelo)) }}</p>
+                </div>
+            </ng-container>
+            <!-- Loading de carga creados -->
+            <div class="box-profile-load" *ngIf="state_creados == 'load'">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">...loading</span>
+                </div>
             </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-check"></i>
-                <p class="d-block text-center ms-3">Tags vinculados</p>
+            <!-- Error de carga de datos creados -->
+            <div class="box-profile-error" *ngIf="state_creados == 'error'">
+                <div class="alert alert-danger">
+                    <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
+                </div>
             </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-xmark"></i>
-                <p class="d-block text-center ms-3">Tags no vinculados</p>
-            </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-person-circle-exclamation"></i>
-                <p class="d-block text-center ms-3">Tags en alerta</p>
-            </div>
-        </div>
-
-        <div class="box-profile-data rounded" *ngIf="state == 'ok'">
-            <h5 class="position-absolute w-100 text-left mb-0 ms-3" style="top: 0.5rem; "><i class="fa-solid fa-user-check me-2"></i>Tags vinculados</h5>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-tag"></i>
-                <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
-            </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-check"></i>
-                <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
-            </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-xmark"></i>
-                <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
-            </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-person-circle-exclamation"></i>
-                <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
+            <!-- Error de carga de datos creados -->
+            <div class="box-profile-error" *ngIf="state_creados == 'empty'">
+                <div class="alert alert-info">
+                    <h6 class="text-center mb-0">No hay tags creados</h6>
+                </div>
             </div>
         </div>
 
-        <div class="box-profile-data rounded" *ngIf="state == 'ok'">
-            <h5 class="position-absolute w-100 text-left mb-0 ms-3" style="top: 0.5rem; "><i class="fa-solid fa-user-xmark me-2"></i>Tags no vinculados</h5>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-tag"></i>
-                <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
+        <!-- LINKEADOS -->
+        <div class="box-profile-data rounded">
+            <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-check me-2"></i>Tags vinculados</h5>
+            <ng-container *ngFor="let linkeados of card_link">
+                <div class="card-profile rounded">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <p class="d-block text-center ms-3">{{ (linkeados.apellido)?(linkeados.nombre + ' ' + linkeados.apellido):((linkeados.especie)?(linkeados.especie + ' - ' + linkeados.nombre):(linkeados.marca + ' - ' + linkeados.modelo)) }}</p>
+                </div>
+            </ng-container>
+            <!-- Loading de carga link -->
+            <div class="box-profile-load" *ngIf="state_link == 'load'">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">...loading</span>
+                </div>
             </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-check"></i>
-                <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
+            <!-- Error de carga de datos link -->
+            <div class="box-profile-error" *ngIf="state_link == 'error'">
+                <div class="alert alert-danger">
+                    <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
+                </div>
             </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-xmark"></i>
-                <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
-            </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-person-circle-exclamation"></i>
-                <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
-            </div>
-        </div>
-
-        <div class="box-profile-data rounded" *ngIf="state == 'ok'">
-            <h5 class="position-absolute w-100 text-left mb-0 ms-3" style="top: 0.5rem; "><i class="fa-solid fa-person-circle-exclamation me-2"></i>Tags en alerta</h5>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-tag"></i>
-                <p class="d-block text-center">Tags creados<br><b style="font-size: 1.05rem;">({{ card_total }})</b></p>
-            </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-check"></i>
-                <p class="d-block text-center">Tags vinculados<br><b style="font-size: 1.05rem;">({{ card_link }})</b></p>
-            </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-user-xmark"></i>
-                <p class="d-block text-center">Tags no vinculados<br><b style="font-size: 1.05rem;">({{ card_nolink }})</b></p>
-            </div>
-            <div class="card-profile rounded">
-                <i class="fa-solid fa-person-circle-exclamation"></i>
-                <p class="d-block text-center">Tags en alerta<br><b style="font-size: 1.05rem;">({{ card_alert }})</b></p>
+            <!-- Error de carga de datos link -->
+            <div class="box-profile-error" *ngIf="state_link == 'empty'">
+                <div class="alert alert-info">
+                    <h6 class="text-center mb-0">No hay tags vinculados</h6>
+                </div>
             </div>
         </div>
 
-        <!-- Loading de carga -->
-        <div class="box-profile-load" *ngIf="state == 'load'">
-            <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">...loading</span>
+        <!-- NOLINKEADOS -->
+        <div class="box-profile-data rounded">
+            <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-xmark me-2"></i>Tags no vinculados</h5>
+            <ng-container *ngFor="let nolinkeados of card_nolink">
+                <div class="card-profile rounded">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <p class="d-block text-center ms-3">{{ (nolinkeados.apellido)?(nolinkeados.nombre + ' ' + nolinkeados.apellido):((nolinkeados.especie)?(nolinkeados.especie + ' - ' + nolinkeados.nombre):(nolinkeados.marca + ' - ' + nolinkeados.modelo)) }}</p>
+                </div>
+            </ng-container>
+            <!-- Loading de carga creados -->
+            <div class="box-profile-load" *ngIf="state_nolink == 'load'">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">...loading</span>
+                </div>
+            </div>
+            <!-- Error de carga de datos creados -->
+            <div class="box-profile-error" *ngIf="state_nolink == 'error'">
+                <div class="alert alert-danger">
+                    <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
+                </div>
+            </div>
+            <!-- Error de carga de datos creados -->
+            <div class="box-profile-error" *ngIf="state_nolink == 'empty'">
+                <div class="alert alert-info">
+                    <h6 class="text-center mb-0">No hay tags desvinculados</h6>
+                </div>
             </div>
         </div>
-        <!-- Error de carga de datos -->
-        <div class="box-profile-error" *ngIf="state == 'error'">
-            <div class="alert alert-danger">
-                <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
+
+        <!-- ALERTADOS -->
+        <div class="box-profile-data rounded">
+            <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-person-circle-exclamation me-2"></i>Tags en alerta</h5>
+            <ng-container *ngFor="let alertados of card_alert">
+                <div class="card-profile rounded">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <p class="d-block text-center ms-3">{{ (alertados.apellido)?(alertados.nombre + ' ' + alertados.apellido):((alertados.especie)?(alertados.especie + ' - ' + alertados.nombre):(alertados.marca + ' - ' + alertados.modelo)) }}</p>
+                </div>
+            </ng-container>
+            <!-- Loading de carga alert -->
+            <div class="box-profile-load" *ngIf="state_alert == 'load'">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">...loading</span>
+                </div>
+            </div>
+            <!-- Error de carga de datos alert -->
+            <div class="box-profile-error" *ngIf="state_alert == 'error'">
+                <div class="alert alert-danger">
+                    <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
+                </div>
+            </div>
+            <!-- Error de carga de datos alert -->
+            <div class="box-profile-error" *ngIf="state_alert == 'empty'">
+                <div class="alert alert-info">
+                    <h6 class="text-center mb-0">No hay tags en alerta</h6>
+                </div>
             </div>
         </div>
+
     </section>
 </div>
 

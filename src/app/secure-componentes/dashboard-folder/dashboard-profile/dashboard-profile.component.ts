@@ -17,11 +17,14 @@ export class DashboardProfileComponent implements OnInit {
   user:string;
   email:string;
   active:boolean;
-  card_total:number;
-  card_link:number;
-  card_nolink:number;
-  card_alert:number;
-  state:string;
+  card_creados:any[];
+  card_link:any[];
+  card_nolink:any[];
+  card_alert:any[];
+  state_creados:string;
+  state_link:string;
+  state_nolink:string;
+  state_alert:string;
   state_box_alert:string;
   isFound:boolean;
 
@@ -33,11 +36,14 @@ export class DashboardProfileComponent implements OnInit {
     private _router:Router,
     private modalService: NgbModal
   ) {
-    this.card_total = 0;
-    this.card_link = 0;
-    this.card_nolink = 0;
-    this.card_alert = 0;
-    this.state = 'load';
+    this.card_creados = [];
+    this.card_link = [];
+    this.card_nolink = [];
+    this.card_alert = [];
+    this.state_creados = 'load';
+    this.state_link = 'load';
+    this.state_nolink = 'load';
+    this.state_alert = 'load';
     this.state_box_alert = 'load';
     this.isFound = false;
   }
@@ -84,21 +90,51 @@ export class DashboardProfileComponent implements OnInit {
   cargar_tarjetas(id:any){
     this._api.postTypeRequest('profile/get-data-card', {id}).subscribe({
       next: (res: any) => {
+        console.log(res.data);
         if(res.status == 1){
           //Ok;
-          this.card_total = res.data.total;
-          this.card_link = res.data.link;
-          this.card_nolink = res.data.nolink;
-          this.card_alert = res.data.alert;
-          this.state = 'ok';
+          if(res.data.creados.length){
+            this.card_creados = res.data.creados;
+            this.state_creados = 'ok';
+          } else{
+            this.state_creados = 'empty';
+          }
+
+          if(res.data.link.length){
+            this.card_link = res.data.link;
+            this.state_link = 'ok';
+          } else{
+            this.state_link = 'empty';
+          }
+
+          if(res.data.nolink.length){
+            this.card_nolink = res.data.nolink;
+            this.state_nolink = 'ok';
+          } else{
+            this.state_nolink = 'empty';
+          }
+
+          if(res.data.alert.length){
+            this.card_alert = res.data.alert;
+            this.state_alert = 'ok';
+          } else{
+            this.state_alert = 'empty';
+          }
+
         } else{
           //ventana de error
-          this.state = 'error';
+          this.state_creados = 'error';
+          this.state_link = 'error';
+          this.state_nolink = 'error';
+          this.state_alert = 'error';
         }
       },
       error: (error) => {
         //ventana de error
-        this.state = 'error';
+        this.state_creados = 'error';
+        this.state_link = 'error';
+        this.state_nolink = 'error';
+        this.state_alert = 'error';
       }
     })
   }
