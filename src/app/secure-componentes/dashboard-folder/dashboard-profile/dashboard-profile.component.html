@@ -52,7 +52,7 @@
             <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-tag me-2"></i>Tags creados</h5>
             <ng-container *ngFor="let creados of card_creados">
                 <div class="card-profile rounded">
-                    <i class="fa-solid fa-qrcode"></i>
+                    <i class="fa-solid fa-qrcode text-primary"></i>
                     <p class="d-block text-center ms-3">{{ (creados.apellido)?(creados.nombre + ' ' + creados.apellido):((creados.especie)?(creados.especie + ' - ' + creados.nombre):(creados.marca + ' - ' + creados.modelo)) }}</p>
                 </div>
             </ng-container>
@@ -64,13 +64,13 @@
             </div>
             <!-- Error de carga de datos creados -->
             <div class="box-profile-error" *ngIf="state_creados == 'error'">
-                <div class="alert alert-danger">
+                <div class="alert alert-danger mb-0">
                     <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
                 </div>
             </div>
             <!-- Error de carga de datos creados -->
             <div class="box-profile-error" *ngIf="state_creados == 'empty'">
-                <div class="alert alert-info">
+                <div class="alert alert-info mb-0">
                     <h6 class="text-center mb-0">No hay tags creados</h6>
                 </div>
             </div>
@@ -81,7 +81,7 @@
             <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-check me-2"></i>Tags vinculados</h5>
             <ng-container *ngFor="let linkeados of card_link">
                 <div class="card-profile rounded">
-                    <i class="fa-solid fa-qrcode"></i>
+                    <i class="fa-solid fa-qrcode" [style.color]="link"></i>
                     <p class="d-block text-center ms-3">{{ (linkeados.apellido)?(linkeados.nombre + ' ' + linkeados.apellido):((linkeados.especie)?(linkeados.especie + ' - ' + linkeados.nombre):(linkeados.marca + ' - ' + linkeados.modelo)) }}</p>
                 </div>
             </ng-container>
@@ -93,13 +93,13 @@
             </div>
             <!-- Error de carga de datos link -->
             <div class="box-profile-error" *ngIf="state_link == 'error'">
-                <div class="alert alert-danger">
+                <div class="alert alert-danger mb-0">
                     <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
                 </div>
             </div>
             <!-- Error de carga de datos link -->
             <div class="box-profile-error" *ngIf="state_link == 'empty'">
-                <div class="alert alert-info">
+                <div class="alert alert-info mb-0">
                     <h6 class="text-center mb-0">No hay tags vinculados</h6>
                 </div>
             </div>
@@ -110,25 +110,25 @@
             <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-xmark me-2"></i>Tags no vinculados</h5>
             <ng-container *ngFor="let nolinkeados of card_nolink">
                 <div class="card-profile rounded">
-                    <i class="fa-solid fa-qrcode"></i>
+                    <i class="fa-solid fa-qrcode" [style.color]="nolink"></i>
                     <p class="d-block text-center ms-3">{{ (nolinkeados.apellido)?(nolinkeados.nombre + ' ' + nolinkeados.apellido):((nolinkeados.especie)?(nolinkeados.especie + ' - ' + nolinkeados.nombre):(nolinkeados.marca + ' - ' + nolinkeados.modelo)) }}</p>
                 </div>
             </ng-container>
-            <!-- Loading de carga creados -->
+            <!-- Loading de carga nolinkeados -->
             <div class="box-profile-load" *ngIf="state_nolink == 'load'">
                 <div class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">...loading</span>
                 </div>
             </div>
-            <!-- Error de carga de datos creados -->
+            <!-- Error de carga de datos nolinkeados -->
             <div class="box-profile-error" *ngIf="state_nolink == 'error'">
-                <div class="alert alert-danger">
+                <div class="alert alert-danger mb-0">
                     <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
                 </div>
             </div>
-            <!-- Error de carga de datos creados -->
+            <!-- Error de carga de datos nolinkeados -->
             <div class="box-profile-error" *ngIf="state_nolink == 'empty'">
-                <div class="alert alert-info">
+                <div class="alert alert-info mb-0">
                     <h6 class="text-center mb-0">No hay tags desvinculados</h6>
                 </div>
             </div>
@@ -139,7 +139,7 @@
             <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-person-circle-exclamation me-2"></i>Tags en alerta</h5>
             <ng-container *ngFor="let alertados of card_alert">
                 <div class="card-profile rounded">
-                    <i class="fa-solid fa-qrcode"></i>
+                    <i class="fa-solid fa-qrcode" [style.color]="alert"></i>
                     <p class="d-block text-center ms-3">{{ (alertados.apellido)?(alertados.nombre + ' ' + alertados.apellido):((alertados.especie)?(alertados.especie + ' - ' + alertados.nombre):(alertados.marca + ' - ' + alertados.modelo)) }}</p>
                 </div>
             </ng-container>
@@ -151,13 +151,13 @@
             </div>
             <!-- Error de carga de datos alert -->
             <div class="box-profile-error" *ngIf="state_alert == 'error'">
-                <div class="alert alert-danger">
+                <div class="alert alert-danger mb-0">
                     <h6 class="text-center mb-0">Hubo un problema al cargar los datos. Por favor, actualizá la página.</h6>
                 </div>
             </div>
             <!-- Error de carga de datos alert -->
             <div class="box-profile-error" *ngIf="state_alert == 'empty'">
-                <div class="alert alert-info">
+                <div class="alert alert-info mb-0">
                     <h6 class="text-center mb-0">No hay tags en alerta</h6>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { globalVariable } from 'src/app/entidades/global_variables';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,6 +11,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./dashboard-profile.component.css']
 })
 export class DashboardProfileComponent implements OnInit {
+
+  link = globalVariable.LINK;
+  nolink = globalVariable.NOLINK;
+  alert = globalVariable.ALERT;
 
   @ViewChild('modal_ubicacion') modal_ubicacion: ElementRef;
 

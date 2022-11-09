@@ -80,6 +80,7 @@
 }
 
 .box-profile-data {
+    min-height: 140px;
     width: 100%;
     display: grid;
     grid-template-columns: 49% 49%;
@@ -94,13 +95,17 @@
     border-left: 2px solid rgb(110, 149, 255);
 }
 .box-profile-load {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 120px;
+    width: 100%;
+    left: 48%;
+    top: 50%;
+    position: absolute;
 }
 .box-profile-error {
-    padding: 1rem;
+    padding: 1rem 1rem 1.5rem;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 
 .box-profile-title{
@@ -187,16 +192,12 @@
     }
 
     .box-profile-data {
-        grid-template-columns: auto auto;
+        grid-template-columns: 49% 49%;
         gap: 10px;
     }
 
     .card-profile {
         margin: 0.5rem 0.5rem;
-    }
-
-    .box-profile-error {
-        padding: 0 0.5rem;
     }
 
 }
@@ -225,7 +226,7 @@
     }
     
     .box-profile-data {
-        grid-template-columns: auto auto;
+        grid-template-columns: 49% 49%;
         gap: 10px;
     }
 
