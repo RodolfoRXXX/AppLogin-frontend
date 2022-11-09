@@ -95,7 +95,6 @@ export class DashboardProfileComponent implements OnInit {
   cargar_tarjetas(id:any){
     this._api.postTypeRequest('profile/get-data-card', {id}).subscribe({
       next: (res: any) => {
-        console.log(res.data);
         if(res.status == 1){
           //Ok;
           if(res.data.creados.length){

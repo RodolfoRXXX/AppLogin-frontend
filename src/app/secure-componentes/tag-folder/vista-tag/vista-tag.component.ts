@@ -81,6 +81,9 @@ export class VistaTagComponent implements OnInit {
                   case 'nolink':
                     //qr libre
                     this.view_tag = 'nolink';
+                    setTimeout(() => {
+                      this._router.navigate(['home']);
+                    }, 3000);
                     break;
                   default:
                     //error genérico o no encuentra el tag de dicho qr, actualiza
