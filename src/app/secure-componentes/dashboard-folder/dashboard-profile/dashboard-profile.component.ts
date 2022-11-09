@@ -156,5 +156,9 @@ export class DashboardProfileComponent implements OnInit {
     this._router.navigate(['profile/configuration']);
   }
 
+  ver_tags(){
+    this._router.navigate(['profile/tags/all-tag']);
+  }
+
 
 }

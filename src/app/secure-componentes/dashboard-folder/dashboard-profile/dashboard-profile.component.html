@@ -51,7 +51,7 @@
         <div class="box-profile-data rounded">
             <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-tag me-2"></i>Tags creados</h5>
             <ng-container *ngFor="let creados of card_creados">
-                <div class="card-profile rounded">
+                <div class="card-profile rounded" title="Ver tags" (click)="ver_tags()">
                     <i class="fa-solid fa-qrcode text-primary"></i>
                     <p class="d-block text-center ms-3">{{ (creados.apellido)?(creados.nombre + ' ' + creados.apellido):((creados.especie)?(creados.especie + ' - ' + creados.nombre):(creados.marca + ' - ' + creados.modelo)) }}</p>
                 </div>
@@ -80,7 +80,7 @@
         <div class="box-profile-data rounded">
             <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-check me-2"></i>Tags vinculados</h5>
             <ng-container *ngFor="let linkeados of card_link">
-                <div class="card-profile rounded">
+                <div class="card-profile rounded" title="Ver tags" (click)="ver_tags()">
                     <i class="fa-solid fa-qrcode" [style.color]="link"></i>
                     <p class="d-block text-center ms-3">{{ (linkeados.apellido)?(linkeados.nombre + ' ' + linkeados.apellido):((linkeados.especie)?(linkeados.especie + ' - ' + linkeados.nombre):(linkeados.marca + ' - ' + linkeados.modelo)) }}</p>
                 </div>
@@ -109,7 +109,7 @@
         <div class="box-profile-data rounded">
             <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-user-xmark me-2"></i>Tags no vinculados</h5>
             <ng-container *ngFor="let nolinkeados of card_nolink">
-                <div class="card-profile rounded">
+                <div class="card-profile rounded" title="Ver tags" (click)="ver_tags()">
                     <i class="fa-solid fa-qrcode" [style.color]="nolink"></i>
                     <p class="d-block text-center ms-3">{{ (nolinkeados.apellido)?(nolinkeados.nombre + ' ' + nolinkeados.apellido):((nolinkeados.especie)?(nolinkeados.especie + ' - ' + nolinkeados.nombre):(nolinkeados.marca + ' - ' + nolinkeados.modelo)) }}</p>
                 </div>
@@ -138,7 +138,7 @@
         <div class="box-profile-data rounded">
             <h5 class="border-bottom box-profile-title"><i class="fa-solid fa-person-circle-exclamation me-2"></i>Tags en alerta</h5>
             <ng-container *ngFor="let alertados of card_alert">
-                <div class="card-profile rounded">
+                <div class="card-profile rounded" title="Ver tags" (click)="ver_tags()">
                     <i class="fa-solid fa-qrcode" [style.color]="alert"></i>
                     <p class="d-block text-center ms-3">{{ (alertados.apellido)?(alertados.nombre + ' ' + alertados.apellido):((alertados.especie)?(alertados.especie + ' - ' + alertados.nombre):(alertados.marca + ' - ' + alertados.modelo)) }}</p>
                 </div>
