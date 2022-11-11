@@ -181,7 +181,6 @@ export class EditTagComponent implements OnInit {
                 if(res.status == 1){
                   if(res.data.length){
                     this.mascota = res.data[0];
-                    console.log(this.mascota);
                     this.createFormMascota(this.userId, 'adicional', this.mascota);
                     this._com.setTabEditor(this.mascota.nombre + ' - ' + this.mascota.especie);
                     this.tipo_form = this.tag.tipo;
@@ -219,7 +218,6 @@ export class EditTagComponent implements OnInit {
                 if(res.status == 1){
                   if(res.data.length){
                     this.vehiculo = res.data[0];
-                    console.log(this.vehiculo);
                     this.createFormVehiculo(this.userId, 'adicional', this.vehiculo);
                     this._com.setTabEditor(this.vehiculo.marca + ' - ' + this.vehiculo.modelo);
                     this.tipo_form = this.tag.tipo;

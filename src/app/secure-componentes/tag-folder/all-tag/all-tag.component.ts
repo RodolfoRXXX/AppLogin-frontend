@@ -162,28 +162,28 @@ export class AllTagComponent implements OnInit {
     this.texto_confirmacion = 'Estás seguro de eliminar el tag de ' + texto + '?';
     this.modalService.open(this.modal_confirmacion, { centered: true, size: 'sm' });
   }
-  cerrar_confirmar( value:boolean){
-    switch (this.tag_eliminar.nivel) {
-      case 'personal':
-        this.tag_personal_existe = false;
-        this.load_tag_personal = true;
-        break;
-      case 'persona':
-        this.tag_adic_persona_existe = false;
-        this.load_tag_persona = true;
-        break;
-      case 'mascota':
-        this.tag_adic_mascota_existe = false;
-        this.load_tag_mascota = true;
-        break;
-      case 'vehiculo':
-        this.tag_adic_vehiculo_existe = false;
-        this.load_tag_vehiculo = true;
-        break;
-    }
+  cerrar_confirmar( value:boolean ){
     this.modalService.dismissAll();
     let text_error = 'Ha sucedido un error. Intentá nuevamente.';
     if(value){
+      switch (this.tag_eliminar.nivel) {
+        case 'personal':
+          this.tag_personal_existe = false;
+          this.load_tag_personal = true;
+          break;
+        case 'persona':
+          this.tag_adic_persona_existe = false;
+          this.load_tag_persona = true;
+          break;
+        case 'mascota':
+          this.tag_adic_mascota_existe = false;
+          this.load_tag_mascota = true;
+          break;
+        case 'vehiculo':
+          this.tag_adic_vehiculo_existe = false;
+          this.load_tag_vehiculo = true;
+          break;
+      }
       this._api.postTypeRequest('profile/delete-tag', this.tag_eliminar).subscribe({
         next: (res: any) => {
           if(res.status == 1){

@@ -70,8 +70,8 @@
             </div>
             <!-- Error de carga de datos creados -->
             <div class="box-profile-error" *ngIf="state_creados == 'empty'">
-                <div class="alert alert-info mb-0">
-                    <h6 class="text-center mb-0">No hay tags creados</h6>
+                <div class="alert alert-primary mb-0" id="crear_tag" (click)="ver_tags()" title="Crear Tag">
+                    <h6 class="text-center mb-0"><i class="fa-solid fa-person-circle-plus me-1"></i> Crear mi primer Tag!</h6>
                 </div>
             </div>
         </div>
