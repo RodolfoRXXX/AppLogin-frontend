@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { emergencias_personas, em_persona } from 'src/app/entidades/array_emergencias_personas';
+import { emergencias_data, em_cards } from 'src/app/entidades/array_emergencias';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { globalVariable } from 'src/app/entidades/global_variables';
 import { social_data } from 'src/app/entidades/social_form';
@@ -10,6 +10,8 @@ import { ComunicationService } from 'src/app/services/comunication.service';
 import { EmailService } from 'src/app/services/email.service';
 import { LocationServiceService } from 'src/app/services/location-service.service';
 import { environment } from 'src/environments/environment';
+import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
+import { debounceTime, distinctUntilChanged, filter, map, merge, Observable, OperatorFunction, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-vista-tag',
@@ -24,6 +26,13 @@ export class VistaTagComponent implements OnInit {
 
   @ViewChild('modal_posicion') modal_posicion: ElementRef;
 
+  model: any;
+  lista: string[];
+
+	@ViewChild('instance', { static: true }) instance: NgbTypeahead;
+	focus$ = new Subject<string>();
+	click$ = new Subject<string>();
+
   @Input() datos:any;
   @Input() tipo:string;
 
@@ -34,7 +43,7 @@ export class VistaTagComponent implements OnInit {
   foto_perfil:string;
   view_tag:string;
   
-  cards_emergency:any[];
+  cards_emergency:em_cards[];
 
   id_user:number;
   id_autor:number;
@@ -59,6 +68,7 @@ export class VistaTagComponent implements OnInit {
     this.usuario = '';
     this.redes = array_social;
     this.sociales = [];
+    this.lista = [];
     this.view_tag = 'load';
 
     config.backdrop = 'static';
@@ -115,13 +125,14 @@ export class VistaTagComponent implements OnInit {
     this.datos = datos;
     this.id_user = datos.id;
     this.id_autor = datos.id_autor;
+    this.cards_emergency = emergencias_data;
     switch (tipo) {
       case 'personas' :
         (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
         this.usuario = datos.nombre + ' ' + datos.apellido;
         this.sociales = (datos.red != '')?JSON.parse(datos.red):[];
         this.view_tag = 'ok';
-        this.cards_emergency = emergencias_personas;
+        this.crear_filtro(tipo, this.cards_emergency);
         break;
       case 'mascotas' :
         (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_mascota.png');
@@ -138,6 +149,14 @@ export class VistaTagComponent implements OnInit {
         this.view_tag = 'error';
         break;
     }
+  }
+
+  crear_filtro(tipo:string, datos:em_cards[]){
+    datos.forEach( value => {
+      if(value.tipo === tipo){
+        this.lista.push(value.titulo);
+      }
+    })
   }
 
   select_leaf(text:string){
@@ -184,5 +203,22 @@ export class VistaTagComponent implements OnInit {
       this.modalService.dismissAll();
     }
   }
+
+  search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) => {
+		const debouncedText$ = text$.pipe(debounceTime(200), distinctUntilChanged());
+		const clicksWithClosedPopup$ = this.click$.pipe(filter(() => !this.instance?.isPopupOpen()));
+		const inputFocus$ = this.focus$;
+
+		return merge(debouncedText$, inputFocus$, clicksWithClosedPopup$).pipe(
+			map((term) =>
+				(term === '' ? this.lista : this.lista.filter((v) => v.toLowerCase().indexOf(term.toLowerCase()) > -1)),
+			),
+		);
+	};
+
+  borra_texto(){
+    this.model = '';
+  }
+
 
 }

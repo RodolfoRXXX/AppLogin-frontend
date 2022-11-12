@@ -31,6 +31,7 @@ import { ModalUbicacionComponent } from '../../modals/modal-ubicacion/modal-ubic
 import { ModalSesionComponent } from '../../modals/modal-sesion/modal-sesion.component';
 import { ModalMarcarPosicionComponent } from '../../tag-folder/modals/modal-marcar-posicion/modal-marcar-posicion.component';
 import { DataBoxComponent } from '../../tag-folder/vista-tag/componentes/data-box/data-box.component';
+import { DataBoxSectionComponent } from '../../tag-folder/vista-tag/componentes/data-box-section/data-box-section.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { DataBoxComponent } from '../../tag-folder/vista-tag/componentes/data-bo
     ModalSesionComponent,
     VistaTagComponent,
     DataBoxComponent,
+    DataBoxSectionComponent,
     DetailTagComponent,
     LinkTagComponent,
     AlertTagComponent,

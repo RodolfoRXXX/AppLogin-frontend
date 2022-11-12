@@ -104,11 +104,23 @@
         <div class="body-card-data" *ngIf="true">
             <h4>Cúal es tu emergencia?</h4>
             <div class="body-card-data-filter">
-                <input class="form-control" type="text">
+                <input
+                    id="typeahead-focus"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="model"
+                    [ngbTypeahead]="search"
+                    (focus)="focus$.next($any($event).target.value)"
+                    (click)="click$.next($any($event).target.value)"
+                    #instance="ngbTypeahead"
+                    placeholder="Escribí aquí..."
+                />
+                <i class="fa-solid fa-xmark del-txt-input" (click)="borra_texto()" *ngIf="model"></i>
+                <i class="fa-solid fa-magnifying-glass search-icon" *ngIf="!model"></i>
             </div>
             <div class="body-card-data-boxes">
                 <ng-container *ngFor="let card of cards_emergency">
-                    <app-data-box [dato]="card"></app-data-box>
+                    <app-data-box [dato]="card" *ngIf="(model?.length > 0)?(card.titulo == model):(card.tipo == tipo)" (click)="borra_texto()"></app-data-box>
                 </ng-container>
             </div>
         </div>

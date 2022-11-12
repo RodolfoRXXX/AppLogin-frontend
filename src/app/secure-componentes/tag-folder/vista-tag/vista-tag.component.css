@@ -220,11 +220,39 @@
 }
 
 .body-card-data-filter {
+    width: 100%;
+    position: relative;
+}
 
+.del-txt-input {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 24px;
+    background-color: #fff;
+    padding: 2px 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #6c757d;
+}
+
+.del-txt-input:hover, .del-txt-input:active {
+    color: black;
+}
+
+.search-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 24px;
+    background-color: #fff;
+    padding: 2px 4px;
+    border-radius: 5px;
+    color: #6c757d;
 }
 
 .body-card-data-boxes {
-    padding: 20px;
+    padding: 40px 20px;
     display: grid;
     grid-template-columns: auto auto;
     gap: 30px;
