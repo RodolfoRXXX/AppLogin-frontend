@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { emergencias_personas, em_persona } from 'src/app/entidades/array_emergencias_personas';
 import { array_social, social } from 'src/app/entidades/array_social';
 import { globalVariable } from 'src/app/entidades/global_variables';
 import { social_data } from 'src/app/entidades/social_form';
@@ -32,6 +33,8 @@ export class VistaTagComponent implements OnInit {
   leaf_selected:string;
   foto_perfil:string;
   view_tag:string;
+  
+  cards_emergency:any[];
 
   id_user:number;
   id_autor:number;
@@ -118,6 +121,7 @@ export class VistaTagComponent implements OnInit {
         this.usuario = datos.nombre + ' ' + datos.apellido;
         this.sociales = (datos.red != '')?JSON.parse(datos.red):[];
         this.view_tag = 'ok';
+        this.cards_emergency = emergencias_personas;
         break;
       case 'mascotas' :
         (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_mascota.png');

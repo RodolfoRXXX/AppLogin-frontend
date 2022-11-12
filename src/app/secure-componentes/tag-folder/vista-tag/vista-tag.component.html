@@ -1,5 +1,5 @@
 <div class="main-body">
-    <div class="body-card">
+    <div class="body-card" *ngIf="false">
         <!-- Spinner load -->
         <div class="info-content" *ngIf="view_tag == 'load'" style="box-shadow: none; ">
             <div class="spinner-border text-primary" role="status">
@@ -98,6 +98,22 @@
             <p class="d-block text-center mb-0">Ha ocurrido un error durante la carga. Por favor actualizá la página.</p>
         </div>
     </div>
+
+    <!-- Información de emergencia -->
+    <div class="body-card" *ngIf="true">
+        <div class="body-card-data" *ngIf="true">
+            <h4>Cúal es tu emergencia?</h4>
+            <div class="body-card-data-filter">
+                <input class="form-control" type="text">
+            </div>
+            <div class="body-card-data-boxes">
+                <ng-container *ngFor="let card of cards_emergency">
+                    <app-data-box [dato]="card"></app-data-box>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <ng-template #modal_posicion let-modal>
