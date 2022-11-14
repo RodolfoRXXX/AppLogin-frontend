@@ -1,5 +1,5 @@
 <div class="box-content">
     <h4 class="title-content">{{ contenido.title }}</h4>
     <p class="subtitle-content">{{ contenido.subtitle }}</p>
-    <p class="text-content">{{ contenido.body }}</p>
+    <p class="text-content" [innerHTML]="contenido.body"></p>
 </div>

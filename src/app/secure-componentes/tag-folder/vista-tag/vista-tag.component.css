@@ -18,6 +18,7 @@
     align-items: center;
     justify-content: center;
     width: 520px;
+    position: relative;
 }
 
 .card-box {
@@ -258,6 +259,18 @@
     gap: 30px;
     justify-content: space-between;
 }
+
+.btn-information {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btn-information i {
+    font-size: 17px;
+}
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {

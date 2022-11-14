@@ -28,6 +28,7 @@ export class VistaTagComponent implements OnInit {
 
   model: any;
   lista: string[];
+  vista: boolean;
 
 	@ViewChild('instance', { static: true }) instance: NgbTypeahead;
 	focus$ = new Subject<string>();
@@ -70,6 +71,7 @@ export class VistaTagComponent implements OnInit {
     this.sociales = [];
     this.lista = [];
     this.view_tag = 'load';
+    this.vista = true;
 
     config.backdrop = 'static';
     config.keyboard = false;
@@ -202,6 +204,10 @@ export class VistaTagComponent implements OnInit {
     } else{
       this.modalService.dismissAll();
     }
+  }
+
+  cambiar_vista(){
+    this.vista = !this.vista;
   }
 
   search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) => {

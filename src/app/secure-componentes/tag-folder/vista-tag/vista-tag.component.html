@@ -1,5 +1,5 @@
 <div class="main-body">
-    <div class="body-card" *ngIf="false">
+    <div class="body-card" *ngIf="vista">
         <!-- Spinner load -->
         <div class="info-content" *ngIf="view_tag == 'load'" style="box-shadow: none; ">
             <div class="spinner-border text-primary" role="status">
@@ -9,6 +9,11 @@
         <!-- Caja principal de vista -->
         <div class="card-box" *ngIf="view_tag == 'ok'" [ngClass]="(this.datos.estado == 'link')?'link':((this.datos.estado == 'nolink')?'nolink':'alert')">
             
+            <button class="btn btn-outline-dark btn-information" (click)="cambiar_vista()" title="Información importante">
+                <i class="fa-solid fa-question"></i>
+                <p style="font-size: 10px; margin: 0; ">Información</p>
+            </button>
+
             <div class="img-box" [style.background-color]="(this.datos.estado == 'link')?link:((this.datos.estado == 'nolink')?nolink:alert)">
                 <img class="img-item" [src]="foto_perfil" alt="{{ this.datos.nivel }}" >
                 <button class="btn-markposition" title="Marcar Posicion" (click)="get_position()" *ngIf="this.datos.estado == 'alert'">
@@ -100,8 +105,11 @@
     </div>
 
     <!-- Información de emergencia -->
-    <div class="body-card" *ngIf="true">
-        <div class="body-card-data" *ngIf="true">
+    <div class="body-card" *ngIf="!vista">
+        <button class="btn btn-outline-secondary btn-information" style="z-index: 10;" (click)="cambiar_vista()" title="Volver a la vista">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <div class="body-card-data">
             <h4>Cúal es tu emergencia?</h4>
             <div class="body-card-data-filter">
                 <input
