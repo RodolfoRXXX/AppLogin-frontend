@@ -128,13 +128,13 @@ export class VistaTagComponent implements OnInit {
     this.id_user = datos.id;
     this.id_autor = datos.id_autor;
     this.cards_emergency = emergencias_data;
+    this.crear_filtro(tipo, this.cards_emergency);
     switch (tipo) {
       case 'personas' :
         (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_persona.png'); 
         this.usuario = datos.nombre + ' ' + datos.apellido;
         this.sociales = (datos.red != '')?JSON.parse(datos.red):[];
         this.view_tag = 'ok';
-        this.crear_filtro(tipo, this.cards_emergency);
         break;
       case 'mascotas' :
         (datos.foto != '')?(this.foto_perfil = environment.SERVER + datos.foto):(this.foto_perfil = '../../../../assets/img/blanck_mascota.png');
