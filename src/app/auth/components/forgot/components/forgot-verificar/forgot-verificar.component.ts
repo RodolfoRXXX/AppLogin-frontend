@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -11,6 +11,13 @@ export class ForgotVerificarComponent implements OnInit {
 
   @Output() estado: EventEmitter<any>;
   @Input() user_email:string;
+
+  @ViewChild("input1") input1: ElementRef;
+  @ViewChild("input2") input2: ElementRef;
+  @ViewChild("input3") input3: ElementRef;
+  @ViewChild("input4") input4: ElementRef;
+  @ViewChild("input5") input5: ElementRef;
+  @ViewChild("input6") input6: ElementRef;
   
   form: FormGroup;
   estadoSmt: string;
@@ -67,10 +74,36 @@ export class ForgotVerificarComponent implements OnInit {
     this.crearFormulario(this.user_email);
   }
 
+  ngAfterViewInit():void {
+    this.input1.nativeElement.focus();
+  }
+
   actualizarSmt(){
     if(this.estadoSmt == 'error'){
       this.estadoSmt = 'verificar';
       this.estadoLogin(false, '', '');
+    }
+  }
+
+  cambiar_valor(e:any, numero:number){
+    if((numero < 6)&&(e != '')){
+      switch (numero) {
+        case 1:
+          this.input2.nativeElement.focus();
+          break;
+        case 2:
+          this.input3.nativeElement.focus();
+          break;
+        case 3:
+          this.input4.nativeElement.focus();
+          break;
+        case 4:
+          this.input5.nativeElement.focus();
+          break;
+        case 5:
+          this.input6.nativeElement.focus();
+          break;
+      }
     }
   }
 

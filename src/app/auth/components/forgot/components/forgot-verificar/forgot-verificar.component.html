@@ -5,6 +5,8 @@
                formControlName="1" 
                maxlength="1" 
                class="input-code"
+               #input1
+               (input)="cambiar_valor($event, 1)"
                (focus)="actualizarSmt()"
                [ngClass]="form.get('1')?.valid?'is-valid':(((form.get('1')?.invalid)&&(form.get('1')?.dirty||form.get('1')?.touched))?'is-invalid':'')"
         />
@@ -12,6 +14,8 @@
                formControlName="2" 
                maxlength="1" 
                class="input-code"
+               #input2
+               (input)="cambiar_valor($event, 2)"
                (focus)="actualizarSmt()"
                [ngClass]="form.get('2')?.valid?'is-valid':(((form.get('2')?.invalid)&&(form.get('2')?.dirty||form.get('2')?.touched))?'is-invalid':'')"
         />
@@ -19,6 +23,8 @@
                formControlName="3" 
                maxlength="1" 
                class="input-code"
+               #input3
+               (input)="cambiar_valor($event, 3)"
                (focus)="actualizarSmt()"
                [ngClass]="form.get('3')?.valid?'is-valid':(((form.get('3')?.invalid)&&(form.get('3')?.dirty||form.get('3')?.touched))?'is-invalid':'')"
         />
@@ -26,6 +32,8 @@
                formControlName="4" 
                maxlength="1" 
                class="input-code"
+               #input4
+               (input)="cambiar_valor($event, 4)"
                (focus)="actualizarSmt()"
                [ngClass]="form.get('4')?.valid?'is-valid':(((form.get('4')?.invalid)&&(form.get('4')?.dirty||form.get('4')?.touched))?'is-invalid':'')"
         />
@@ -33,6 +41,8 @@
                formControlName="5" 
                maxlength="1" 
                class="input-code"
+               #input5
+               (input)="cambiar_valor($event, 5)"
                (focus)="actualizarSmt()"
                [ngClass]="form.get('5')?.valid?'is-valid':(((form.get('5')?.invalid)&&(form.get('5')?.dirty||form.get('5')?.touched))?'is-invalid':'')"
         />
@@ -40,6 +50,8 @@
                formControlName="6" 
                maxlength="1" 
                class="input-code"
+               #input6
+               (input)="cambiar_valor($event, 6)"
                (focus)="actualizarSmt()"
                [ngClass]="form.get('6')?.valid?'is-valid':(((form.get('6')?.invalid)&&(form.get('6')?.dirty||form.get('6')?.touched))?'is-invalid':'')"
         />
