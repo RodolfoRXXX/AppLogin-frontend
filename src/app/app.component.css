@@ -1,5 +1,5 @@
 .main-content {
-    min-height: calc(100vh - 148px);
+    min-height: calc(100vh - 74px);
     background-color: rgb(247, 247, 247);
     position: relative;
 }
@@ -8,7 +8,7 @@
 @media only screen and (max-width: 768px) {
 
     .main-content {
-        min-height: calc(100vh - 196px);
+        min-height: calc(100vh - 122px);
     }
 
 }

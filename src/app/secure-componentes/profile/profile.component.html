@@ -11,6 +11,9 @@
         <router-outlet></router-outlet>
     </section>
 </div>
+<footer>
+  <app-footer></app-footer>
+</footer>
 <ng-template #modal_sesion let-modal>
   <app-modal-sesion [texto]="texto_sesion" (cerrado)="confirma_sesion($event)"></app-modal-sesion>
 </ng-template>
