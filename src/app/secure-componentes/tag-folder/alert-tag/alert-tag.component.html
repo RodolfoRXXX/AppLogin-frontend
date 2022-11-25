@@ -4,7 +4,7 @@
             <img class="alert-tag-img" src="../../../../assets/img/img-alert.png" alt="iimg-alert">
         </div>
         <div>
-            <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()" autocomplete="off">
                 <div class="mb-2">
                     <p class="text-muted text-center ms-1 mb-2" style="font-size: 14px;">Creá un alerta sobre este tag para que puedan ayudarte a encontrarlo. Al crear un alerta, recibirás la ubicación de cualquier dispositivo que haya encontrado y leído el tag.</p>
                     <textarea rows="3"

@@ -12,7 +12,6 @@ export class DataBoxSectionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.contenido)
   }
 
 }

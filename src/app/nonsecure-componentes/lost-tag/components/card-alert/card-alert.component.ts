@@ -17,7 +17,9 @@ export class CardAlertComponent implements OnInit {
   titulo:string;
   texto:string;
   telefono:string;
+  link_tel:string;
   wsp:string;
+  link_wsp:string;
   fecha:string;
 
   estado:string;
@@ -30,8 +32,7 @@ export class CardAlertComponent implements OnInit {
     if((this.tipo)&&((this.persona)||(this.mascota)||(this.vehiculo))){
       this.crear_card();
       this.estado = 'ok';
-    }
-    
+    }  
   }
 
   crear_card(){
@@ -41,7 +42,9 @@ export class CardAlertComponent implements OnInit {
         this.titulo = this.persona.nombre + ' ' + this.persona.apellido;
         this.texto = this.persona.obsestado;
         this.telefono = this.persona.telresp;
+        (this.telefono != '')?(this.link_tel = 'tel:+' + this.telefono):'';
         this.wsp = this.persona.wspresp;
+        (this.wsp != '')?(this.link_wsp = 'https://wa.me/549' + this.wsp):'';
         this.fecha = this.persona.fechaestado;
         break;
       case 'mascotas':
@@ -49,7 +52,9 @@ export class CardAlertComponent implements OnInit {
         this.titulo = this.mascota.especie + ' - ' + this.mascota.nombre;
         this.texto = this.mascota.obsestado;
         this.telefono = this.mascota.telresp;
+        (this.telefono != '')?(this.link_tel = 'tel:+' + this.telefono):'';
         this.wsp = this.mascota.wspresp;
+        (this.wsp != '')?(this.link_wsp = 'https://wa.me/549' + this.wsp):'';
         this.fecha = this.mascota.fechaestado;
         break;
       case 'vehiculos':
@@ -57,7 +62,9 @@ export class CardAlertComponent implements OnInit {
         this.titulo = this.vehiculo.marca + ' - ' + this.vehiculo.modelo;
         this.texto = this.vehiculo.obsestado;
         this.telefono = this.vehiculo.telresp;
+        (this.telefono != '')?(this.link_tel = 'tel:+' + this.telefono):'';
         this.wsp = this.vehiculo.wspresp;
+        (this.wsp != '')?(this.link_wsp = 'https://wa.me/549' + this.wsp):'';
         this.fecha = this.vehiculo.fechaestado;
         break;
       default:

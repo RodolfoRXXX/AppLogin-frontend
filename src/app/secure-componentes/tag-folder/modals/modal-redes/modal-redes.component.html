@@ -24,7 +24,7 @@
               <label for="input_lit_social" class="mb-2 ps-3">Escribí tu usuario/número en la red social elegida</label>
               <div class="input-group" id="input_lit-social">
                   <span class="input-group-text">{{ this.red_nombre }}</span>
-                  <input type="text" class="form-control" placeholder={{this.red_placeholder}} [value]="input" [disabled]="this.social.id_red < 0" #val_input (change)="crearVinculo($event)">
+                  <input type="text" class="form-control" placeholder={{this.red_placeholder}} [value]="input" [disabled]="this.social.id_red < 0" #val_input (input)="crearVinculo($event)">
               </div>
           </div>
       </div>

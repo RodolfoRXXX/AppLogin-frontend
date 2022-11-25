@@ -6,11 +6,11 @@
             <h5 class="card-title">{{titulo}}</h5>
             <p class="card-text">{{texto}}</p>
             <div class="d-flex justify-content-end">
-                <span class="badge rounded-pill bg-primary badge-content" title="Llamame!" *ngIf="wsp == ''">
+                <a type="button" class="badge rounded-pill bg-primary badge-content" title="Llamame" [href]="link_tel"  *ngIf="wsp == ''">
                     <i class="fa-solid fa-phone me-1"></i>
                     {{telefono}}
-                </span>
-                <a type="button" class="badge rounded-pill badge-content badge-wsp" title="Enviame información" [href]=""  *ngIf="wsp != ''">
+                </a>
+                <a type="button" class="badge rounded-pill badge-content badge-wsp" title="Enviame información" [href]="link_wsp"  *ngIf="wsp != ''">
                     <i class="fa-brands fs-social fa-whatsapp"></i>
                     {{wsp}}
                 </a>

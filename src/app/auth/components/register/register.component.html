@@ -3,7 +3,7 @@
     <p>Registrarse</p>
   </div>
     <div class="body-content col-md-3">
-        <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()">
+        <form [formGroup]="form" class="p-2" (ngSubmit)="onSubmit()" autocomplete="off">
           <div class="mb-1">
             <label for="InputEmail" class="form-label">Nombre</label>
             <input type="nombre" 

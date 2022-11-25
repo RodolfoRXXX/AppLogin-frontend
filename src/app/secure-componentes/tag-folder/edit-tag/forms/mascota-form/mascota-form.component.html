@@ -10,7 +10,7 @@
                    formControlName="nombre"
                    [ngClass]="((form.get('nombre')?.valid)&&(form.get('nombre')?.dirty))?'is-valid':(((form.get('nombre')?.invalid)&&(form.get('nombre')?.dirty||form.get('nombre')?.touched))?'is-invalid':'')"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nombre')?.invalid)&&(form.get('nombre')?.dirty||form.get('nombre')?.touched)">
                   <span *ngIf="form.get('nombre')?.errors?.['required']">"Nombre" es requerido.</span>
                   <span *ngIf="form.get('nombre')?.errors?.['minlength']">"Nombre" mín. 2 caracteres.</span>
@@ -31,7 +31,7 @@
                 <option value="" selected disabled>Seleccioná una especie</option>
                 <option [value]="especie" *ngFor="let especie of especies">{{especie}}</option>
             </select>
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('especie')?.invalid)&&(form.get('especie')?.dirty||form.get('especie')?.touched)">
                   <span *ngIf="form.get('especie')?.errors?.['required']">"Especie" es requerida.</span>
                 </div>
@@ -49,7 +49,7 @@
                    formControlName="ciudad"
                    [ngClass]="((form.get('ciudad')?.valid)&&(form.get('ciudad')?.dirty))?'is-valid':(((form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched))?'is-invalid':'')"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched)">
                     <span *ngIf="form.get('ciudad')?.errors?.['required']">"Ciudad" es requerida.</span>
                     <span *ngIf="form.get('ciudad')?.errors?.['minlength']">"Ciudad" mín. 4 caracteres.</span>
@@ -69,7 +69,7 @@
                    formControlName="direccion"
                    [ngClass]="((form.get('direccion')?.valid)&&(form.get('direccion')?.dirty))?'is-valid':(((form.get('direccion')?.invalid)&&(form.get('direccion')?.dirty||form.get('direccion')?.touched))?'is-invalid':'')"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('direccion')?.invalid)&&(form.get('direccion')?.dirty||form.get('direccion')?.touched)">
                     <span *ngIf="form.get('direccion')?.errors?.['required']">"Dirección" es requerida.</span>
                     <span *ngIf="form.get('direccion')?.errors?.['minlength']">"Dirección" mín. 4 caracteres.</span>
@@ -89,7 +89,7 @@
                    formControlName="fechanac"
                    [ngClass]="((form.get('fechanac')?.value.length == 0)||(!form.get('fechanac')?.dirty))?'':((form.get('fechanac')?.invalid)&&(form.get('fechanac')?.dirty||form.get('fechanac')?.touched)?'is-invalid':('is-valid'))"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('fechanac')?.invalid)&&(form.get('fechanac')?.dirty||form.get('fechanac')?.touched)">
                     <span *ngIf="form.get('fechanac')?.invalid">Fecha de nacimiento incorrecta.</span>
                 </div>

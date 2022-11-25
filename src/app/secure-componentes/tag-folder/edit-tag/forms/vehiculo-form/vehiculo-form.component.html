@@ -10,7 +10,7 @@
                    formControlName="marca"
                    [ngClass]="((form.get('marca')?.valid)&&(form.get('marca')?.dirty))?'is-valid':(((form.get('marca')?.invalid)&&(form.get('marca')?.dirty||form.get('marca')?.touched))?'is-invalid':'')"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('marca')?.invalid)&&(form.get('marca')?.dirty||form.get('marca')?.touched)">
                   <span *ngIf="form.get('marca')?.errors?.['required']">"Marca" es requerido.</span>
                   <span *ngIf="form.get('marca')?.errors?.['minlength']">"Marca" mín. 1 caracteres.</span>
@@ -28,7 +28,7 @@
                    formControlName="modelo"
                    [ngClass]="((form.get('modelo')?.valid)&&(form.get('modelo')?.dirty))?'is-valid':(((form.get('modelo')?.invalid)&&(form.get('modelo')?.dirty||form.get('modelo')?.touched))?'is-invalid':'')"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('modelo')?.invalid)&&(form.get('modelo')?.dirty||form.get('modelo')?.touched)">
                   <span *ngIf="form.get('modelo')?.errors?.['required']">"Modelo" es requerido.</span>
                   <span *ngIf="form.get('modelo')?.errors?.['minlength']">"Modelo" mín. 2 caracteres.</span>
@@ -51,7 +51,7 @@
                 <option value="" selected disabled>Seleccioná un color</option>
                 <option [value]="color" *ngFor="let color of colores">{{color}}</option>
             </select>
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('color')?.invalid)&&(form.get('color')?.dirty||form.get('color')?.touched)">
                     <span *ngIf="form.get('color')?.errors?.['required']">"Color" es requerido.</span>
                 </div>
@@ -67,7 +67,7 @@
                    formControlName="anio"
                    [ngClass]="((form.get('anio')?.valid)&&(form.get('anio')?.dirty))?'is-valid':(((form.get('anio')?.invalid)&&(form.get('anio')?.dirty||form.get('anio')?.touched))?'is-invalid':'')"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('anio')?.invalid)&&(form.get('anio')?.dirty||form.get('anio')?.touched)">
                     <span *ngIf="form.get('anio')?.errors?.['required']">"Año" es requerido.</span>
                     <span *ngIf="form.get('anio')?.errors?.['minlength']">"Año" no válido.</span>
@@ -85,7 +85,7 @@
                    formControlName="patente"
                    [ngClass]="((form.get('patente')?.valid)&&(form.get('patente')?.dirty))?'is-valid':(((form.get('patente')?.invalid)&&(form.get('patente')?.dirty||form.get('patente')?.touched))?'is-invalid':'')"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('patente')?.invalid)&&(form.get('patente')?.dirty||form.get('patente')?.touched)">
                     <span *ngIf="form.get('patente')?.errors?.['required']">"Patente" es requerido.</span>
                     <span *ngIf="form.get('patente')?.errors?.['minlength']">"Patente" mín. 2 caracteres.</span>
@@ -105,7 +105,7 @@
                    formControlName="ciudad"
                    [ngClass]="((form.get('ciudad')?.valid)&&(form.get('ciudad')?.dirty))?'is-valid':(((form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched))?'is-invalid':'')"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('ciudad')?.invalid)&&(form.get('ciudad')?.dirty||form.get('ciudad')?.touched)">
                     <span *ngIf="form.get('ciudad')?.errors?.['required']">"Ciudad" es requerida.</span>
                     <span *ngIf="form.get('ciudad')?.errors?.['minlength']">"Ciudad" mín. 4 caracteres.</span>
@@ -125,7 +125,7 @@
                    formControlName="aseguradora"
                    [ngClass]="((form.get('aseguradora')?.value.length == 0)||(!form.get('aseguradora')?.dirty))?'':((form.get('aseguradora')?.invalid)&&(form.get('aseguradora')?.dirty||form.get('aseguradora')?.touched)?'is-invalid':('is-valid'))"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('aseguradora')?.invalid)&&(form.get('aseguradora')?.dirty||form.get('aseguradora')?.touched)">
                     <span *ngIf="form.get('aseguradora')?.errors?.['minlength']">"Aseguradora" mín. 3 caracteres.</span>
                     <span *ngIf="form.get('aseguradora')?.errors?.['maxlength']">"Aseguradora" máx. 30 caracteres.</span>
@@ -140,7 +140,7 @@
                    formControlName="nroseguro"
                    [ngClass]="((form.get('nroseguro')?.value.length == 0)||(!form.get('nroseguro')?.dirty))?'':((form.get('nroseguro')?.invalid)&&(form.get('nroseguro')?.dirty||form.get('nroseguro')?.touched)?'is-invalid':('is-valid'))"
             />
-            <div style="height: 18px; font-size: 0.9rem; ">
+            <div style="min-height: 18px; font-size: 0.9rem; ">
                 <div class="invalid-feedback d-flex justify-content-start mt-0 ms-1" *ngIf="(form.get('nroseguro')?.invalid)&&(form.get('nroseguro')?.dirty||form.get('nroseguro')?.touched)">
                     <span *ngIf="form.get('nroseguro')?.errors?.['minlength']">"Nro. de seguro" mín. 3 caracteres.</span>
                     <span *ngIf="form.get('nroseguro')?.errors?.['maxlength']">"Nro. de seguro" máx. 40 caracteres.</span>

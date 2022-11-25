@@ -1,5 +1,5 @@
 
-<form [formGroup]="form" class="p-3" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" class="p-3" (ngSubmit)="onSubmit()" autocomplete="off">
   <p class="text-muted ms-1" style="font-size: 0.9rem; line-height: 22px; ">Para actualizar tu contraseña tenés que ingresar el código de 6 dígitos que envíaremos a tu correo. 
     <span class="border rounded text-primary box-enviar-codigo" *ngIf="envio == 0" (click)="enviar_codigo()" title="Enviar código">Enviar código</span>
     <span class="border rounded text-primary box-enviar-codigo" *ngIf="envio == 1">

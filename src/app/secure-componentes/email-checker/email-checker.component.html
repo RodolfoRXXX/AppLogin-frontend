@@ -6,7 +6,7 @@
         </div>
         <div class="body-content col-md-3">
             <h6 class="text-muted text-center mt-2" style="font-size: 0.8rem;">Ingresá el código de 6 dígitos que recibiste en tu correo electrónico</h6>
-            <form [formGroup]="form" style="padding: 1rem 0 0.5rem;" (ngSubmit)="onSubmit()">
+            <form [formGroup]="form" style="padding: 1rem 0 0.5rem;" (ngSubmit)="onSubmit()" autocomplete="off">
                 <div class="d-flex justify-content-around w-100 mb-3">
                     <input type="text" 
                            formControlName="1" 
