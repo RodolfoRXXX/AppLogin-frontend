@@ -1,5 +1,5 @@
 .main-content {
-    min-height: calc(100vh - 74px);
+    height: calc(100vh - 74px); /* Es el alto de la pantalla menos 74px del nav para pantallas de ancho mayor a 768px */
     background-color: rgb(247, 247, 247);
     position: relative;
 }
@@ -8,7 +8,7 @@
 @media only screen and (max-width: 768px) {
 
     .main-content {
-        min-height: calc(100vh - 122px);
+        height: calc(100vh - 122px); /* Es el alto de la pantalla menos 122px del nav para pantallas de ancho menos a 768px */
     }
 
 }

@@ -9,10 +9,12 @@
         <!-- Caja principal de vista -->
         <div class="card-box" *ngIf="view_tag == 'ok'" [ngClass]="(this.datos.estado == 'link')?'link':((this.datos.estado == 'nolink')?'nolink':'alert')">
             
-            <button class="btn btn-outline-dark btn-information" (click)="cambiar_vista()" title="Información importante">
-                <i class="fa-solid fa-question"></i>
-                <p style="font-size: 10px; margin: 0; ">Información</p>
-            </button>
+            <div class="box-information">
+                <button class="btn btn-outline-dark btn-information" (click)="cambiar_vista()" title="Información importante">
+                    <i class="fa-solid fa-question"></i>
+                    <p style="font-size: 10px; margin: 0; ">Información</p>
+                </button>
+            </div>
 
             <div class="img-box" [style.background-color]="(this.datos.estado == 'link')?link:((this.datos.estado == 'nolink')?nolink:alert)">
                 <img class="img-item" [src]="foto_perfil" alt="{{ this.datos.nivel }}" >
@@ -106,7 +108,7 @@
 
     <!-- Información de emergencia -->
     <div class="body-card" *ngIf="!vista">
-        <button class="btn btn-outline-secondary btn-information" style="z-index: 10;" (click)="cambiar_vista()" title="Volver a la vista">
+        <button class="btn btn-outline-secondary btn-information btn-back" (click)="cambiar_vista()" title="Volver a la vista">
             <i class="fa-solid fa-arrow-left"></i>
         </button>
         <div class="body-card-data">
