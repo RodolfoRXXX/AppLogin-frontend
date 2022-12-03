@@ -8,8 +8,8 @@
                 <div class="left-text col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <h3 class="mb-1">Bienvenido a</h3>
                     <img class="img-logo" src="../../../assets/img/home/logo-1.png">
-                    <p>Te presento un nuevo modo de conectarnos. <strong>Qrlink</strong> es una innovadora forma de presentarte digitalmente mediante un código QR y centralizar toda tu información allí.</p> 
-                    <a href="#about" class="main-button-slider">Qué es QRLINK?</a>
+                    <p>Te presento un nuevo modo de conectarnos.<br><strong>Qrlink</strong> es una innovadora forma de presentarte digitalmente mediante un código QR físico y obtener tu información en segundos.</p> 
+                    <a class="main-button-slider" (click)="scrollToElement(about)">Qué es QRLINK?</a>
                 </div>
             </div>
         </div>
@@ -19,18 +19,23 @@
 <!-- ***** Welcome Area End ***** -->
 
 <!-- ***** Features Big Item Start ***** -->
-<section class="section" id="about">
+<section class="section" id="about" #about>
     <div class="container">
         <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="center-heading">
+                    <h2>Qué es QRlink <em>?</em></h2>
+                    <p>Es un sistema de identificación personal para vos, los tuyos y tu cosas, donde por medio de un código QR físico será posible acceder a su información.</p>
+                </div>
+            </div>
             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12"
                 data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
                 <div class="features-item">
                     <div class="features-icon">
-                        <h2>01</h2>
                         <img src="../../../assets/img/home/features-icon-1.png" alt="">
                         <h4>Creá tus tags</h4>
                         <p>Los tags son perfiles digitales que podés crear con tu información. Hacé uno para vos, tus mascotas, tus vehículos, hijos y más. </p>
-                        <a href="#promotion1" class="main-button">
+                        <a class="main-button" (click)="scrollToElement(promotion1)">
                             Cómo funciona?
                         </a>
                     </div>
@@ -40,11 +45,10 @@
                 data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s">
                 <div class="features-item">
                     <div class="features-icon">
-                        <h2>02</h2>
                         <img src="../../../assets/img/home/features-icon-2.png" alt="">
                         <h4>Vinculalos con un código QR físico</h4>
                         <p>Podés tener acceso a cada perfíl digital por medio de los códigos QR físicos.</p>
-                        <a href="#promotion2" class="main-button">
+                        <a class="main-button" (click)="scrollToElement(promotion2)">
                             Para qué sirve?
                         </a>
                     </div>
@@ -54,11 +58,10 @@
                 data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
                 <div class="features-item">
                     <div class="features-icon">
-                        <h2>03</h2>
                         <img src="../../../assets/img/home/features-icon-3.png" alt="">
                         <h4>Emití alertas sobre tags perdidos</h4>
-                        <p>Estas alertas son accesibles para todos los que accedan al sitio y quieran ayudarte.</p>
-                        <a href="#promotion3" class="main-button">
+                        <p>Estas alertas son accesibles para todos los que accedan al sitio y puedan ayudarte.</p>
+                        <a class="main-button" (click)="scrollToElement(promotion3)">
                             Cómo lo uso?
                         </a>
                     </div>
@@ -70,13 +73,13 @@
 <!-- ***** Features Big Item End ***** -->
 
 <!-- ***** Features Big Item Start ***** -->
-<section class="section border-bottom" id="promotion1">
+<section class="section border-bottom" id="promotion1" #promotion1>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
                 <div class="center-heading">
                     <h2>Cómo funciona <em>?</em></h2>
-                    <p>Solo necesitás crear un perfíl digital y vincularlo con un tag-QR. Toda tu información en un solo lugar y accesible de una forma fácil y cómoda.</p>
+                    <p>Solo necesitás crear un perfíl digital y vincularlo con un tag-QR(Código QR físico). Toda tu información en un solo lugar y accesible de una forma fácil y cómoda.</p>
                 </div>
             </div>
             <div class="right-text offset-lg-1 col-lg-6 col-md-12 col-sm-12 order-lg-2">
@@ -104,7 +107,7 @@
                         <div class="text">
                             <h4>Accedé utilizando tags-QR creativos y actualizables</h4>
                             <p>
-                                Conocé los <a rel="register" href="#testimonials" target="_parent">Tags-QR</a>, con diseños variados. Elegí el que más te guste y cambialos cuando quieras.
+                                Conocé los <a class="link-anchor" (click)="scrollToElement(testimonials)">Tags-QR</a>, con diseños variados. Elegí el que más te guste y cambialos cuando quieras.
                             </p>
                         </div>
                     </li>
@@ -119,7 +122,7 @@
 <!-- ***** Features Big Item End ***** -->
 
 <!-- ***** Features Big Item Start ***** -->
-<section class="section" id="promotion2">
+<section class="section" id="promotion2" #promotion2>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
@@ -144,7 +147,7 @@
                         <div class="text">
                             <h4>Informá sobre personas, mascotas o vehículos perdidos</h4>
                             <p>En   <a rel="nofollow"
-                                    href="https://www.qrlink.com.ar/lost">
+                                    href="https://www.qrlink.com.ar/#/lost">
                                         Tags en alerta
                                     </a> encontrá todos los tags que han sido informados como perdidos. Esta información es accesible para todos.
                             </p>
@@ -168,13 +171,13 @@
 <!-- ***** Features Big Item End ***** -->
 
 <!-- ***** Features Big Item Start ***** -->
-<section class="section" id="promotion3">
+<section class="section" id="promotion3" #promotion3>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
                 <div class="center-heading">
                     <h2>Cómo lo uso <em>?</em></h2>
-                    <p>Empezá creando una cuenta y lo demás es muy fácil. Recordá adquirir los tags-QR para poder tener un vínculo con tu información digital.</p>
+                    <p>Empezá creando una cuenta y creá tu primer tag. Luego deberás adquirir los tags-QR para poder tener un vínculo con tu información digital.</p>
                 </div>
             </div>
             <div class="right-text offset-lg-1 col-lg-6 col-md-12 col-sm-12 order-lg-2">
@@ -183,7 +186,7 @@
                         <img src="../../../assets/img/home/about-icon-7.png" alt="">
                         <div class="text">
                             <h4>Creá una cuenta para gestionar todos tus tags</h4>
-                            <p><a rel="register" href="https://www.qrlink.com.ar/register" target="_parent">Registrate</a> en el sitio y conocé todo lo que podés hacer con un perfíl digital.</p>
+                            <p><a rel="register" href="https://www.qrlink.com.ar/#/register" target="_parent">Registrate</a> en el sitio y conocé todo lo que podés hacer con un perfíl digital.</p>
                         </div>
                     </li>
                     <li>
@@ -200,7 +203,7 @@
                         <div class="text">
                             <h4>Vinculá cada tag con un código QR</h4>
                             <p>
-                                Adquirí los <a rel="register" href="#testimonials" target="_parent">Tags-QR</a>, que son domes con un código QR que te permiten vincularte a tus tags y acceder a sus perfiles digitales.
+                                Adquirí los <a class="link-anchor" (click)="scrollToElement(testimonials)">Tags-QR</a>, que son domes con un código QR que te permiten vincularte a tus tags y acceder a sus perfiles digitales.
                             </p>
                         </div>
                     </li>
@@ -226,15 +229,14 @@
                     [navigation]="true"
                     [pagination]="{ type: 'fraction' }"
                     [centeredSlides]="true"
-                    [keyboard]="{
-                        enabled: true
-                    }"
+                    [keyboard]="{ enabled: true }"
+                    [autoplay]="{ delay: 5000 }"
                     [virtual]="true"
                     class="my-swiper"
                 >
                     <ng-template swiperSlide *ngFor="let slide of slides; index as i">
                         <div class="swiper-slide-container">
-                            <img class="img-fluid" src={{slide}} alt={{i}}>
+                            <img class="" src={{slide}} alt={{i}}>
                         </div>
                     </ng-template>
                 </swiper>
@@ -245,7 +247,7 @@
 <!-- end of screenshots -->
 
 <!-- ***** Testimonials Starts ***** -->
-<section class="section" id="testimonials">
+<section class="section" id="testimonials" #testimonials>
     <div class="container">
         <div class="row d-flex flex-column align-items-center">
             <div class="col-lg-8">
@@ -289,7 +291,7 @@
                 <!-- ***** Contact Form Start ***** -->
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="contact-form">
-                        <form id="contact" action="" method="post">
+                        <form id="contact"  autocomplete="off">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <fieldset>
@@ -306,7 +308,7 @@
                                 <div class="col-lg-12">
                                     <fieldset>
                                         <textarea name="message" rows="6" id="message" placeholder="Escribí tu mensaje"
-                                            required="" style="background-color: rgba(250,250,250,0.3);"></textarea>
+                                            minlength="2" maxlength="150" required="" style="background-color: rgba(250,250,250,0.3);"></textarea>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
@@ -324,11 +326,9 @@
                     <p>Si tenés dudas, enviame un mensaje y te responderé cuanto antes.</p>
                     <p>Visitá las redes sociales para enterarte de novedades y asi, poder estar siempre conectados.</p>
                     <ul class="social">
-                        <li><a href="https://fb.com/templatemo"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -337,7 +337,7 @@
             <div class="col-lg-12">
                 <div class="sub-footer">
                     <p>qrlink.com.ar | 2022
-                    | Designed by <a class="fw-bold" rel="nofollow" href="https://github.com/RodolfoRXXX"><b>Rodolfo Romero</b></a></p>
+                    | Designed by <a class="fw-bold" rel="nofollow" href="https://github.com/RodolfoRXXX">Rodolfo Romero</a></p>
                 </div>
             </div>
         </div>

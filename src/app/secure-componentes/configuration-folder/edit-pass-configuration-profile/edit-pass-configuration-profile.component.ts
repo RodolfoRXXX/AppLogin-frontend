@@ -39,6 +39,7 @@ export class EditPassConfigurationProfileComponent implements OnInit {
     if(data){
       this.crearFormulario(JSON.parse(data)[0].id);
       this.email_user = JSON.parse(data)[0].email;
+      this.actual_code = JSON.parse(data)[0].codeEmail;
     } else{
       this._router.navigate(['login']);
     }
@@ -120,6 +121,7 @@ export class EditPassConfigurationProfileComponent implements OnInit {
   enviar_codigo(){
     this.envio = 1;
     this._email.bifurcador('verificate', null, this.email_user, null, this.actual_code );
+    console.log(this.actual_code);
     this._com.setNotifier({display: true, state:'alert-success', text:'Se envió el código a tu correo electrónico.', time:2500})
           setTimeout(() => {
             this.envio = 2;
