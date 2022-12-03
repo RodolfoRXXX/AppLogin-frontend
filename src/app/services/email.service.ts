@@ -35,10 +35,14 @@ export class EmailService {
       case 'change_user'://(RECIBO: email / BUSCO: - / ENVIO: notificación )
         this.enviar_mail(_email, tipo, {});
         break;
+      case 'message'://(RECIBO: email, objeto formulario / BUSCO: - / ENVIO: formulario completo )
+        this.enviar_mail(_email, tipo, {form: _codigo});
+        break;
     }
   }
 
   enviar_mail(_email:string, _tipo:string, _data:any){
+    console.log(_data);
     this._api.postTypeRequest('user/envio-email', {email: _email, tipo:_tipo, data:_data}).subscribe();
   }
 

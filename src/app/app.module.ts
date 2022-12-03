@@ -18,6 +18,7 @@ import { LostTagComponent } from './nonsecure-componentes/lost-tag/lost-tag.comp
 import { CardAlertComponent } from './nonsecure-componentes/lost-tag/components/card-alert/card-alert.component';
 import { NgbdOffcanvasBasic } from './nav/menu-lateral-offcanvas/menu-lateral-offcanvas.component';
 import { SwiperModule } from 'swiper/angular';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SwiperModule } from 'swiper/angular';
     RouterModule,
     SecureModule,
     NgbModule,
-    SwiperModule
+    SwiperModule,
+    FormsModule
   ],
   providers: [
     {

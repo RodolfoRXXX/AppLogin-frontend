@@ -291,29 +291,95 @@
                 <!-- ***** Contact Form Start ***** -->
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <div class="contact-form">
-                        <form id="contact"  autocomplete="off">
+                        <form id="contact" autocomplete="off" (ngSubmit)="onSubmit(formulario)" #formulario="ngForm">
                             <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                     <fieldset>
-                                        <input name="name" type="text" id="name" placeholder="Nombre completo" required=""
-                                            style="background-color: rgba(250,250,250,0.3);">
+                                        <input 
+                                            name="nombre" 
+                                            type="text" 
+                                            id="name" 
+                                            placeholder="Nombre completo"
+                                            ngModel
+                                            #nombre="ngModel"
+                                            [ngClass]="nombre.valid?'is-valid':(((nombre.invalid)&&(nombre.dirty||nombre.touched))?'is-invalid':'')"
+                                            minlength="2"
+                                            maxlength="30"
+                                            required
+                                        />
+                                        <div style="height: 30px; font-size: 12px;">
+                                            <div *ngIf="nombre.touched && nombre.errors">
+                                                <div class="text-danger text-start" *ngIf="nombre.errors?.['required']">Nombre requerido</div>
+                                                <div class="text-danger text-start" *ngIf="nombre.errors?.['minlength']">Mínimo 2 Caracteres</div>
+                                                <div class="text-danger text-start" *ngIf="nombre.errors?.['maxlength']">Máximo 30 Caracteres</div>
+                                            </div>
+                                        </div>
                                     </fieldset>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <fieldset>
-                                        <input name="email" type="text" id="email" placeholder="Correo electrónico"
-                                            required="" style="background-color: rgba(250,250,250,0.3);">
+                                        <input 
+                                            name="email" 
+                                            type="email" 
+                                            id="email" 
+                                            placeholder="Correo electrónico"
+                                            ngModel
+                                            #email="ngModel"
+                                            [ngClass]="email.valid?'ng-valid':(((email.invalid)&&(email.dirty||email.touched))?'ng-invalid':'')"
+                                            minlength="5"
+                                            maxlength="30"
+                                            required
+                                        />
+                                        <div style="height: 30px; font-size: 12px;">
+                                            <div *ngIf="email.touched && email.errors">
+                                                <div class="text-danger text-start" *ngIf="email.errors?.['required']">Email requerido</div>
+                                                <div class="text-danger text-start" *ngIf="email.errors?.['minlength']">Mínimo 5 Caracteres</div>
+                                                <div class="text-danger text-start" *ngIf="email.errors?.['maxlength']">Máximo 30 Caracteres</div>
+                                            </div>
+                                        </div>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <textarea name="message" rows="6" id="message" placeholder="Escribí tu mensaje"
-                                            minlength="2" maxlength="150" required="" style="background-color: rgba(250,250,250,0.3);"></textarea>
+                                        <textarea 
+                                            name="message" 
+                                            rows="6" 
+                                            id="message" 
+                                            placeholder="Escribí tu mensaje"
+                                            #message="ngModel"
+                                            ngModel
+                                            [ngClass]="message.valid?'is-valid':(((message.invalid)&&(message.dirty||message.touched))?'is-invalid':'')"
+                                            minlength="2" 
+                                            maxlength="150"
+                                            required 
+                                        ></textarea>
+                                        <div style="height: 30px; font-size: 12px;">
+                                            <div *ngIf="message.touched && message.errors">
+                                                <div class="text-danger text-start" *ngIf="message.errors?.['required']">Mensaje requerido</div>
+                                                <div class="text-danger text-start" *ngIf="message.errors?.['minlength']">Mínimo 2 Caracteres</div>
+                                                <div class="text-danger text-start" *ngIf="message.errors?.['maxlength']">Máximo 150 Caracteres</div>
+                                            </div>
+                                        </div>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
-                                    <fieldset>
-                                        <button type="submit" id="form-submit" class="main-button">Enviar mensaje</button>
+                                    <fieldset *ngIf="form_state">
+                                        <button type="submit" id="form-submit" class="main-button" [disabled]="formulario.invalid">
+                                            Enviar mensaje
+                                        </button>
+                                    </fieldset>
+                                    <fieldset *ngIf="!form_state">
+                                        <div class="alert box-status" [ngClass]="(form_email=='load')?'alert-light':((form_email=='ok')?'alert-success':'alert-danger')">
+                                            <div class="spinner-border box-alert-load" role="status" *ngIf="form_email=='load'">
+                                                <span class="visually-hidden">...loading</span>
+                                            </div>
+                                            <span *ngIf="form_email=='ok'">
+                                                Mensaje enviado con éxito!
+                                            </span>
+                                            <span *ngIf="form_email=='error'">
+                                                Ha ocurrido un error. Intentá nuevamente.
+                                            </span>
+                                        </div>
                                     </fieldset>
                                 </div>
                             </div>
