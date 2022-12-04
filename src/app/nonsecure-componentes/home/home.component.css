@@ -489,8 +489,7 @@ testimonials
 }
 
 #testimonials .item .testimonial-content {
-  background: rgb(102, 161, 250);
-  background: linear-gradient(145deg, rgba(102, 161, 250,1) 0%, rgba(13, 110, 253,1) 100%);
+  background-color: rgb(13, 110, 253);
   margin: auto;
   padding: 40px 30px;
   text-align: center;
@@ -533,6 +532,28 @@ testimonials
 
 @media screen and (max-width: 1060px) {
   
+}
+
+.a-socialresp-box {
+  border: none;
+  color: #25D366;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+.a-socialresp-box:hover {
+  background-color: #25D366;
+  color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.fs-social {
+  font-size: 17px;
 }
 
 /* 

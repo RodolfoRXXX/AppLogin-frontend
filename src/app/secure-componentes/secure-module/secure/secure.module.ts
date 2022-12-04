@@ -32,14 +32,12 @@ import { ModalSesionComponent } from '../../modals/modal-sesion/modal-sesion.com
 import { ModalMarcarPosicionComponent } from '../../tag-folder/modals/modal-marcar-posicion/modal-marcar-posicion.component';
 import { DataBoxComponent } from '../../tag-folder/vista-tag/componentes/data-box/data-box.component';
 import { DataBoxSectionComponent } from '../../tag-folder/vista-tag/componentes/data-box-section/data-box-section.component';
-import { FooterComponent } from 'src/app/secure-componentes/footer/footer.component';
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
     LogoutComponent,
-    FooterComponent,
     DashboardProfileComponent,
     ConfigurationProfileComponent,
     EditEmailConfigurationProfileComponent,
