@@ -338,6 +338,13 @@ welcome
     margin-right: 0px;
     padding-right: 0px;
   }
+
+}
+
+@media (max-width: 400px) {
+  .img-logo {
+    max-width: 300px;
+  }
 }
 
 /*

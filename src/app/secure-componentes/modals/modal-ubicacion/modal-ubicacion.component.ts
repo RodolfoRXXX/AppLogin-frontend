@@ -43,8 +43,8 @@ export class ModalUbicacionComponent implements OnInit {
       L.marker([point.latitud, point.longitud], {icon: myIcon}).addTo(map).bindPopup(
         `<div class="d-flex flex-column align-items-center justify-content-center">
         <h5 class="text-center mb-0"><b>${point.titulo}</b></h5>
-        <p class="d-block text-muted text-center mb-0">${point.obs}</p>
-        <p class="d-block mb-0">Encontrado el ${point.fecha}</p>
+        <p class="d-block text-muted text-center mb-0 p-1 rounded bg-light" style="box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px;"><i>${point.obs}</i></p>
+        <p class="d-block text-danger mb-0">Encontrado el ${point.fecha}</p>
         </div>`
       );
     })

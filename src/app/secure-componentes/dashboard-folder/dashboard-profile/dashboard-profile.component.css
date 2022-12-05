@@ -42,10 +42,6 @@
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-.card-info:nth-child(1) {
-    justify-content: center;
-    align-items: center;
-}
     .box-alert {
         width: 100%;
         display: flex;
