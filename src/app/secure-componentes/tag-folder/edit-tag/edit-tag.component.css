@@ -56,7 +56,7 @@
 .box-redes {
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     height: 40px;
-    width: 125px;
+    width: 150px;
     margin: 0.5rem;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -76,6 +76,12 @@
     position: absolute;
     top: -5px;
     right: -6px;
+}
+
+.box-submit {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 3rem;
 }
 
 .input-style {
@@ -99,6 +105,18 @@
     background-color: rgb(250, 225, 225)!important;
 }
 
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 400px) {
+
+    .padding-content-form {
+        padding: 1rem 1rem;
+    }
+
+    .box-submit {
+        padding: 1rem 1rem;
+    }
+
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 768px) {

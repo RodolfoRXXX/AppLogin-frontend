@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
+p {
+    color: black;
+}
+
 .link:before {background-color: #28b463;}
 .nolink:before {background-color: #fcca46;}
 .alert:before {background-color: #cb4335;}
@@ -176,6 +180,18 @@
     border-bottom-right-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
+    .data-section-info h6 {
+        font-size: 1rem;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+    .data-section-info p {
+        margin-top: 0;
+        margin-bottom: 1rem;
+        color: black;
+    }
 
 .a-socialresp-box {
     border: none;
@@ -184,6 +200,7 @@
     justify-content: center;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    width: 100%;
 }
 
 .a-socialresp-box:hover, .a-socialresp-box:active {
@@ -272,9 +289,7 @@
 .btn-information {
     border-radius: 10px;
     cursor: pointer;
-}
-.btn-information i {
-    font-size: 17px;
+    font-size: 14px;
 }
 
 .btn-back {

@@ -166,9 +166,9 @@
                     </div>
                 </div>  
             </div>
-            <div class="d-flex justify-content-end padding-content-form pt-2 border-top">
+            <div class="box-submit border-top">
                 <button class="btn btn-light me-3" type="reset" (click)="cancelForm()">Cancelar</button>
-                <button class="btn btn-primary" type="submit" [disabled]="(form.invalid) || (estado_foto == 'peso' || estado_foto == 'formato') || (!estado_form)" style="height: 50px; width: 150px;">
+                <button class="btn btn-primary" type="submit" [disabled]="(form.invalid) || (estado_foto == 'peso' || estado_foto == 'formato') || (!estado_form)" style="height: 50px; min-width: 150px;">
                     <span *ngIf="estado_form">Guardar cambios</span>
                     <div class="spinner-border text-light" role="status" *ngIf="!estado_form">
                         <span class="visually-hidden">...loading</span>
