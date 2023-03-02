@@ -28,28 +28,54 @@
 -->
 
 
-  <mat-toolbar color="primary">
-    <span>My App</span>
+  <mat-toolbar class="nav-" color="primary">
     <span class="example-spacer"></span>
-    <button 
-        mat-icon-button
+    <!-- caja menu -->
+    <div>
+      <button 
+        mat-icon-button 
         class="example-icon" 
         aria-label="Example icon-button with menu icon" 
-        title="Notifications"
-        (click)="toggleBadgeVisibility()"
-        [matMenuTriggerFor]="menu"
-        [matMenuTriggerData]="{name: 'Sally'}">
-      <mat-icon
-        matBadge="5" 
-        matBadgeSize="small"
-        matBadgeOverlap="true"
-        matBadgeColor="warn"
-        [matBadgeHidden]="hidden">chat_bubble_outline
-      </mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" title="Menu">
-      <mat-icon>menu</mat-icon>
-    </button>
+        title="Menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <!--  -->
+
+    <!-- caja logo -->
+    <div>
+      <span>My App</span>
+    </div>
+    <!--  -->
+
+    <!-- caja login -->
+    <div>
+      <div>
+        <a mat-flat-button color="primary" routerLink = "login" routerLinkActive = "active">Ingresar</a>
+      <a mat-flat-button color="primary" routerLink = "register" routerLinkActive = "active" >Registrarse</a>
+      </div>
+      <!-- Login user -->
+      <div *ngIf="false">
+        <button 
+          mat-icon-button
+          class="example-icon" 
+          aria-label="Example icon-button with menu icon" 
+          title="Notifications"
+          (click)="toggleBadgeVisibility()"
+          [matMenuTriggerFor]="menu"
+          [matMenuTriggerData]="{name: 'Sally'}">
+          <mat-icon
+            matBadge="5" 
+            matBadgeSize="small"
+            matBadgeOverlap="true"
+            matBadgeColor="warn"
+            [matBadgeHidden]="hidden">chat_bubble_outline</mat-icon>
+        </button>
+        <button mat-button color="primary">usuario</button>
+      </div>
+      <!-- -->
+
+    </div>
   </mat-toolbar>
   <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-name="name">
