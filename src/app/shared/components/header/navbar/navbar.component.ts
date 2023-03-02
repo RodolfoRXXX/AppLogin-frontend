@@ -12,11 +12,17 @@ export class NavbarComponent implements OnInit {
   isLogin: boolean;
   //userId: string|null;
 
+  hidden = false;
+
   constructor( 
     //private _auth: AuthService,
     //private _com: ComunicationService
   ) {
     this.isLogin = false;
+  }
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
   }
 
   ngOnInit(): void {
