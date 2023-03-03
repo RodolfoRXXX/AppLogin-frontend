@@ -82,7 +82,29 @@
 
 }
 
-.example-spacer {
-    flex: 1 1 auto;
-  }
+.header{
+    display: flex;
+    justify-content: space-between;
+}
 
+.box-login {
+    display: flex;
+}
+
+.d-768 {
+    display: none;
+}
+.u-768 {
+    display: flex;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .d-768 {
+        display: flex;
+    }
+    .u-768 {
+        display: none;
+    }
+
+}

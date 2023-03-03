@@ -28,14 +28,19 @@
 -->
 
 
-  <mat-toolbar class="nav-" color="primary">
-    <span class="example-spacer"></span>
+  <mat-toolbar class="header" color="primary">
     <!-- caja menu -->
-    <div>
-      <button 
+    <div> <!-- Esto cambia de acuerdo al dispositivo en que se vea -->
+      <button
+        class="u-768"
+        color="primary"
+        mat-flat-button
+        title="Menu">Menu
+        <mat-icon>menu</mat-icon>
+      </button>
+      <button
+        class="d-768" 
         mat-icon-button 
-        class="example-icon" 
-        aria-label="Example icon-button with menu icon" 
         title="Menu">
         <mat-icon>menu</mat-icon>
       </button>
@@ -43,23 +48,35 @@
     <!--  -->
 
     <!-- caja logo -->
-    <div>
+    <div> <!-- Puede cambiar el logo de acuerdo al dispositivo, siendo solo logo para móvil y logo más nombre para pc -->
       <span>My App</span>
     </div>
     <!--  -->
 
-    <!-- caja login -->
-    <div>
+    <!-- caja login y market -->
+    <div class="box-login">
+      <!-- caja market -->
       <div>
-        <a mat-flat-button color="primary" routerLink = "login" routerLinkActive = "active">Ingresar</a>
-      <a mat-flat-button color="primary" routerLink = "register" routerLinkActive = "active" >Registrarse</a>
+        <button
+          class="u-768"
+          mat-flat-button 
+          color="primary" 
+          title="Market">
+          <mat-icon>shopping_cart</mat-icon>Market
+        </button>
+        <button
+          class="d-768"
+          mat-icon-button 
+          title="Market">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
       </div>
-      <!-- Login user -->
-      <div *ngIf="false">
-        <button 
+
+      <!-- caja login -->
+      <div>
+        <button
+          class="d-768"
           mat-icon-button
-          class="example-icon" 
-          aria-label="Example icon-button with menu icon" 
           title="Notifications"
           (click)="toggleBadgeVisibility()"
           [matMenuTriggerFor]="menu"
@@ -71,7 +88,15 @@
             matBadgeColor="warn"
             [matBadgeHidden]="hidden">chat_bubble_outline</mat-icon>
         </button>
-        <button mat-button color="primary">usuario</button>
+        <a
+          class="u-768"
+          mat-flat-button 
+          color="primary" 
+          routerLink = "login" 
+          routerLinkActive = "active" 
+          title="Ingresar">
+          <mat-icon>input</mat-icon>Ingresar
+        </a>
       </div>
       <!-- -->
 
