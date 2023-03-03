@@ -32,6 +32,7 @@
     <!-- caja menu -->
     <div> <!-- Esto cambia de acuerdo al dispositivo en que se vea -->
       <button
+      *ngIf="isLogin"
         class="u-768"
         color="primary"
         mat-flat-button
@@ -61,34 +62,75 @@
           class="u-768"
           mat-flat-button 
           color="primary" 
-          title="Market">
-          <mat-icon>shopping_cart</mat-icon>Market
+          title="Market"
+          (click)="deploy_cart()"
+          [matMenuTriggerFor]="cart">
+          <mat-icon
+            matBadge="0" 
+            matBadgeSize="small"
+            matBadgeOverlap="true"
+            matBadgeColor="accent"
+            [matBadgeHidden]="hidden_cart">shopping_cart</mat-icon>Market
         </button>
         <button
           class="d-768"
           mat-icon-button 
-          title="Market">
-          <mat-icon>shopping_cart</mat-icon>
+          title="Market"
+          (click)="deploy_cart()"
+          [matMenuTriggerFor]="cart">
+          <mat-icon
+            matBadge="0" 
+            matBadgeSize="small"
+            matBadgeOverlap="true"
+            matBadgeColor="accent"
+            [matBadgeHidden]="hidden_cart">shopping_cart</mat-icon>
         </button>
       </div>
 
       <!-- caja login -->
       <div>
         <button
+        *ngIf="isLogin"
           class="d-768"
           mat-icon-button
-          title="Notifications"
-          (click)="toggleBadgeVisibility()"
-          [matMenuTriggerFor]="menu"
+          title="News"
+          (click)="deploy_news()"
+          [matMenuTriggerFor]="news"
           [matMenuTriggerData]="{name: 'Sally'}">
           <mat-icon
             matBadge="5" 
             matBadgeSize="small"
             matBadgeOverlap="true"
             matBadgeColor="warn"
-            [matBadgeHidden]="hidden">chat_bubble_outline</mat-icon>
+            [matBadgeHidden]="hidden_news">chat_bubble_outline</mat-icon>
+        </button>
+        <button
+          *ngIf="isLogin"
+          class="u-768"
+          color="primary"
+          mat-flat-button
+          title="News"
+          (click)="deploy_news()"
+          [matMenuTriggerFor]="news"
+          [matMenuTriggerData]="{name: 'Sally'}">
+          <mat-icon
+            matBadge="5" 
+            matBadgeSize="small"
+            matBadgeOverlap="true"
+            matBadgeColor="warn"
+            [matBadgeHidden]="hidden_news">chat_bubble_outline</mat-icon>Novedades
         </button>
         <a
+          *ngIf="!isLogin"
+          class="d-768"
+          mat-icon-button 
+          routerLink = "login"
+          routerLinkActive = "active"
+          title="Ingresar">
+          <mat-icon>input</mat-icon>
+        </a>
+        <a
+          *ngIf="!isLogin"
           class="u-768"
           mat-flat-button 
           color="primary" 
@@ -102,9 +144,20 @@
 
     </div>
   </mat-toolbar>
-  <mat-menu #menu="matMenu">
+
+  <!-- desplegable de notificaciones -->
+  <mat-menu #news="matMenu">
     <ng-template matMenuContent let-name="name">
       <button mat-menu-item>Settings</button>
       <button mat-menu-item>Log off {{name}}</button>
+    </ng-template>
+  </mat-menu>
+
+  <!-- desplegable de carrito -->
+  <mat-menu #cart="matMenu">
+    <ng-template matMenuContent let-name="name">
+      <button mat-menu-item>Ir a Market</button>
+      <hr>
+      <p class="p-2">No tienes items en tu carrito</p>
     </ng-template>
   </mat-menu>

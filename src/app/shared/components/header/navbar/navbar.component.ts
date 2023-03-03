@@ -12,7 +12,8 @@ export class NavbarComponent implements OnInit {
   isLogin: boolean;
   //userId: string|null;
 
-  hidden = false;
+  hidden_news = false;
+  hidden_cart = false;
 
   constructor( 
     //private _auth: AuthService,
@@ -21,8 +22,12 @@ export class NavbarComponent implements OnInit {
     this.isLogin = false;
   }
 
-  toggleBadgeVisibility() {
-    this.hidden = !this.hidden;
+  deploy_news() {
+    this.hidden_news = !this.hidden_news;
+  }
+
+  deploy_cart() {
+    this.hidden_cart = !this.hidden_cart;
   }
 
   ngOnInit(): void {
