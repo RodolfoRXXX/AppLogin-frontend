@@ -32,16 +32,17 @@
     <!-- caja menu -->
     <div> <!-- Esto cambia de acuerdo al dispositivo en que se vea -->
       <button
-      *ngIf="isLogin"
         class="u-768"
         color="primary"
         mat-flat-button
+        (click)="toggleMenu()"
         title="Menu">Menu
         <mat-icon>menu</mat-icon>
       </button>
       <button
         class="d-768" 
-        mat-icon-button 
+        mat-icon-button
+        (click)="toggleMenu()"
         title="Menu">
         <mat-icon>menu</mat-icon>
       </button>
@@ -124,7 +125,7 @@
           *ngIf="!isLogin"
           class="d-768"
           mat-icon-button 
-          routerLink = "login"
+          routerLink = "auth"
           routerLinkActive = "active"
           title="Ingresar">
           <mat-icon>input</mat-icon>
@@ -134,7 +135,7 @@
           class="u-768"
           mat-flat-button 
           color="primary" 
-          routerLink = "login" 
+          routerLink = "auth" 
           routerLinkActive = "active" 
           title="Ingresar">
           <mat-icon>input</mat-icon>Ingresar

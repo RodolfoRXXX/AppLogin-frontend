@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComunicationService {
+
+  private openSidenav$ = new BehaviorSubject<boolean>(false);
 
   dataIdObservable: Subject<string|null> = new Subject();
   notifierObservable: Subject<any> = new Subject();
@@ -13,6 +15,14 @@ export class ComunicationService {
   closeSessionObservable: Subject<any> = new Subject();
 
   constructor() { }
+
+  //Controlador que maneja el sidenav
+  get sidenav$():Observable<boolean> {
+    return this.openSidenav$.asObservable();
+  }
+  setSidenav(): void {
+    this.openSidenav$.next(!this.openSidenav$);
+  }
 
   //Observable para cambios en el id del usuario
   setDataId( id:string|null ){

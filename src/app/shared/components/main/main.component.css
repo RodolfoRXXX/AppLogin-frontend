@@ -1,0 +1,16 @@
+.mat-sidenav-container {
+    height: calc(100vh - 128px);
+}
+
+.mat-sidenav {
+    width: 250px;
+    border-left: 1px solid #000;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .mat-sidenav-container {
+        height: calc(100vh - 112px);
+    }
+
+}

@@ -6,11 +6,19 @@ import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './shared/components/header/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { MainComponent } from './shared/components/main/main.component';
+import { HomeComponent } from './sections/home/home.component';
+import { PageNotFoundComponent } from './sections/page-not-found/page-not-found.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    MainComponent,
+    HomeComponent,
+    PageNotFoundComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

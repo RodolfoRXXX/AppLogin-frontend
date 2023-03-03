@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComunicationService } from 'src/app/shared/services/comunication.service';
 //import { AuthService } from 'src/app/services/auth.service';
 //import { ComunicationService } from 'src/app/services/comunication.service';
 
@@ -17,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   constructor( 
     //private _auth: AuthService,
-    //private _com: ComunicationService
+    private shared: ComunicationService
   ) {
     this.isLogin = false;
   }
@@ -28,6 +29,10 @@ export class NavbarComponent implements OnInit {
 
   deploy_cart() {
     this.hidden_cart = !this.hidden_cart;
+  }
+
+  toggleMenu(): void {
+    this.shared.setSidenav();
   }
 
   ngOnInit(): void {
