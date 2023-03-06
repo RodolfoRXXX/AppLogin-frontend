@@ -11,11 +11,16 @@ export class MainComponent implements OnInit {
   isOpenMenu!: boolean;
 
   constructor(
-    private shared: ComunicationService
+    private readonly comSvc: ComunicationService
   ) {}
 
   ngOnInit(): void {
-    this.shared.sidenav$.subscribe( (value: boolean) => this.isOpenMenu = value )
+    this.comSvc.sidenav$.subscribe( (value: boolean) => this.isOpenMenu = value )
   }
+
+  closedSidenav() {
+    if(this.isOpenMenu) this.comSvc.setSidenav();
+  }
+
 
 }

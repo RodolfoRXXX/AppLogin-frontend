@@ -4,7 +4,7 @@
 
 .mat-sidenav {
     width: 250px;
-    border-left: 1px solid #000;
+    border-right: 1px solid #000;
 }
 
 @media only screen and (max-width: 600px) {

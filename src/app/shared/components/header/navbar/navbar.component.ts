@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   constructor( 
     //private _auth: AuthService,
-    private shared: ComunicationService
+    private readonly comSvc: ComunicationService
   ) {
     this.isLogin = false;
   }
@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleMenu(): void {
-    this.shared.setSidenav();
+    this.comSvc.setSidenav();
   }
 
   ngOnInit(): void {

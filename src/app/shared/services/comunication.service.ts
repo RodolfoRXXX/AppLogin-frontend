@@ -21,7 +21,7 @@ export class ComunicationService {
     return this.openSidenav$.asObservable();
   }
   setSidenav(): void {
-    this.openSidenav$.next(!this.openSidenav$);
+      this.openSidenav$.next(!this.openSidenav$.value);
   }
 
   //Observable para cambios en el id del usuario
