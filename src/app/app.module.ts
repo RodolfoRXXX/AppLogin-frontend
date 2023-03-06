@@ -10,6 +10,7 @@ import { MainComponent } from './shared/components/main/main.component';
 import { HomeComponent } from './sections/home/home.component';
 import { PageNotFoundComponent } from './sections/page-not-found/page-not-found.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

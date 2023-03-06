@@ -47,16 +47,14 @@
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-    <!--  -->
 
     <!-- caja logo -->
     <div> <!-- Puede cambiar el logo de acuerdo al dispositivo, siendo solo logo para móvil y logo más nombre para pc -->
       <a routerLink="home">My App</a>
     </div>
-    <!--  -->
 
     <!-- caja login y market -->
-    <div class="box-login">
+    <div class="box-user">
       <!-- caja market -->
       <div>
         <button
@@ -89,12 +87,13 @@
       </div>
 
       <!-- caja login -->
-      <div>
+      <div class="box-login">
+        <!-- market -->
         <button
         *ngIf="isLogin"
           class="d-768"
           mat-icon-button
-          title="News"
+          title="Novedades"
           (click)="deploy_news()"
           [matMenuTriggerFor]="news"
           [matMenuTriggerData]="{name: 'Sally'}">
@@ -110,7 +109,7 @@
           class="u-768"
           color="primary"
           mat-flat-button
-          title="News"
+          title="Novedades"
           (click)="deploy_news()"
           [matMenuTriggerFor]="news"
           [matMenuTriggerData]="{name: 'Sally'}">
@@ -121,6 +120,8 @@
             matBadgeColor="warn"
             [matBadgeHidden]="hidden_news">chat_bubble_outline</mat-icon>Novedades
         </button>
+
+        <!-- login -->
         <a
           *ngIf="!isLogin"
           class="d-768"
@@ -139,6 +140,27 @@
           routerLinkActive = "active" 
           title="Ingresar">
           <mat-icon>input</mat-icon>Ingresar
+        </a>
+
+        <!-- Account -->
+        <a
+          *ngIf="isLogin"
+          class="d-768"
+          mat-icon-button 
+          routerLink = "profile"
+          routerLinkActive = "active"
+          title="Mi cuenta">
+          <mat-icon>account_circle</mat-icon>
+        </a>
+        <a
+          *ngIf="isLogin"
+          class="u-768"
+          mat-flat-button 
+          color="primary" 
+          routerLink = "profile" 
+          routerLinkActive = "active" 
+          title="Mi cuenta">
+          <mat-icon>account_circle</mat-icon>Mi cuenta
         </a>
       </div>
       <!-- -->

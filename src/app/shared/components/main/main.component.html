@@ -1,6 +1,6 @@
 
 <mat-sidenav-container class="example-container">
-    <mat-sidenav [opened]="isOpenMenu" (closed)="closedSidenav()" mode="over">Menú</mat-sidenav>
+    <mat-sidenav [opened]="isOpenMenu" (closed)="closedSidenav()" [mode]="sideMode">Menú</mat-sidenav>
     <section>
         <router-outlet></router-outlet>
     </section>

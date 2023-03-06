@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
     //private _auth: AuthService,
     private readonly comSvc: ComunicationService
   ) {
-    this.isLogin = false;
+    this.isLogin = true;
   }
 
   deploy_news() {
